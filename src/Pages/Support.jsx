@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import emailjs from "@emailjs/browser";
 
-import "../Assets/support.css";
+import "../Assets/styles/support.css";
 import Logo from "../Assets/logo/Logo.svg";
 
 export default function Support() {
