@@ -1,5 +1,5 @@
 import './App.css';
-import Support from "./components/Support";
+import Support from "./Pages/Support";
 
 function App() {
   return (

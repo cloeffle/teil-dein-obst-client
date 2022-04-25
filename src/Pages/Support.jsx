@@ -2,11 +2,10 @@ import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import emailjs from "@emailjs/browser";
 
-import "../styles/support.css";
-import Logo from "../logo/Logo.svg";
+import "../Assets/support.css";
+import Logo from "../Assets/logo/Logo.svg";
 
 export default function Support() {
-
   let navigate = useNavigate();
   function goBack() {
     navigate("/");
@@ -59,6 +58,7 @@ export default function Support() {
             name="user_name"
             className="support-name"
             placeholder="Gebe hier deinen Namen ein"
+            required
           />
           <label>E-Mail Adresse</label>
           <input
@@ -66,6 +66,7 @@ export default function Support() {
             name="user_email"
             className="support-mail"
             placeholder="Gebe hier deine E-Mail Adresse ein"
+            required
           />
           <label>Deine Nachricht an uns</label>
           <textarea
@@ -74,8 +75,11 @@ export default function Support() {
             cols="30"
             rows="8"
             placeholder="Deine Nachricht..."
+            required
           ></textarea>
-          <input className="support-submit" type="submit" value="ABSCHICKEN" />
+          <button className="support-submit" type="submit" value="ABSCHICKEN">
+            ABSCHICKEN
+          </button>
         </form>
       </div>
     </>
