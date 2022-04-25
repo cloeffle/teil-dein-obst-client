@@ -67,3 +67,9 @@ Note: Beware of modifying this element as it can break the animations - you shou
   /* .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
 } */
+
+@media screen and (max-width: 400px){
+  .bm-burger-button{
+    position: absolute;
+  }
+}
