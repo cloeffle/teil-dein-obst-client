@@ -10,9 +10,6 @@ import axios from 'axios';
 function UserPage() {
   const { user } = useAuth0();
   const [userData, setUserData] = useState([]);
-  if (userData) {
-    console.log(userData);
-  }
 
   useEffect(() => {
     // use substring to get rid of auth0| prefix
@@ -21,6 +18,16 @@ function UserPage() {
       .catch((e) => {
         console.log(e);
       });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .post(`http://localhost:8000/user/${user.sub.substring(6)}`, {
+        name: user.name,
+        email: user.email,
+      })
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
   }, []);
 
   return (
