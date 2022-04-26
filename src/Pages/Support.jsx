@@ -54,7 +54,7 @@ export default function Support() {
     if (status === "success") {
       setTimeout(() => {
         setStatus("");
-      }, 3000);
+      }, 5000);
     }
   }, [status]);
 
@@ -103,9 +103,7 @@ export default function Support() {
               value={userInput.message}
               onChange={handleChange}
             ></textarea>
-            <button disabled={!userInput.name || !userInput.email || !userInput.message} className="support-submit btn" type="submit" value="ABSCHICKEN">
-              ABSCHICKEN
-            </button>
+            <input disabled={!userInput.name || !userInput.email || !userInput.message} className="submit btn" type="submit" value="Absenden" />
           </form>
         </div>
       </div>

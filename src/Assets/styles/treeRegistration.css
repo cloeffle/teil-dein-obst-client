@@ -1,0 +1,21 @@
+.tree-form-container {
+  margin: 0.5rem 1rem;
+  line-height: 2rem;
+}
+
+.tree-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.tree-input-field {
+  padding: 0.5rem;
+  margin: 0.7rem 0;
+  border: none;
+  background-color: #faf1cf72;
+  font-size: 1rem;
+}
+
+input[type="number"] {
+  font-family: Nunito, sans-serif;
+}

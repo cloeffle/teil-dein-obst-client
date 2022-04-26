@@ -29,6 +29,12 @@ a {
   margin-top: 0.5rem;
 }
 
+.submit {
+  border: none;
+  background-color: #357560;
+  color: #f9f8f2;
+}
+
 .logo-wrapper {
   display: flex;
   justify-content: center;

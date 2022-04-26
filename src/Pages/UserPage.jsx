@@ -1,6 +1,6 @@
 import React from "react";
 import LogoutButton from "../components/Login/LogoutButton";
-import "../assets/styles/userpage.css";
+import "../assets/styles/userPage.css";
 import LogoComponent from "../components/LogoComponent";
 import Obstbaum from "../assets/images/Obstbaum.svg";
 

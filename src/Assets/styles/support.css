@@ -1,7 +1,4 @@
 .support-container {
-  display: flex;
-  height: 100vh;
-  justify-content: center;
   margin: 0.5rem 1rem
 }
 
@@ -36,11 +33,6 @@ textarea {
   font-family: Nunito, sans-serif;
 }
 
-.support-submit {
-  border: none;
-  background-color: #357560;
-  color: #f9f8f2;
-}
 
 .support-success-message {
   margin-bottom: 1.3rem;
