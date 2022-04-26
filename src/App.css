@@ -10,22 +10,37 @@
   box-sizing: border-box;
 }
 
-h3 {
-  font-family: Roboto, sans-serif;
+h3,
+h4 {
+  font-family: "Roboto", sans-serif;
 }
 
-.logo {
-  display: flex;
-  justify-content: center;
-  margin: .5rem 0;
-  /* margin-left: 5rem; */
+a {
+  text-decoration: none;
+  color: black;
 }
 
-.logo img {
-  width: 45%;
+.btn {
+  padding: 0.7rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  letter-spacing: 0.1rem;
+  margin-top: 0.5rem;
 }
 
 .logo-wrapper {
   display: flex;
   justify-content: center;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  margin: 0.5rem 0;
+  /* margin-left: 5rem; */
+}
+
+.logo img {
+  width: 45%;
 }

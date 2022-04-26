@@ -40,11 +40,6 @@ textarea {
   border: none;
   background-color: #357560;
   color: #f9f8f2;
-  padding: 0.7rem;
-  border-radius: 12px;
-  font-size: 1rem;
-  cursor: pointer;
-  letter-spacing: 0.1rem;
 }
 
 .support-success-message {

@@ -1,16 +1,12 @@
 import React from "react";
 
 import "../assets/styles/about.css";
-import Logo from "../assets/logo/Logo.svg";
+import LogoComponent from "../components/LogoComponent";
 
 export default function About() {
   return (
     <>
-      <div className="logo-wrapper">
-        <div className="logo">
-          <img src={Logo} alt="logo" />
-        </div>
-      </div>
+      <LogoComponent />
       <div className="about-container">
         <div className="about-text">
           <h3>Über Teil dein Obst</h3>

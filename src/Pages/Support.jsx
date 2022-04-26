@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 
 import "../assets/styles/support.css";
-import Logo from "../assets/logo/Logo.svg";
+import LogoComponent from "../components/LogoComponent";
 
 export default function Support() {
   const [userInput, setUserInput] = useState({
@@ -61,11 +61,7 @@ export default function Support() {
   return (
     <>
       <div className="supportWrapper">
-        <div className="logo-wrapper">
-          <div className="logo">
-            <img src={Logo} alt="logo" />
-          </div>
-        </div>
+        <LogoComponent />
         <div className="support-container">
           <form ref={form} onSubmit={sendEmail} className="support-form">
             <h3>Kontaktformular</h3>
@@ -107,7 +103,7 @@ export default function Support() {
               value={userInput.message}
               onChange={handleChange}
             ></textarea>
-            <button disabled={!userInput.name || !userInput.email || !userInput.message} className="support-submit" type="submit" value="ABSCHICKEN">
+            <button disabled={!userInput.name || !userInput.email || !userInput.message} className="support-submit btn" type="submit" value="ABSCHICKEN">
               ABSCHICKEN
             </button>
           </form>
