@@ -1,10 +1,28 @@
-import React from "react";
-import LogoutButton from "../components/Login/LogoutButton";
-import "../assets/styles/userpage.css";
-import LogoComponent from "../components/LogoComponent";
-import Obstbaum from "../assets/images/Obstbaum.svg";
+import React, { useEffect, useState } from 'react';
+import LogoutButton from '../components/Login/LogoutButton';
+import '../assets/styles/userpage.css';
+import LogoComponent from '../components/LogoComponent';
+import Obstbaum from '../assets/images/Obstbaum.svg';
+
+import { useAuth0 } from '@auth0/auth0-react';
+import axios from 'axios';
 
 function UserPage() {
+  const { user } = useAuth0();
+  const [userData, setUserData] = useState([]);
+  if (userData) {
+    console.log(userData);
+  }
+
+  useEffect(() => {
+    // use substring to get rid of auth0| prefix
+    axios(`http://localhost:8000/user/${user.sub.substring(6)}`)
+      .then((response) => setUserData(response.data))
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
+
   return (
     <div>
       <LogoComponent />
