@@ -100,13 +100,10 @@ function Filter() {
             <p>Sonstiges</p>
           </button>
         </div>
-      </div>
-
-      <div>
-        <button className="select">Filter anwenden</button>
-      </div>
-      <div>
-        <button className="delete">Filter löschen</button>
+        <div className="applyFilter">
+          <button className="select">Filter anwenden</button>
+          <button className="delete">Filter löschen</button>
+        </div>
       </div>
     </div>
   );
