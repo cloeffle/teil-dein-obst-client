@@ -4,7 +4,7 @@ import '../assets/styles/userpage.css';
 import LogoComponent from '../components/LogoComponent';
 import Obstbaum from '../assets/images/Obstbaum.svg';
 
-import { useAuth0 } from '@auth0/auth0-react';
+import { useAuth0, User } from '@auth0/auth0-react';
 import axios from 'axios';
 
 function UserPage() {
@@ -12,8 +12,7 @@ function UserPage() {
   const [userData, setUserData] = useState([]);
 
   useEffect(() => {
-    // use substring to get rid of auth0| prefix
-    axios(`http://localhost:8000/user/${user.sub.substring(6)}`)
+    axios(`http://localhost:8000/user/${user.sub}`)
       .then((response) => setUserData(response.data))
       .catch((e) => {
         console.log(e);
@@ -22,7 +21,7 @@ function UserPage() {
 
   useEffect(() => {
     axios
-      .post(`http://localhost:8000/user/${user.sub.substring(6)}`, {
+      .post(`http://localhost:8000/user/${user.sub}`, {
         name: user.name,
         email: user.email,
       })
