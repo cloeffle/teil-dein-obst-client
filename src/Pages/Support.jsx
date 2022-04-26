@@ -1,9 +1,8 @@
-import React, { useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useRef, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 
-import "../Assets/styles/support.css";
-import Logo from "../Assets/logo/Logo.svg";
+import "../assets/styles/support.css";
+import Logo from "../assets/logo/Logo.svg";
 
 export default function Support() {
   const [userInput, setUserInput] = useState({
@@ -12,10 +11,15 @@ export default function Support() {
     message: "",
   });
 
-  let navigate = useNavigate();
-  function goBack() {
-    navigate("/");
-  }
+  const [status, setStatus] = useState("");
+  console.log("status:", status);
+
+  const handleChange = (e) => {
+    setUserInput({
+      ...userInput,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const form = useRef();
 
@@ -32,22 +36,35 @@ export default function Support() {
       .then(
         (result) => {
           console.log(result.text);
+          setUserInput({
+            name: "",
+            email: "",
+            message: "",
+          });
+          setStatus("success");
         },
         (error) => {
           console.log(error.text);
         }
       );
+    e.target.reset();
   };
+
+  useEffect(() => {
+    if (status === "success") {
+      setTimeout(() => {
+        setStatus("");
+      }, 3000);
+    }
+  }, [status]);
+
   return (
     <>
       <div className="supportWrapper">
-        <div className="toMap">
-          <button className="toMap-btn" onClick={goBack}>
-            zurück
-          </button>
-        </div>
-        <div className="logo">
-          <img src={Logo} alt="logo" />
+        <div className="logo-wrapper">
+          <div className="logo">
+            <img src={Logo} alt="logo" />
+          </div>
         </div>
         <div className="support-container">
           <form ref={form} onSubmit={sendEmail} className="support-form">
@@ -59,27 +76,26 @@ export default function Support() {
               Dann kontaktiere uns gerne über dieses Kontaktformular. Wir werden
               uns schnellstmöglich mit Dir in Verbindung setzen!
             </div>
+            {status && renderAlert()}
             <label>Name</label>
             <input
               type="text"
-              name="user_name"
+              name="name"
               className="support-name"
               placeholder="Gebe hier Deinen Namen ein"
-              required
-              onChange={(e) =>
-                setUserInput({ ...userInput, name: e.target.value })
-              }
+              value={userInput.name}
+              onChange={handleChange}
+              
             />
             <label>E-Mail Adresse</label>
             <input
               type="email"
-              name="user_email"
+              name="email"
               className="support-mail"
               placeholder="Gebe hier Deine E-Mail Adresse ein"
-              required
-              onChange={(e) =>
-                setUserInput({ ...userInput, email: e.target.value })
-              }
+              value={userInput.email}
+              onChange={handleChange}
+              
             />
             <label>Deine Nachricht an uns</label>
             <textarea
@@ -88,17 +104,10 @@ export default function Support() {
               cols="30"
               rows="8"
               placeholder="Deine Nachricht..."
-              required
-              onChange={(e) =>
-                setUserInput({ ...userInput, message: e.target.value })
-              }
+              value={userInput.message}
+              onChange={handleChange}
             ></textarea>
-            <button
-              className="support-submit"
-              type="submit"
-              value="ABSCHICKEN"
-              disabled={!userInput}
-            >
+            <button disabled={!userInput.name || !userInput.email || !userInput.message} className="support-submit" type="submit" value="ABSCHICKEN">
               ABSCHICKEN
             </button>
           </form>
@@ -107,3 +116,11 @@ export default function Support() {
     </>
   );
 }
+
+const renderAlert = () => (
+  <div className="support-success-message">
+    <p>Deine Nachricht wurde erfolgreich versendet!</p>
+  </div>
+);
+
+console.log(renderAlert());
