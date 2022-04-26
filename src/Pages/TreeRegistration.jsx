@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
+import Select from "react-select";
+
 import LogoComponent from "../components/LogoComponent";
 import "../assets/styles/treeRegistration.css";
 
+const fruits = [
+  { value: "Apfel", label: "Apfel" },
+  { value: "Birne", label: "Birne" },
+  { value: "Aprikose", label: "Aprikose" },
+  { value: "Kirsche", label: "Kirsche" },
+  { value: "Johannisbeere", label: "Johannisbeere" },
+  { value: "Heidelbeere", label: "Heidelbeere" },
+  { value: "Erdbeere", label: "Erdbeere" },
+  { value: "Sonstiges", label: "Sonstiges" },
+];
+
 export default function TreeRegistration() {
+  const [selectedOption, setSelectedOption] = useState(null);
+
   return (
     <>
       <div>
@@ -11,11 +26,16 @@ export default function TreeRegistration() {
           <form className="tree-form">
             <h3>Obstbaum zur Verfügung stellen</h3>
             <label>Obstsorte</label>
-            <input
-              className="tree-input-field"
+            <Select
+              defaultValue={selectedOption}
+              isMulti
               type="text"
               name="Obstsorte"
-              placeholder="Obstsorte"
+              placeholder="Auswählen"
+              options={fruits}
+              className="basic-multi-select"
+              classNamePrefix="select"
+              closeMenuOnSelect={false}
             />
             <label>Standort</label>
             <input
@@ -34,7 +54,7 @@ export default function TreeRegistration() {
               className="tree-input-field"
               type="number"
               name="PLZ"
-              placeholder="PLZ"
+              placeholder="Postleitzahl"
             />
             <input
               className="tree-input-field"
@@ -42,6 +62,11 @@ export default function TreeRegistration() {
               name="Ort"
               placeholder="Ort"
             />
+            <label>Erntezeitraum</label>
+            <p>von</p>
+            <input className="tree-input-field" type="date" name="start" />
+            <p>bis</p>
+            <input className="tree-input-field" type="date" name="end" />
             <label>Infos</label>
             <textarea
               className="tree-input-field"
@@ -50,11 +75,8 @@ export default function TreeRegistration() {
               rows="5"
               placeholder="Nähere Informationen zum Standort und der Zugänglickeit z.B. Pflücken nur nach Absprache möglich"
             ></textarea>
-            <input
-              type="submit"
-              className="submit btn"
-              value="Hinzufügen"
-            />
+            <input type="file" />
+            <input type="submit" className="submit btn" value="Hinzufügen" />
           </form>
         </div>
       </div>

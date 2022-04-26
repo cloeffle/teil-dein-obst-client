@@ -78,7 +78,7 @@ export default function Support() {
               type="text"
               name="name"
               className="support-name"
-              placeholder="Gebe hier Deinen Namen ein"
+              placeholder="Deine Name"
               value={userInput.name}
               onChange={handleChange}
               
@@ -88,7 +88,7 @@ export default function Support() {
               type="email"
               name="email"
               className="support-mail"
-              placeholder="Gebe hier Deine E-Mail Adresse ein"
+              placeholder="Deine E-Mail Adresse"
               value={userInput.email}
               onChange={handleChange}
               

@@ -16,6 +16,11 @@
   font-size: 1rem;
 }
 
-input[type="number"] {
+input[type="number"],
+input[type="date"] {
   font-family: Nunito, sans-serif;
+}
+
+.tree-form p{
+    font-size: .9rem;
 }
