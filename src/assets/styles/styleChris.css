@@ -6,25 +6,35 @@
 
 .container {
   display: flex;
-  flex-direction: column;
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
   text-align: center;
   background-color: #f7fafc;
-  width: 375px;
+  width: 100vw;
 }
-
 .chooseBtnCont {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 1rem;
 }
 
+.chooseBtn p {
+  font-size: 1rem;
+  font-weight: bold;
+}
 .chooseBtn {
   border: none;
   border-radius: 5px;
   margin-bottom: 5px;
   background-color: #faf1cf9b;
+  padding: 5px;
+}
+.chooseBtn:hover {
+  outline: 3px solid #357560;
 }
 
 button {
@@ -33,22 +43,37 @@ button {
   margin-bottom: 5px;
 }
 
-.card-1,
-.card-2 {
-  padding: 30px 40px 20px;
-  background-color: #faf1cf9b;
-  width: 75%;
-  height: auto;
+.card-2 p {
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  /* text-align: center; */
+}
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.card-1 img,
+.card-2 {
+  padding: 15px 20px 20px;
+  margin: 2px;
+  background-color: #faf1cf9b;
+  width: 40%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .card-2 img {
   width: 50%;
   height: auto;
 }
 
-.card-1:hover {
-  outline: 7px solid #f5d54a;
+.row {
+  display: flex;
+  justify-content: center;
 }
 
 .card-2:hover {
