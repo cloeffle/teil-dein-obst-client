@@ -1,5 +1,5 @@
 import "./App.css";
-
+import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ProtectedRoute } from './auth/ProtectedRoute';
 
@@ -10,12 +10,14 @@ import GuestPage from './Pages/GuestPage';
 import Tree from './Pages/Tree';
 import UserPage from './Pages/UserPage';
 import TreeRegistration from './Pages/TreeRegistration';
+import Filter from './components/Filter';
+
+
 
 function App() {
   return (
     <div className="App">
       <Navbar />
-      <TreeRegistration />
       <Routes>
         <Route path="ueber-teil-dein-obst" element={<About />} />
         <Route path="kontakt" element={<Support />} />
