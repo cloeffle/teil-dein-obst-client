@@ -5,7 +5,7 @@ export default function LogoComponent() {
   return (
     <div className="logo-wrapper">
       <div className="logo">
-        <img src={Logo} alt="logo" />
+        <a href="/"><img src={Logo} alt="logo" /></a>
       </div>
     </div>
   );

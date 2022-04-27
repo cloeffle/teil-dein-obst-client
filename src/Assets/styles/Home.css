@@ -70,6 +70,7 @@
   letter-spacing: 0.1rem;
 }
 
+/*LOGO AND LOGIN */
 .header-login {
   display: flex;
 }
@@ -77,11 +78,12 @@
 .home-logo {
   display: flex;
   justify-content: flex-end;
-  margin-right: 2.2rem;
+  margin: 0.5rem 2.1rem 0.5rem 0;
+
 }
 
 .home-logo img {
-    width: 55%
+    width: 57%
 }
 
 .login-btn {

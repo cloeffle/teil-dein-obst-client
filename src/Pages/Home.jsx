@@ -38,7 +38,7 @@ function Home() {
     <div className="home">
       <div className="header-login">
         <div className="logo-wrapper">
-          <div className="logo home-logo">
+          <div className="home-logo">
             <img src={Logo} alt="logo" />
           </div>
         </div>
