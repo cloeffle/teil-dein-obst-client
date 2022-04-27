@@ -14,96 +14,40 @@ import Pflaume from '../assets/images/icons8-plum-500.png';
 import Korb from '../assets/images/fruit basket 500.png';
 
 function Filter() {
+  const obstsorten = [
+    { name: 'Apfel', alt: 'Äpfel', bild: Apfel, id: 1 },
+    { name: 'Aprikose', alt: 'Aprikosen', bild: Aprikose, id: 2 },
+    { name: 'Birne', alt: 'Birnen', bild: Birne, id: 3 },
+    { name: 'Erdbeere', alt: 'Erdbeeren', bild: Erdbeere, id: 4 },
+    { name: 'Heidelbeere', alt: 'Heidelbeeren', bild: Heidelbeere, id: 5 },
+    { name: 'Himbeere', alt: 'Himbeeren', bild: Himbeere, id: 6 },
+    {
+      name: 'Johannisbeere',
+      alt: 'Johannisbeeren',
+      bild: Johannisbeere,
+      id: 7,
+    },
+    { name: 'Kirsche', alt: 'Kirschen', bild: Kirsche, id: 8 },
+    { name: 'Stachelbeere', alt: 'Stachelbeeren', bild: Stachelbeere, id: 9 },
+    { name: 'Weintraube', alt: 'Weintrauben', bild: Weintraube, id: 10 },
+    { name: 'Pflaume', alt: 'Pflaumen', bild: Pflaume, id: 11 },
+    { name: 'Sonstiges', alt: 'Sonstiges', bild: Korb, id: 12 },
+  ];
+  console.log(obstsorten);
   return (
     <div className="container">
-      <div className="chooseBtnCont">
-        <button className="chooseBtn">
-          <p>ALLE:</p>
-        </button>
-        <button className="chooseBtn">
-          <p>Steinobst:</p>
-        </button>
-        <button className="chooseBtn">
-          <p>Kernobst:</p>
-        </button>
-        <button className="chooseBtn">
-          <p>Schalenobst:</p>
-        </button>
-        <button className="chooseBtn">
-          <p>Beerenobst:</p>
-        </button>
+      <div className="cardContainer">
+        {obstsorten.map((sorte) => (
+          <button className="card-2" key={sorte.id}>
+            <img src={sorte.bild} alt={sorte.alt} />
+            <p>{sorte.name}</p>
+          </button>
+        ))}
       </div>
 
-      <div className="cardContainer">
-        <div className="row">
-          <button className="card-2">
-            <img src={Apfel} alt="Apfel" />
-            <p>Äpfel</p>
-          </button>
-          <button className="card-2">
-            <img src={Aprikose} alt="Aprikose" />
-            <p>Aprikosen</p>
-          </button>
-        </div>
-
-        <div className="row">
-          <button className="card-2">
-            <img src={Birne} alt="Birne" />
-            <p>Birnen</p>
-          </button>
-          <button className="card-2">
-            <img src={Erdbeere} alt="Erdbeeren" />
-            <p>Erdbeeren</p>
-          </button>
-        </div>
-
-        <div className="row">
-          <button className="card-2">
-            <img src={Heidelbeere} alt="Heidelbeere" />
-            <p>Heidelbeeren</p>
-          </button>
-          <button className="card-2">
-            <img src={Himbeere} alt="Himbeere" />
-            <p>Himbeere</p>
-          </button>
-        </div>
-
-        <div className="row">
-          <button className="card-2">
-            <img src={Johannisbeere} alt="Johannisbeere" />
-            <p>Johannisbeeren</p>
-          </button>
-          <button className="card-2">
-            <img src={Kirsche} alt="Kirschen" />
-            <p>Kirschen</p>
-          </button>
-        </div>
-
-        <div className="row">
-          <button className="card-2">
-            <img src={Stachelbeere} alt="Stachelbeeren" />
-            <p>Stachelbeeren</p>
-          </button>
-          <button className="card-2">
-            <img src={Pflaume} alt="Pflaumen" />
-            <p>Pflaumen</p>
-          </button>
-        </div>
-
-        <div className="row">
-          <button className="card-2">
-            <img src={Weintraube} alt="Weintrauben" />
-            <p>Weintrauben</p>
-          </button>
-          <button className="card-2">
-            <img src={Korb} alt="Sonstiges" />
-            <p>Sonstiges</p>
-          </button>
-        </div>
-        <div className="applyFilter">
-          <button className="select">Filter anwenden</button>
-          <button className="delete">Filter löschen</button>
-        </div>
+      <div className="applyFilter">
+        <button className="select">Filter anwenden</button>
+        <button className="delete">Filter löschen</button>
       </div>
     </div>
   );

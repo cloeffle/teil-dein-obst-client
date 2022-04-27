@@ -48,7 +48,9 @@ button {
 /** Fruit-Button-Container */
 .cardContainer {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
   gap: 5px;
 }
@@ -81,11 +83,11 @@ button {
 }
 
 /** container with 2 buttons */
-.row {
+/* .row {
   display: flex;
   justify-content: center;
   gap: 5px;
-}
+} */
 
 /** Bottom-Filter-Buttons */
 
@@ -101,7 +103,6 @@ button {
 }
 .select:hover {
   outline: 3px solid #f9f8f2;
-  
 }
 
 .delete {
