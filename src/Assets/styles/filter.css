@@ -1,0 +1,112 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+button {
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+/** MainContainer */
+.container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  text-align: center;
+  background-color: #f7fafc;
+  width: 100vw;
+}
+/** Choose Fruit-Button-Container */
+.chooseBtnCont {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 1rem;
+}
+
+.chooseBtn p {
+  font-size: 1rem;
+  font-weight: bold;
+}
+.chooseBtn {
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  background-color: #faf1cf9b;
+  padding: 5px;
+}
+.chooseBtn:hover {
+  outline: 3px solid #357560;
+}
+
+/** Fruit-Button-Container */
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+/** Fruit-Cards */
+.card-2 {
+  padding: 10px 15px 10px;
+  margin: 2px;
+  background-color: #faf1cf9b;
+  width: 40%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.card-2 p {
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  /* text-align: center; */
+}
+
+.card-2:hover {
+  outline: 5px solid #357560;
+}
+
+.card-2 img {
+  width: 50%;
+  height: auto;
+}
+
+/** container with 2 buttons */
+.row {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+/** Bottom-Filter-Buttons */
+
+.applyFilter {
+  margin-bottom: 2rem;
+}
+
+.select {
+  margin-top: 1rem;
+  padding: 10px 25px;
+  background-color: #357560;
+  color: #f9f8f2;
+}
+.select:hover {
+  outline: 3px solid #f9f8f2;
+  
+}
+
+.delete {
+  padding: 10px 25px;
+  background-color: none;
+  border: 3px solid #af473c;
+  color: black;
+}

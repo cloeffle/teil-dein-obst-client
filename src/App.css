@@ -1,6 +1,7 @@
 :root {
   font-family: "Nunito", sans-serif;
-  font-size: 17px;
+  font-size: 16px;
+  color: #444;
   background-color: #f7fafc;
 }
 
@@ -22,11 +23,17 @@ a {
 
 .btn {
   padding: 0.7rem;
-  border-radius: 12px;
+  border-radius: 22px;
   font-size: 1rem;
   cursor: pointer;
   letter-spacing: 0.1rem;
   margin-top: 0.5rem;
+}
+
+.submit {
+  border: none;
+  background-color: #357560;
+  color: #f9f8f2;
 }
 
 .logo-wrapper {
@@ -43,4 +50,9 @@ a {
 
 .logo img {
   width: 45%;
+}
+
+input:focus, textarea:focus{
+  outline: none;
+  border: 2px solid #faf1cf;
 }

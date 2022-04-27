@@ -60,7 +60,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
     display: inline-block;
     margin-bottom: 1rem;
     text-decoration: none;
-    color: white;
+    color: #f7fafc;
   }
 
   /* Styling of overlay */

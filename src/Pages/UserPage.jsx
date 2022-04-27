@@ -4,8 +4,9 @@ import '../assets/styles/userpage.css';
 import LogoComponent from '../components/LogoComponent';
 import Obstbaum from '../assets/images/Obstbaum.svg';
 
-import { useAuth0, User } from '@auth0/auth0-react';
+import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function UserPage() {
   const { user } = useAuth0();
@@ -44,12 +45,12 @@ function UserPage() {
               <p>Baum C</p>
             </div>
             <div className="add-trees">
-              <a href="">
+              <Link to="">
                 <figure>
                   <img src={Obstbaum} alt="Obstbaum" />
                   <figcaption>Baum hinzufügen</figcaption>
                 </figure>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

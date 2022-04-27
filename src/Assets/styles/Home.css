@@ -1,0 +1,73 @@
+.map {
+    width: 97vw;
+    height: 89vh;
+    position: relative;
+}
+
+.location_icon {
+    height: 2rem;
+    width: auto;
+}
+
+.btn_map_wrapper {
+    position: absolute;
+    top: 20%;
+    right: 3%;
+    display: flex;
+    flex-direction: column;
+}
+
+.btn_map {
+    width: 60px;
+    height: 60px;
+    background-color: white;
+    border-radius: 100%;
+}
+
+.btn_map:first-child {
+    margin-bottom: 20px;
+}  
+
+.btn_map img {
+    width: 60%;
+    height: auto;
+}
+
+.myLocation_marker img{
+    width: 35px;
+}
+
+.location_info_modal {
+    position: absolute;
+    bottom: 0px;
+    height: 25%;
+    width: 100%;
+    background-color: #faf1cf;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 10% 0;
+}
+
+
+
+.close_icon {
+    top:5%;
+    right: 2%;
+    position: absolute;
+}
+
+.close_icon:hover {
+    cursor: pointer;
+}
+
+.btn_info_modal {
+    border: none;
+  background-color: #357560;
+  color: #f9f8f2;
+  padding: 0.7rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  letter-spacing: 0.1rem;
+}
