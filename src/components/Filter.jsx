@@ -1,5 +1,5 @@
 import React from 'react';
-import '../assets/styles/styleChris.css';
+import '../assets/styles/filter.css';
 import Apfel from '../assets/images/icons8-apple-500.png';
 import Aprikose from '../assets/images/icons8-apricot-500.png';
 import Birne from '../assets/images/icons8-pear-500.png';
