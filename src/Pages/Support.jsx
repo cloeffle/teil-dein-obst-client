@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 
 import "../assets/styles/support.css";
-import Logo from "../assets/logo/Logo.svg";
+import LogoComponent from "../components/LogoComponent";
 
 export default function Support() {
   const [userInput, setUserInput] = useState({
@@ -54,18 +54,14 @@ export default function Support() {
     if (status === "success") {
       setTimeout(() => {
         setStatus("");
-      }, 3000);
+      }, 5000);
     }
   }, [status]);
 
   return (
     <>
       <div className="supportWrapper">
-        <div className="logo-wrapper">
-          <div className="logo">
-            <img src={Logo} alt="logo" />
-          </div>
-        </div>
+        <LogoComponent />
         <div className="support-container">
           <form ref={form} onSubmit={sendEmail} className="support-form">
             <h3>Kontaktformular</h3>
@@ -82,7 +78,7 @@ export default function Support() {
               type="text"
               name="name"
               className="support-name"
-              placeholder="Gebe hier Deinen Namen ein"
+              placeholder="Deine Name"
               value={userInput.name}
               onChange={handleChange}
               
@@ -92,7 +88,7 @@ export default function Support() {
               type="email"
               name="email"
               className="support-mail"
-              placeholder="Gebe hier Deine E-Mail Adresse ein"
+              placeholder="Deine E-Mail Adresse"
               value={userInput.email}
               onChange={handleChange}
               
@@ -107,9 +103,7 @@ export default function Support() {
               value={userInput.message}
               onChange={handleChange}
             ></textarea>
-            <button disabled={!userInput.name || !userInput.email || !userInput.message} className="support-submit" type="submit" value="ABSCHICKEN">
-              ABSCHICKEN
-            </button>
+            <input disabled={!userInput.name || !userInput.email || !userInput.message} className="submit btn" type="submit" value="Absenden" />
           </form>
         </div>
       </div>

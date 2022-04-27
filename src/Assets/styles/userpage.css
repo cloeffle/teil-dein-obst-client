@@ -1,0 +1,63 @@
+.userpage-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 85vh;
+  margin: 0.5rem 1rem;
+  line-height: 2rem;
+}
+
+.userpage {
+  background-color: #faf1cf72;
+  margin: 0.5rem 0;
+  padding-left: 0.5rem;
+}
+
+.trees-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 1.5rem;
+  grid-row-gap: 0px;
+}
+
+.my-trees {
+  grid-area: 1 / 1 / 2 / 2;
+}
+
+.add-trees {
+  grid-area: 1 / 2 / 2 / 3;
+}
+
+figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+figure img {
+  width: 70%;
+}
+
+figcaption {
+  display: flex;
+  font-size: 0.8rem;
+  justify-content: center;
+}
+
+.userpage-btn {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logout-btn {
+  border: 2px solid #af473c;
+  background-color: transparent;
+  color: #af473c;
+}
+
+.settings-btn {
+  border: none;
+  background-color: rgba(128, 128, 128, 0.567);
+  color: #f9f8f2;
+}
