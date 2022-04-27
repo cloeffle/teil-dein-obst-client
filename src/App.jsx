@@ -11,6 +11,7 @@ import Tree from './pages/Tree';
 import UserPage from './pages/UserPage';
 import Filter from './components/Filter';
 import TreeRegistration from './pages/TreeRegistration';
+import Login from './components/Login/LoginButton';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="filter" element={<Filter />} />
         <Route path="baum-registrieren" element={<TreeRegistration />} />
+        <Route path="anmelden" element={<Login />} />
         <Route path="ueber-teil-dein-obst" element={<About />} />
         <Route path="kontakt" element={<Support />} />
         <Route
