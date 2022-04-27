@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import LogoutButton from "../components/Login/LogoutButton";
 import "../assets/styles/userpage.css";
 import LogoComponent from "../components/LogoComponent";
@@ -20,12 +21,12 @@ function UserPage() {
               <p>Baum C</p>
             </div>
             <div className="add-trees">
-              <a href="">
+              <Link to="">
                 <figure>
                   <img src={Obstbaum} alt="Obstbaum" />
                   <figcaption>Baum hinzufügen</figcaption>
                 </figure>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

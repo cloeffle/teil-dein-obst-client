@@ -18,6 +18,8 @@ const fruits = [
 export default function TreeRegistration() {
   const [selectedOption, setSelectedOption] = useState(null);
 
+  const toDay = new Date().toISOString().substring(0, 10);
+
   return (
     <>
       <div>
@@ -41,30 +43,35 @@ export default function TreeRegistration() {
             <input
               className="tree-input-field"
               type="text"
-              name="Strasse"
+              name="strasse"
               placeholder="Straße"
             />
             <input
               className="tree-input-field"
               type="number"
-              name="Hausnummer"
+              name="hausnummer"
               placeholder="Hausnummer"
             />
             <input
               className="tree-input-field"
               type="number"
-              name="PLZ"
+              name="plz"
               placeholder="Postleitzahl"
             />
             <input
               className="tree-input-field"
               type="text"
-              name="Ort"
+              name="ort"
               placeholder="Ort"
             />
             <label>Erntezeitraum</label>
             <p>von</p>
-            <input className="tree-input-field" type="date" name="start" />
+            <input
+              className="tree-input-field"
+              type="date"
+              name="start"
+              defaultValue={toDay}
+            />
             <p>bis</p>
             <input className="tree-input-field" type="date" name="end" />
             <label>Infos</label>
@@ -73,7 +80,7 @@ export default function TreeRegistration() {
               name="message"
               cols="30"
               rows="5"
-              placeholder="Nähere Informationen zum Standort und der Zugänglickeit z.B. Pflücken nur nach Absprache möglich"
+              placeholder="Nähere Informationen zum Standort, der Zugänglickeit z.B. Pflücken nur nach Absprache möglich etc."
             ></textarea>
             <input type="file" />
             <input type="submit" className="submit btn" value="Hinzufügen" />

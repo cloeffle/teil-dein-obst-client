@@ -1,6 +1,8 @@
 .userpage-container {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  height: 85vh;
   margin: 0.5rem 1rem;
   line-height: 2rem;
 }
