@@ -17,7 +17,7 @@ function App() {
     <div className="App">
       <Navbar />
       <Routes>
-        <Route path="karte" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="filter" element={<Filter />} />
         <Route path="baum-registrieren" element={<TreeRegistration />} />
         <Route path="ueber-teil-dein-obst" element={<About />} />

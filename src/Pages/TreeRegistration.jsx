@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import Select from "react-select";
+import React, { useState } from 'react';
+import Select from 'react-select';
 
-import LogoComponent from "../components/LogoComponent";
-import "../assets/styles/treeRegistration.css";
+import LogoComponent from '../components/LogoComponent';
+import '../assets/styles/treeRegistration.css';
 
 const fruits = [
-  { value: "Apfel", label: "Apfel" },
-  { value: "Birne", label: "Birne" },
-  { value: "Aprikose", label: "Aprikose" },
-  { value: "Kirsche", label: "Kirsche" },
-  { value: "Johannisbeere", label: "Johannisbeere" },
-  { value: "Heidelbeere", label: "Heidelbeere" },
-  { value: "Erdbeere", label: "Erdbeere" },
-  { value: "Sonstiges", label: "Sonstiges" },
+  { value: 'Apfel', label: 'Apfel' },
+  { value: 'Birne', label: 'Birne' },
+  { value: 'Aprikose', label: 'Aprikose' },
+  { value: 'Kirsche', label: 'Kirsche' },
+  { value: 'Johannisbeere', label: 'Johannisbeere' },
+  { value: 'Heidelbeere', label: 'Heidelbeere' },
+  { value: 'Erdbeere', label: 'Erdbeere' },
+  { value: 'Sonstiges', label: 'Sonstiges' },
 ];
 
 export default function TreeRegistration() {
