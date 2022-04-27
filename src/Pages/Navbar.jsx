@@ -8,6 +8,7 @@ export default function Navbar() {
   return (
     <>
       <Menu noOverlay>
+        <NavLink to="/profil">Mein Profil</NavLink>
         <NavLink to="/" id="map" className="menu-item">
           Karte
         </NavLink>
