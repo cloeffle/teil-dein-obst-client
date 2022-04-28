@@ -9,19 +9,19 @@ export default function Navbar() {
     <>
       <Menu>
         <a href="/profil">
-          <i class="fa-solid fa-user"></i>
+          <i className="fa-solid fa-user"></i>
           <span>Mein Profil</span>
         </a>
         <a href="/" id="map" className="menu-item">
-          <i class="fa-solid fa-location-dot"></i>
+          <i className="fa-solid fa-location-dot"></i>
           <span>Karte</span>
         </a>
         <a href="/ueber-teil-dein-obst" id="about" className="menu-item">
-          <i class="fa-solid fa-circle-info"></i>
+          <i className="fa-solid fa-circle-info"></i>
           <span>Über Teil dein Obst</span>
         </a>
         <a href="/kontakt" id="contact" className="menu-item">
-          <i class="fa-solid fa-paper-plane"></i>
+          <i className="fa-solid fa-paper-plane"></i>
           <span>Kontakt</span>
         </a>
       </Menu>

@@ -3,7 +3,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { ProtectedRoute } from "./auth/ProtectedRoute";
 
-import Navbar from "./pages/Navbar";
+import Navbar from "./components/Navbar";
 import About from "./pages/About";
 import Support from "./pages/Support";
 import Home from "./pages/Home";
