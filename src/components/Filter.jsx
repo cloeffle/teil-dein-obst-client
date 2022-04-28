@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../assets/styles/filter.css';
 import Apfel from '../assets/images/icons8-apple-500.png';
 import Aprikose from '../assets/images/icons8-apricot-500.png';
@@ -14,6 +14,8 @@ import Pflaume from '../assets/images/icons8-plum-500.png';
 import Korb from '../assets/images/fruit basket 500.png';
 
 function Filter() {
+  const [filter, setFilter] = useState([]);
+
   const obstsorten = [
     { name: 'Apfel', alt: 'Äpfel', bild: Apfel, id: 1 },
     { name: 'Aprikose', alt: 'Aprikosen', bild: Aprikose, id: 2 },
@@ -33,12 +35,38 @@ function Filter() {
     { name: 'Pflaume', alt: 'Pflaumen', bild: Pflaume, id: 11 },
     { name: 'Sonstiges', alt: 'Sonstiges', bild: Korb, id: 12 },
   ];
-  console.log(obstsorten);
+
+  const handleClick = (e) => {
+    const id = e.target.closest('button').id;
+    const index = filter.indexOf(id);
+
+    console.log(e.target.closest('button'));
+
+    if (index === -1) {
+      setFilter([...filter, id]);
+      e.target.closest('button').classList.add('selected');
+    } else {
+      filter.splice(index, 1);
+      setFilter([...filter]);
+      e.target.closest('button').classList.remove('selected');
+    }
+  };
+
+  console.log(filter);
+
   return (
     <div className="container">
       <div className="cardContainer">
         {obstsorten.map((sorte) => (
-          <button className="card-2 chooseBtn" key={sorte.id}>
+          <button
+            onClick={(e) => {
+              handleClick(e);
+            }}
+            id={sorte.id}
+            className="card-2 chooseBtn"
+            key={sorte.id}
+            selected={sorte.selected}
+          >
             <img src={sorte.bild} alt={sorte.alt} />
             <p>{sorte.name}</p>
           </button>
@@ -47,7 +75,9 @@ function Filter() {
 
       <div className="applyFilter">
         <button className="select">Filter anwenden</button>
-        <button className="delete">Filter löschen</button>
+        <button className="delete" onClick={() => setFilter([])}>
+          Filter löschen
+        </button>
       </div>
     </div>
   );

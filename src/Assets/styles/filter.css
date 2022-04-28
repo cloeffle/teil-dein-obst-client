@@ -89,6 +89,10 @@ button {
   outline: 5px solid #357560;
 }
 
+.selected {
+  outline: 5px solid #357560;
+}
+
 .card-2 img {
   width: 50%;
   height: auto;
