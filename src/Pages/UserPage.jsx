@@ -14,34 +14,31 @@ function UserPage() {
   const [userFavorites, setUserFavorites] = useState(false);
 
   useEffect(() => {
-    axios(`http://localhost:8000/user/${user.sub}`).then((response) =>
-      setUserData(response.data)
-    );
+    axios(
+      `http://localhost:8000/user/${user.sub.slice(user.sub.length - 7)}`
+    ).then((response) => setUserData(response.data));
   }, []);
 
   useEffect(() => {
-    if (userData !== false) {
-      let favTrees = [];
-      userData.favorites.forEach((favorites) => {
-        axios(`http://localhost:8000/tree/${favorites}`).then((response) => {
-          favTrees.push(response.data);
-        });
-        setUserFavorites(favTrees);
-        console.log(favTrees, 'favtrees');
-      });
-    }
+    axios(
+      `http://localhost:8000/tree/collection/${user.sub.slice(
+        user.sub.length - 7
+      )}`
+    ).then((response) => setUserFavorites(response.data));
   }, [userData]);
 
-  // add user to mongodb database.
-  // useEffect(() => {
-  //   axios
-  //     .post(`http://localhost:8000/user/${user.sub}`, {
-  //       name: user.name,
-  //       email: user.email,
-  //     })
-  //     .then((response) => console.log(response))
-  //     .catch((error) => console.log(error));
-  // }, []);
+  useEffect(() => {
+    axios
+      .post(
+        `http://localhost:8000/user/${user.sub.slice(user.sub.length - 7)}`,
+        {
+          name: user.name,
+          email: user.email,
+        }
+      )
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
+  }, []);
 
   return (
     <div>
