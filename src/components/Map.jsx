@@ -12,7 +12,7 @@ const Map = ({ locationData, lat, lng }) => {
     const locations = locationData.map(location => {
        return (
        <LocationMarker 
-            
+            key={location._id}
             lat={location.coordinates.lat.$numberDecimal} 
             lng={location.coordinates.lng.$numberDecimal} 
 
