@@ -38,6 +38,7 @@
 }
 
 .location_info_modal {
+<<<<<<< HEAD
   position: absolute;
   bottom: 0px;
   height: 25%;
@@ -49,6 +50,25 @@
   padding: 10% 0;
 }
 
+=======
+    position: absolute;
+    bottom: 0px;
+    height: 45%;
+    width: 100%;
+    background-color: #faf1cf;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10% 0;
+}
+
+.location_info_modal h2 {
+    margin-bottom: 1.5rem;
+}
+
+
+>>>>>>> 7a8c297ba2e3f3ea3ec7cc8b877218ea6d7b8e95
 .close_icon {
   top: 5%;
   right: 2%;
@@ -60,15 +80,27 @@
 }
 
 .btn_info_modal {
-  border: none;
+border: none;
   background-color: #357560;
   color: #f9f8f2;
   padding: 0.7rem;
-  border-radius: 12px;
+  border-radius: 22px;
   font-size: 1rem;
   cursor: pointer;
   letter-spacing: 0.1rem;
+    margin-top: 2rem;
+
 }
+
+.addresse {
+    font-size: 1.2rem;
+    margin: 1rem 0;
+    font-weight: 900;
+}
+
+
+
+
 
 /*LOGO AND LOGIN */
 .header-login {
@@ -103,3 +135,4 @@
   margin-top: 1rem; */
 
 }
+

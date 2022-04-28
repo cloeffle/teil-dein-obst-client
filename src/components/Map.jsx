@@ -19,7 +19,7 @@ const Map = ({ locationData, lat, lng }) => {
 
             onClick={() => setLocationInfo(
                 {   
-                    type: location.type.type,
+                    type: location.type,
                     strasse: location.location.strasse, 
                     plz: location.location.plz,
                     stadt: location.location.stadt,
