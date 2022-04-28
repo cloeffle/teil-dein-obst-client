@@ -7,14 +7,14 @@ import LocationInfoModal from './LocationInfoModal'
 
 const Map = ({ locationData, lat, lng }) => {
     const [locationInfo, setLocationInfo] = useState(null)
-    console.log(locationInfo)
+    
     
     const locations = locationData.map(location => {
        return (
        <LocationMarker 
-            key={location.id} 
-            lat={location.coordinates.lat} 
-            lng={location.coordinates.lng} 
+            
+            lat={location.coordinates.lat.$numberDecimal} 
+            lng={location.coordinates.lng.$numberDecimal} 
 
 
             onClick={() => setLocationInfo(
