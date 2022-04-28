@@ -5,7 +5,7 @@ import LogoComponent from '../components/LogoComponent';
 import Obstbaum from '../assets/images/Obstbaum.svg';
 
 import { useAuth0 } from '@auth0/auth0-react';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 function UserPage() {
@@ -14,6 +14,7 @@ function UserPage() {
   const [userTrees, setUserTrees] = useState(false);
 
   useEffect(() => {
+    // slice id to avoid special characters
     axios(
       `http://localhost:8000/user/${user.sub.slice(user.sub.length - 7)}`
     ).then((response) => setUserData(response.data));
@@ -58,14 +59,16 @@ function UserPage() {
                     <th>Straße</th>
                   </tr>
                 </thead>
-                {userTrees &&
-                  userTrees.map((favorite) => (
-                    <tr>
-                      <td>{favorite.status.status}</td>
-                      <td>{favorite.type}</td>
-                      <td>{favorite.location.strasse}</td>
-                    </tr>
-                  ))}
+                <tbody>
+                  {userTrees &&
+                    userTrees.map((favorite) => (
+                      <tr>
+                        <td>{favorite.status.status}</td>
+                        <td>{favorite.type}</td>
+                        <td>{favorite.location.strasse}</td>
+                      </tr>
+                    ))}
+                </tbody>
               </table>
             </div>
             <div className="add-trees">
