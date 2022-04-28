@@ -26,8 +26,9 @@
 }
 
 td {
-  padding: 10px;
+  margin-right: 10px;
   text-align: center;
+  vertical-align: top;
 }
 
 .add-trees {
