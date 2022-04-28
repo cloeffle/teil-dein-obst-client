@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 function UserPage() {
   const { user } = useAuth0();
   const [userData, setUserData] = useState(false);
-  const [userFavorites, setUserFavorites] = useState(false);
+  const [userTrees, setUserTrees] = useState(false);
 
   useEffect(() => {
     axios(
@@ -24,7 +24,7 @@ function UserPage() {
       `http://localhost:8000/tree/collection/${user.sub.slice(
         user.sub.length - 7
       )}`
-    ).then((response) => setUserFavorites(response.data));
+    ).then((response) => setUserTrees(response.data));
   }, [userData]);
 
   useEffect(() => {
@@ -50,6 +50,7 @@ function UserPage() {
           <div className="trees-container userpage">
             <div className="my-trees">
               <a href="/loggedIn/tree">Meine Bäume</a>
+              {userTrees && userTrees.map((favorite) => <p>{favorite.type}</p>)}
             </div>
             <div className="add-trees">
               <Link to="">
@@ -63,10 +64,7 @@ function UserPage() {
         </div>
         <div className="favorites-container">
           <h4>Deine Favoriten</h4>
-          <div className="favorite-trees userpage">
-            {userFavorites &&
-              userFavorites.map((favorite) => <p>{favorite.type}</p>)}
-          </div>
+          <div className="favorite-trees userpage"></div>
         </div>
         <div className="leaderboard-container">
           <h4>Rangliste</h4>
