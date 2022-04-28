@@ -64,17 +64,22 @@ export default function TreeRegistration() {
       target: { value },
     } = e;
     setFruitName(typeof value === "string" ? value.split(",") : value);
+    const myValue = typeof value === "string" ? value.split(",") : value;
+    setUserInput({
+      ...userInput,
+      type: myValue[0],
+    });
   };
 
   // Form
 
   const [userInput, setUserInput] = useState({
-    type: fruits.toString(),
+    type: "",
     strasse: "",
     plz: "",
     stadt: "",
-    // start: "",
-    // end: "",
+    start: "",
+    end: "",
     info: "",
   });
 
@@ -91,15 +96,6 @@ export default function TreeRegistration() {
       .post("http://localhost:8000/tree", userInput)
       .then((res) => {
         console.log(res);
-        setUserInput({
-          type: fruits.toString(),
-          strasse: "",
-          plz: "",
-          stadt: "",
-          // start: Date(),
-          // end: Date(),
-          info: "",
-        });
       })
       .catch((err) => {
         console.log(err);
@@ -191,15 +187,17 @@ export default function TreeRegistration() {
               className="tree-input-field"
               type="date"
               name="start"
-              // value={userInput.start}
+              id="start"
+              value={userInput.start}
               onChange={(e) => handleChangeUserInput(e)}
             />
             <p>bis</p>
             <input
               className="tree-input-field"
               type="date"
+              id="end"
               name="end"
-              // value={userInput.end}
+              value={userInput.end}
               onChange={(e) => handleChangeUserInput(e)}
             />
             <label>Infos</label>
