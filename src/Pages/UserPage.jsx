@@ -11,10 +11,7 @@ import { Link } from 'react-router-dom';
 function UserPage() {
   const { user } = useAuth0();
   const [userData, setUserData] = useState(false);
-  const [userFavorites, setUserFavorites] = useState([]);
-  if (userFavorites.length > 0) {
-    console.log(userFavorites);
-  }
+  const [userFavorites, setUserFavorites] = useState(false);
 
   useEffect(() => {
     axios(`http://localhost:8000/user/${user.sub}`).then((response) =>
@@ -25,11 +22,12 @@ function UserPage() {
   useEffect(() => {
     if (userData !== false) {
       let favTrees = [];
-      userData.favorites.map((favorites) => {
+      userData.favorites.forEach((favorites) => {
         axios(`http://localhost:8000/tree/${favorites}`).then((response) => {
           favTrees.push(response.data);
         });
         setUserFavorites(favTrees);
+        console.log(favTrees, 'favtrees');
       });
     }
   }, [userData]);
@@ -44,16 +42,6 @@ function UserPage() {
   //     .then((response) => console.log(response))
   //     .catch((error) => console.log(error));
   // }, []);
-
-  // useEffect(() => {
-  //   if (userData) {
-  //     let favorites = [];
-  //     axios
-  //       .get(`http://localhost:8000/tree/${userData.favorites[0]}`)
-  //       .then((response) => favorites.push(response.data[0]));
-  //     console.log('favorites', favorites);
-  //   }
-  // }, [userData]);
 
   return (
     <div>
@@ -79,8 +67,8 @@ function UserPage() {
         <div className="favorites-container">
           <h4>Deine Favoriten</h4>
           <div className="favorite-trees userpage">
-            {/* {userData.favorites &&
-              userData.favorites.map((favorite) => <p>{favorite}</p>)} */}
+            {userFavorites &&
+              userFavorites.map((favorite) => <p>{favorite.type}</p>)}
           </div>
         </div>
         <div className="leaderboard-container">
