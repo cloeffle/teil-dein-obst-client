@@ -5,44 +5,66 @@ import LogoComponent from '../components/LogoComponent';
 import Obstbaum from '../assets/images/Obstbaum.svg';
 
 import { useAuth0 } from '@auth0/auth0-react';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { Link } from 'react-router-dom';
 
 function UserPage() {
   const { user } = useAuth0();
-  const [userData, setUserData] = useState([]);
+  const [userData, setUserData] = useState(false);
+  const [userFavorites, setUserFavorites] = useState([]);
+  if (userFavorites.length > 0) {
+    console.log(userFavorites);
+  }
 
   useEffect(() => {
-    axios(`http://localhost:8000/user/${user.sub}`)
-      .then((response) => setUserData(response.data))
-      .catch((e) => {
-        console.log(e);
+    axios(`http://localhost:8000/user/${user.sub}`).then((response) =>
+      setUserData(response.data)
+    );
+  }, []);
+
+  useEffect(() => {
+    if (userData !== false) {
+      let favTrees = [];
+      userData.favorites.map((favorites) => {
+        axios(`http://localhost:8000/tree/${favorites}`).then((response) => {
+          favTrees.push(response.data);
+        });
+        setUserFavorites(favTrees);
       });
-  }, []);
+    }
+  }, [userData]);
 
-  useEffect(() => {
-    axios
-      .post(`http://localhost:8000/user/${user.sub}`, {
-        name: user.name,
-        email: user.email,
-      })
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
-  }, []);
+  // add user to mongodb database.
+  // useEffect(() => {
+  //   axios
+  //     .post(`http://localhost:8000/user/${user.sub}`, {
+  //       name: user.name,
+  //       email: user.email,
+  //     })
+  //     .then((response) => console.log(response))
+  //     .catch((error) => console.log(error));
+  // }, []);
+
+  // useEffect(() => {
+  //   if (userData) {
+  //     let favorites = [];
+  //     axios
+  //       .get(`http://localhost:8000/tree/${userData.favorites[0]}`)
+  //       .then((response) => favorites.push(response.data[0]));
+  //     console.log('favorites', favorites);
+  //   }
+  // }, [userData]);
 
   return (
     <div>
       <LogoComponent />
       <div className="userpage-container">
-        <h3>Hallo Username</h3>
+        <h3>Hallo {user.name}</h3>
         <div className="trees-wrapper">
           <h4>Deine Bäume</h4>
           <div className="trees-container userpage">
             <div className="my-trees">
               <a href="/loggedIn/tree">Meine Bäume</a>
-              <p>Baum A</p>
-              <p>Baum B</p>
-              <p>Baum C</p>
             </div>
             <div className="add-trees">
               <Link to="">
@@ -57,9 +79,8 @@ function UserPage() {
         <div className="favorites-container">
           <h4>Deine Favoriten</h4>
           <div className="favorite-trees userpage">
-            <p>Apfelbaum, Musterstr. 11</p>
-            <p>Birnebaum, Musterweg. 24</p>
-            <p>Erdbeere, Musterhaus 2</p>
+            {/* {userData.favorites &&
+              userData.favorites.map((favorite) => <p>{favorite}</p>)} */}
           </div>
         </div>
         <div className="leaderboard-container">
