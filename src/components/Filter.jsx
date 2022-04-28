@@ -38,7 +38,7 @@ function Filter() {
     <div className="container">
       <div className="cardContainer">
         {obstsorten.map((sorte) => (
-          <button className="card-2" key={sorte.id}>
+          <button className="card-2 chooseBtn" key={sorte.id}>
             <img src={sorte.bild} alt={sorte.alt} />
             <p>{sorte.name}</p>
           </button>
