@@ -38,19 +38,6 @@
 }
 
 .location_info_modal {
-<<<<<<< HEAD
-  position: absolute;
-  bottom: 0px;
-  height: 25%;
-  width: 100%;
-  background-color: #faf1cf;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  padding: 10% 0;
-}
-
-=======
     position: absolute;
     bottom: 0px;
     height: 45%;
@@ -68,7 +55,6 @@
 }
 
 
->>>>>>> 7a8c297ba2e3f3ea3ec7cc8b877218ea6d7b8e95
 .close_icon {
   top: 5%;
   right: 2%;
