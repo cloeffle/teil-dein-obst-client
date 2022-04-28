@@ -44,15 +44,6 @@ button {
   box-shadow: 3px 2px 12px 1px rgba(0, 0, 0, 0.5);
 }
 
-/* .chooseBtn p {
-  font-size: 1rem;
-  font-weight: bold;
-}
-
-.chooseBtn:hover {
-  outline: 3px solid #357560;
-} */
-
 /** Fruit-Button-Container */
 .cardContainer {
   display: flex;
@@ -90,7 +81,7 @@ button {
 }
 
 .selected {
-  outline: 5px solid #357560;
+  outline: 5px solid #ff0000;
 }
 
 .card-2 img {
