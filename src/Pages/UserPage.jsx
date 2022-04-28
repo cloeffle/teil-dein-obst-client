@@ -72,7 +72,7 @@ function UserPage() {
               </table>
             </div>
             <div className="add-trees">
-              <Link to="">
+              <Link to="/baum-registrieren">
                 <figure>
                   <img src={Obstbaum} alt="Obstbaum" />
                   <figcaption>Baum hinzufügen</figcaption>
