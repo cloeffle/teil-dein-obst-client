@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import Map from '../components/Map';
 import '../assets/styles/Home.css';
 
+import Logo from "../assets/logo/Logo.svg";
+import Login from "../components/Login/LoginButton";
+
 function Home() {
   /*GET ALL LOCATIONS FROM BACKEND*/
   const [locationData, setLocationData] = useState([]);
@@ -30,6 +33,14 @@ function Home() {
 
   return (
     <div className="home">
+      <div className="header-login">
+        <div className="logo-wrapper">
+          <div className="home-logo">
+            <img src={Logo} alt="logo" />
+          </div>
+        </div>
+        <Login />
+      </div>
       {locationData && <Map locationData={locationData} lat={lat} lng={lng} />}
     </div>
   );
