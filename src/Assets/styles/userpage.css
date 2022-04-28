@@ -25,6 +25,11 @@
   grid-area: 1 / 1 / 2 / 2;
 }
 
+td {
+  padding: 10px;
+  text-align: center;
+}
+
 .add-trees {
   grid-area: 1 / 2 / 2 / 3;
 }

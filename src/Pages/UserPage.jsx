@@ -50,7 +50,23 @@ function UserPage() {
           <div className="trees-container userpage">
             <div className="my-trees">
               <a href="/loggedIn/tree">Meine Bäume</a>
-              {userTrees && userTrees.map((favorite) => <p>{favorite.type}</p>)}
+              <table>
+                <thead>
+                  <tr>
+                    <th>Status</th>
+                    <th>Sorte</th>
+                    <th>Straße</th>
+                  </tr>
+                </thead>
+                {userTrees &&
+                  userTrees.map((favorite) => (
+                    <tr>
+                      <td>{favorite.status.status}</td>
+                      <td>{favorite.type}</td>
+                      <td>{favorite.location.strasse}</td>
+                    </tr>
+                  ))}
+              </table>
             </div>
             <div className="add-trees">
               <Link to="">
