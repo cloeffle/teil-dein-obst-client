@@ -1,11 +1,13 @@
 import { AiOutlineClose } from 'react-icons/ai';
 import '../assets/styles/Home.css';
+import '../../src/App.css';
+import 'animate.css'
 
 function LocationInfoModal({ locationInfo, setLocationInfo }) {
   console.log(locationInfo);
 
   return (
-    <div className="location_info_modal">
+    <div className="location_info_modal animate__animated animate__slideInUp">
       <div className="info_wrapper">
         <h2>Info</h2>
         <p>{locationInfo.type}</p>
