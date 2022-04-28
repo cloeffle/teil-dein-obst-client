@@ -13,6 +13,7 @@ import Chip from "@mui/material/Chip";
 import LogoComponent from "../components/LogoComponent";
 import "../assets/styles/treeRegistration.css";
 
+// Select Option Obstsorte
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -54,10 +55,10 @@ function getStyles(fruit, fruitName, theme) {
 }
 
 export default function TreeRegistration() {
-  const toDay = new Date().toISOString().substring(0, 10);
   const theme = useTheme();
   const [fruitName, setFruitName] = useState([]);
 
+  // Select Fruits Option
   const handleChange = (e) => {
     const {
       target: { value },
@@ -65,18 +66,60 @@ export default function TreeRegistration() {
     setFruitName(typeof value === "string" ? value.split(",") : value);
   };
 
+  // Form
+
+  const [userInput, setUserInput] = useState({
+    type: fruits.toString(),
+    strasse: "",
+    plz: "",
+    stadt: "",
+    // start: "",
+    // end: "",
+    info: "",
+  });
+
+  const handleChangeUserInput = (e) => {
+    setUserInput({
+      ...userInput,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:8000/tree", userInput)
+      .then((res) => {
+        console.log(res);
+        setUserInput({
+          type: fruits.toString(),
+          strasse: "",
+          plz: "",
+          stadt: "",
+          // start: Date(),
+          // end: Date(),
+          info: "",
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    e.target.reset();
+  };
+
   return (
     <>
       <div>
         <LogoComponent />
         <div className="tree-form-container">
-          <form className="tree-form">
+          <form className="tree-form" onSubmit={(e) => handleSubmit(e)}>
             <h3>Obstbaum zur Verfügung stellen</h3>
             <FormControl sx={{ m: 1, width: 320 }}>
               <InputLabel id="Obstsorte" sx={{ fontFamily: "Nunito" }}>
                 Obstsorte
               </InputLabel>
               <Select
+                name="type"
                 labelId="Obstsorte"
                 id="Obstsorte"
                 multiple
@@ -101,7 +144,8 @@ export default function TreeRegistration() {
                   </Box>
                 )}
                 MenuProps={MenuProps}
-              required>
+                // required
+              >
                 {fruits.map((fruit) => (
                   <MenuItem
                     key={fruit}
@@ -118,21 +162,27 @@ export default function TreeRegistration() {
               className="tree-input-field"
               type="text"
               name="strasse"
+              value={userInput.strasse}
               placeholder="Straße, Hausnummer"
+              onChange={(e) => handleChangeUserInput(e)}
               required
             />
             <input
               className="tree-input-field"
               type="number"
               name="plz"
+              value={userInput.plz}
               placeholder="Postleitzahl"
-              required
+              onChange={(e) => handleChangeUserInput(e)}
+              // required
             />
             <input
               className="tree-input-field"
               type="text"
               name="stadt"
+              value={userInput.stadt}
               placeholder="Ort"
+              onChange={(e) => handleChangeUserInput(e)}
               required
             />
             <label>Erntezeitraum</label>
@@ -141,14 +191,24 @@ export default function TreeRegistration() {
               className="tree-input-field"
               type="date"
               name="start"
-              defaultValue={toDay}
+              // value={userInput.start}
+              onChange={(e) => handleChangeUserInput(e)}
             />
             <p>bis</p>
-            <input className="tree-input-field" type="date" name="end" />
+            <input
+              className="tree-input-field"
+              type="date"
+              name="end"
+              // value={userInput.end}
+              onChange={(e) => handleChangeUserInput(e)}
+            />
             <label>Infos</label>
             <textarea
               className="tree-input-field"
-              name="message"
+              type="text"
+              name="info"
+              value={userInput.info}
+              onChange={(e) => handleChangeUserInput(e)}
               cols="30"
               rows="5"
               placeholder="Nähere Informationen zum Standort, der Zugänglickeit z.B. Pflücken nur nach Absprache möglich etc."
