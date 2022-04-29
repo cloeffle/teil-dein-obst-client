@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState } from 'react';
+import axios from 'axios';
 
-import { useTheme } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import Chip from "@mui/material/Chip";
+import { useTheme } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import Chip from '@mui/material/Chip';
 
-import LogoComponent from "../components/LogoComponent";
-import "../assets/styles/treeRegistration.css";
+import LogoComponent from '../components/LogoComponent';
+import '../assets/styles/treeRegistration.css';
 
 // Select Option Obstsorte
 const ITEM_HEIGHT = 48;
@@ -26,18 +26,18 @@ const MenuProps = {
 };
 
 const fruits = [
-  "Apfel",
-  "Aprikose",
-  "Birne",
-  "Erdbeere",
-  "Heidelbeere",
-  "Himbeere",
-  "Johannisbeere",
-  "Kirsche",
-  "Stachelbeere",
-  "Weintraube",
-  "Pflaume",
-  "Sonstiges",
+  'Apfel',
+  'Aprikose',
+  'Birne',
+  'Erdbeere',
+  'Heidelbeere',
+  'Himbeere',
+  'Johannisbeere',
+  'Kirsche',
+  'Stachelbeere',
+  'Weintraube',
+  'Pflaume',
+  'Sonstiges',
 ];
 
 function getStyles(fruit, fruitName, theme) {
@@ -47,10 +47,10 @@ function getStyles(fruit, fruitName, theme) {
         ? theme.typography.fontWeightRegular
         : theme.typography.fontWeightMedium,
 
-    color: fruitName.indexOf(fruit) === -1 ? "#444" : "white",
+    color: fruitName.indexOf(fruit) === -1 ? '#444' : 'white',
 
-    backgroundColor: fruitName.indexOf(fruit) === -1 ? "white" : "#5a9481",
-    fontFamily: fruitName.indexOf(fruit) === -1 ? "Nunito" : "Nunito",
+    backgroundColor: fruitName.indexOf(fruit) === -1 ? 'white' : '#5a9481',
+    fontFamily: fruitName.indexOf(fruit) === -1 ? 'Nunito' : 'Nunito',
   };
 }
 
@@ -63,8 +63,8 @@ export default function TreeRegistration() {
     const {
       target: { value },
     } = e;
-    setFruitName(typeof value === "string" ? value.split(",") : value);
-    const myValue = typeof value === "string" ? value.split(",") : value;
+    setFruitName(typeof value === 'string' ? value.split(',') : value);
+    const myValue = typeof value === 'string' ? value.split(',') : value;
     setUserInput({
       ...userInput,
       type: myValue[0],
@@ -74,13 +74,13 @@ export default function TreeRegistration() {
   // Form
 
   const [userInput, setUserInput] = useState({
-    type: "",
-    strasse: "",
-    plz: "",
-    stadt: "",
-    start: "",
-    end: "",
-    info: "",
+    type: '',
+    strasse: '',
+    plz: '',
+    stadt: '',
+    start: '',
+    end: '',
+    info: '',
   });
 
   const handleChangeUserInput = (e) => {
@@ -93,7 +93,7 @@ export default function TreeRegistration() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:8000/tree", userInput)
+      .post('http://localhost:8000/tree', userInput)
       .then((res) => {
         console.log(res);
       })
@@ -111,7 +111,7 @@ export default function TreeRegistration() {
           <form className="tree-form" onSubmit={(e) => handleSubmit(e)}>
             <h3>Obstbaum zur Verfügung stellen</h3>
             <FormControl sx={{ m: 1, width: 320 }}>
-              <InputLabel id="Obstsorte" sx={{ fontFamily: "Nunito" }}>
+              <InputLabel id="Obstsorte" sx={{ fontFamily: 'Nunito' }}>
                 Obstsorte
               </InputLabel>
               <Select
@@ -125,15 +125,15 @@ export default function TreeRegistration() {
                   <OutlinedInput id="select-obstsorte" label="Obstsorte" />
                 }
                 renderValue={(selected) => (
-                  <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                     {selected.map((value) => (
                       <Chip
                         key={value}
                         label={value}
                         sx={{
-                          backgroundColor: "#5a9481",
-                          color: "white",
-                          fontFamily: "Nunito",
+                          backgroundColor: '#5a9481',
+                          color: 'white',
+                          fontFamily: 'Nunito',
                         }}
                       />
                     ))}
