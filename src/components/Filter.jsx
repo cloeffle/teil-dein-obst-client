@@ -16,53 +16,101 @@ import Korb from '../assets/images/fruit basket 500.png';
 function Filter() {
   const [filter, setFilter] = useState([]);
 
-  const obstsorten = [
-    { name: 'Apfel', alt: 'Äpfel', bild: Apfel, id: 1 },
-    { name: 'Aprikose', alt: 'Aprikosen', bild: Aprikose, id: 2 },
-    { name: 'Birne', alt: 'Birnen', bild: Birne, id: 3 },
-    { name: 'Erdbeere', alt: 'Erdbeeren', bild: Erdbeere, id: 4 },
-    { name: 'Heidelbeere', alt: 'Heidelbeeren', bild: Heidelbeere, id: 5 },
-    { name: 'Himbeere', alt: 'Himbeeren', bild: Himbeere, id: 6 },
+  const [obstsorten, setObsorten] = useState([
+    { name: 'Apfel', alt: 'Äpfel', bild: Apfel, id: 1, status: false },
+    {
+      name: 'Aprikose',
+      alt: 'Aprikosen',
+      bild: Aprikose,
+      id: 2,
+      status: false,
+    },
+    { name: 'Birne', alt: 'Birnen', bild: Birne, id: 3, status: false },
+    {
+      name: 'Erdbeere',
+      alt: 'Erdbeeren',
+      bild: Erdbeere,
+      id: 4,
+      status: false,
+    },
+    {
+      name: 'Heidelbeere',
+      alt: 'Heidelbeeren',
+      bild: Heidelbeere,
+      id: 5,
+      status: false,
+    },
+    {
+      name: 'Himbeere',
+      alt: 'Himbeeren',
+      bild: Himbeere,
+      id: 6,
+      status: false,
+    },
     {
       name: 'Johannisbeere',
       alt: 'Johannisbeeren',
       bild: Johannisbeere,
       id: 7,
+      status: false,
     },
-    { name: 'Kirsche', alt: 'Kirschen', bild: Kirsche, id: 8 },
-    { name: 'Stachelbeere', alt: 'Stachelbeeren', bild: Stachelbeere, id: 9 },
-    { name: 'Weintraube', alt: 'Weintrauben', bild: Weintraube, id: 10 },
-    { name: 'Pflaume', alt: 'Pflaumen', bild: Pflaume, id: 11 },
-    { name: 'Sonstiges', alt: 'Sonstiges', bild: Korb, id: 12 },
-  ];
+    { name: 'Kirsche', alt: 'Kirschen', bild: Kirsche, id: 8, status: false },
+    {
+      name: 'Stachelbeere',
+      alt: 'Stachelbeeren',
+      bild: Stachelbeere,
+      id: 9,
+      status: false,
+    },
+    {
+      name: 'Weintraube',
+      alt: 'Weintrauben',
+      bild: Weintraube,
+      id: 10,
+      status: false,
+    },
+    { name: 'Pflaume', alt: 'Pflaumen', bild: Pflaume, id: 11, status: false },
+    { name: 'Sonstiges', alt: 'Sonstiges', bild: Korb, id: 12, status: false },
+  ]);
 
-  const handleClick = (e) => {
-    const id = e.target.closest('button').id;
-    const index = filter.indexOf(id);
+  const handleClick = (id) => {
+    const obst = [...obstsorten];
+    const index = obst.findIndex((obst) => obst.id === id);
 
-    console.log(e.target.closest('button'));
-
-    if (index === -1) {
-      setFilter([...filter, id]);
-      e.target.closest('button').classList.add('selected');
-    } else {
-      filter.splice(index, 1);
-      setFilter([...filter]);
-      e.target.closest('button').classList.remove('selected');
-    }
+    obst[index].status = !obst[index].status;
+    setObsorten(obst);
   };
 
-  //write a function that removes classList.add('selected') from the Objekt of the useState Filter when the button with the "delete" class is clicked and the setFilter called to delete the array
-  const handleDelete = (e) => {
-    const id = e.target.closest('button').id;
-    const index = filter.indexOf(id);
-    console.log(e.target.closest('button'));
-    if (index !== -1) {
-      filter.splice(index, 1);
-      setFilter([...filter]);
-      e.target.closest('button').classList.remove('selected');
-    }
+  const handleDelete = () => {
+    const obst = [...obstsorten];
+    obst.forEach((obst) => {
+      obst.status = false;
+    });
+    setObsorten(obst);
   };
+
+  // const handleClick = (e) => {
+  //   const id = e.target.closest('button').id;
+  //   const index = filter.indexOf(id);
+
+  //   console.log(e.target.closest('button'));
+
+  //   if (index === -1) {
+  //     setFilter([...filter, id]);
+  //     e.target.closest('button').classList.add('selected');
+  //   } else {
+  //     filter.splice(index, 1);
+  //     setFilter([...filter]);
+  //     e.target.closest('button').classList.remove('selected');
+  //   }
+  // };
+
+  // const handleDelete = () => {
+  //   filter.map((filter ) => {filter)
+
+  //   setFilter([]);
+
+  // const collection = document.getElementByClassName('button');
 
   console.log(filter);
 
@@ -71,11 +119,15 @@ function Filter() {
       <div className="cardContainer">
         {obstsorten.map((sorte) => (
           <button
-            onClick={(e) => {
-              handleClick(e);
+            onClick={() => {
+              handleClick(sorte.id);
             }}
             id={sorte.id}
-            className="card-2 chooseBtn"
+            className={
+              sorte.status === true
+                ? 'card-2 chooseBtn selected'
+                : 'card-2 chooseBtn'
+            }
             key={sorte.id}
             selected={sorte.selected}
           >
@@ -87,13 +139,12 @@ function Filter() {
 
       <div className="applyFilter">
         <button className="select">Filter anwenden</button>
-        <button className="delete" onClick={handleDelete}>
+        <button className="delete" onClick={() => handleDelete()}>
           Filter löschen
         </button>
       </div>
     </div>
   );
-  // () => setFilter([])
 }
 
 export default Filter;
