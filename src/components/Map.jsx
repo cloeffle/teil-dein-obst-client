@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from 'react'
+import { useState, useRef, useCallback, useEffect } from 'react'
 import GoogleMapReact from 'google-map-react'
 import LocationMarker from './LocationMarker'
 import MyLocationMarker from './MyLocationMarker'
@@ -8,12 +8,19 @@ import Filter from '../assets/images/Filter.png'
 
 
 
-const Map = ({ locationData, lat, lng }) => {
+const Map = ({ locationData, lat, lng, locationCoordinates}) => {
     const [locationInfo, setLocationInfo] = useState(null)
-    const [center, setCenter] = useState({lat: lat, lng: lng})
-    console.log(locationData)
     
-    //GET USERS CURRENT POSITOPN ON CLICK
+    //GET USERS CURRENT POSITION
+    const [center, setCenter] = useState({lat: locationCoordinates.lat, lng: locationCoordinates.lng})
+    useEffect(() => {
+      if (locationCoordinates) {
+        setCenter({lat: locationCoordinates.lat, lng: locationCoordinates.lng})
+      }
+    }, [locationCoordinates])
+
+    console.log("center", center)
+    
   const mapRef = useRef()
   const onMapLoad = useCallback((map) => {
     mapRef.current = map
@@ -40,18 +47,15 @@ const Map = ({ locationData, lat, lng }) => {
        )
     })
 
-    //USERS COORDINATES
-    console.log(center)
-    
 
   return (
     <div className='map'>
         <GoogleMapReact
             bootstrapURLKeys={{ key: 'AIzaSyB1k4mwigeqizDxbO_8PkkOqjyhI1BQTxU' }}
             center = { {lat: center.lat, lng: center.lng} }
-            zoom = { 20 }
+            zoom = { 16 }
             >
-            <MyLocationMarker lat={lat} lng={lng} />
+            <MyLocationMarker lat={center.lat} lng={center.lng} />
             {locations}
         </GoogleMapReact>
         {locationInfo && (
