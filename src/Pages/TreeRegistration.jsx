@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import { useTheme } from "@mui/material/styles";
@@ -64,10 +64,10 @@ export default function TreeRegistration() {
       target: { value },
     } = e;
     setFruitName(typeof value === "string" ? value.split(",") : value);
-    const myValue = typeof value === "string" ? value.split(",") : value;
+    const myFruit = typeof value === "string" ? value.split(",") : value;
     setUserInput({
       ...userInput,
-      type: myValue[0],
+      type: myFruit[0],
     });
   };
 
@@ -75,13 +75,14 @@ export default function TreeRegistration() {
 
   const [userInput, setUserInput] = useState({
     type: "",
-    strasse: "",
-    plz: "",
-    stadt: "",
+    lat: "",
+    lng: "",
     start: "",
     end: "",
     info: "",
   });
+
+console.log(userInput)
 
   const handleChangeUserInput = (e) => {
     setUserInput({
@@ -90,6 +91,23 @@ export default function TreeRegistration() {
     });
   };
 
+  //API TO GET COORDINATES OF ADDRESS
+  useEffect(() => {
+    const getCoordinates = async () => {
+      try {
+        const resp = await axios.get(
+          `http://api.positionstack.com/v1/forward?access_key=${process.env.REACT_APP_COORDINATE_KEY}&query=${userInput.address}&limit=1`
+        );
+        // console.log(resp.data.data[0].latitude, resp.data.data[0].longitude);
+        setUserInput({...userInput, lat: resp.data.data[0].latitude, lng: resp.data.data[0].longitude});
+      } catch (err) {
+        console.log("Error: ", err);
+      }
+    };
+    getCoordinates();
+  }, [userInput.address]);
+
+  //POST REQUEST TO MONGODB
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
@@ -157,13 +175,13 @@ export default function TreeRegistration() {
             <input
               className="tree-input-field"
               type="text"
-              name="strasse"
-              value={userInput.strasse}
-              placeholder="Straße, Hausnummer"
+              name="address"
+              value={userInput.address}
+              placeholder="Straße, Hausnummer, Ort"
               onChange={(e) => handleChangeUserInput(e)}
               required
             />
-            <input
+            {/* <input
               className="tree-input-field"
               type="number"
               name="plz"
@@ -180,7 +198,7 @@ export default function TreeRegistration() {
               placeholder="Ort"
               onChange={(e) => handleChangeUserInput(e)}
               required
-            />
+            /> */}
             <label>Erntezeitraum</label>
             <p>von</p>
             <input

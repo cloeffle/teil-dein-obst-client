@@ -116,5 +116,3 @@ const renderAlert = () => (
     <p>Deine Nachricht wurde erfolgreich versendet!</p>
   </div>
 );
-
-console.log(renderAlert());
