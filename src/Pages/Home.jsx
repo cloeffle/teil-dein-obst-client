@@ -8,28 +8,34 @@ import Login from "../components/Login/LoginButton";
 function Home() {
   /*GET ALL LOCATIONS FROM BACKEND*/
   const [locationData, setLocationData] = useState([]);
-
   useEffect(() => {
     fetch('http://localhost:8000/tree')
       .then((response) => response.json())
       .then((data) => setLocationData(data))
       .catch((error) => console.log(error));
+    
   }, []);
 
-  console.log(locationData);
+  console.log("Fetch Trees", locationData);
+  
 
   /*GET USERS CURRENT POSITION ON FIRST RENDER*/
-  const [lat, setLat] = useState('');
-  const [lng, setLng] = useState('');
+  //const [lat, setLat] = useState('');
+  //const [lng, setLng] = useState('');
+  const [locationCoordinates, setLocationCoordinates] = useState({});
 
   useEffect(() => {
+      
       navigator.geolocation.getCurrentPosition((position) => {
-        setLat(position.coords.latitude);
-        setLng(position.coords.longitude);
+        console.log("current position",position)
+        //setLat(position.coords.latitude);
+        //setLng(position.coords.longitude);
+        setLocationCoordinates({lat: position.coords.latitude, lng: position.coords.longitude});
       });
     }, []);
-
-  
+    
+    
+    
 
   return (
     <div className="home">
@@ -41,7 +47,7 @@ function Home() {
         </div>
         <Login />
       </div>
-      {locationData && <Map locationData={locationData} lat={lat} lng={lng} />}
+      {locationData && <Map locationData={locationData} /*lat={lat} lng={lng}*/ locationCoordinates={locationCoordinates}/>}
     </div>
   );
 }
