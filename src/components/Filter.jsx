@@ -52,6 +52,18 @@ function Filter() {
     }
   };
 
+  //write a function that removes classList.add('selected') from the Objekt of the useState Filter when the button with the "delete" class is clicked and the setFilter called to delete the array
+  const handleDelete = (e) => {
+    const id = e.target.closest('button').id;
+    const index = filter.indexOf(id);
+    console.log(e.target.closest('button'));
+    if (index !== -1) {
+      filter.splice(index, 1);
+      setFilter([...filter]);
+      e.target.closest('button').classList.remove('selected');
+    }
+  };
+
   console.log(filter);
 
   return (
@@ -75,12 +87,13 @@ function Filter() {
 
       <div className="applyFilter">
         <button className="select">Filter anwenden</button>
-        <button className="delete" onClick={() => setFilter([])}>
+        <button className="delete" onClick={handleDelete}>
           Filter löschen
         </button>
       </div>
     </div>
   );
+  // () => setFilter([])
 }
 
 export default Filter;
