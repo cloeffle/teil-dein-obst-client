@@ -13,10 +13,14 @@ import Weintraube from '../assets/images/icons8-grapes-500.png';
 import Pflaume from '../assets/images/icons8-plum-500.png';
 import Korb from '../assets/images/fruit basket 500.png';
 
+// use Javascript ES6 Syntax
 function Filter() {
   const [filter, setFilter] = useState([]);
+  //! packe alle in einen usestate filter die den Wert true mit einem useeffect obstsorten sich ändert
 
-  const [obstsorten, setObsorten] = useState([
+  const [selected, setSelected] = useState([]);
+
+  const [fruitsort, setFruitsort] = useState([
     { name: 'Apfel', alt: 'Äpfel', bild: Apfel, id: 1, status: false },
     {
       name: 'Aprikose',
@@ -74,19 +78,19 @@ function Filter() {
   ]);
 
   const handleClick = (id) => {
-    const obst = [...obstsorten];
-    const index = obst.findIndex((obst) => obst.id === id);
+    const fruit = [...fruitsort];
+    const index = fruit.findIndex((fruit) => fruit.id === id);
 
-    obst[index].status = !obst[index].status;
-    setObsorten(obst);
+    fruit[index].status = !fruit[index].status;
+    setFruitsort(fruit);
   };
 
   const handleDelete = () => {
-    const obst = [...obstsorten];
-    obst.forEach((obst) => {
-      obst.status = false;
+    const fruit = [...fruitsort];
+    fruit.forEach((fruit) => {
+      fruit.status = false;
     });
-    setObsorten(obst);
+    setFruitsort(fruit);
   };
 
   // const handleClick = (e) => {
@@ -117,22 +121,22 @@ function Filter() {
   return (
     <div className="container">
       <div className="cardContainer">
-        {obstsorten.map((sorte) => (
+        {fruitsort.map((sort) => (
           <button
             onClick={() => {
-              handleClick(sorte.id);
+              handleClick(sort.id);
             }}
-            id={sorte.id}
+            id={sort.id}
             className={
-              sorte.status === true
+              sort.status === true
                 ? 'card-2 chooseBtn selected'
                 : 'card-2 chooseBtn'
             }
-            key={sorte.id}
-            selected={sorte.selected}
+            key={sort.id}
+            selected={sort.selected}
           >
-            <img src={sorte.bild} alt={sorte.alt} />
-            <p>{sorte.name}</p>
+            <img src={sort.bild} alt={sort.alt} />
+            <p>{sort.name}</p>
           </button>
         ))}
       </div>
