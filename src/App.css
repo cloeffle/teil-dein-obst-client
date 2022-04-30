@@ -41,10 +41,11 @@ a {
   justify-content: center;
 }
 
-.logo {
+.logo,
+.logo a {
   display: flex;
   justify-content: center;
-  margin: 0.5rem 0;
+  margin: 0.3rem 0;
   /* margin-left: 5rem; */
 }
 
@@ -52,7 +53,8 @@ a {
   width: 45%;
 }
 
-input:focus, textarea:focus{
+input:focus,
+textarea:focus {
   outline: none;
   border: 2px solid #faf1cf;
 }

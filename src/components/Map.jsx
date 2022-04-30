@@ -1,25 +1,43 @@
-import { useState } from 'react'
+import { useState, useRef, useCallback, useEffect } from 'react'
 import GoogleMapReact from 'google-map-react'
 import LocationMarker from './LocationMarker'
 import MyLocationMarker from './MyLocationMarker'
 import LocationInfoModal from './LocationInfoModal'
+import LocateButton from './LocateButton'
+import Filter from '../assets/images/Filter.png'
 
 
-const Map = ({ locationData, lat, lng }) => {
+
+const Map = ({ locationData, lat, lng, locationCoordinates}) => {
     const [locationInfo, setLocationInfo] = useState(null)
-    console.log(locationInfo)
     
+    //GET USERS CURRENT POSITION
+    const [center, setCenter] = useState({lat: locationCoordinates.lat, lng: locationCoordinates.lng})
+    useEffect(() => {
+      if (locationCoordinates) {
+        setCenter({lat: locationCoordinates.lat, lng: locationCoordinates.lng})
+      }
+    }, [locationCoordinates])
+
+    console.log("center", center)
+    
+  const mapRef = useRef()
+  const onMapLoad = useCallback((map) => {
+    mapRef.current = map
+  }, [])
+
+    //SHOW ALL LOCATIONS ON MAP
     const locations = locationData.map(location => {
        return (
        <LocationMarker 
-            key={location.id} 
-            lat={location.coordinates.lat} 
-            lng={location.coordinates.lng} 
-
+            key={location._id}
+            lat={location.coordinates.lat.$numberDecimal} 
+            lng={location.coordinates.lng.$numberDecimal} 
+            onLoad={onMapLoad}
 
             onClick={() => setLocationInfo(
                 {   
-                    type: location.type.type,
+                    type: location.type,
                     strasse: location.location.strasse, 
                     plz: location.location.plz,
                     stadt: location.location.stadt,
@@ -29,33 +47,31 @@ const Map = ({ locationData, lat, lng }) => {
        )
     })
 
-    /*USERS COORDINATES*/
-    const center = {
-        lat: lat, 
-        lng: lng
-    }
-    
 
   return (
     <div className='map'>
         <GoogleMapReact
             bootstrapURLKeys={{ key: 'AIzaSyB1k4mwigeqizDxbO_8PkkOqjyhI1BQTxU' }}
             center = { {lat: center.lat, lng: center.lng} }
-            zoom = { 20 }
+            zoom = { 16 }
             >
-            <MyLocationMarker lat={lat} lng={lng} />
+            <MyLocationMarker lat={center.lat} lng={center.lng} />
             {locations}
         </GoogleMapReact>
-        {locationInfo && <LocationInfoModal locationInfo={locationInfo} setLocationInfo={setLocationInfo}/>}
-        
-        </div>
-        
-   
-  )     
-  
+        {locationInfo && (
+        <LocationInfoModal 
+        locationInfo={locationInfo} 
+        setLocationInfo={setLocationInfo}
+        />
+        )}
+        <div className='btn_map_wrapper'>
+        <LocateButton center={center} setCenter={setCenter} />
+        <button className='btn_map'>
+          <img src={Filter} alt='Filter-Icon' />
+        </button>
+      </div>
+    </div>
+  )
 }
-
-
-
 
 export default Map

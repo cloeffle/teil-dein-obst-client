@@ -1,73 +1,124 @@
 .map {
-    width: 97vw;
-    height: 89vh;
-    position: relative;
+  width: 97vw;
+  height: 89vh;
+  position: relative;
 }
 
 .location_icon {
-    height: 2rem;
-    width: auto;
+  height: 2rem;
+  width: auto;
 }
 
 .btn_map_wrapper {
-    position: absolute;
-    top: 20%;
-    right: 3%;
-    display: flex;
-    flex-direction: column;
+  position: absolute;
+  top: 20%;
+  right: 3%;
+  display: flex;
+  flex-direction: column;
 }
 
 .btn_map {
-    width: 60px;
-    height: 60px;
-    background-color: white;
-    border-radius: 100%;
+  width: 60px;
+  height: 60px;
+  background-color: white;
+  border-radius: 100%;
 }
 
 .btn_map:first-child {
-    margin-bottom: 20px;
-}  
-
-.btn_map img {
-    width: 60%;
-    height: auto;
+  margin-bottom: 20px;
 }
 
-.myLocation_marker img{
-    width: 35px;
+.btn_map img {
+  width: 60%;
+  height: auto;
+}
+
+.myLocation_marker img {
+  width: 35px;
 }
 
 .location_info_modal {
     position: absolute;
     bottom: 0px;
-    height: 25%;
+    height: 45%;
     width: 100%;
     background-color: #faf1cf;
     display: flex;
     justify-content: center;
+    align-items: center;
     text-align: center;
     padding: 10% 0;
 }
 
+.location_info_modal h2 {
+    margin-bottom: 1.5rem;
+}
 
 
 .close_icon {
-    top:5%;
-    right: 2%;
-    position: absolute;
+  top: 5%;
+  right: 2%;
+  position: absolute;
 }
 
 .close_icon:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .btn_info_modal {
-    border: none;
+border: none;
   background-color: #357560;
   color: #f9f8f2;
   padding: 0.7rem;
-  border-radius: 12px;
+  border-radius: 22px;
   font-size: 1rem;
   cursor: pointer;
   letter-spacing: 0.1rem;
+    margin-top: 2rem;
+
 }
+
+.addresse {
+    font-size: 1.2rem;
+    margin: 1rem 0;
+    font-weight: 900;
+}
+
+
+
+
+
+/*LOGO AND LOGIN */
+.header-login {
+  display: flex;
+}
+
+.home-logo {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0.5rem 2.1rem 0.5rem 0;
+
+}
+
+.home-logo img {
+    width: 57%
+}
+
+.login-btn {
+  padding: 0 0.7rem;
+  border-radius: 22px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  letter-spacing: 0.1rem;
+  margin-top: 1rem;
+  margin-right: 0.5rem;
+  background-color: #357560;
+  color: #f9f8f2;
+  /* background-color: transparent;
+  font-weight: bold;
+  letter-spacing: 0.1rem;
+  margin-right: 0.5rem;
+  margin-top: 1rem; */
+
+}
+
