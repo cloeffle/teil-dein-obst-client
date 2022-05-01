@@ -18,8 +18,6 @@ function Filter() {
   const [filter, setFilter] = useState([]);
   //! packe alle in einen usestate filter die den Wert true mit einem useeffect obstsorten sich ändert
 
-  const [selected, setSelected] = useState([]);
-
   const [fruitsort, setFruitsort] = useState([
     { name: 'Apfel', alt: 'Äpfel', bild: Apfel, id: 1, status: false },
     {
@@ -85,6 +83,8 @@ function Filter() {
     setFruitsort(fruit);
   };
 
+  console.log(fruitsort);
+
   const handleDelete = () => {
     const fruit = [...fruitsort];
     fruit.forEach((fruit) => {
@@ -92,6 +92,14 @@ function Filter() {
     });
     setFruitsort(fruit);
   };
+
+  const handleApplyFilter = (e) => {
+    e.preventDefault();
+    const fruit = [...fruitsort];
+    const filter = fruit.filter((fruit) => fruit.status === true);
+    setFilter(filter);
+  };
+  console.log(filter);
 
   // const handleClick = (e) => {
   //   const id = e.target.closest('button').id;
@@ -115,8 +123,6 @@ function Filter() {
   //   setFilter([]);
 
   // const collection = document.getElementByClassName('button');
-
-  console.log(filter);
 
   return (
     <div className="container">
@@ -142,7 +148,13 @@ function Filter() {
       </div>
 
       <div className="applyFilter">
-        <button className="select">Filter anwenden</button>
+        <button
+          type="submit"
+          className="select"
+          onClick={(e) => handleApplyFilter(e)}
+        >
+          Filter anwenden
+        </button>
         <button className="delete" onClick={() => handleDelete()}>
           Filter löschen
         </button>
