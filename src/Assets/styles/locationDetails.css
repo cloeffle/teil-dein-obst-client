@@ -1,0 +1,25 @@
+.locationDetails-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    margin-top: 4rem;
+}
+
+.locationDetails-details {
+    margin: 1.5rem 0;
+    line-height: 1.5rem;
+}
+
+.locationDetails-details p {
+    font-size: large;
+    font-weight: bolder;
+    margin-bottom: 0.5rem;
+}
+
+#write-comment {
+    display: flex;
+    flex-direction: column;
+}
