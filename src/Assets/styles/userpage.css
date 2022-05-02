@@ -8,9 +8,7 @@
 }
 
 .userpage {
-  /* background-color: #faf1cf72; */
   margin: 0.5rem 0;
-  padding-left: 0.5rem;
 }
 
 /* .trees-container {
@@ -34,9 +32,11 @@ td {
 /* .add-trees {
   grid-area: 1 / 2 / 2 / 3;
 } */
+
 .my-tree-address {
-  padding: 0 .5rem;
+  padding: 0 .6rem;
 }
+
 figure {
   display: flex;
   flex-direction: column;
@@ -45,11 +45,6 @@ figure {
 
 figure img {
   width: 40%;
-}
-
-figcaption {
-  display: flex;
-  font-size: 0.8rem;
 }
 
 .link-add-tree {
