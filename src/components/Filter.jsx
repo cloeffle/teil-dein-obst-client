@@ -14,7 +14,9 @@ import Pflaume from '../assets/images/icons8-plum-500.png';
 import Korb from '../assets/images/fruit basket 500.png';
 
 // use Javascript ES6 Syntax
-function Filter() {
+function Filter(props) {
+  const { onSelectFilter } = props;
+
   const [filter, setFilter] = useState([]);
 
   const [fruitsort, setFruitsort] = useState([
@@ -82,7 +84,7 @@ function Filter() {
     setFruitsort(fruit);
   };
 
-  console.log(fruitsort);
+  console.log('Fruitsort:', fruitsort);
 
   const handleDelete = () => {
     const fruit = [...fruitsort];
@@ -97,8 +99,9 @@ function Filter() {
     const fruit = [...fruitsort];
     const filter = fruit.filter((fruit) => fruit.status === true);
     setFilter(filter);
+    onSelectFilter(filter);
   };
-  console.log(filter);
+  console.log('Filter anwenden:', filter);
 
   return (
     <div className="container">
