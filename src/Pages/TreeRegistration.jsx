@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
+import { useAuth0 } from "@auth0/auth0-react";
 
 import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -55,6 +56,7 @@ function getStyles(fruit, fruitName, theme) {
 }
 
 export default function TreeRegistration() {
+  const { user } = useAuth0();
   const theme = useTheme();
   const [fruitName, setFruitName] = useState([]);
 
@@ -64,24 +66,25 @@ export default function TreeRegistration() {
       target: { value },
     } = e;
     setFruitName(typeof value === "string" ? value.split(",") : value);
-    const myValue = typeof value === "string" ? value.split(",") : value;
+    const myFruit = typeof value === "string" ? value.split(",") : value;
     setUserInput({
       ...userInput,
-      type: myValue[0],
+      type: myFruit,
     });
   };
 
-  // Form
-
+  // Form Input
   const [userInput, setUserInput] = useState({
     type: "",
-    strasse: "",
-    plz: "",
-    stadt: "",
+    lat: "",
+    lng: "",
     start: "",
     end: "",
     info: "",
+    userId: "",
   });
+
+  console.log(userInput);
 
   const handleChangeUserInput = (e) => {
     setUserInput({
@@ -90,10 +93,79 @@ export default function TreeRegistration() {
     });
   };
 
+  //POSITIONSTACK API TO GET COORDINATES OF ADDRESS
+  // const getCoordinates = useCallback(async () => {
+  //   try {
+  //     const resp = await axios.get(
+  //       `http://api.positionstack.com/v1/forward?access_key=${process.env.REACT_APP_COORDINATE_KEY}&query=${userInput.address}&limit=1`
+  //     );
+  //     setUserInput({
+  //       ...userInput,
+  //       lat: resp.data.data[0].latitude,
+  //       lng: resp.data.data[0].longitude,
+  //     });
+  //     setSuccess("succeeded");
+  //   } catch (err) {
+  //     console.log("Error: ", err);
+  //     setFailed("error");
+  //   }
+  // }, [userInput]);
+
+  // GOOGLE GEOCODING API TO GET ADDRESS FROM COORDINATES
+  const getCoordinates = useCallback(
+    async (e) => {
+      try {
+        const resp = await axios.get(
+          `https://maps.googleapis.com/maps/api/geocode/json?address=${userInput.address}&key=${process.env.REACT_APP_GEOCODING_KEY}`
+        );
+        setUserInput({
+          ...userInput,
+          lat: resp.data.results[0].geometry.location.lat,
+          lng: resp.data.results[0].geometry.location.lng,
+        });
+        setSuccess("succeeded");
+      } catch (err) {
+        console.log(err);
+        setFailed("error");
+      }
+    },
+    [userInput]
+  );
+
+  //SUCCESS AND FAILED SEND MESSAGES
+  const [success, setSuccess] = useState("");
+  const [failed, setFailed] = useState("");
+
+  //SUCCESS AND FAILED SEND MESSAGES TIMEOUT
+  useEffect(() => {
+    if (success === "succeeded") {
+      setTimeout(() => {
+        setSuccess("");
+      }, 5000);
+    } else {
+      if (failed === "error") {
+        setTimeout(() => {
+          setFailed("");
+        }, 5000);
+      }
+    }
+  }, [success, failed]);
+
+
+  //GET USER ID FROM USER
+  useEffect(() => {
+    axios(
+      `http://localhost:8000/user/${user.sub.slice(user.sub.length - 7)}`
+    ).then((response) =>
+      setUserInput({...userInput, userId: response.data.id})
+    );
+  }, [user.sub]);
+
+  //POST REQUEST TO MONGODB
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:8000/tree", userInput)
+      .post("http://localhost:8000/tree/", userInput)
       .then((res) => {
         console.log(res);
       })
@@ -108,9 +180,31 @@ export default function TreeRegistration() {
       <div>
         <LogoComponent />
         <div className="tree-form-container">
-          <form className="tree-form" onSubmit={(e) => handleSubmit(e)}>
-            <h3>Obstbaum zur Verfügung stellen</h3>
-            <FormControl sx={{ m: 1, width: 320 }}>
+          <h3>Obstbaum zur Verfügung stellen</h3>
+
+          <div className="tree-form">
+            {/* <label>Standort</label> */}
+            <input
+              className="tree-input-field"
+              type="text"
+              name="address"
+              placeholder="Straße, Hausnummer, Ort"
+              onChange={handleChangeUserInput}
+              required
+            />
+            {success && renderAlert()}
+            {failed && renderFailed()}
+            <button
+              className="address-btn"
+              onClick={getCoordinates}
+              disabled={!userInput.address}
+            >
+              Adresse bestätigen
+            </button>
+          </div>
+
+          <form className="tree-form" name="userId" onSubmit={(e) => handleSubmit(e)}>
+            <FormControl sx={{ m: 0, width: 340, backgroundColor: "white" }}>
               <InputLabel id="Obstsorte" sx={{ fontFamily: "Nunito" }}>
                 Obstsorte
               </InputLabel>
@@ -153,34 +247,7 @@ export default function TreeRegistration() {
                 ))}
               </Select>
             </FormControl>
-            <label>Standort</label>
-            <input
-              className="tree-input-field"
-              type="text"
-              name="strasse"
-              value={userInput.strasse}
-              placeholder="Straße, Hausnummer"
-              onChange={(e) => handleChangeUserInput(e)}
-              required
-            />
-            <input
-              className="tree-input-field"
-              type="number"
-              name="plz"
-              value={userInput.plz}
-              placeholder="Postleitzahl"
-              onChange={(e) => handleChangeUserInput(e)}
-              // required
-            />
-            <input
-              className="tree-input-field"
-              type="text"
-              name="stadt"
-              value={userInput.stadt}
-              placeholder="Ort"
-              onChange={(e) => handleChangeUserInput(e)}
-              required
-            />
+
             <label>Erntezeitraum</label>
             <p>von</p>
             <input
@@ -188,8 +255,7 @@ export default function TreeRegistration() {
               type="date"
               name="start"
               id="start"
-              value={userInput.start}
-              onChange={(e) => handleChangeUserInput(e)}
+              onChange={handleChangeUserInput}
             />
             <p>bis</p>
             <input
@@ -197,25 +263,42 @@ export default function TreeRegistration() {
               type="date"
               id="end"
               name="end"
-              value={userInput.end}
-              onChange={(e) => handleChangeUserInput(e)}
+              onChange={handleChangeUserInput}
             />
+
             <label>Infos</label>
             <textarea
               className="tree-input-field"
               type="text"
               name="info"
-              value={userInput.info}
-              onChange={(e) => handleChangeUserInput(e)}
+              onChange={handleChangeUserInput}
               cols="30"
               rows="5"
               placeholder="Nähere Informationen zum Standort, der Zugänglickeit z.B. Pflücken nur nach Absprache möglich etc."
             ></textarea>
-            <input type="file" />
-            <input type="submit" className="submit btn" value="Hinzufügen" />
+
+            {/* <input type="file" /> */}
+
+            <input
+              type="submit"
+              className="submit btn"
+              defaultValue="Hinzufügen"
+            />
           </form>
         </div>
       </div>
     </>
   );
 }
+
+const renderAlert = () => (
+  <div className="">
+    <p style={{ color: "green" }}>Adresse bestätigt</p>
+  </div>
+);
+
+const renderFailed = () => (
+  <div className="">
+    <p style={{ color: "red" }}>Adresse nicht gefunden</p>
+  </div>
+);
