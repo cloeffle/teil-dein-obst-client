@@ -16,7 +16,6 @@ import Korb from '../assets/images/fruit basket 500.png';
 // use Javascript ES6 Syntax
 function Filter() {
   const [filter, setFilter] = useState([]);
-  //! packe alle in einen usestate filter die den Wert true mit einem useeffect obstsorten sich ändert
 
   const [fruitsort, setFruitsort] = useState([
     { name: 'Apfel', alt: 'Äpfel', bild: Apfel, id: 1, status: false },
@@ -100,29 +99,6 @@ function Filter() {
     setFilter(filter);
   };
   console.log(filter);
-
-  // const handleClick = (e) => {
-  //   const id = e.target.closest('button').id;
-  //   const index = filter.indexOf(id);
-
-  //   console.log(e.target.closest('button'));
-
-  //   if (index === -1) {
-  //     setFilter([...filter, id]);
-  //     e.target.closest('button').classList.add('selected');
-  //   } else {
-  //     filter.splice(index, 1);
-  //     setFilter([...filter]);
-  //     e.target.closest('button').classList.remove('selected');
-  //   }
-  // };
-
-  // const handleDelete = () => {
-  //   filter.map((filter ) => {filter)
-
-  //   setFilter([]);
-
-  // const collection = document.getElementByClassName('button');
 
   return (
     <div className="container">
