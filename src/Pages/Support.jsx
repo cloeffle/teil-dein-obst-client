@@ -78,7 +78,7 @@ export default function Support() {
               type="text"
               name="name"
               className="support-name"
-              placeholder="Deine Name"
+              placeholder="Dein Name"
               value={userInput.name}
               onChange={handleChange}
               

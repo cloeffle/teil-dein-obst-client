@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import LogoutButton from '../components/Login/LogoutButton';
 import '../assets/styles/userpage.css';
 import LogoComponent from '../components/LogoComponent';
-import Obstbaum from '../assets/images/Obstbaum.svg';
+import Obstbaum from '../assets/images/fruit-tree.png';
 
 import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
@@ -47,7 +47,7 @@ function UserPage() {
             <div className="add-trees">
               <Link to="/baum-registrieren">
                 <figure>
-                  <img src={Obstbaum} alt="Obstbaum" />
+                  <img src={Obstbaum} alt="Obstbaum" /> 
                   <figcaption>Baum hinzufügen</figcaption>
                 </figure>
               </Link>
