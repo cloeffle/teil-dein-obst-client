@@ -83,7 +83,7 @@ function UserPage() {
                 <tbody>
                   {userTrees &&
                     userTrees.map((myTrees) => (
-                      <tr>
+                      <tr key={myTrees._id}>
                         <td className="my-tree-type">{myTrees.type}</td>
                         {
                           <td className="my-tree-address">

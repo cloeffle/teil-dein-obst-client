@@ -85,9 +85,7 @@ export default function TreeRegistration() {
     info: "",
     userId: "",
   });
-
-  console.log(userInput);
-
+  
   const handleChangeUserInput = (e) => {
     setUserInput({
       ...userInput,
