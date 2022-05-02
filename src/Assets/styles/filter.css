@@ -51,7 +51,7 @@ button {
   flex-wrap: wrap;
   justify-content: center;
   width: 100vw;
-  margin-top: 5rem;
+  margin-top: 0.25rem;
   /* margin-right: 1rem; */
   /* align-items: center; */
   gap: 7px;

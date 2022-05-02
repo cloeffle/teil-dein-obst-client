@@ -16,7 +16,6 @@ import Korb from '../assets/images/fruit basket 500.png';
 // use Javascript ES6 Syntax
 function Filter(props) {
   const { onSelectFilter } = props;
-
   const [filter, setFilter] = useState([]);
 
   const [fruitsort, setFruitsort] = useState([

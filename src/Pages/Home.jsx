@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react';
 import Map from '../components/Map';
 import Filter from '../components/Filter';
 import '../assets/styles/Home.css';
-
 import Logo from '../assets/logo/Logo.svg';
 import Login from '../components/Login/LoginButton';
 
 function Home() {
-  /*GET ALL LOCATIONS FROM BACKEND*/
   const [showFilter, setShowFilter] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState([]);
+
+  /*GET ALL LOCATIONS FROM BACKEND*/
 
   const [locationData, setLocationData] = useState([]);
   useEffect(() => {
@@ -43,6 +43,13 @@ function Home() {
     setShowFilter(false);
     console.log('Home handleSelectFilter', filter);
   };
+  // create function that compares selectedFilter with locationData, that the key "type:" of locationData matches the the key "Name:" of selectedFilter and returns the matching locations
+
+  // const filterLocations = () => {
+  //   const filteredLocations = locationData.filter((location) => {
+  //     return location.type === selectedFilter.name;
+  //   });
+  //   console.log('filteredLocations', filteredLocations);
 
   return (
     <div className="home">
