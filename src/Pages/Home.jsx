@@ -45,12 +45,6 @@ function Home() {
   };
   // create function that compares selectedFilter with locationData, that the key "type:" of locationData matches the the key "Name:" of selectedFilter and returns the matching locations
 
-  // const filterLocations = () => {
-  //   const filteredLocations = locationData.filter((location) => {
-  //     return location.type === selectedFilter.name;
-  //   });
-  //   console.log('filteredLocations', filteredLocations);
-
   return (
     <div className="home">
       <div className="header-login">
