@@ -78,7 +78,7 @@ export default function Support() {
               type="text"
               name="name"
               className="support-name"
-              placeholder="Deine Name"
+              placeholder="Dein Name"
               value={userInput.name}
               onChange={handleChange}
               
@@ -116,5 +116,3 @@ const renderAlert = () => (
     <p>Deine Nachricht wurde erfolgreich versendet!</p>
   </div>
 );
-
-console.log(renderAlert());

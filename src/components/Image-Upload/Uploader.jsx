@@ -22,12 +22,15 @@ function Uploader() {
   const storage = getStorage(app);
 
   const [imageUpload, setImageUpload] = useState([]);
+  const [pictureURL, SetPictureURL] = useState([]);
 
   const uploadImage = (e) => {
     e.preventDefault();
     console.log('uploading');
     // if (imageUpload == null) return;
-    const imageRef = ref(storage, `images/${uploadImage.name + uuidv4()}`);
+    const name = `images/${uploadImage.name + uuidv4()}`;
+    SetPictureURL(name);
+    const imageRef = ref(storage, name);
     uploadBytes(imageRef, imageUpload).then(() =>
       console.log('Image uploaded')
     );

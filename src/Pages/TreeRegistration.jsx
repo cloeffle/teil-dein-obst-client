@@ -1,17 +1,21 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState, useEffect, useCallback } from 'react';
+import axios from 'axios';
+import { useAuth0 } from '@auth0/auth0-react';
+import { initializeApp } from 'firebase/app';
+import { ref, uploadBytes, getStorage } from 'firebase/storage';
+import { v4 as uuidv4 } from 'uuid';
 
-import { useTheme } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import Chip from "@mui/material/Chip";
+import { useTheme } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import Chip from '@mui/material/Chip';
 
-import LogoComponent from "../components/LogoComponent";
-import "../assets/styles/treeRegistration.css";
+import LogoComponent from '../components/LogoComponent';
+import '../assets/styles/treeRegistration.css';
 
 // Select Option Obstsorte
 const ITEM_HEIGHT = 48;
@@ -26,18 +30,18 @@ const MenuProps = {
 };
 
 const fruits = [
-  "Apfel",
-  "Aprikose",
-  "Birne",
-  "Erdbeere",
-  "Heidelbeere",
-  "Himbeere",
-  "Johannisbeere",
-  "Kirsche",
-  "Stachelbeere",
-  "Weintraube",
-  "Pflaume",
-  "Sonstiges",
+  'Apfel',
+  'Aprikose',
+  'Birne',
+  'Erdbeere',
+  'Heidelbeere',
+  'Himbeere',
+  'Johannisbeere',
+  'Kirsche',
+  'Stachelbeere',
+  'Weintraube',
+  'Pflaume',
+  'Sonstiges',
 ];
 
 function getStyles(fruit, fruitName, theme) {
@@ -47,41 +51,62 @@ function getStyles(fruit, fruitName, theme) {
         ? theme.typography.fontWeightRegular
         : theme.typography.fontWeightMedium,
 
-    color: fruitName.indexOf(fruit) === -1 ? "#444" : "white",
+    color: fruitName.indexOf(fruit) === -1 ? '#444' : 'white',
 
-    backgroundColor: fruitName.indexOf(fruit) === -1 ? "white" : "#5a9481",
-    fontFamily: fruitName.indexOf(fruit) === -1 ? "Nunito" : "Nunito",
+    backgroundColor: fruitName.indexOf(fruit) === -1 ? 'white' : '#5a9481',
+    fontFamily: fruitName.indexOf(fruit) === -1 ? 'Nunito' : 'Nunito',
   };
 }
 
 export default function TreeRegistration() {
+  const { user } = useAuth0();
   const theme = useTheme();
   const [fruitName, setFruitName] = useState([]);
+
+  const firebaseConfig = {
+    apiKey: 'AIzaSyBegp0enVMVG-NCtWMGSdxDryhqfSe5kBM',
+
+    authDomain: 'teile-dein-obst.firebaseapp.com',
+
+    projectId: 'teile-dein-obst',
+
+    storageBucket: 'teile-dein-obst.appspot.com',
+
+    messagingSenderId: '767476028882',
+
+    appId: '1:767476028882:web:9d5bb0332aa5302e43e40b',
+  };
+  const app = initializeApp(firebaseConfig);
+  const storage = getStorage(app);
+
+  const [imageUpload, setImageUpload] = useState([]);
 
   // Select Fruits Option
   const handleChange = (e) => {
     const {
       target: { value },
     } = e;
-    setFruitName(typeof value === "string" ? value.split(",") : value);
-    const myValue = typeof value === "string" ? value.split(",") : value;
+    setFruitName(typeof value === 'string' ? value.split(',') : value);
+    const myFruit = typeof value === 'string' ? value.split(',') : value;
     setUserInput({
       ...userInput,
-      type: myValue[0],
+      type: myFruit,
     });
   };
 
-  // Form
-
+  // Form Input
   const [userInput, setUserInput] = useState({
-    type: "",
-    strasse: "",
-    plz: "",
-    stadt: "",
-    start: "",
-    end: "",
-    info: "",
+    type: '',
+    lat: '',
+    lng: '',
+    start: '',
+    end: '',
+    info: '',
+    userId: '',
+    pictureURL: '',
   });
+
+  console.log(userInput);
 
   const handleChangeUserInput = (e) => {
     setUserInput({
@@ -90,10 +115,83 @@ export default function TreeRegistration() {
     });
   };
 
+  //POSITIONSTACK API TO GET COORDINATES OF ADDRESS
+  // const getCoordinates = useCallback(async () => {
+  //   try {
+  //     const resp = await axios.get(
+  //       `http://api.positionstack.com/v1/forward?access_key=${process.env.REACT_APP_COORDINATE_KEY}&query=${userInput.address}&limit=1`
+  //     );
+  //     setUserInput({
+  //       ...userInput,
+  //       lat: resp.data.data[0].latitude,
+  //       lng: resp.data.data[0].longitude,
+  //     });
+  //     setSuccess("succeeded");
+  //   } catch (err) {
+  //     console.log("Error: ", err);
+  //     setFailed("error");
+  //   }
+  // }, [userInput]);
+
+  // GOOGLE GEOCODING API TO GET ADDRESS FROM COORDINATES
+  const getCoordinates = useCallback(
+    async (e) => {
+      try {
+        const resp = await axios.get(
+          `https://maps.googleapis.com/maps/api/geocode/json?address=${userInput.address}&key=${process.env.REACT_APP_GEOCODING_KEY}`
+        );
+        setUserInput({
+          ...userInput,
+          lat: resp.data.results[0].geometry.location.lat,
+          lng: resp.data.results[0].geometry.location.lng,
+        });
+        setSuccess('succeeded');
+      } catch (err) {
+        console.log(err);
+        setFailed('error');
+      }
+    },
+    [userInput]
+  );
+
+  //SUCCESS AND FAILED SEND MESSAGES
+  const [success, setSuccess] = useState('');
+  const [failed, setFailed] = useState('');
+
+  //SUCCESS AND FAILED SEND MESSAGES TIMEOUT
+  useEffect(() => {
+    if (success === 'succeeded') {
+      setTimeout(() => {
+        setSuccess('');
+      }, 5000);
+    } else {
+      if (failed === 'error') {
+        setTimeout(() => {
+          setFailed('');
+        }, 5000);
+      }
+    }
+  }, [success, failed]);
+
+  //GET USER ID FROM USER
+  useEffect(() => {
+    axios(
+      `http://localhost:8000/user/${user.sub.slice(user.sub.length - 7)}`
+    ).then((response) =>
+      setUserInput({ ...userInput, userId: response.data.id })
+    );
+  }, [user.sub]);
+
+  //POST REQUEST TO MONGODB
   const handleSubmit = (e) => {
     e.preventDefault();
+    const name = `images/${userInput.pictureURL}}`;
+    const imageRef = ref(storage, name);
+    uploadBytes(imageRef, imageUpload).then(() =>
+      console.log('Image uploaded')
+    );
     axios
-      .post("http://localhost:8000/tree", userInput)
+      .post('http://localhost:8000/tree/', userInput)
       .then((res) => {
         console.log(res);
       })
@@ -103,15 +201,51 @@ export default function TreeRegistration() {
     e.target.reset();
   };
 
+  const handleImage = (target) => {
+    setImageUpload(target);
+    setUserInput({
+      ...userInput,
+      pictureURL: target.name + uuidv4(),
+    });
+  };
+  if (userInput) {
+    console.log(userInput, 'userinput');
+  }
   return (
     <>
       <div>
         <LogoComponent />
         <div className="tree-form-container">
-          <form className="tree-form" onSubmit={(e) => handleSubmit(e)}>
-            <h3>Obstbaum zur Verfügung stellen</h3>
-            <FormControl sx={{ m: 1, width: 320 }}>
-              <InputLabel id="Obstsorte" sx={{ fontFamily: "Nunito" }}>
+          <h3>Obstbaum zur Verfügung stellen</h3>
+
+          <div className="tree-form">
+            {/* <label>Standort</label> */}
+            <input
+              className="tree-input-field"
+              type="text"
+              name="address"
+              placeholder="Straße, Hausnummer, Ort"
+              onChange={handleChangeUserInput}
+              required
+            />
+            {success && renderAlert()}
+            {failed && renderFailed()}
+            <button
+              className="address-btn"
+              onClick={getCoordinates}
+              disabled={!userInput.address}
+            >
+              Adresse bestätigen
+            </button>
+          </div>
+
+          <form
+            className="tree-form"
+            name="userId"
+            onSubmit={(e) => handleSubmit(e)}
+          >
+            <FormControl sx={{ m: 0, width: 340, backgroundColor: 'white' }}>
+              <InputLabel id="Obstsorte" sx={{ fontFamily: 'Nunito' }}>
                 Obstsorte
               </InputLabel>
               <Select
@@ -125,15 +259,15 @@ export default function TreeRegistration() {
                   <OutlinedInput id="select-obstsorte" label="Obstsorte" />
                 }
                 renderValue={(selected) => (
-                  <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                     {selected.map((value) => (
                       <Chip
                         key={value}
                         label={value}
                         sx={{
-                          backgroundColor: "#5a9481",
-                          color: "white",
-                          fontFamily: "Nunito",
+                          backgroundColor: '#5a9481',
+                          color: 'white',
+                          fontFamily: 'Nunito',
                         }}
                       />
                     ))}
@@ -153,34 +287,7 @@ export default function TreeRegistration() {
                 ))}
               </Select>
             </FormControl>
-            <label>Standort</label>
-            <input
-              className="tree-input-field"
-              type="text"
-              name="strasse"
-              value={userInput.strasse}
-              placeholder="Straße, Hausnummer"
-              onChange={(e) => handleChangeUserInput(e)}
-              required
-            />
-            <input
-              className="tree-input-field"
-              type="number"
-              name="plz"
-              value={userInput.plz}
-              placeholder="Postleitzahl"
-              onChange={(e) => handleChangeUserInput(e)}
-              // required
-            />
-            <input
-              className="tree-input-field"
-              type="text"
-              name="stadt"
-              value={userInput.stadt}
-              placeholder="Ort"
-              onChange={(e) => handleChangeUserInput(e)}
-              required
-            />
+
             <label>Erntezeitraum</label>
             <p>von</p>
             <input
@@ -188,8 +295,7 @@ export default function TreeRegistration() {
               type="date"
               name="start"
               id="start"
-              value={userInput.start}
-              onChange={(e) => handleChangeUserInput(e)}
+              onChange={handleChangeUserInput}
             />
             <p>bis</p>
             <input
@@ -197,25 +303,43 @@ export default function TreeRegistration() {
               type="date"
               id="end"
               name="end"
-              value={userInput.end}
-              onChange={(e) => handleChangeUserInput(e)}
+              onChange={handleChangeUserInput}
             />
+
             <label>Infos</label>
             <textarea
               className="tree-input-field"
               type="text"
               name="info"
-              value={userInput.info}
-              onChange={(e) => handleChangeUserInput(e)}
+              onChange={handleChangeUserInput}
               cols="30"
               rows="5"
               placeholder="Nähere Informationen zum Standort, der Zugänglickeit z.B. Pflücken nur nach Absprache möglich etc."
             ></textarea>
-            <input type="file" />
-            <input type="submit" className="submit btn" value="Hinzufügen" />
+            <input
+              onChange={(event) => handleImage(event.target.files[0])}
+              type="file"
+            ></input>
+            <input
+              type="submit"
+              className="submit btn"
+              defaultValue="Hinzufügen"
+            />
           </form>
         </div>
       </div>
     </>
   );
 }
+
+const renderAlert = () => (
+  <div className="">
+    <p style={{ color: 'green' }}>Adresse bestätigt</p>
+  </div>
+);
+
+const renderFailed = () => (
+  <div className="">
+    <p style={{ color: 'red' }}>Adresse nicht gefunden</p>
+  </div>
+);

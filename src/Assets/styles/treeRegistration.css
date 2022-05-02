@@ -17,11 +17,20 @@
   font-size: 1rem;
 }
 
+.address-btn {
+  font-family: "Nunito", sans-serif;
+  text-decoration: underline;
+  background-color: transparent;
+  display: flex;
+  justify-content: flex-start;
+  color: #444;
+}
+
 input[type="number"],
 input[type="date"] {
   font-family: Nunito, sans-serif;
 }
 
-.tree-form p{
-    font-size: .9rem;
+.tree-form p {
+  font-size: 0.9rem;
 }

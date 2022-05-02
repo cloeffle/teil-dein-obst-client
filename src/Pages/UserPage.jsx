@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import LogoutButton from '../components/Login/LogoutButton';
 import '../assets/styles/userpage.css';
 import LogoComponent from '../components/LogoComponent';
-import Obstbaum from '../assets/images/Obstbaum.svg';
+import Obstbaum from '../assets/images/fruit-tree.png';
 
 import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
@@ -10,22 +10,33 @@ import { Link } from 'react-router-dom';
 
 function UserPage() {
   const { user } = useAuth0();
-  const [userData, setUserData] = useState([]);
+  const [userData, setUserData] = useState(false);
+  const [userTrees, setUserTrees] = useState(false);
 
   useEffect(() => {
-    axios(`http://localhost:8000/user/${user.sub}`)
-      .then((response) => setUserData(response.data))
-      .catch((e) => {
-        console.log(e);
-      });
+    // slice id to avoid special characters
+    axios(
+      `http://localhost:8000/user/${user.sub.slice(user.sub.length - 7)}`
+    ).then((response) => setUserData(response.data));
   }, []);
 
   useEffect(() => {
+    axios(
+      `http://localhost:8000/tree/collection/${user.sub.slice(
+        user.sub.length - 7
+      )}`
+    ).then((response) => setUserTrees(response.data));
+  }, [userData]);
+
+  useEffect(() => {
     axios
-      .post(`http://localhost:8000/user/${user.sub}`, {
-        name: user.name,
-        email: user.email,
-      })
+      .post(
+        `http://localhost:8000/user/${user.sub.slice(user.sub.length - 7)}`,
+        {
+          name: user.name,
+          email: user.email,
+        }
+      )
       .then((response) => console.log(response))
       .catch((error) => console.log(error));
   }, []);
@@ -34,15 +45,31 @@ function UserPage() {
     <div>
       <LogoComponent />
       <div className="userpage-container">
-        <h3>Hallo Username</h3>
+        <h3>Hallo {user.name}</h3>
         <div className="trees-wrapper">
           <h4>Deine Bäume</h4>
           <div className="trees-container userpage">
             <div className="my-trees">
               <a href="/loggedIn/tree">Meine Bäume</a>
-              <p>Baum A</p>
-              <p>Baum B</p>
-              <p>Baum C</p>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Status</th>
+                    <th>Sorte</th>
+                    <th>Straße</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {userTrees &&
+                    userTrees.map((favorite) => (
+                      <tr>
+                        {/* <td>{favorite.status.status}</td> */}
+                        <td>{favorite.type}</td>
+                        <td>{favorite.location.strasse}</td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
             </div>
             <div className="add-trees">
               <Link to="/baum-registrieren">
@@ -56,11 +83,7 @@ function UserPage() {
         </div>
         <div className="favorites-container">
           <h4>Deine Favoriten</h4>
-          <div className="favorite-trees userpage">
-            <p>Apfelbaum, Musterstr. 11</p>
-            <p>Birnebaum, Musterweg. 24</p>
-            <p>Erdbeere, Musterhaus 2</p>
-          </div>
+          <div className="favorite-trees userpage"></div>
         </div>
         <div className="leaderboard-container">
           <h4>Rangliste</h4>
