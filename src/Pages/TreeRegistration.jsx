@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
+import { useAuth0 } from "@auth0/auth0-react";
 
 import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -55,6 +56,7 @@ function getStyles(fruit, fruitName, theme) {
 }
 
 export default function TreeRegistration() {
+  const { user } = useAuth0();
   const theme = useTheme();
   const [fruitName, setFruitName] = useState([]);
 
@@ -153,7 +155,7 @@ export default function TreeRegistration() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:8000/tree", userInput)
+      .post("http://localhost:8000/tree/", userInput)
       .then((res) => {
         console.log(res);
       })
@@ -162,6 +164,8 @@ export default function TreeRegistration() {
       });
     e.target.reset();
   };
+
+
 
   return (
     <>
