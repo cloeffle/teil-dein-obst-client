@@ -69,7 +69,6 @@ export default function TreeRegistration() {
     const myFruit = typeof value === "string" ? value.split(",") : value;
     setUserInput({
       ...userInput,
-      // type: myFruit[0],
       type: myFruit,
     });
   };
@@ -82,6 +81,7 @@ export default function TreeRegistration() {
     start: "",
     end: "",
     info: "",
+    userId: "",
   });
 
   console.log(userInput);
@@ -94,43 +94,43 @@ export default function TreeRegistration() {
   };
 
   //POSITIONSTACK API TO GET COORDINATES OF ADDRESS
-  const getCoordinates = useCallback(async () => {
-    try {
-      const resp = await axios.get(
-        `http://api.positionstack.com/v1/forward?access_key=${process.env.REACT_APP_COORDINATE_KEY}&query=${userInput.address}&limit=1`
-      );
-      setUserInput({
-        ...userInput,
-        lat: resp.data.data[0].latitude,
-        lng: resp.data.data[0].longitude,
-      });
-      setSuccess("succeeded");
-    } catch (err) {
-      console.log("Error: ", err);
-      setFailed("error");
-    }
-  }, [userInput]);
+  // const getCoordinates = useCallback(async () => {
+  //   try {
+  //     const resp = await axios.get(
+  //       `http://api.positionstack.com/v1/forward?access_key=${process.env.REACT_APP_COORDINATE_KEY}&query=${userInput.address}&limit=1`
+  //     );
+  //     setUserInput({
+  //       ...userInput,
+  //       lat: resp.data.data[0].latitude,
+  //       lng: resp.data.data[0].longitude,
+  //     });
+  //     setSuccess("succeeded");
+  //   } catch (err) {
+  //     console.log("Error: ", err);
+  //     setFailed("error");
+  //   }
+  // }, [userInput]);
 
-  //GOOGLE GEOCODING API TO GET ADDRESS FROM COORDINATES
-  // const getCoordinates = useCallback(
-  //   async (e) => {
-  //     try {
-  //       const resp = await axios.get(
-  //         `https://maps.googleapis.com/maps/api/geocode/json?address=${userInput.address}&key=${process.env.REACT_APP_GEOCODING_KEY}`
-  //       );
-  //       setUserInput({
-  //         ...userInput,
-  //         lat: resp.data.results[0].geometry.location.lat,
-  //         lng: resp.data.results[0].geometry.location.lng,
-  //       });
-  //       setSuccess("succeeded");
-  //     } catch (err) {
-  //       console.log(err);
-  //       setFailed("error");
-  //     }
-  //   },
-  //   [userInput]
-  // );
+  // GOOGLE GEOCODING API TO GET ADDRESS FROM COORDINATES
+  const getCoordinates = useCallback(
+    async (e) => {
+      try {
+        const resp = await axios.get(
+          `https://maps.googleapis.com/maps/api/geocode/json?address=${userInput.address}&key=${process.env.REACT_APP_GEOCODING_KEY}`
+        );
+        setUserInput({
+          ...userInput,
+          lat: resp.data.results[0].geometry.location.lat,
+          lng: resp.data.results[0].geometry.location.lng,
+        });
+        setSuccess("succeeded");
+      } catch (err) {
+        console.log(err);
+        setFailed("error");
+      }
+    },
+    [userInput]
+  );
 
   //SUCCESS AND FAILED SEND MESSAGES
   const [success, setSuccess] = useState("");
@@ -151,6 +151,16 @@ export default function TreeRegistration() {
     }
   }, [success, failed]);
 
+
+  //GET USER ID FROM USER
+  useEffect(() => {
+    axios(
+      `http://localhost:8000/user/${user.sub.slice(user.sub.length - 7)}`
+    ).then((response) =>
+      setUserInput({...userInput, userId: response.data.id})
+    );
+  }, [user.sub]);
+
   //POST REQUEST TO MONGODB
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -164,8 +174,6 @@ export default function TreeRegistration() {
       });
     e.target.reset();
   };
-
-
 
   return (
     <>
@@ -195,7 +203,7 @@ export default function TreeRegistration() {
             </button>
           </div>
 
-          <form className="tree-form" onSubmit={(e) => handleSubmit(e)}>
+          <form className="tree-form" name="userId" onSubmit={(e) => handleSubmit(e)}>
             <FormControl sx={{ m: 0, width: 340, backgroundColor: "white" }}>
               <InputLabel id="Obstsorte" sx={{ fontFamily: "Nunito" }}>
                 Obstsorte

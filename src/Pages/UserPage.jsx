@@ -63,7 +63,7 @@ function UserPage() {
                   {userTrees &&
                     userTrees.map((favorite) => (
                       <tr>
-                        <td>{favorite.status.status}</td>
+                        {/* <td>{favorite.status.status}</td> */}
                         <td>{favorite.type}</td>
                         <td>{favorite.location.strasse}</td>
                       </tr>
