@@ -192,7 +192,6 @@ export default function TreeRegistration() {
         <LogoComponent />
         <div className="tree-form-container">
           <h3>Obstbaum zur Verfügung stellen</h3>
-
           <div className="tree-form">
             <label>Standort*</label>
             <input

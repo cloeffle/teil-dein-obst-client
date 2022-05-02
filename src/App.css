@@ -58,3 +58,10 @@ textarea:focus {
   outline: none;
   border: 2px solid #faf1cf;
 }
+
+.loading{
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}

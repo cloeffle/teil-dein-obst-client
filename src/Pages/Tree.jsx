@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
-import { v4 as uuidv4 } from "uuid";
 
+import "../assets/styles/myTrees.css";
 import LogoComponent from "../components/LogoComponent";
+import Delete from "../assets/images/icons8-entfernen.svg";
+
 function Tree() {
   const { user } = useAuth0();
   const [userData, setUserData] = useState(false);
@@ -17,23 +19,23 @@ function Tree() {
     ).then((response) => setUserTrees(response.data));
   }, [userData]);
 
-const deleteTree = (id) => {
-  axios.delete(`http://localhost:8000/tree/${id}`).then(() => {
-    axios(
-      `http://localhost:8000/tree/collection/${user.sub.slice(
-        user.sub.length - 7
-      )}`
-    ).then((response) => setUserTrees(response.data));
-  }
-  );
-}
+  const deleteTree = (id) => {
+    axios.delete(`http://localhost:8000/tree/${id}`).then(() => {
+      axios(
+        `http://localhost:8000/tree/collection/${user.sub.slice(
+          user.sub.length - 7
+        )}`
+      ).then((response) => setUserTrees(response.data));
+    });
+  };
 
   return (
     <>
       <div>
         <LogoComponent />
       </div>
-      <div className="tree-container">
+      <div className="my-trees-container">
+        <h3>Deaktivieren/Löschen</h3>
         <div className="my-trees">
           <table>
             <thead>
@@ -48,11 +50,9 @@ const deleteTree = (id) => {
                 userTrees.map((myTrees) => (
                   <tr key={myTrees._id}>
                     <td className="my-tree-type">{myTrees.type}</td>
-                    {
-                      <td className="my-tree-address">
-                        {myTrees.location.address}
-                      </td>
-                    }
+                    <td className="my-tree-address">
+                      {myTrees.location.address}
+                    </td>
                     <td className="my-tree-status">
                       {myTrees.active === true ? (
                         <p style={{ color: "green" }}>aktiv</p>
@@ -61,8 +61,11 @@ const deleteTree = (id) => {
                       )}
                     </td>
                     <td>
-                      <button onClick={() => deleteTree(myTrees._id)}>
-                        Delete
+                      <button
+                        className="delete-tree"
+                        onClick={() => deleteTree(myTrees._id)}
+                      >
+                        <img src={Delete} alt="Löschen" />
                       </button>
                     </td>
                   </tr>

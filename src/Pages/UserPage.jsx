@@ -85,11 +85,9 @@ function UserPage() {
                     userTrees.map((myTrees) => (
                       <tr key={myTrees._id}>
                         <td className="my-tree-type">{myTrees.type}</td>
-                        {
-                          <td className="my-tree-address">
-                            {myTrees.location.address.substring(0, 25)}...
-                          </td>
-                        }
+                        <td className="my-tree-address">
+                          {myTrees.location.address.substring(0, 25)}...
+                        </td>
                         <td className="my-tree-status">
                           {myTrees.active === true ? (
                             <p style={{ color: "green" }}>aktiv</p>
