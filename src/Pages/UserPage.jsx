@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import LogoutButton from "../components/Login/LogoutButton";
-import "../assets/styles/userpage.css";
-import LogoComponent from "../components/LogoComponent";
-import Obstbaum from "../assets/images/fruit-tree.png";
+import React, { useEffect, useState } from 'react';
+import LogoutButton from '../components/Login/LogoutButton';
+import '../assets/styles/userpage.css';
+import LogoComponent from '../components/LogoComponent';
+import Obstbaum from '../assets/images/fruit-tree.png';
 
-import { useAuth0 } from "@auth0/auth0-react";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import { useAuth0 } from '@auth0/auth0-react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function UserPage() {
   const { user } = useAuth0();
@@ -14,7 +14,7 @@ function UserPage() {
   const [userTrees, setUserTrees] = useState(false);
   const [userFavorites, setUserFavorites] = useState([]);
   if (userFavorites) {
-    console.log(userFavorites, "userFavorites");
+    console.log(userFavorites, 'userFavorites');
   }
 
   useEffect(() => {
@@ -90,9 +90,9 @@ function UserPage() {
                         </td>
                         <td className="my-tree-status">
                           {myTrees.active === true ? (
-                            <p style={{ color: "green" }}>aktiv</p>
+                            <p style={{ color: 'green' }}>aktiv</p>
                           ) : (
-                            <p style={{ color: "red" }}>inaktiv</p>
+                            <p style={{ color: 'red' }}>inaktiv</p>
                           )}
                         </td>
                       </tr>
@@ -117,14 +117,14 @@ function UserPage() {
                 </tr>
               </thead>
               <tbody>
-                {userFavorites &&
+                {/* {userFavorites &&
                   userFavorites.map((favorite) => (
                     <tr>
                       <td>{favorite[0].status.status}</td>
                       <td>{favorite[0].type[0]}</td>
                       <td>{favorite[0].location.address}</td>
                     </tr>
-                  ))}
+                  ))} */}
               </tbody>
             </table>
           </div>

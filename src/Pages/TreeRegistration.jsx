@@ -1,19 +1,22 @@
-import React, { useState, useEffect, useCallback } from "react";
-import {useNavigate} from 'react-router-dom';
-import axios from "axios";
-import { useAuth0 } from "@auth0/auth0-react";
+import React, { useState, useEffect, useCallback } from 'react';
+import axios from 'axios';
+import { useAuth0 } from '@auth0/auth0-react';
+import { initializeApp } from 'firebase/app';
+import { ref, uploadBytes, getStorage } from 'firebase/storage';
+import { v4 as uuidv4 } from 'uuid';
+import { useNavigate } from 'react-router-dom';
 
-import { useTheme } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import Chip from "@mui/material/Chip";
+import { useTheme } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import Chip from '@mui/material/Chip';
 
-import LogoComponent from "../components/LogoComponent";
-import "../assets/styles/treeRegistration.css";
+import LogoComponent from '../components/LogoComponent';
+import '../assets/styles/treeRegistration.css';
 
 // Select Option Obstsorte
 const ITEM_HEIGHT = 48;
@@ -28,18 +31,18 @@ const MenuProps = {
 };
 
 const fruits = [
-  "Apfel",
-  "Aprikose",
-  "Birne",
-  "Erdbeere",
-  "Heidelbeere",
-  "Himbeere",
-  "Johannisbeere",
-  "Kirsche",
-  "Stachelbeere",
-  "Weintraube",
-  "Pflaume",
-  "Sonstiges",
+  'Apfel',
+  'Aprikose',
+  'Birne',
+  'Erdbeere',
+  'Heidelbeere',
+  'Himbeere',
+  'Johannisbeere',
+  'Kirsche',
+  'Stachelbeere',
+  'Weintraube',
+  'Pflaume',
+  'Sonstiges',
 ];
 
 function getStyles(fruit, fruitName, theme) {
@@ -49,10 +52,10 @@ function getStyles(fruit, fruitName, theme) {
         ? theme.typography.fontWeightRegular
         : theme.typography.fontWeightMedium,
 
-    color: fruitName.indexOf(fruit) === -1 ? "#444" : "white",
+    color: fruitName.indexOf(fruit) === -1 ? '#444' : 'white',
 
-    backgroundColor: fruitName.indexOf(fruit) === -1 ? "white" : "#5a9481",
-    fontFamily: fruitName.indexOf(fruit) === -1 ? "Nunito" : "Nunito",
+    backgroundColor: fruitName.indexOf(fruit) === -1 ? 'white' : '#5a9481',
+    fontFamily: fruitName.indexOf(fruit) === -1 ? 'Nunito' : 'Nunito',
   };
 }
 
@@ -62,13 +65,31 @@ export default function TreeRegistration() {
   const theme = useTheme();
   const [fruitName, setFruitName] = useState([]);
 
+  const firebaseConfig = {
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+
+    appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  };
+  const app = initializeApp(firebaseConfig);
+  const storage = getStorage(app);
+
+  const [imageUpload, setImageUpload] = useState([]);
+
   // Select Fruits Option
   const handleChange = (e) => {
     const {
       target: { value },
     } = e;
-    setFruitName(typeof value === "string" ? value.split(",") : value);
-    const myFruit = typeof value === "string" ? value.split(",") : value;
+    setFruitName(typeof value === 'string' ? value.split(',') : value);
+    const myFruit = typeof value === 'string' ? value.split(',') : value;
     setUserInput({
       ...userInput,
       type: myFruit,
@@ -77,15 +98,16 @@ export default function TreeRegistration() {
 
   // Form Input
   const [userInput, setUserInput] = useState({
-    type: "",
-    lat: "",
-    lng: "",
-    start: "",
-    end: "",
-    info: "",
-    userId: "",
+    type: '',
+    lat: '',
+    lng: '',
+    start: '',
+    end: '',
+    info: '',
+    userId: '',
+    pictureURL: '',
   });
-  
+
   const handleChangeUserInput = (e) => {
     setUserInput({
       ...userInput,
@@ -123,62 +145,60 @@ export default function TreeRegistration() {
           lat: resp.data.results[0].geometry.location.lat,
           lng: resp.data.results[0].geometry.location.lng,
         });
-        setSuccess("succeeded");
+        setSuccess('succeeded');
       } catch (err) {
         console.log(err);
-        setFailed("error");
+        setFailed('error');
       }
     },
     [userInput]
   );
 
   //SUCCESS AND FAILED SEND MESSAGES
-  const [success, setSuccess] = useState("");
-  const [failed, setFailed] = useState("");
-  const [uploadSuccess, setUploadSuccess] = useState("")
+  const [success, setSuccess] = useState('');
+  const [failed, setFailed] = useState('');
+  const [uploadSuccess, setUploadSuccess] = useState('');
 
   //SUCCESS AND FAILED SEND MESSAGES TIMEOUT
   useEffect(() => {
-    if (success === "succeeded") {
+    if (success === 'succeeded') {
       setTimeout(() => {
-        setSuccess("");
+        setSuccess('');
       }, 5000);
     } else {
-      if (failed === "error") {
+      if (failed === 'error') {
         setTimeout(() => {
-          setFailed("");
+          setFailed('');
         }, 5000);
       }
     }
   }, [success, failed]);
-
-  // useEffect(() => {
-  //   if(uploadSuccess === "uploaded"){
-  //     setTimeout(() => {
-  //       setUploadSuccess("");
-  //     }, 2000);
-  //   }
-  // },[uploadSuccess])
-
 
   //GET USER ID FROM USER
   useEffect(() => {
     axios(
       `http://localhost:8000/user/${user.sub.slice(user.sub.length - 7)}`
     ).then((response) =>
-      setUserInput({...userInput, userId: response.data.id})
+      setUserInput({ ...userInput, userId: response.data.id })
     );
   }, [user.sub]);
 
   //POST REQUEST TO MONGODB
   const handleSubmit = (e) => {
     e.preventDefault();
+    const name = `images/${userInput.pictureURL}}`;
+    const imageRef = ref(storage, name);
+    uploadBytes(imageRef, imageUpload).then(() =>
+      console.log('Image uploaded')
+    );
     axios
-      .post("http://localhost:8000/tree/", userInput)
+      .post('http://localhost:8000/tree/', userInput)
       .then((res) => {
         console.log(res);
-        setUploadSuccess("uploaded");
-        setTimeout(() => {navigate('/profil')}, 3000);
+        setUploadSuccess('uploaded');
+        setTimeout(() => {
+          navigate('/profil');
+        }, 3000);
       })
       .catch((err) => {
         console.log(err);
@@ -186,6 +206,16 @@ export default function TreeRegistration() {
     e.target.reset();
   };
 
+  const handleImage = (target) => {
+    setImageUpload(target);
+    setUserInput({
+      ...userInput,
+      pictureURL: target.name + uuidv4(),
+    });
+  };
+  if (userInput) {
+    console.log(userInput, 'userinput');
+  }
   return (
     <>
       <div>
@@ -218,9 +248,9 @@ export default function TreeRegistration() {
             name="userId"
             onSubmit={(e) => handleSubmit(e)}
           >
-            <FormControl sx={{ m: 0, width: 340, backgroundColor: "white" }}>
-              <InputLabel id="Obstsorte" sx={{ fontFamily: "Nunito" }}>
-                Obstsorte*
+            <FormControl sx={{ m: 0, width: 340, backgroundColor: 'white' }}>
+              <InputLabel id="Obstsorte" sx={{ fontFamily: 'Nunito' }}>
+                Obstsorte
               </InputLabel>
               <Select
                 name="type"
@@ -233,15 +263,15 @@ export default function TreeRegistration() {
                   <OutlinedInput id="select-obstsorte" label="Obstsorte" />
                 }
                 renderValue={(selected) => (
-                  <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                     {selected.map((value) => (
                       <Chip
                         key={value}
                         label={value}
                         sx={{
-                          backgroundColor: "#5a9481",
-                          color: "white",
-                          fontFamily: "Nunito",
+                          backgroundColor: '#5a9481',
+                          color: 'white',
+                          fontFamily: 'Nunito',
                         }}
                       />
                     ))}
@@ -290,9 +320,10 @@ export default function TreeRegistration() {
               rows="5"
               placeholder="Nähere Informationen zum Standort, der Zugänglickeit z.B. Pflücken nur nach Absprache möglich etc."
             ></textarea>
-
-            {/* <input type="file" /> */}
-
+            <input
+              onChange={(event) => handleImage(event.target.files[0])}
+              type="file"
+            ></input>
             {uploadSuccess && renderUpload()}
             <input
               type="submit"
@@ -309,18 +340,18 @@ export default function TreeRegistration() {
 
 const renderAlert = () => (
   <div className="">
-    <p style={{ color: "green" }}>Adresse bestätigt</p>
+    <p style={{ color: 'green' }}>Adresse bestätigt</p>
   </div>
 );
 
 const renderFailed = () => (
   <div className="">
-    <p style={{ color: "red" }}>Adresse nicht gefunden</p>
+    <p style={{ color: 'red' }}>Adresse nicht gefunden</p>
   </div>
 );
 
 const renderUpload = () => (
   <div className="">
-    <p style={{ color: "green" }}>Baum wurde erfolgreich hochgeladen</p>
+    <p style={{ color: 'green' }}>Baum wurde erfolgreich hochgeladen</p>
   </div>
 );
