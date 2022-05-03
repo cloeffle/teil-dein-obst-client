@@ -6,7 +6,7 @@ import "../assets/styles/myTrees.css";
 import LogoComponent from "../components/LogoComponent";
 import Delete from "../assets/images/icons8-entfernen.svg";
 
-function Tree() {
+function Tree({closeModal}) {
   const { user } = useAuth0();
   const [userData, setUserData] = useState(false);
   const [userTrees, setUserTrees] = useState(false);
@@ -31,20 +31,16 @@ function Tree() {
 
   return (
     <>
-      <div>
-        <LogoComponent />
-      </div>
       <div className="my-trees-container">
-        <h3>Deaktivieren/Löschen</h3>
         <div className="my-trees">
           <table>
-            <thead>
+            {/* <thead>
               <tr>
                 <th>Sorte</th>
                 <th>Adresse</th>
                 <th>Status</th>
               </tr>
-            </thead>
+            </thead> */}
             <tbody>
               {userTrees &&
                 userTrees.map((myTrees) => (

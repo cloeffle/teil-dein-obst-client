@@ -1,20 +1,42 @@
-import React, { useEffect, useState } from 'react';
-import LogoutButton from '../components/Login/LogoutButton';
-import '../assets/styles/userpage.css';
-import LogoComponent from '../components/LogoComponent';
-import Obstbaum from '../assets/images/fruit-tree.png';
+import React, { useEffect, useState } from "react";
+import LogoutButton from "../components/Login/LogoutButton";
+import "../assets/styles/userpage.css";
+import LogoComponent from "../components/LogoComponent";
+import Obstbaum from "../assets/images/fruit-tree.png";
+import Tree from "./Tree";
 
-import { useAuth0 } from '@auth0/auth0-react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { useAuth0 } from "@auth0/auth0-react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import Modal from "react-modal";
+
+//MODAL STYLE
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "3%",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    backgroundColor: "#C8E0C3",
+    boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+
+  },
+};
+
+Modal.setAppElement("#root");
 
 function UserPage() {
   const { user } = useAuth0();
   const [userData, setUserData] = useState(false);
   const [userTrees, setUserTrees] = useState(false);
   const [userFavorites, setUserFavorites] = useState([]);
+  let subtitle;
+  const [isOpen, setIsOpen] = useState(false);
+
   if (userFavorites) {
-    console.log(userFavorites, 'userFavorites');
+    // console.log(userFavorites, 'userFavorites');
   }
 
   useEffect(() => {
@@ -51,9 +73,26 @@ function UserPage() {
           email: user.email,
         }
       )
-      .then((response) => console.log(response))
+      // .then((response) => console.log(response))
       .catch((error) => console.log(error));
   }, []);
+
+  //MODAL FUNCTIONS
+  const openModal = () => {
+    setIsOpen(true);
+  }
+
+  const afterOpenModal = () =>{
+    subtitle.style.color = "#444";
+  }
+
+  const closeModal = () => {
+    setIsOpen(false);
+  }
+
+  const refreshPage = () => {
+    window.location.reload();
+  };
 
   return (
     <div>
@@ -73,13 +112,6 @@ function UserPage() {
           <div className="trees-container userpage">
             <div className="my-trees">
               <table>
-                <thead>
-                  <tr>
-                    <th>Sorte</th>
-                    <th>Adresse</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
                 <tbody>
                   {userTrees &&
                     userTrees.map((myTrees) => (
@@ -90,17 +122,42 @@ function UserPage() {
                         </td>
                         <td className="my-tree-status">
                           {myTrees.active === true ? (
-                            <p style={{ color: 'green' }}>aktiv</p>
+                            <p style={{ color: "green" }}>aktiv</p>
                           ) : (
-                            <p style={{ color: 'red' }}>inaktiv</p>
+                            <p style={{ color: "red" }}>inaktiv</p>
                           )}
                         </td>
                       </tr>
                     ))}
                 </tbody>
               </table>
-              <div className="my-tree-edit">
-                <Link to="/profil/baum">Bearbeiten</Link>
+              <div className="my-tree-edit" id="root">
+                <button className="tree-edit-btn" onClick={openModal}>
+                  Bearbeiten
+                </button>
+                <Modal
+                  isOpen={isOpen}
+                  onAfterOpen={afterOpenModal}
+                  onRequestClose={closeModal}
+                  style={customStyles}
+                  contentLabel="Tree Modal"
+                >
+                  <div className="modal-close">
+                    <button
+                      className="modal-close-btn"
+                      onClick={closeModal && refreshPage}
+                    >
+                      &times;
+                    </button>
+                  </div>
+                  <h3
+                    ref={(_subtitle) => (subtitle = _subtitle)}
+                    style={{ marginBottom: "1rem" }}
+                  >
+                    Deaktivieren oder Löschen
+                  </h3>
+                  <Tree closeModal={closeModal} />
+                </Modal>
               </div>
             </div>
           </div>

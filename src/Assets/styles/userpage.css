@@ -34,7 +34,7 @@ td {
 } */
 
 .my-tree-address {
-  padding: 0 .6rem;
+  padding: 0 0.6rem;
 }
 
 figure {
@@ -53,9 +53,25 @@ figure img {
   align-items: center;
 }
 
-.my-tree-edit{
+.my-tree-edit {
   display: flex;
   justify-content: flex-end;
+}
+
+.tree-edit-btn {
+  background-color: transparent;
+}
+
+.modal-close {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal-close-btn {
+  display: flex;
+  color: #444;
+  background-color: transparent;
+  font-size: 1.8rem;
 }
 
 .userpage-btn {
