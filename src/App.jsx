@@ -8,7 +8,6 @@ import Support from './pages/Support';
 import Home from './pages/Home';
 import Tree from './pages/Tree';
 import UserPage from './pages/UserPage';
-
 import TreeRegistration from './pages/TreeRegistration';
 
 function App() {
