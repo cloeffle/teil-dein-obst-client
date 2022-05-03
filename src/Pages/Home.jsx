@@ -4,6 +4,7 @@ import Filter from '../components/Filter';
 import '../assets/styles/Home.css';
 import Logo from '../assets/logo/Logo.svg';
 import Login from '../components/Login/LoginButton';
+import { LocationSearching } from '@mui/icons-material';
 
 function Home() {
   const [showFilter, setShowFilter] = useState(false);
@@ -43,7 +44,23 @@ function Home() {
     setShowFilter(false);
     console.log('Home handleSelectFilter', filter);
   };
-  // create function that compares selectedFilter with locationData, that the key "type:" of locationData matches the the key "Name:" of selectedFilter and returns the matching locations
+
+  console.log('selctedFilter', selectedFilter);
+
+  //! Filtering Data for Map-Markers
+  const locations = locationData;
+  const filter = selectedFilter;
+
+  const filteredLocations = locations.filter((location) => {
+    for (let i = 0; i < filter.length; i++) {
+      if (location.type[0] === filter[i].name) {
+        return location;
+      }
+    }
+    return null;
+  });
+
+  console.log('filteredLocations', filteredLocations);
 
   return (
     <div className="home">
