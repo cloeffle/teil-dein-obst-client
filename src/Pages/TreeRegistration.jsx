@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import {useNavigate} from 'react-router-dom';
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -57,6 +58,7 @@ function getStyles(fruit, fruitName, theme) {
 
 export default function TreeRegistration() {
   const { user } = useAuth0();
+  const navigate = useNavigate();
   const theme = useTheme();
   const [fruitName, setFruitName] = useState([]);
 
@@ -83,9 +85,7 @@ export default function TreeRegistration() {
     info: "",
     userId: "",
   });
-
-  console.log(userInput);
-
+  
   const handleChangeUserInput = (e) => {
     setUserInput({
       ...userInput,
@@ -135,6 +135,7 @@ export default function TreeRegistration() {
   //SUCCESS AND FAILED SEND MESSAGES
   const [success, setSuccess] = useState("");
   const [failed, setFailed] = useState("");
+  const [uploadSuccess, setUploadSuccess] = useState("")
 
   //SUCCESS AND FAILED SEND MESSAGES TIMEOUT
   useEffect(() => {
@@ -150,6 +151,14 @@ export default function TreeRegistration() {
       }
     }
   }, [success, failed]);
+
+  // useEffect(() => {
+  //   if(uploadSuccess === "uploaded"){
+  //     setTimeout(() => {
+  //       setUploadSuccess("");
+  //     }, 2000);
+  //   }
+  // },[uploadSuccess])
 
 
   //GET USER ID FROM USER
@@ -168,6 +177,8 @@ export default function TreeRegistration() {
       .post("http://localhost:8000/tree/", userInput)
       .then((res) => {
         console.log(res);
+        setUploadSuccess("uploaded");
+        setTimeout(() => {navigate('/profil')}, 3000);
       })
       .catch((err) => {
         console.log(err);
@@ -181,9 +192,8 @@ export default function TreeRegistration() {
         <LogoComponent />
         <div className="tree-form-container">
           <h3>Obstbaum zur Verfügung stellen</h3>
-
           <div className="tree-form">
-            {/* <label>Standort</label> */}
+            <label>Standort*</label>
             <input
               className="tree-input-field"
               type="text"
@@ -203,10 +213,14 @@ export default function TreeRegistration() {
             </button>
           </div>
 
-          <form className="tree-form" name="userId" onSubmit={(e) => handleSubmit(e)}>
+          <form
+            className="tree-form"
+            name="userId"
+            onSubmit={(e) => handleSubmit(e)}
+          >
             <FormControl sx={{ m: 0, width: 340, backgroundColor: "white" }}>
               <InputLabel id="Obstsorte" sx={{ fontFamily: "Nunito" }}>
-                Obstsorte
+                Obstsorte*
               </InputLabel>
               <Select
                 name="type"
@@ -234,7 +248,7 @@ export default function TreeRegistration() {
                   </Box>
                 )}
                 MenuProps={MenuProps}
-                // required
+                required
               >
                 {fruits.map((fruit) => (
                   <MenuItem
@@ -279,9 +293,11 @@ export default function TreeRegistration() {
 
             {/* <input type="file" /> */}
 
+            {uploadSuccess && renderUpload()}
             <input
               type="submit"
               className="submit btn"
+              disabled={!userInput.address || !userInput.type}
               defaultValue="Hinzufügen"
             />
           </form>
@@ -300,5 +316,11 @@ const renderAlert = () => (
 const renderFailed = () => (
   <div className="">
     <p style={{ color: "red" }}>Adresse nicht gefunden</p>
+  </div>
+);
+
+const renderUpload = () => (
+  <div className="">
+    <p style={{ color: "green" }}>Baum wurde erfolgreich hochgeladen</p>
   </div>
 );
