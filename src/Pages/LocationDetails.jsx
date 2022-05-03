@@ -1,5 +1,8 @@
 import { useParams } from 'react-router-dom';
-import CommentForm from '../components/CommentForm'; 
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useAuth0 } from '@auth0/auth0-react';
+
 import Logo from "../assets/logo/Logo.svg";
 import Login from "../components/Login/LoginButton";
 import Apfel from '../assets/images/icons8-apple-500.png';
@@ -15,22 +18,64 @@ import '../assets/styles/locationDetails.css';
 
 
 function LocationDetails({locationData}) {
+    //GET LOCATION DATA FOR SPECIFIC LOCATION (ID)
     const params = useParams();
-
-    console.log("param", params.id)
-    console.log("locationData",locationData)
-
     let locationDetail = locationData.find(function(location) {
         return location._id === params.id;
     });
-        
+    
+    //GET USER DATA FROM AUTH0
+    const { user } = useAuth0();
+    const [userData, setUserData] = useState([]);
+    useEffect(() => {
+        if (user) {
+            axios.get(`http://localhost:8000/user/${user.sub}`)
+            .then(res => {
+                setUserData(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        }
+    }, [user]);
 
-    console.log("locationDetail", locationDetail)
     
-    const addComment = (text) => {
-        console.log("text", text)
-    }
-    
+  
+    //FORM COMMENT
+    let [counter, setCounter] = useState(0);
+    const [comment, setComment] = useState({
+      text: "",
+      timestamp: "",
+      user: "",
+      id: ""
+    });
+  
+    const handleChange = (e) => {
+      setComment({
+        
+        [e.target.name]: e.target.value,
+        timestamp: new Date().toLocaleString(),
+        user: user.name,
+        id: counter
+      });
+    };
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      setCounter(counter + 1);
+      axios
+      .post("http://localhost:8000/tree", comment)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+      e.target.reset();
+      
+    };
+  
+  
   return (
     <div className='locationDetails'>
         <div className="header-login">
@@ -42,7 +87,6 @@ function LocationDetails({locationData}) {
         <Login />
         </div>
      <div className='locationDetails-content'>
-         <>
          {locationDetail && 
          <>
          {locationDetail.type[0] === 'Apfel' && (
@@ -73,28 +117,42 @@ function LocationDetails({locationData}) {
             <p>Info des Besitzers:</p>
         {locationDetail.info}</div>
 
-        <div className='locationDetails-details'>
-            <p>Erntezeit:</p>
-        {locationDetail.harvestPeriod.start} bis {locationDetail.harvestPeriod.end}</div>
+        
         <div className='locationDetails-details' id='write-comment'>
-        <p>Schreibe einen Kommentar:</p>
-        <CommentForm submitLabel="Write" handleSubmit={addComment}/></div>
+        
+
+        <form className="commentForm" onSubmit={(e) => handleSubmit(e)}>
+        <textarea
+              
+              type="text"
+              name="info"
+              value={comment.text}
+              onChange={(e) => handleChange(e)}
+              placeholder="Hinterlasse einen Kommentar"
+              required
+            ></textarea>
+            <input type="submit" className="submit btn" value="Hinzufügen" />
+        </form>
+        
+
+        </div>
         <div className='locationDetails-details'>
             <p>Kommentare:</p>
-       {locationDetail.comments.map(comment => {
-           return <div>{comment = comment.comment}</div>
-
-
-       })}
        </div>
-        
+        {locationDetail.comments.map((comment, index) => 
+            <div key={index}>
+                {comment}
+            </div>
+           
+        )}
+     
         </>
          }
-         </>
-
       </div>
     </div>
+    
   )
+  
 }
 
 export default LocationDetails

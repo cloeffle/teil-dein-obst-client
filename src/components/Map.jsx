@@ -44,7 +44,6 @@ const Map = ({ locationData, locationCoordinates}) => {
                 {   
                     type: location.type,
                     address: location.location.address, 
-                    
                     id: location._id}
                     )}
         />
