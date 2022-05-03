@@ -11,14 +11,12 @@ import Tree from './pages/Tree';
 import UserPage from './pages/UserPage';
 import Filter from './components/Filter';
 import TreeRegistration from './pages/TreeRegistration';
-import Uploader from './components/Image-Upload/Uploader';
 
 function App() {
   return (
     <div className="App">
       <Navbar />
       <Routes>
-        <Route path="/upload" element={<Uploader />} />
         <Route path="/" element={<Home />} />
         <Route path="filter" element={<Filter />} />
         <Route path="ueber-teil-dein-obst" element={<About />} />
