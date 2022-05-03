@@ -7,12 +7,17 @@
   height: 30px;
 }
 
+/* .deactivate-reactivate-btn{
+  display: flex;
+  align-items: flex-end;
+} */
+
 .deactivate-tree {
   background-color: transparent;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .activate-tree {
   background-color: transparent;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }

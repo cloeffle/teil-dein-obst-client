@@ -11,27 +11,11 @@
   margin: 0.5rem 0;
 }
 
-/* .trees-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 1fr;
-  grid-column-gap: 1.5rem;
-  grid-row-gap: 0px;
-}
-
-.my-trees {
-  grid-area: 1 / 1 / 2 / 2;
-} */
-
 td {
   margin-right: 10px;
-  text-align: center;
+  /* text-align: center; */
   vertical-align: top;
 }
-
-/* .add-trees {
-  grid-area: 1 / 2 / 2 / 3;
-} */
 
 .my-tree-address {
   padding: 0 0.6rem;

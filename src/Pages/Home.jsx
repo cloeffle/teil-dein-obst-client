@@ -3,7 +3,7 @@ import Map from '../components/Map';
 import '../assets/styles/Home.css';
 
 import Logo from "../assets/logo/Logo.svg";
-import Login from "../components/Login/LoginButton";
+import AuthenticationButton from "../components/Login/AuthenticationButton";
 
 function Home() {
   /*GET ALL LOCATIONS FROM BACKEND*/
@@ -45,7 +45,8 @@ function Home() {
             <img src={Logo} alt="logo" />
           </div>
         </div>
-        <Login />
+        {/* <Login /> */}
+        <AuthenticationButton />
       </div>
       {locationData && <Map locationData={locationData} /*lat={lat} lng={lng}*/ locationCoordinates={locationCoordinates}/>}
     </div>
