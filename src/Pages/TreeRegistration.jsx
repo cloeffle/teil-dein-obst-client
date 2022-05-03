@@ -81,7 +81,7 @@ export default function TreeRegistration() {
   const app = initializeApp(firebaseConfig);
   const storage = getStorage(app);
 
-  const [imageUpload, setImageUpload] = useState([]);
+  const [imageUpload, setImageUpload] = useState(false);
 
   // Select Fruits Option
   const handleChange = (e) => {
@@ -186,11 +186,14 @@ export default function TreeRegistration() {
   //POST REQUEST TO MONGODB
   const handleSubmit = (e) => {
     e.preventDefault();
-    const name = `images/${userInput.pictureURL}}`;
-    const imageRef = ref(storage, name);
-    uploadBytes(imageRef, imageUpload).then(() =>
-      console.log('Image uploaded')
-    );
+    if (imageUpload) {
+      const name = `images/${userInput.pictureURL}}`;
+      const imageRef = ref(storage, name);
+      uploadBytes(imageRef, imageUpload).then(() =>
+        console.log('Image uploaded')
+      );
+    }
+
     axios
       .post('http://localhost:8000/tree/', userInput)
       .then((res) => {
