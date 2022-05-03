@@ -203,7 +203,7 @@ export default function TreeRegistration() {
       .catch((err) => {
         console.log(err);
       });
-    e.target.reset();
+    // e.target.reset();
   };
 
   const handleImage = (target) => {

@@ -132,7 +132,7 @@ function UserPage() {
                 </tbody>
               </table>
               <div className="my-tree-edit" id="root">
-                <button className="tree-edit-btn" onClick={openModal}>
+               <button className="tree-edit-btn" onClick={openModal}>
                   Bearbeiten
                 </button>
                 <Modal
@@ -156,7 +156,7 @@ function UserPage() {
                   >
                     Deaktivieren oder Löschen
                   </h3>
-                  <Tree closeModal={closeModal} />
+                  <Tree closeModal={closeModal}/>
                 </Modal>
               </div>
             </div>
