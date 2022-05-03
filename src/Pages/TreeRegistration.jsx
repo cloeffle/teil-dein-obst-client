@@ -4,6 +4,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { initializeApp } from 'firebase/app';
 import { ref, uploadBytes, getStorage } from 'firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
+import { useNavigate } from 'react-router-dom';
 
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -60,21 +61,22 @@ function getStyles(fruit, fruitName, theme) {
 
 export default function TreeRegistration() {
   const { user } = useAuth0();
+  const navigate = useNavigate();
   const theme = useTheme();
   const [fruitName, setFruitName] = useState([]);
 
   const firebaseConfig = {
-    apiKey: 'AIzaSyBegp0enVMVG-NCtWMGSdxDryhqfSe5kBM',
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
 
-    authDomain: 'teile-dein-obst.firebaseapp.com',
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
 
-    projectId: 'teile-dein-obst',
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
 
-    storageBucket: 'teile-dein-obst.appspot.com',
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
 
-    messagingSenderId: '767476028882',
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
 
-    appId: '1:767476028882:web:9d5bb0332aa5302e43e40b',
+    appId: process.env.REACT_APP_FIREBASE_APP_ID,
   };
   const app = initializeApp(firebaseConfig);
   const storage = getStorage(app);
@@ -105,8 +107,6 @@ export default function TreeRegistration() {
     userId: '',
     pictureURL: '',
   });
-
-  console.log(userInput);
 
   const handleChangeUserInput = (e) => {
     setUserInput({
@@ -157,6 +157,7 @@ export default function TreeRegistration() {
   //SUCCESS AND FAILED SEND MESSAGES
   const [success, setSuccess] = useState('');
   const [failed, setFailed] = useState('');
+  const [uploadSuccess, setUploadSuccess] = useState('');
 
   //SUCCESS AND FAILED SEND MESSAGES TIMEOUT
   useEffect(() => {
@@ -194,6 +195,10 @@ export default function TreeRegistration() {
       .post('http://localhost:8000/tree/', userInput)
       .then((res) => {
         console.log(res);
+        setUploadSuccess('uploaded');
+        setTimeout(() => {
+          navigate('/profil');
+        }, 3000);
       })
       .catch((err) => {
         console.log(err);
@@ -217,9 +222,8 @@ export default function TreeRegistration() {
         <LogoComponent />
         <div className="tree-form-container">
           <h3>Obstbaum zur Verfügung stellen</h3>
-
           <div className="tree-form">
-            {/* <label>Standort</label> */}
+            <label>Standort*</label>
             <input
               className="tree-input-field"
               type="text"
@@ -274,7 +278,7 @@ export default function TreeRegistration() {
                   </Box>
                 )}
                 MenuProps={MenuProps}
-                // required
+                required
               >
                 {fruits.map((fruit) => (
                   <MenuItem
@@ -320,9 +324,11 @@ export default function TreeRegistration() {
               onChange={(event) => handleImage(event.target.files[0])}
               type="file"
             ></input>
+            {uploadSuccess && renderUpload()}
             <input
               type="submit"
               className="submit btn"
+              disabled={!userInput.address || !userInput.type}
               defaultValue="Hinzufügen"
             />
           </form>
@@ -341,5 +347,11 @@ const renderAlert = () => (
 const renderFailed = () => (
   <div className="">
     <p style={{ color: 'red' }}>Adresse nicht gefunden</p>
+  </div>
+);
+
+const renderUpload = () => (
+  <div className="">
+    <p style={{ color: 'green' }}>Baum wurde erfolgreich hochgeladen</p>
   </div>
 );
