@@ -6,9 +6,15 @@ import LocationInfoModal from './LocationInfoModal';
 import LocateButton from './LocateButton';
 import FilterButton from '../assets/images/Filter.png';
 
-const Map = ({ locationData, lat, lng, locationCoordinates, onShowFilter }) => {
+const Map = ({
+  locationData,
+  lat,
+  lng,
+  locationCoordinates,
+  onShowFilter,
+  filteredLocations,
+}) => {
   const [locationInfo, setLocationInfo] = useState(null);
-
   //GET USERS CURRENT POSITION
   const [center, setCenter] = useState({
     lat: locationCoordinates.lat,
@@ -26,6 +32,15 @@ const Map = ({ locationData, lat, lng, locationCoordinates, onShowFilter }) => {
   const onMapLoad = useCallback((map) => {
     mapRef.current = map;
   }, []);
+
+  console.log('FILTEREDLOCATIONS ON MAP:', filteredLocations);
+  console.log('LOCATION DATA ON MAP:', locationData);
+
+  //! handover filtered Data from filter to Map-Markers
+  if (filteredLocations.length > 0) {
+    locationData = filteredLocations;
+  }
+  console.log('LOC DATA ON MAP AFTER filled FILTEREDLOCATIONS :', locationData);
 
   //SHOW ALL LOCATIONS ON MAP
   const locations = locationData.map((location) => {

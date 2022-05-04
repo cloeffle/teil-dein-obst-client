@@ -18,8 +18,8 @@ function Filter(props) {
   const { onSelectFilter, selectedFilter } = props;
   const [filter, setFilter] = useState([]);
 
-  console.log('filter state in filter', filter);
-  console.log('selectedFilter in filter', selectedFilter);
+  // console.log('filter state in filter', filter);
+  // console.log('selectedFilter in filter', selectedFilter);
 
   const [fruitsort, setFruitsort] = useState([
     { name: 'Apfel', alt: 'Äpfel', bild: Apfel, id: 1, status: false },
@@ -86,7 +86,7 @@ function Filter(props) {
     setFruitsort(fruit);
   };
 
-  console.log('Fruitsort:', fruitsort);
+  // console.log('Fruitsort:', fruitsort);
 
   const handleDelete = () => {
     const fruit = [...fruitsort];
@@ -103,7 +103,7 @@ function Filter(props) {
     setFilter(filter);
     onSelectFilter(filter);
   };
-  console.log('Filter anwenden:', filter);
+  // console.log('Filter anwenden:', filter);
 
   useEffect(() => {
     if (selectedFilter.length > 0) {
@@ -132,7 +132,7 @@ function Filter(props) {
                 ? 'card-2 chooseBtn selected'
                 : 'card-2 chooseBtn'
             }
-            key={sort.id}
+            key={crypto.randomUUID()}
             selected={sort.selected}
           >
             <img src={sort.bild} alt={sort.alt} />

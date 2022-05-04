@@ -57,7 +57,7 @@ function Home() {
         return location;
       }
     }
-    return null; //! Hier noch mal mit Martin drüber sprechen!
+    return null;
   });
 
   console.log('filteredLocations', filteredLocations);
@@ -93,12 +93,3 @@ function Home() {
 }
 
 export default Home;
-
-// {
-//   locationData && (
-//     <Map
-//       locationData={locationData}
-//       /*lat={lat} lng={lng}*/ locationCoordinates={locationCoordinates}
-//     />
-//   );
-// }
