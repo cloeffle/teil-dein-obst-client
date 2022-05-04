@@ -45,9 +45,9 @@ function Home() {
     console.log('Home handleSelectFilter', filter);
   };
 
-  console.log('selctedFilter', selectedFilter);
+  console.log('selectedFilter', selectedFilter);
 
-  //! Filtering Data for Map-Markers
+  //! Filtering Data for Map-Markers, filterLocations to connect with Markers
   const locations = locationData;
   const filter = selectedFilter;
 
@@ -57,7 +57,7 @@ function Home() {
         return location;
       }
     }
-    return null;
+    return null; //! Hier noch mal mit Martin drüber sprechen!
   });
 
   console.log('filteredLocations', filteredLocations);
@@ -74,12 +74,16 @@ function Home() {
       </div>
 
       {showFilter ? (
-        <Filter onSelectFilter={handleSelectFilter} />
+        <Filter
+          selectedFilter={selectedFilter}
+          onSelectFilter={handleSelectFilter}
+        />
       ) : (
         locationData && (
           <Map
             onShowFilter={() => setShowFilter(true)}
             locationData={locationData}
+            filteredLocations={filteredLocations}
             /*lat={lat} lng={lng}*/ locationCoordinates={locationCoordinates}
           />
         )
