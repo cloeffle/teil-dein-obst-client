@@ -15,13 +15,13 @@ const customStyles = {
   content: {
     top: "50%",
     left: "50%",
-    right: "3%",
+    right: "4%",
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
     backgroundColor: "#C8E0C3",
     boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
-
+    fontSize: "14px",
   },
 };
 
@@ -30,7 +30,7 @@ Modal.setAppElement("#root");
 function UserPage() {
   const { user } = useAuth0();
   const [userData, setUserData] = useState(false);
-  const [userTrees, setUserTrees] = useState(false);
+  const [userTrees, setUserTrees] = useState([]);
   const [userFavorites, setUserFavorites] = useState([]);
   let subtitle;
   const [isOpen, setIsOpen] = useState(false);
@@ -80,15 +80,15 @@ function UserPage() {
   //MODAL FUNCTIONS
   const openModal = () => {
     setIsOpen(true);
-  }
+  };
 
-  const afterOpenModal = () =>{
+  const afterOpenModal = () => {
     subtitle.style.color = "#444";
-  }
+  };
 
   const closeModal = () => {
     setIsOpen(false);
-  }
+  };
 
   const refreshPage = () => {
     window.location.reload();
@@ -113,7 +113,7 @@ function UserPage() {
             <div className="my-trees">
               <table>
                 <tbody>
-                  {userTrees &&
+                  {userTrees.length > 0 &&
                     userTrees.map((myTrees) => (
                       <tr key={myTrees._id}>
                         <td className="my-tree-type">{myTrees.type}</td>
@@ -132,9 +132,11 @@ function UserPage() {
                 </tbody>
               </table>
               <div className="my-tree-edit" id="root">
-               <button className="tree-edit-btn" onClick={openModal}>
-                  Bearbeiten
-                </button>
+                {userTrees.length > 0 && (
+                  <button className="tree-edit-btn" onClick={openModal}>
+                    Bearbeiten
+                  </button>
+                )}
                 <Modal
                   isOpen={isOpen}
                   onAfterOpen={afterOpenModal}
@@ -156,7 +158,7 @@ function UserPage() {
                   >
                     Deaktivieren oder Löschen
                   </h3>
-                  <Tree closeModal={closeModal}/>
+                  <Tree closeModal={closeModal} />
                 </Modal>
               </div>
             </div>
@@ -166,13 +168,13 @@ function UserPage() {
           <h4>Meine Favoriten</h4>
           <div className="favorite-trees userpage">
             <table>
-              <thead>
+              {/* <thead>
                 <tr>
                   <th>Status</th>
                   <th>Sorte</th>
                   <th>Adresse</th>
                 </tr>
-              </thead>
+              </thead> */}
               <tbody>
                 {/* {userFavorites &&
                   userFavorites.map((favorite) => (

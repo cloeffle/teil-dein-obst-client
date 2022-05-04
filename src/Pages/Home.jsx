@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import Map from '../components/Map';
 import Filter from '../components/Filter';
 import '../assets/styles/Home.css';
-import Logo from '../assets/logo/Logo.svg';
-import Login from '../components/Login/LoginButton';
-import { LocationSearching } from '@mui/icons-material';
+
+import Logo from "../assets/logo/Logo.svg";
+import AuthenticationButton from "../components/Login/AuthenticationButton";
 
 function Home() {
   const [showFilter, setShowFilter] = useState(false);
@@ -70,7 +70,8 @@ function Home() {
             <img src={Logo} alt="logo" />
           </div>
         </div>
-        <Login />
+        {/* <Login /> */}
+        <AuthenticationButton />
       </div>
 
       {showFilter ? (

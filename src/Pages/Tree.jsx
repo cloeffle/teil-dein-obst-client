@@ -65,7 +65,7 @@ function Tree() {
                     <td className="my-tree-address">
                       {myTrees.location.address}
                     </td>
-                    <td>
+                    <td className="deactivate-reactivate-btn">
                       {myTrees.active === true ? (
                         <button
                           className="deactivate-tree"
