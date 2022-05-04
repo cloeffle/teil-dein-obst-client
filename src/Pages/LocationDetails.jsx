@@ -50,10 +50,10 @@ function LocationDetails({locationData}) {
 
     //ADD TO FAVAORITES
     const [liked, setLiked] = useState(false);
-    const [favorite, setFavorite] = useState('');
+    const [favorite, setFavorite] = useState(null);
     const handleLike = () => {
     setLiked(!liked);
-    !liked ? setFavorite(locationDetail._id) : setFavorite(); //noch anpassen. wenn liked muss id gelöscht werden. 
+    setFavorite(locationDetail._id); 
     console.log("LIKED ID", favorite);
     axios
       .put(`http://localhost:8000/user/${user.sub}`, favorite)
@@ -68,7 +68,7 @@ function LocationDetails({locationData}) {
     //FORM COMMENT
     let [counter, setCounter] = useState(0);
     const [comment, setComment] = useState({    // Database anpassen? aktuell comment = array. 
-      text: "",
+      comment: "",
       timestamp: "",
       user: "",
       id: ""
@@ -76,7 +76,7 @@ function LocationDetails({locationData}) {
   
     const handleChange = (e) => {
       setComment({
-        ...comment,
+        
         [e.target.name]: e.target.value,
         timestamp: new Date().toLocaleString(),
         user: user.name,
@@ -86,7 +86,7 @@ function LocationDetails({locationData}) {
   
     const handleSubmit = (e) => {
       e.preventDefault();
-      setCounter(counter + 1);            // akutell nur placeholder. checken, ob counter + 1 funktioniert.
+      console.log("Comment", comment);
       e.target.reset();
       
     };
@@ -150,7 +150,8 @@ function LocationDetails({locationData}) {
               type="text"
               name="comment"
               value={comment.text}
-              onChange={(e) => handleChange(e)}
+              onBlur={handleChange}
+              
               placeholder="Hinterlasse einen Kommentar"
               required
             ></textarea>
