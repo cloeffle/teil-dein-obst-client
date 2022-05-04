@@ -10,7 +10,8 @@ const Auth0ProviderWithHistory = ({ children }) => {
   const navigate = useNavigate();
 
   const onRedirectCallback = (appState) => {
-    navigate.push(appState?.returnTo || window.location.pathname);
+    // navigate('http://localhost:3000/profil');
+    navigate(appState?.returnTo || window.location.pathname);
   };
 
   return (
@@ -18,7 +19,7 @@ const Auth0ProviderWithHistory = ({ children }) => {
       domain={domain}
       clientId={clientId}
       audience={audience}
-      redirectUri={window.location.origin}
+      redirectUri="http://localhost:3000/profil"
       onRedirectCallback={onRedirectCallback}
     >
       {children}

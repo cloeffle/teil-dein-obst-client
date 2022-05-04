@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../assets/styles/filter.css';
 import Apfel from '../assets/images/icons8-apple-500.png';
 import Aprikose from '../assets/images/icons8-apricot-500.png';
@@ -13,97 +13,129 @@ import Weintraube from '../assets/images/icons8-grapes-500.png';
 import Pflaume from '../assets/images/icons8-plum-500.png';
 import Korb from '../assets/images/fruit basket 500.png';
 
-function Filter() {
+// use Javascript ES6 Syntax
+function Filter(props) {
+  const { onSelectFilter } = props;
+  const [filter, setFilter] = useState([]);
+
+  const [fruitsort, setFruitsort] = useState([
+    { name: 'Apfel', alt: 'Äpfel', bild: Apfel, id: 1, status: false },
+    {
+      name: 'Aprikose',
+      alt: 'Aprikosen',
+      bild: Aprikose,
+      id: 2,
+      status: false,
+    },
+    { name: 'Birne', alt: 'Birnen', bild: Birne, id: 3, status: false },
+    {
+      name: 'Erdbeere',
+      alt: 'Erdbeeren',
+      bild: Erdbeere,
+      id: 4,
+      status: false,
+    },
+    {
+      name: 'Heidelbeere',
+      alt: 'Heidelbeeren',
+      bild: Heidelbeere,
+      id: 5,
+      status: false,
+    },
+    {
+      name: 'Himbeere',
+      alt: 'Himbeeren',
+      bild: Himbeere,
+      id: 6,
+      status: false,
+    },
+    {
+      name: 'Johannisbeere',
+      alt: 'Johannisbeeren',
+      bild: Johannisbeere,
+      id: 7,
+      status: false,
+    },
+    { name: 'Kirsche', alt: 'Kirschen', bild: Kirsche, id: 8, status: false },
+    {
+      name: 'Stachelbeere',
+      alt: 'Stachelbeeren',
+      bild: Stachelbeere,
+      id: 9,
+      status: false,
+    },
+    {
+      name: 'Weintraube',
+      alt: 'Weintrauben',
+      bild: Weintraube,
+      id: 10,
+      status: false,
+    },
+    { name: 'Pflaume', alt: 'Pflaumen', bild: Pflaume, id: 11, status: false },
+    { name: 'Sonstiges', alt: 'Sonstiges', bild: Korb, id: 12, status: false },
+  ]);
+
+  const handleClick = (id) => {
+    const fruit = [...fruitsort];
+    const index = fruit.findIndex((fruit) => fruit.id === id);
+
+    fruit[index].status = !fruit[index].status;
+    setFruitsort(fruit);
+  };
+
+  console.log('Fruitsort:', fruitsort);
+
+  const handleDelete = () => {
+    const fruit = [...fruitsort];
+    fruit.forEach((fruit) => {
+      fruit.status = false;
+    });
+    setFruitsort(fruit);
+  };
+
+  const handleApplyFilter = (e) => {
+    e.preventDefault();
+    const fruit = [...fruitsort];
+    const filter = fruit.filter((fruit) => fruit.status === true);
+    setFilter(filter);
+    onSelectFilter(filter);
+  };
+  console.log('Filter anwenden:', filter);
+
   return (
     <div className="container">
-      <div className="chooseBtnCont">
-        <button className="chooseBtn">
-          <p>ALLE:</p>
-        </button>
-        <button className="chooseBtn">
-          <p>Steinobst:</p>
-        </button>
-        <button className="chooseBtn">
-          <p>Kernobst:</p>
-        </button>
-        <button className="chooseBtn">
-          <p>Schalenobst:</p>
-        </button>
-        <button className="chooseBtn">
-          <p>Beerenobst:</p>
-        </button>
+      <div className="cardContainer">
+        {fruitsort.map((sort) => (
+          <button
+            onClick={() => {
+              handleClick(sort.id);
+            }}
+            id={sort.id}
+            className={
+              sort.status === true
+                ? 'card-2 chooseBtn selected'
+                : 'card-2 chooseBtn'
+            }
+            key={sort.id}
+            selected={sort.selected}
+          >
+            <img src={sort.bild} alt={sort.alt} />
+            <p>{sort.name}</p>
+          </button>
+        ))}
       </div>
 
-      <div className="cardContainer">
-        <div className="row">
-          <button className="card-2">
-            <img src={Apfel} alt="Apfel" />
-            <p>Äpfel</p>
-          </button>
-          <button className="card-2">
-            <img src={Aprikose} alt="Aprikose" />
-            <p>Aprikosen</p>
-          </button>
-        </div>
-
-        <div className="row">
-          <button className="card-2">
-            <img src={Birne} alt="Birne" />
-            <p>Birnen</p>
-          </button>
-          <button className="card-2">
-            <img src={Erdbeere} alt="Erdbeeren" />
-            <p>Erdbeeren</p>
-          </button>
-        </div>
-
-        <div className="row">
-          <button className="card-2">
-            <img src={Heidelbeere} alt="Heidelbeere" />
-            <p>Heidelbeeren</p>
-          </button>
-          <button className="card-2">
-            <img src={Himbeere} alt="Himbeere" />
-            <p>Himbeere</p>
-          </button>
-        </div>
-
-        <div className="row">
-          <button className="card-2">
-            <img src={Johannisbeere} alt="Johannisbeere" />
-            <p>Johannisbeeren</p>
-          </button>
-          <button className="card-2">
-            <img src={Kirsche} alt="Kirschen" />
-            <p>Kirschen</p>
-          </button>
-        </div>
-
-        <div className="row">
-          <button className="card-2">
-            <img src={Stachelbeere} alt="Stachelbeeren" />
-            <p>Stachelbeeren</p>
-          </button>
-          <button className="card-2">
-            <img src={Pflaume} alt="Pflaumen" />
-            <p>Pflaumen</p>
-          </button>
-        </div>
-
-        <div className="row">
-          <button className="card-2">
-            <img src={Weintraube} alt="Weintrauben" />
-            <p>Weintrauben</p>
-          </button>
-          <button className="card-2">
-            <img src={Korb} alt="Sonstiges" />
-            <p>Sonstiges</p>
-          </button>
-        </div>
-        <div className="applyFilter">
-          <button className="select">Filter anwenden</button>
-          <button className="delete">Filter löschen</button>
-        </div>
+      <div className="applyFilter">
+        <button
+          type="submit"
+          className="select"
+          onClick={(e) => handleApplyFilter(e)}
+        >
+          Filter anwenden
+        </button>
+        <button className="delete" onClick={() => handleDelete()}>
+          Filter löschen
+        </button>
       </div>
     </div>
   );

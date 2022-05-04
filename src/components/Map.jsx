@@ -1,28 +1,28 @@
-import { useState, useRef, useCallback, useEffect } from 'react'
-import { Link } from 'react-router-dom';
-import GoogleMapReact from 'google-map-react'
-import LocationMarker from './LocationMarker'
-import MyLocationMarker from './MyLocationMarker'
-import LocationInfoModal from './LocationInfoModal'
-import LocateButton from './LocateButton'
-import Filter from '../assets/images/Filter.png'
+import { useState, useRef, useCallback, useEffect } from 'react';
+import GoogleMapReact from 'google-map-react';
+import LocationMarker from './LocationMarker';
+import MyLocationMarker from './MyLocationMarker';
+import LocationInfoModal from './LocationInfoModal';
+import LocateButton from './LocateButton';
+import FilterButton from '../assets/images/Filter.png';
 
+const Map = ({ locationData, lat, lng, locationCoordinates, onShowFilter }) => {
+  const [locationInfo, setLocationInfo] = useState(null);
 
+  //GET USERS CURRENT POSITION
+  const [center, setCenter] = useState({
+    lat: locationCoordinates.lat,
+    lng: locationCoordinates.lng,
+  });
+  useEffect(() => {
+    if (locationCoordinates) {
+      setCenter({ lat: locationCoordinates.lat, lng: locationCoordinates.lng });
+    }
+  }, [locationCoordinates]);
 
-const Map = ({ locationData, locationCoordinates}) => {
-    const [locationInfo, setLocationInfo] = useState(null)
-    
-    //GET USERS CURRENT POSITION
-    const [center, setCenter] = useState({lat: locationCoordinates.lat, lng: locationCoordinates.lng})
-    useEffect(() => {
-      if (locationCoordinates) {
-        setCenter({lat: locationCoordinates.lat, lng: locationCoordinates.lng})
-      }
-    }, [locationCoordinates])
+  console.log('center', center);
 
-    console.log("center", center)
-    
-  const mapRef = useRef()
+  const mapRef = useRef();
   const onMapLoad = useCallback((map) => {
     mapRef.current = map
   }, [])
@@ -51,6 +51,7 @@ const Map = ({ locationData, locationCoordinates}) => {
     })
 
 
+
   return (
     <div className='map'>
         <GoogleMapReact
@@ -67,15 +68,15 @@ const Map = ({ locationData, locationCoordinates}) => {
         setLocationInfo={setLocationInfo}
         locationData={locationData}
         />
-        )}
-        <div className='btn_map_wrapper'>
+      )}
+      <div className="btn_map_wrapper">
         <LocateButton center={center} setCenter={setCenter} />
-        <Link to="/filter"><button className='btn_map'>
-          <img src={Filter} alt='Filter-Icon' />
-        </button></Link>
+        <button onClick={onShowFilter} className="btn_map">
+          <img src={FilterButton} alt="Filter-Icon" />
+        </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Map
+export default Map;
