@@ -324,7 +324,7 @@ export default function TreeRegistration() {
             <input
               onChange={(event) => handleImage(event.target.files[0])}
               type="file"
-              accept=".jpg,.jpegm,.png,.tiff,"
+              accept=".jpg,.jpeg,.png"
             ></input>
             {uploadSuccess && renderUpload()}
             <input
