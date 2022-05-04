@@ -14,43 +14,47 @@ button {
 .container {
   display: flex;
   align-items: center;
-  gap: 10px;
   flex-wrap: wrap;
-  text-align: center;
+  justify-content: center;
   background-color: #f7fafc;
   width: 100vw;
 }
 /** Choose Fruit-Button-Container */
-.chooseBtnCont {
+/* .chooseBtnCont {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 5px;
-  margin-top: 1rem;
-}
+  gap: 8px;
+  margin-top: 5rem; 
+  margin-right: 1rem; 
+} */
 
-.chooseBtn p {
-  font-size: 1rem;
-  font-weight: bold;
-}
 .chooseBtn {
   border: none;
   border-radius: 5px;
   margin-bottom: 5px;
   background-color: #faf1cf9b;
-  padding: 5px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 5px;
+  padding: 8px;
 }
-.chooseBtn:hover {
-  outline: 3px solid #357560;
+.chooseBtn:active {
+  transform: scale(0.98);
+  /* Scaling button to 0.98 to its original size */
+  box-shadow: 3px 2px 12px 1px rgba(0, 0, 0, 0.5);
 }
 
 /** Fruit-Button-Container */
 .cardContainer {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100vw;
+  margin-top: 0.25rem;
+  /* margin-right: 1rem; */
+  /* align-items: center; */
+  gap: 7px;
 }
 
 /** Fruit-Cards */
@@ -63,6 +67,7 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 .card-2 p {
   font-size: 13px;
@@ -71,7 +76,11 @@ button {
   /* text-align: center; */
 }
 
-.card-2:hover {
+/* .card-2:hover {
+  outline: 5px solid #357560;
+} */
+
+.selected {
   outline: 5px solid #357560;
 }
 
@@ -80,17 +89,14 @@ button {
   height: auto;
 }
 
-/** container with 2 buttons */
-.row {
-  display: flex;
-  justify-content: center;
-  gap: 5px;
-}
-
 /** Bottom-Filter-Buttons */
 
 .applyFilter {
-  margin-bottom: 2rem;
+  display: flex;
+  margin-bottom: 1rem;
+  justify-content: space-evenly;
+  width: 100vw;
+  /* gap: 8px; */
 }
 
 .select {
@@ -101,12 +107,22 @@ button {
 }
 .select:hover {
   outline: 3px solid #f9f8f2;
-  
+}
+.select:active {
+  transform: scale(0.98);
+  /* Scaling button to 0.98 to its original size */
+  box-shadow: 3px 2px 5px 1px rgba(0, 0, 0, 0.5);
 }
 
 .delete {
+  margin-top: 1rem;
   padding: 10px 25px;
   background-color: none;
   border: 3px solid #af473c;
   color: black;
+}
+.delete:active {
+  transform: scale(0.98);
+  /* Scaling button to 0.98 to its original size */
+  box-shadow: 2px 1px 5px 1px rgba(0, 0, 0, 0.5);
 }
