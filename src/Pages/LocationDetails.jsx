@@ -14,6 +14,9 @@ import Pflaume from '../assets/images/icons8-plum-500.png';
 import Erdbeere from '../assets/images/icons8-strawberry-500.png';
 import Sonstiges from '../assets/images/fruit basket 500.png'
 import Birne from '../assets/images/icons8-pear-500.png'
+import Like_black from '../assets/images/Like_black.png';
+import Like_red from '../assets/images/Like_red.png';
+
 import '../assets/styles/locationDetails.css';
 
 
@@ -23,10 +26,14 @@ function LocationDetails({locationData}) {
     let locationDetail = locationData.find(function(location) {
         return location._id === params.id;
     });
-    
+    console.log("LOCATIONDETAIL", locationDetail);
+
     //GET USER DATA FROM AUTH0
     const { user } = useAuth0();
     const [userData, setUserData] = useState([]);
+    console.log("USER", userData);
+
+
     useEffect(() => {
         if (user) {
             axios.get(`http://localhost:8000/user/${user.sub}`)
@@ -40,10 +47,27 @@ function LocationDetails({locationData}) {
     }, [user]);
 
     
-  
+
+    //ADD TO FAVAORITES
+    const [liked, setLiked] = useState(false);
+    const [favorite, setFavorite] = useState('');
+    const handleLike = () => {
+    setLiked(!liked);
+    !liked ? setFavorite(locationDetail._id) : setFavorite(); //noch anpassen. wenn liked muss id gelöscht werden. 
+    console.log("LIKED ID", favorite);
+    axios
+      .put(`http://localhost:8000/user/${user.sub}`, favorite)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+    
     //FORM COMMENT
     let [counter, setCounter] = useState(0);
-    const [comment, setComment] = useState({
+    const [comment, setComment] = useState({    // Database anpassen? aktuell comment = array. 
       text: "",
       timestamp: "",
       user: "",
@@ -52,7 +76,7 @@ function LocationDetails({locationData}) {
   
     const handleChange = (e) => {
       setComment({
-        
+        ...comment,
         [e.target.name]: e.target.value,
         timestamp: new Date().toLocaleString(),
         user: user.name,
@@ -62,15 +86,7 @@ function LocationDetails({locationData}) {
   
     const handleSubmit = (e) => {
       e.preventDefault();
-      setCounter(counter + 1);
-      axios
-      .post("http://localhost:8000/tree", comment)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      setCounter(counter + 1);            // akutell nur placeholder. checken, ob counter + 1 funktioniert.
       e.target.reset();
       
     };
@@ -112,6 +128,13 @@ function LocationDetails({locationData}) {
         <div className='locationDetails-details'>
             <p>Wo befindet sich der Baum?</p>
         {locationDetail.location.address}</div>
+          
+        <div onClick={handleLike}>
+          
+               {!liked ? 
+                <img src={Like_black} alt=""/> : <img src={Like_red} alt=""/>} {/*noch anpassen. conditional auf favorite setzen? Mit find?*/}
+                
+           </div>
 
         <div className='locationDetails-details'>
             <p>Info des Besitzers:</p>
@@ -125,7 +148,7 @@ function LocationDetails({locationData}) {
         <textarea
               
               type="text"
-              name="info"
+              name="comment"
               value={comment.text}
               onChange={(e) => handleChange(e)}
               placeholder="Hinterlasse einen Kommentar"

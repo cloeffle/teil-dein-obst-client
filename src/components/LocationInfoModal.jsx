@@ -16,6 +16,8 @@ import Sonstiges from '../assets/images/fruit basket 500.png'
 function LocationInfoModal({ locationInfo, setLocationInfo, locationData }) {
   console.log("locationinfo", locationInfo);
 
+  
+
   return (
     <div className="location_info_modal animate__animated animate__slideInUp">
       <div className="info_wrapper">
@@ -44,6 +46,7 @@ function LocationInfoModal({ locationInfo, setLocationInfo, locationData }) {
         >
           
         </p>
+        
         <p>{locationInfo.active ? 'active' : 'inactive'}</p>
         <Link to={locationInfo.id}>
             <button className="btn_info_modal">Details</button>
