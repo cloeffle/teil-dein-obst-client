@@ -19,8 +19,13 @@ td {
   vertical-align: top;
 }
 
+.my-tree-type {
+  padding-right: 0.5rem;
+}
+
 .my-tree-address {
-  padding: 0 0.5rem;
+  margin-top: 1rem;
+  padding-right: 0.5rem;
 }
 
 figure {
@@ -67,6 +72,7 @@ figure img {
 .userpage-btn {
   display: flex;
   justify-content: space-around;
+  padding-bottom: 1rem;
 }
 
 .logout-btn {

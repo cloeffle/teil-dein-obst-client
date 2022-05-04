@@ -1,8 +1,13 @@
+.my-tree-type-modal {
+  padding: 0 1rem 0 0;
+}
+
 .my-tree-address-modal {
   padding-bottom: 1rem;
 }
 
-.delete-tree {
+
+.delete-tree-btn {
   background-color: transparent;
 }
 
@@ -22,7 +27,7 @@
   background-color:green;
   font-family: "Roboto", sans-serif;
   /* border: 1px solid green; */
-  padding: 0.1rem 0.8rem;
+  padding: 0 1rem;
   border-radius: 22px;
   color: white;
 }
@@ -30,7 +35,7 @@
 .deactivate-tree {
   background-color: rgba(128, 128, 128, 0.483);
   font-family: "Roboto", sans-serif;
-  padding: 0.1rem 0.5rem;
+  padding: 0 0.7rem;
   border-radius: 22px;
   color: #444;
 }

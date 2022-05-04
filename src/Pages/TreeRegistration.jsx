@@ -364,6 +364,6 @@ const renderFailed = () => (
 
 const renderUpload = () => (
   <div className="tree-upload-success">
-    <p style={{ color: "green" }}>Baum wurde erfolgreich hochgeladen</p>
+    <p>Baum wurde erfolgreich hochgeladen</p>
   </div>
 );

@@ -70,9 +70,11 @@ button {
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 .card-2 p {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin: 5px 0;
+  font-family: "Nunito", sans-serif;
+
   /* text-align: center; */
 }
 
@@ -101,10 +103,12 @@ button {
 
 .select {
   margin-top: 1rem;
-  margin-left: .5rem;
+  margin-left: 0.5rem;
   padding: 10px 25px;
   background-color: #357560;
   color: #f9f8f2;
+  font-family: "Nunito", sans-serif;
+  font-size: .9rem;
 }
 .select:hover {
   outline: 3px solid #f9f8f2;
@@ -121,7 +125,10 @@ button {
   border: 2px solid #af473c;
   background-color: transparent;
   color: #af473c;
+  font-family: "Nunito", sans-serif;
+  font-size: .9rem;
 }
+
 .delete:active {
   transform: scale(0.98);
   /* Scaling button to 0.98 to its original size */

@@ -146,7 +146,7 @@ function LocationDetails({locationData}) {
 
         <form className="commentForm" onSubmit={(e) => handleSubmit(e)}>
         <textarea
-              
+              className="commentTextarea"
               type="text"
               name="comment"
               value={comment.text}

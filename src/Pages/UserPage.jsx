@@ -174,7 +174,7 @@ function UserPage() {
                   >
                     Inaktivieren / Aktivieren oder Löschen
                   </h3>
-                  <Tree closeModal={closeModal} />
+                  <Tree />
                 </Modal>
               </div>
             </div>
