@@ -210,7 +210,13 @@ export default function TreeRegistration() {
   };
 
   const handleImage = (target) => {
-    setImageUpload(target);
+    const fileSize = target.size / 1024 / 1024;
+    if (fileSize < 3) {
+      setImageUpload(target);
+    } else {
+      alert('Das Bild übersteigt die zulässige Größe von 3 MB ');
+    }
+
     setUserInput({
       ...userInput,
       pictureURL: target.name + uuidv4(),
