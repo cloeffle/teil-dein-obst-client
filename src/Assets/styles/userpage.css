@@ -10,6 +10,7 @@
 .userpage {
   margin: 0.5rem 0;
   line-height: 1.5rem;
+  border-top: 2px solid #c8e0c3;
 }
 
 td {
@@ -44,7 +45,11 @@ figure img {
 }
 
 .tree-edit-btn {
-  background-color: transparent;
+  margin-top: 1rem;
+  background-color: #9aad97;
+  color: white;
+  border-radius: 22px;
+  padding: 0.4rem 0.8rem;
 }
 
 .modal-close {
@@ -65,6 +70,7 @@ figure img {
 }
 
 .logout-btn {
+  padding: 0.5rem 1.5rem;
   border: 2px solid #af473c;
   background-color: transparent;
   color: #af473c;
@@ -72,6 +78,6 @@ figure img {
 
 .settings-btn {
   border: none;
-  background-color: rgba(128, 128, 128, 0.567);
-  color: #f9f8f2;
+  background-color: #9aad97;
+  color: white;
 }

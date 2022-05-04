@@ -106,7 +106,7 @@ function UserPage() {
           <figure>
             <Link to="/baum-registrieren" className="link-add-tree">
               <img src={Obstbaum} alt="Obstbaum" />
-              <figcaption>Obst hinzufügen</figcaption>
+              <figcaption style={{color: "#3d6137"}}>Obst hinzufügen</figcaption>
             </Link>
           </figure>
         </div>
