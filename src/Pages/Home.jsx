@@ -50,7 +50,8 @@ function Home() {
   //! Filtering Data for Map-Markers, filterLocations to connect with Markers
   const locations = locationData;
   const filter = selectedFilter;
-  // create const filteredLocatons with a .forEach() compare location.type[] with filter[i].name
+
+  //! New Filter
   const filteredLocations = locations.filter((location) => {
     for (let i = 0; i < filter.length; i++) {
       if (location.type.includes(filter[i].name)) {
@@ -59,6 +60,7 @@ function Home() {
     }
   });
 
+  // Vorheriger Filter
   // const filteredLocations = locations.filter((location) => {
   //   for (let i = 0; i < filter.length; i++) {
   //     if (location.type[0] === filter[i].name) {
