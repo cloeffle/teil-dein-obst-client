@@ -9,6 +9,7 @@
 
 .userpage {
   margin: 0.5rem 0;
+  line-height: 1.5rem;
 }
 
 td {
@@ -18,7 +19,7 @@ td {
 }
 
 .my-tree-address {
-  padding: 0 0.6rem;
+  padding: 0 0.5rem;
 }
 
 figure {

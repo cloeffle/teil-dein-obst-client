@@ -13,7 +13,7 @@ import Modal from "react-modal";
 //MODAL STYLE
 const customStyles = {
   content: {
-    top: "50%",
+    top: "55%",
     left: "50%",
     right: "4%",
     bottom: "auto",
@@ -22,6 +22,9 @@ const customStyles = {
     backgroundColor: "#C8E0C3",
     boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
     fontSize: "14px",
+    paddingLeft: "15px",
+    paddingRight: "15px",
+    paddingTop: "5px",
   },
 };
 
@@ -103,20 +106,30 @@ function UserPage() {
           <figure>
             <Link to="/baum-registrieren" className="link-add-tree">
               <img src={Obstbaum} alt="Obstbaum" />
-              <figcaption>Baum hinzufügen</figcaption>
+              <figcaption>Obst hinzufügen</figcaption>
             </Link>
           </figure>
         </div>
         <div className="trees-wrapper">
-          <h4>Meine Bäume</h4>
+          <h4>Mein Obst</h4>
           <div className="trees-container userpage">
             <div className="my-trees">
               <table>
                 <tbody>
+                  {!userTrees.length > 0 && (
+                    <tr style={{ fontSize: "14px", fontStyle: "italic" }}>
+                      <td>
+                        Hier werden dir deine hochgeladenen Obstbäume/-sträucher
+                        angezeigt
+                      </td>
+                    </tr>
+                  )}
                   {userTrees.length > 0 &&
                     userTrees.map((myTrees) => (
                       <tr key={myTrees._id}>
-                        <td className="my-tree-type">{myTrees.type}</td>
+                        <td className="my-tree-type">
+                          {myTrees.type.join(", ")}
+                        </td>
                         <td className="my-tree-address">
                           {myTrees.location.address.substring(0, 25)}...
                         </td>
@@ -124,7 +137,9 @@ function UserPage() {
                           {myTrees.active === true ? (
                             <p style={{ color: "green" }}>aktiv</p>
                           ) : (
-                            <p style={{ color: "red" }}>inaktiv</p>
+                            <p style={{ color: "grey", fontWeight: "bold" }}>
+                              inaktiv
+                            </p>
                           )}
                         </td>
                       </tr>
@@ -156,7 +171,7 @@ function UserPage() {
                     ref={(_subtitle) => (subtitle = _subtitle)}
                     style={{ marginBottom: "1rem" }}
                   >
-                    Deaktivieren oder Löschen
+                    Inaktivieren / Aktivieren oder Löschen
                   </h3>
                   <Tree closeModal={closeModal} />
                 </Modal>
@@ -176,6 +191,11 @@ function UserPage() {
                 </tr>
               </thead> */}
               <tbody>
+                {!userFavorites.length > 0 && (
+                  <tr style={{ fontSize: "14px", fontStyle: "italic" }}>
+                    <td>Hier findest du deine Favoriten</td>
+                  </tr>
+                )}
                 {/* {userFavorites &&
                   userFavorites.map((favorite) => (
                     <tr>
