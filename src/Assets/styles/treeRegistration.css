@@ -18,7 +18,7 @@
 }
 
 .address-btn {
-  font-family: "Nunito", sans-serif;
+  font-family: 'Nunito', sans-serif;
   text-decoration: underline;
   background-color: transparent;
   display: flex;
@@ -26,11 +26,28 @@
   color: #444;
 }
 
-input[type="number"],
-input[type="date"] {
+input[type='number'],
+input[type='date'] {
   font-family: Nunito, sans-serif;
 }
 
 .tree-form p {
   font-size: 0.9rem;
 }
+
+input[type='file'] {
+  display: none;
+}
+
+.upload-icon {
+  height: 70px;
+  cursor: pointer;
+}
+
+/* .custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  width: 100px;
+  cursor: pointer;
+} */

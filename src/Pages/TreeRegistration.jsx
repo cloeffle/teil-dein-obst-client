@@ -64,6 +64,10 @@ export default function TreeRegistration() {
   const navigate = useNavigate();
   const theme = useTheme();
   const [fruitName, setFruitName] = useState([]);
+  const [imageUpload, setImageUpload] = useState(false);
+  if (imageUpload) {
+    console.log(imageUpload);
+  }
 
   const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -80,8 +84,6 @@ export default function TreeRegistration() {
   };
   const app = initializeApp(firebaseConfig);
   const storage = getStorage(app);
-
-  const [imageUpload, setImageUpload] = useState(false);
 
   // Select Fruits Option
   const handleChange = (e) => {
@@ -219,8 +221,7 @@ export default function TreeRegistration() {
       });
     } else {
       alert('Das Bild übersteigt die zulässige Größe von 10 MB ');
-      console.log(target);
-      target = null;
+      setImageUpload(null);
     }
   };
 
@@ -328,11 +329,23 @@ export default function TreeRegistration() {
               rows="5"
               placeholder="Nähere Informationen zum Standort, der Zugänglickeit z.B. Pflücken nur nach Absprache möglich etc."
             ></textarea>
-            <input
-              onChange={(event) => handleImage(event.target.files[0])}
-              type="file"
-              accept=".jpg,.jpeg,.png"
-            ></input>
+            <label>
+              <img
+                className="upload-icon"
+                src="https://img.icons8.com/bubbles/344/image.png"
+                alt="upload icon"
+              ></img>
+              <input
+                onChange={(event) => handleImage(event.target.files[0])}
+                type="file"
+                accept=".jpg,.jpeg,.png"
+              ></input>
+            </label>
+            {imageUpload && (
+              <>
+                <p>{imageUpload.name}</p>
+              </>
+            )}
             {uploadSuccess && renderUpload()}
             <input
               type="submit"
