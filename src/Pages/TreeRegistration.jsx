@@ -211,7 +211,7 @@ export default function TreeRegistration() {
 
   const handleImage = (target) => {
     const fileSize = target.size / 1024 / 1024;
-    if (fileSize < 3) {
+    if (fileSize < 10) {
       setImageUpload(target);
     } else {
       alert('Das Bild übersteigt die zulässige Größe von 3 MB ');
