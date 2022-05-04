@@ -216,9 +216,7 @@ export default function TreeRegistration() {
       pictureURL: target.name + uuidv4(),
     });
   };
-  if (userInput) {
-    console.log(userInput, 'userinput');
-  }
+
   return (
     <>
       <div>
@@ -326,6 +324,7 @@ export default function TreeRegistration() {
             <input
               onChange={(event) => handleImage(event.target.files[0])}
               type="file"
+              accept=".jpg,.jpegm,.png,.tiff,"
             ></input>
             {uploadSuccess && renderUpload()}
             <input
