@@ -18,7 +18,7 @@ const Auth0ProviderWithHistory = ({ children }) => {
       domain={domain}
       clientId={clientId}
       audience={audience}
-      redirectUri={window.location.origin}
+      redirectUri="http://localhost:3000/profil"
       // onRedirectCallback={onRedirectCallback}
     >
       {children}
