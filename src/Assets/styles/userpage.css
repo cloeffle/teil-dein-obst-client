@@ -10,7 +10,7 @@
 .userpage {
   margin: 0.5rem 0;
   line-height: 1.5rem;
-  border-top: 2px solid #c8e0c3;
+  /* border-top: 2px solid #c8e0c3; */
 }
 
 td {
@@ -46,8 +46,8 @@ figure img {
 
 .tree-edit-btn {
   margin-top: 1rem;
-  background-color: #9aad97;
-  color: white;
+  background-color: #c8e0c3;
+  color: #3d6137;
   border-radius: 22px;
   padding: 0.4rem 0.8rem;
 }
@@ -78,6 +78,6 @@ figure img {
 
 .settings-btn {
   border: none;
-  background-color: #9aad97;
-  color: white;
+  background-color: #c8e0c3;
+  color: #3d6137;
 }

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Standort from '../assets/images/Standort.png'
+import Standort from '../assets/images/Standort2.png'
 
 function LocateButton({ setCenter }) {
   const [counter, setCounter] = useState(0)

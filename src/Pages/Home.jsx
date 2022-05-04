@@ -70,7 +70,6 @@ function Home() {
             <img src={Logo} alt="logo" />
           </div>
         </div>
-        {/* <Login /> */}
         <AuthenticationButton />
       </div>
 
