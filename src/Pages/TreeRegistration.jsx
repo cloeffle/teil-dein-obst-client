@@ -344,6 +344,9 @@ export default function TreeRegistration() {
             {imageUpload && (
               <>
                 <p>{imageUpload.name}</p>
+                <button className="btn" onClick={() => setImageUpload(null)}>
+                  Bild löschen
+                </button>
               </>
             )}
             {uploadSuccess && renderUpload()}
