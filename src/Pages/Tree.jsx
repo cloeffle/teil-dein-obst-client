@@ -61,24 +61,24 @@ function Tree() {
               {userTrees &&
                 userTrees.map((myTrees) => (
                   <tr key={myTrees._id}>
-                    <td className="my-tree-type">{myTrees.type}</td>
-                    <td className="my-tree-address">
-                      {myTrees.location.address}
+                    <td className="my-tree-type">{myTrees.type.join(", ")}</td>
+                    <td className="my-tree-address-modal">
+                      {myTrees.location.address.substring(0, 25)}...
                     </td>
                     <td className="deactivate-reactivate-btn">
                       {myTrees.active === true ? (
                         <button
-                          className="deactivate-tree"
+                          className="activate-tree"
                           onClick={() => deactivateTree(myTrees._id)}
                         >
-                          inaktivieren
+                          aktiv
                         </button>
                       ) : (
                         <button
-                          className="activate-tree"
+                          className="deactivate-tree"
                           onClick={() => reactivateTree(myTrees._id)}
                         >
-                          aktivieren
+                          inaktiv
                         </button>
                       )}
                     </td>

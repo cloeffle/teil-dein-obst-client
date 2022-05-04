@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from 'react'
+import { Link } from 'react-router-dom';
 import GoogleMapReact from 'google-map-react'
 import LocationMarker from './LocationMarker'
 import MyLocationMarker from './MyLocationMarker'
@@ -8,7 +9,7 @@ import Filter from '../assets/images/Filter.png'
 
 
 
-const Map = ({ locationData, lat, lng, locationCoordinates}) => {
+const Map = ({ locationData, locationCoordinates}) => {
     const [locationInfo, setLocationInfo] = useState(null)
     
     //GET USERS CURRENT POSITION
@@ -26,6 +27,9 @@ const Map = ({ locationData, lat, lng, locationCoordinates}) => {
     mapRef.current = map
   }, [])
 
+  console.log("locationData", locationData)
+  //filterArray = ["Kirsch", "Apfel"] //dein filter state
+
     //SHOW ALL LOCATIONS ON MAP
     const locations = locationData.map(location => {
        return (
@@ -33,15 +37,14 @@ const Map = ({ locationData, lat, lng, locationCoordinates}) => {
             key={location._id}
             lat={location.coordinates.lat.$numberDecimal} 
             lng={location.coordinates.lng.$numberDecimal} 
+            type={location.type[0]}
             onLoad={onMapLoad}
 
             onClick={() => setLocationInfo(
                 {   
                     type: location.type,
-                    strasse: location.location.strasse, 
-                    plz: location.location.plz,
-                    stadt: location.location.stadt,
-                    status: location.status.status}
+                    address: location.location.address, 
+                    id: location._id}
                     )}
         />
        )
@@ -62,13 +65,14 @@ const Map = ({ locationData, lat, lng, locationCoordinates}) => {
         <LocationInfoModal 
         locationInfo={locationInfo} 
         setLocationInfo={setLocationInfo}
+        locationData={locationData}
         />
         )}
         <div className='btn_map_wrapper'>
         <LocateButton center={center} setCenter={setCenter} />
-        <button className='btn_map'>
+        <Link to="/filter"><button className='btn_map'>
           <img src={Filter} alt='Filter-Icon' />
-        </button>
+        </button></Link>
       </div>
     </div>
   )

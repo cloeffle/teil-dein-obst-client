@@ -1,35 +1,18 @@
 import { useEffect, useState } from 'react';
 import Map from '../components/Map';
 import '../assets/styles/Home.css';
-
 import Logo from "../assets/logo/Logo.svg";
 import AuthenticationButton from "../components/Login/AuthenticationButton";
 
-function Home() {
-  /*GET ALL LOCATIONS FROM BACKEND*/
-  const [locationData, setLocationData] = useState([]);
-  useEffect(() => {
-    fetch('http://localhost:8000/tree')
-      .then((response) => response.json())
-      .then((data) => setLocationData(data))
-      .catch((error) => console.log(error));
-    
-  }, []);
-
-  console.log("Fetch Trees", locationData);
+function Home( {locationData} ) {
   
-
-  /*GET USERS CURRENT POSITION ON FIRST RENDER*/
-  //const [lat, setLat] = useState('');
-  //const [lng, setLng] = useState('');
+  //GET CURRENT POSITION
   const [locationCoordinates, setLocationCoordinates] = useState({});
 
   useEffect(() => {
       
       navigator.geolocation.getCurrentPosition((position) => {
         console.log("current position",position)
-        //setLat(position.coords.latitude);
-        //setLng(position.coords.longitude);
         setLocationCoordinates({lat: position.coords.latitude, lng: position.coords.longitude});
       });
     }, []);
