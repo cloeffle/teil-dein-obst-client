@@ -33,6 +33,16 @@
   height: auto;
 }
 
+.btn_map:hover {
+  cursor: pointer;
+  background-color: #faf1cf;
+}
+
+.btn_map:active {
+  background-color: #faf1cf;
+  transform: scale(0.9);
+}
+
 .myLocation_marker img {
   width: 35px;
 }
@@ -113,4 +123,6 @@ width: 80%;
 .profile-btn img {
   width: 81%;
 }
+
+
 
