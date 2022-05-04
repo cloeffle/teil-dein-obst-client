@@ -2,14 +2,12 @@ import './App.css';
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ProtectedRoute } from './auth/ProtectedRoute';
-
 import Navbar from './components/Navbar';
 import About from './pages/About';
 import Support from './pages/Support';
 import Home from './pages/Home';
 import Tree from './pages/Tree';
 import UserPage from './pages/UserPage';
-import Filter from './components/Filter';
 import TreeRegistration from './pages/TreeRegistration';
 
 function App() {
@@ -18,7 +16,6 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="filter" element={<Filter />} />
         <Route path="ueber-teil-dein-obst" element={<About />} />
         <Route path="kontakt" element={<Support />} />
         <Route
