@@ -33,38 +33,14 @@ const Map = ({
     mapRef.current = map;
   }, []);
 
-  console.log('locationData', locationData);
-  //filterArray = ["Kirsch", "Apfel"] //dein filter state
-
-  //SHOW ALL LOCATIONS ON MAP
-  // const locations = locationData.map(location => {
-  //    return (
-  //    <LocationMarker
-  //         key={location._id}
-  //         lat={location.coordinates.lat.$numberDecimal}
-  //         lng={location.coordinates.lng.$numberDecimal}
-  //         type={location.type[0]}
-  //         onLoad={onMapLoad}
-
-  //         onClick={() => setLocationInfo(
-  //             {
-  //                 type: location.type,
-  //                 address: location.location.address,
-  //                 id: location._id}
-  //                 )}
-  //     />
-  //    )
-  // })
-
   console.log('FILTEREDLOCATIONS ON MAP:', filteredLocations);
   console.log('LOCATION DATA ON MAP:', locationData);
 
-  //! handover filtered Data from filter to Map-Markers
+  // //! handover filtered Data from filter to Map-Markers
   if (filteredLocations.length > 0) {
     locationData = filteredLocations;
   }
   console.log('LOC DATA ON MAP AFTER filled FILTEREDLOCATIONS :', locationData);
-
   //SHOW ALL LOCATIONS ON MAP
   const locations = locationData.map((location) => {
     return (
@@ -72,14 +48,13 @@ const Map = ({
         key={location._id}
         lat={location.coordinates.lat.$numberDecimal}
         lng={location.coordinates.lng.$numberDecimal}
+        type={location.type[0]}
         onLoad={onMapLoad}
         onClick={() =>
           setLocationInfo({
             type: location.type,
-            strasse: location.location.strasse,
-            plz: location.location.plz,
-            stadt: location.location.stadt,
-            status: location.status.status,
+            address: location.location.address,
+            id: location._id,
           })
         }
       />
