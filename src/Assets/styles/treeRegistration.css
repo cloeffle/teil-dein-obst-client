@@ -28,7 +28,7 @@ label {
 }
 
 .address-btn {
-  font-family: "Nunito", sans-serif;
+  font-family: 'Nunito', sans-serif;
   margin: 1rem 0;
   background-color: #357560;
   color: white;
@@ -36,13 +36,22 @@ label {
   padding: 0.5rem 1rem;
 }
 
-input[type="number"],
-input[type="date"] {
+input[type='number'],
+input[type='date'] {
   font-family: Nunito, sans-serif;
 }
 
 .tree-form p {
   font-size: 0.9rem;
+}
+
+input[type='file'] {
+  display: none;
+}
+
+.upload-icon {
+  height: 70px;
+  cursor: pointer;
 }
 
 .harvest-date {
@@ -52,7 +61,6 @@ input[type="date"] {
 tree-form-image {
   margin: 1.5rem 0;
 }
-
 
 .tree-upload-success {
   margin: 1.3rem 0;
