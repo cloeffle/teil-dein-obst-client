@@ -8,7 +8,7 @@ import Heidelbeere from '../assets/images/icons8-blueberry-500.png';
 import Himbeere from '../assets/images/icons8-raspberry-500.png';
 import Johannisbeere from '../assets/images/icons8-redcurrant-512.png';
 import Kirsche from '../assets/images/icons8-cherry-500.png';
-import Stachelbeere from '../assets/images/icons8-gooseberry-500.png';
+import Stachelbeere from '../assets/images/icons8-gooseberry-500-2.png';
 import Weintraube from '../assets/images/icons8-grapes-500.png';
 import Pflaume from '../assets/images/icons8-plum-500.png';
 import Korb from '../assets/images/fruit basket 500.png';
@@ -129,8 +129,8 @@ function Filter(props) {
             id={sort.id}
             className={
               sort.status === true
-                ? 'card-2 chooseBtn selected'
-                : 'card-2 chooseBtn'
+                ? "card-2 chooseBtn selected"
+                : "card-2 chooseBtn"
             }
             key={crypto.randomUUID()}
             selected={sort.selected}
@@ -142,15 +142,15 @@ function Filter(props) {
       </div>
 
       <div className="applyFilter">
+        <button className="delete" onClick={() => handleDelete()}>
+          Filter löschen
+        </button>
         <button
           type="submit"
           className="select"
           onClick={(e) => handleApplyFilter(e)}
         >
           Filter anwenden
-        </button>
-        <button className="delete" onClick={() => handleDelete()}>
-          Filter löschen
         </button>
       </div>
     </div>

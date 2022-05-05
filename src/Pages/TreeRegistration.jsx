@@ -52,10 +52,10 @@ function getStyles(fruit, fruitName, theme) {
         ? theme.typography.fontWeightRegular
         : theme.typography.fontWeightMedium,
 
-    color: fruitName.indexOf(fruit) === -1 ? '#444' : 'white',
+    color: '#444',
 
-    backgroundColor: fruitName.indexOf(fruit) === -1 ? 'white' : '#5a9481',
-    fontFamily: fruitName.indexOf(fruit) === -1 ? 'Nunito' : 'Nunito',
+    backgroundColor: fruitName.indexOf(fruit) === -1 ? 'white' : '#c8e0c3',
+    fontFamily: 'Nunito',
   };
 }
 
@@ -64,6 +64,10 @@ export default function TreeRegistration() {
   const navigate = useNavigate();
   const theme = useTheme();
   const [fruitName, setFruitName] = useState([]);
+  const [imageUpload, setImageUpload] = useState(false);
+  if (imageUpload) {
+    console.log(imageUpload);
+  }
 
   const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -80,8 +84,6 @@ export default function TreeRegistration() {
   };
   const app = initializeApp(firebaseConfig);
   const storage = getStorage(app);
-
-  const [imageUpload, setImageUpload] = useState(false);
 
   // Select Fruits Option
   const handleChange = (e) => {
@@ -206,25 +208,28 @@ export default function TreeRegistration() {
       .catch((err) => {
         console.log(err);
       });
-    e.target.reset();
+    // e.target.reset();
   };
 
   const handleImage = (target) => {
-    setImageUpload(target);
-    setUserInput({
-      ...userInput,
-      pictureURL: target.name + uuidv4(),
-    });
+    const fileSize = target.size / 1024 / 1024;
+    if (fileSize <= 10) {
+      setImageUpload(target);
+      setUserInput({
+        ...userInput,
+        pictureURL: target.name + uuidv4(),
+      });
+    } else {
+      alert('Das Bild übersteigt die zulässige Größe von 10 MB ');
+      setImageUpload(null);
+    }
   };
-  if (userInput) {
-    console.log(userInput, 'userinput');
-  }
   return (
     <>
       <div>
         <LogoComponent />
         <div className="tree-form-container">
-          <h3>Obstbaum zur Verfügung stellen</h3>
+          <h3>Obst zur Verfügung stellen</h3>
           <div className="tree-form">
             <label>Standort*</label>
             <input
@@ -237,13 +242,15 @@ export default function TreeRegistration() {
             />
             {success && renderAlert()}
             {failed && renderFailed()}
-            <button
-              className="address-btn"
-              onClick={getCoordinates}
-              disabled={!userInput.address}
-            >
-              Adresse bestätigen
-            </button>
+            <div className="address-confirm">
+              <button
+                className="address-btn"
+                onClick={getCoordinates}
+                disabled={!userInput.address}
+              >
+                Adresse bestätigen
+              </button>
+            </div>
           </div>
 
           <form
@@ -272,8 +279,8 @@ export default function TreeRegistration() {
                         key={value}
                         label={value}
                         sx={{
-                          backgroundColor: '#5a9481',
-                          color: 'white',
+                          backgroundColor: '#c8e0c3',
+                          color: '#444',
                           fontFamily: 'Nunito',
                         }}
                       />
@@ -294,24 +301,25 @@ export default function TreeRegistration() {
                 ))}
               </Select>
             </FormControl>
-
-            <label>Erntezeitraum</label>
-            <p>von</p>
-            <input
-              className="tree-input-field"
-              type="date"
-              name="start"
-              id="start"
-              onChange={handleChangeUserInput}
-            />
-            <p>bis</p>
-            <input
-              className="tree-input-field"
-              type="date"
-              id="end"
-              name="end"
-              onChange={handleChangeUserInput}
-            />
+            <div className="harvest-date">
+              <label>Erntezeitraum</label>
+              <p>von</p>
+              <input
+                className="tree-input-field"
+                type="date"
+                name="start"
+                id="start"
+                onChange={handleChangeUserInput}
+              />
+              <p>bis</p>
+              <input
+                className="tree-input-field"
+                type="date"
+                id="end"
+                name="end"
+                onChange={handleChangeUserInput}
+              />
+            </div>
 
             <label>Infos</label>
             <textarea
@@ -321,13 +329,30 @@ export default function TreeRegistration() {
               onChange={handleChangeUserInput}
               cols="30"
               rows="5"
-              placeholder="Nähere Informationen zum Standort, der Zugänglickeit z.B. Pflücken nur nach Absprache möglich etc."
+              placeholder="Nähere Informationen zum Standort, der Zugänglickeit etc."
             ></textarea>
-            <input
-              onChange={(event) => handleImage(event.target.files[0])}
-              type="file"
-            ></input>
+            <label>
+              <img
+                className="upload-icon"
+                src="https://img.icons8.com/bubbles/344/image.png"
+                alt="upload icon"
+              ></img>
+              <input
+                onChange={(event) => handleImage(event.target.files[0])}
+                type="file"
+                accept=".jpg,.jpeg,.png"
+              ></input>
+            </label>
+            {imageUpload && (
+              <>
+                <p>{imageUpload.name}</p>
+                <button className="btn" onClick={() => setImageUpload(null)}>
+                  Bild löschen
+                </button>
+              </>
+            )}
             {uploadSuccess && renderUpload()}
+
             <input
               type="submit"
               className="submit btn"
@@ -354,7 +379,7 @@ const renderFailed = () => (
 );
 
 const renderUpload = () => (
-  <div className="">
-    <p style={{ color: 'green' }}>Baum wurde erfolgreich hochgeladen</p>
+  <div className="tree-upload-success">
+    <p>Baum wurde erfolgreich hochgeladen</p>
   </div>
 );

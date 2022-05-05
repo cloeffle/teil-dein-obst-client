@@ -4,7 +4,7 @@ import LocationMarker from './LocationMarker';
 import MyLocationMarker from './MyLocationMarker';
 import LocationInfoModal from './LocationInfoModal';
 import LocateButton from './LocateButton';
-import FilterButton from '../assets/images/Filter.png';
+import FilterButton from '../assets/images/Filter2.png';
 
 const Map = ({
   locationData,
@@ -32,6 +32,29 @@ const Map = ({
   const onMapLoad = useCallback((map) => {
     mapRef.current = map;
   }, []);
+
+  console.log('locationData', locationData);
+  //filterArray = ["Kirsch", "Apfel"] //dein filter state
+
+  //SHOW ALL LOCATIONS ON MAP
+  // const locations = locationData.map(location => {
+  //    return (
+  //    <LocationMarker
+  //         key={location._id}
+  //         lat={location.coordinates.lat.$numberDecimal}
+  //         lng={location.coordinates.lng.$numberDecimal}
+  //         type={location.type[0]}
+  //         onLoad={onMapLoad}
+
+  //         onClick={() => setLocationInfo(
+  //             {
+  //                 type: location.type,
+  //                 address: location.location.address,
+  //                 id: location._id}
+  //                 )}
+  //     />
+  //    )
+  // })
 
   console.log('FILTEREDLOCATIONS ON MAP:', filteredLocations);
   console.log('LOCATION DATA ON MAP:', locationData);
@@ -77,6 +100,7 @@ const Map = ({
         <LocationInfoModal
           locationInfo={locationInfo}
           setLocationInfo={setLocationInfo}
+          locationData={locationData}
         />
       )}
       <div className="btn_map_wrapper">

@@ -3,7 +3,7 @@ import Map from '../components/Map';
 import Filter from '../components/Filter';
 import '../assets/styles/Home.css';
 import Logo from '../assets/logo/Logo.svg';
-import Login from '../components/Login/LoginButton';
+import AuthenticationButton from '../components/Login/AuthenticationButton';
 import { LocationSearching } from '@mui/icons-material';
 
 function Home() {
@@ -80,7 +80,7 @@ function Home() {
             <img src={Logo} alt="logo" />
           </div>
         </div>
-        <Login />
+        <AuthenticationButton />
       </div>
 
       {showFilter ? (

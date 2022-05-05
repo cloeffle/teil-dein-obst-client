@@ -1,11 +1,16 @@
 .tree-form-container {
   margin: 0.5rem 1rem;
-  line-height: 2rem;
+  line-height: 1.5rem;
 }
 
 .tree-form {
   display: flex;
   flex-direction: column;
+  margin-top: 1rem;
+}
+
+label {
+  font-weight: bold;
 }
 
 .tree-input-field {
@@ -17,20 +22,48 @@
   font-size: 1rem;
 }
 
-.address-btn {
-  font-family: "Nunito", sans-serif;
-  text-decoration: underline;
-  background-color: transparent;
+.address-confirm {
   display: flex;
-  justify-content: flex-start;
-  color: #444;
+  justify-content: center;
 }
 
-input[type="number"],
-input[type="date"] {
+.address-btn {
+  font-family: 'Nunito', sans-serif;
+  margin: 1rem 0;
+  background-color: #357560;
+  color: white;
+  border-radius: 22px;
+  padding: 0.5rem 1rem;
+}
+
+input[type='number'],
+input[type='date'] {
   font-family: Nunito, sans-serif;
 }
 
 .tree-form p {
   font-size: 0.9rem;
+}
+
+input[type='file'] {
+  display: none;
+}
+
+.upload-icon {
+  height: 70px;
+  cursor: pointer;
+}
+
+.harvest-date {
+  margin: 1.5rem 0;
+}
+
+tree-form-image {
+  margin: 1.5rem 0;
+}
+
+.tree-upload-success {
+  margin: 1.3rem 0;
+  background-color: #35756071;
+  text-align: center;
 }
