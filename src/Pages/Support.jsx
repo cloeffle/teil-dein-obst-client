@@ -81,7 +81,6 @@ export default function Support() {
               placeholder="Dein Name"
               value={userInput.name}
               onChange={handleChange}
-              
             />
             <label>E-Mail Adresse</label>
             <input
@@ -91,7 +90,6 @@ export default function Support() {
               placeholder="Deine E-Mail Adresse"
               value={userInput.email}
               onChange={handleChange}
-              
             />
             <label>Deine Nachricht an uns</label>
             <textarea
@@ -103,7 +101,16 @@ export default function Support() {
               value={userInput.message}
               onChange={handleChange}
             ></textarea>
-            <input disabled={!userInput.name || !userInput.email || !userInput.message} className="submit btn" type="submit" value="Absenden" />
+            <div className="send-btn">
+              <input
+                disabled={
+                  !userInput.name || !userInput.email || !userInput.message
+                }
+                className="submit btn"
+                type="submit"
+                value="Absenden"
+              />
+            </div>
           </form>
         </div>
       </div>

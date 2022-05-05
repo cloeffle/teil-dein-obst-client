@@ -165,6 +165,11 @@ function LocationDetails({ locationData }) {
               <p>Wo befindet sich der Baum?</p>
               {locationDetail.location.address}
             </div>
+            {locationDetail.pictureURL.length > 2 && (
+              <div className="tree-picture">
+                <img src={locationDetail.pictureURL} alt="" />
+              </div>
+            )}
 
             <div onClick={handleLike}>
               {!liked ? (

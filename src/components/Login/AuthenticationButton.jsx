@@ -1,8 +1,8 @@
 import React from 'react';
 
 import LoginButton from './LoginButton';
-import LogoutButton from './LogoutButton';
 import { Link } from "react-router-dom";
+import Profillogo from "../../assets/logo/Profil-Logo.png";
 
 
 import { useAuth0 } from '@auth0/auth0-react';
@@ -14,10 +14,7 @@ const AuthenticationButton = () => {
   return isAuthenticated ? (
     <Link to="/profil">
       <button className="profile-btn">
-        <img
-          src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/64/000000/external-profile-whatsapp-flatart-icons-outline-flatarticons.png"
-          alt="Profil-Button"
-        />
+        <img src={Profillogo} alt="Profil-Button"/>
       </button>
     </Link>
   ) : (

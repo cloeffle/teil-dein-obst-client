@@ -28,7 +28,7 @@ label {
 }
 
 .address-btn {
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   margin: 1rem 0;
   background-color: #357560;
   color: white;
@@ -36,8 +36,8 @@ label {
   padding: 0.5rem 1rem;
 }
 
-input[type='number'],
-input[type='date'] {
+input[type="number"],
+input[type="date"] {
   font-family: Nunito, sans-serif;
 }
 
@@ -45,7 +45,7 @@ input[type='date'] {
   font-size: 0.9rem;
 }
 
-input[type='file'] {
+input[type="file"] {
   display: none;
 }
 
@@ -66,4 +66,33 @@ tree-form-image {
   margin: 1.3rem 0;
   background-color: #35756071;
   text-align: center;
+}
+.submit {
+  padding: 0.6rem 1.5rem;
+}
+
+.image-upload-wrapper{
+    margin: 1.5rem 0;
+}
+
+.image-upload {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  border-radius: 22px;
+  justify-content: space-evenly;
+}
+
+.image-upload p {
+  display: flex;
+  align-items: center;
+}
+
+.image-upload-btn {
+  font-family: "Nunito", sans-serif;
+  margin: 1rem 0;
+  background-color: #357560;
+  color: white;
+  border-radius: 22px;
+  padding: 0 1.5rem;
 }

@@ -45,20 +45,30 @@ function Home() {
     console.log('Home handleSelectFilter', filter);
   };
 
-  console.log('selctedFilter', selectedFilter);
+  console.log('selectedFilter', selectedFilter);
 
-  //! Filtering Data for Map-Markers
+  //! Filtering Data for Map-Markers, filterLocations to connect with Markers
   const locations = locationData;
   const filter = selectedFilter;
 
+  //! New Filter
   const filteredLocations = locations.filter((location) => {
     for (let i = 0; i < filter.length; i++) {
-      if (location.type[0] === filter[i].name) {
+      if (location.type.includes(filter[i].name)) {
         return location;
       }
     }
-    return null;
   });
+
+  // Vorheriger Filter
+  // const filteredLocations = locations.filter((location) => {
+  //   for (let i = 0; i < filter.length; i++) {
+  //     if (location.type[0] === filter[i].name) {
+  //       return location;
+  //     }
+  //   }
+  //   return null;
+  // });
 
   console.log('filteredLocations', filteredLocations);
 
@@ -74,12 +84,16 @@ function Home() {
       </div>
 
       {showFilter ? (
-        <Filter onSelectFilter={handleSelectFilter} />
+        <Filter
+          selectedFilter={selectedFilter}
+          onSelectFilter={handleSelectFilter}
+        />
       ) : (
         locationData && (
           <Map
             onShowFilter={() => setShowFilter(true)}
             locationData={locationData}
+            filteredLocations={filteredLocations}
             /*lat={lat} lng={lng}*/ locationCoordinates={locationCoordinates}
           />
         )
@@ -89,12 +103,3 @@ function Home() {
 }
 
 export default Home;
-
-// {
-//   locationData && (
-//     <Map
-//       locationData={locationData}
-//       /*lat={lat} lng={lng}*/ locationCoordinates={locationCoordinates}
-//     />
-//   );
-// }
