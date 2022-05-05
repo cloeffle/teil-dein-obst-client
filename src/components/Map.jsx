@@ -41,6 +41,7 @@ const Map = ({
     locationData = filteredLocations;
   }
   console.log('LOC DATA ON MAP AFTER filled FILTEREDLOCATIONS :', locationData);
+  
   //SHOW ALL LOCATIONS ON MAP
   const locations = locationData.map((location) => {
     return (
