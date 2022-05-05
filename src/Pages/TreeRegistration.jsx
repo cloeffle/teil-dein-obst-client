@@ -1,22 +1,22 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
-import { useAuth0 } from '@auth0/auth0-react';
-import { initializeApp } from 'firebase/app';
-import { ref, uploadBytes, getStorage } from 'firebase/storage';
-import { v4 as uuidv4 } from 'uuid';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useCallback } from "react";
+import axios from "axios";
+import { useAuth0 } from "@auth0/auth0-react";
+import { initializeApp } from "firebase/app";
+import { ref, uploadBytes, getStorage } from "firebase/storage";
+import { v4 as uuidv4 } from "uuid";
+import { useNavigate } from "react-router-dom";
 
-import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import Chip from '@mui/material/Chip';
+import { useTheme } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import Chip from "@mui/material/Chip";
 
-import LogoComponent from '../components/LogoComponent';
-import '../assets/styles/treeRegistration.css';
+import LogoComponent from "../components/LogoComponent";
+import "../assets/styles/treeRegistration.css";
 
 // Select Option Obstsorte
 const ITEM_HEIGHT = 48;
@@ -31,18 +31,18 @@ const MenuProps = {
 };
 
 const fruits = [
-  'Apfel',
-  'Aprikose',
-  'Birne',
-  'Erdbeere',
-  'Heidelbeere',
-  'Himbeere',
-  'Johannisbeere',
-  'Kirsche',
-  'Stachelbeere',
-  'Weintraube',
-  'Pflaume',
-  'Sonstiges',
+  "Apfel",
+  "Aprikose",
+  "Birne",
+  "Erdbeere",
+  "Heidelbeere",
+  "Himbeere",
+  "Johannisbeere",
+  "Kirsche",
+  "Stachelbeere",
+  "Weintraube",
+  "Pflaume",
+  "Sonstiges",
 ];
 
 function getStyles(fruit, fruitName, theme) {
@@ -52,10 +52,10 @@ function getStyles(fruit, fruitName, theme) {
         ? theme.typography.fontWeightRegular
         : theme.typography.fontWeightMedium,
 
-    color: fruitName.indexOf(fruit) === -1 ? '#444' : 'white',
+    color: "#444",
 
-    backgroundColor: fruitName.indexOf(fruit) === -1 ? 'white' : '#5a9481',
-    fontFamily: fruitName.indexOf(fruit) === -1 ? 'Nunito' : 'Nunito',
+    backgroundColor: fruitName.indexOf(fruit) === -1 ? "white" : "#c8e0c3",
+    fontFamily: "Nunito",
   };
 }
 
@@ -88,8 +88,8 @@ export default function TreeRegistration() {
     const {
       target: { value },
     } = e;
-    setFruitName(typeof value === 'string' ? value.split(',') : value);
-    const myFruit = typeof value === 'string' ? value.split(',') : value;
+    setFruitName(typeof value === "string" ? value.split(",") : value);
+    const myFruit = typeof value === "string" ? value.split(",") : value;
     setUserInput({
       ...userInput,
       type: myFruit,
@@ -98,14 +98,14 @@ export default function TreeRegistration() {
 
   // Form Input
   const [userInput, setUserInput] = useState({
-    type: '',
-    lat: '',
-    lng: '',
-    start: '',
-    end: '',
-    info: '',
-    userId: '',
-    pictureURL: '',
+    type: "",
+    lat: "",
+    lng: "",
+    start: "",
+    end: "",
+    info: "",
+    userId: "",
+    pictureURL: "",
   });
 
   const handleChangeUserInput = (e) => {
@@ -145,30 +145,30 @@ export default function TreeRegistration() {
           lat: resp.data.results[0].geometry.location.lat,
           lng: resp.data.results[0].geometry.location.lng,
         });
-        setSuccess('succeeded');
+        setSuccess("succeeded");
       } catch (err) {
         console.log(err);
-        setFailed('error');
+        setFailed("error");
       }
     },
     [userInput]
   );
 
   //SUCCESS AND FAILED SEND MESSAGES
-  const [success, setSuccess] = useState('');
-  const [failed, setFailed] = useState('');
-  const [uploadSuccess, setUploadSuccess] = useState('');
+  const [success, setSuccess] = useState("");
+  const [failed, setFailed] = useState("");
+  const [uploadSuccess, setUploadSuccess] = useState("");
 
   //SUCCESS AND FAILED SEND MESSAGES TIMEOUT
   useEffect(() => {
-    if (success === 'succeeded') {
+    if (success === "succeeded") {
       setTimeout(() => {
-        setSuccess('');
+        setSuccess("");
       }, 5000);
     } else {
-      if (failed === 'error') {
+      if (failed === "error") {
         setTimeout(() => {
-          setFailed('');
+          setFailed("");
         }, 5000);
       }
     }
@@ -190,17 +190,17 @@ export default function TreeRegistration() {
       const name = `images/${userInput.pictureURL}}`;
       const imageRef = ref(storage, name);
       uploadBytes(imageRef, imageUpload).then(() =>
-        console.log('Image uploaded')
+        console.log("Image uploaded")
       );
     }
 
     axios
-      .post('http://localhost:8000/tree/', userInput)
+      .post("http://localhost:8000/tree/", userInput)
       .then((res) => {
         console.log(res);
-        setUploadSuccess('uploaded');
+        setUploadSuccess("uploaded");
         setTimeout(() => {
-          navigate('/profil');
+          navigate("/profil");
         }, 3000);
       })
       .catch((err) => {
@@ -217,7 +217,7 @@ export default function TreeRegistration() {
     });
   };
   if (userInput) {
-    console.log(userInput, 'userinput');
+    console.log(userInput, "userinput");
   }
   return (
     <>
@@ -237,13 +237,15 @@ export default function TreeRegistration() {
             />
             {success && renderAlert()}
             {failed && renderFailed()}
-            <button
-              className="address-btn"
-              onClick={getCoordinates}
-              disabled={!userInput.address}
-            >
-              Adresse bestätigen
-            </button>
+            <div className="address-confirm">
+              <button
+                className="address-btn"
+                onClick={getCoordinates}
+                disabled={!userInput.address}
+              >
+                Adresse bestätigen
+              </button>
+            </div>
           </div>
 
           <form
@@ -251,8 +253,8 @@ export default function TreeRegistration() {
             name="userId"
             onSubmit={(e) => handleSubmit(e)}
           >
-            <FormControl sx={{ m: 0, width: 340, backgroundColor: 'white' }}>
-              <InputLabel id="Obstsorte" sx={{ fontFamily: 'Nunito' }}>
+            <FormControl sx={{ m: 0, width: 340, backgroundColor: "white" }}>
+              <InputLabel id="Obstsorte" sx={{ fontFamily: "Nunito" }}>
                 Obstsorte
               </InputLabel>
               <Select
@@ -266,15 +268,15 @@ export default function TreeRegistration() {
                   <OutlinedInput id="select-obstsorte" label="Obstsorte" />
                 }
                 renderValue={(selected) => (
-                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                  <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
                     {selected.map((value) => (
                       <Chip
                         key={value}
                         label={value}
                         sx={{
-                          backgroundColor: '#5a9481',
-                          color: 'white',
-                          fontFamily: 'Nunito',
+                          backgroundColor: "#c8e0c3",
+                          color: "#444",
+                          fontFamily: "Nunito",
                         }}
                       />
                     ))}
@@ -294,24 +296,25 @@ export default function TreeRegistration() {
                 ))}
               </Select>
             </FormControl>
-
-            <label>Erntezeitraum</label>
-            <p>von</p>
-            <input
-              className="tree-input-field"
-              type="date"
-              name="start"
-              id="start"
-              onChange={handleChangeUserInput}
-            />
-            <p>bis</p>
-            <input
-              className="tree-input-field"
-              type="date"
-              id="end"
-              name="end"
-              onChange={handleChangeUserInput}
-            />
+            <div className="harvest-date">
+              <label>Erntezeitraum</label>
+              <p>von</p>
+              <input
+                className="tree-input-field"
+                type="date"
+                name="start"
+                id="start"
+                onChange={handleChangeUserInput}
+              />
+              <p>bis</p>
+              <input
+                className="tree-input-field"
+                type="date"
+                id="end"
+                name="end"
+                onChange={handleChangeUserInput}
+              />
+            </div>
 
             <label>Infos</label>
             <textarea
@@ -321,13 +324,19 @@ export default function TreeRegistration() {
               onChange={handleChangeUserInput}
               cols="30"
               rows="5"
-              placeholder="Nähere Informationen zum Standort, der Zugänglickeit z.B. Pflücken nur nach Absprache möglich etc."
+              placeholder="Nähere Informationen zum Standort, der Zugänglickeit etc."
             ></textarea>
-            <input
-              onChange={(event) => handleImage(event.target.files[0])}
-              type="file"
-            ></input>
+
+            <div className="tree-form-image">
+              <label>Foto hochladen</label>
+              <input
+                onChange={(event) => handleImage(event.target.files[0])}
+                type="file"
+              ></input>
+            </div>
+
             {uploadSuccess && renderUpload()}
+
             <input
               type="submit"
               className="submit btn"
@@ -343,18 +352,18 @@ export default function TreeRegistration() {
 
 const renderAlert = () => (
   <div className="">
-    <p style={{ color: 'green' }}>Adresse bestätigt</p>
+    <p style={{ color: "green" }}>Adresse bestätigt</p>
   </div>
 );
 
 const renderFailed = () => (
   <div className="">
-    <p style={{ color: 'red' }}>Adresse nicht gefunden</p>
+    <p style={{ color: "red" }}>Adresse nicht gefunden</p>
   </div>
 );
 
 const renderUpload = () => (
-  <div className="">
-    <p style={{ color: 'green' }}>Baum wurde erfolgreich hochgeladen</p>
+  <div className="tree-upload-success">
+    <p>Baum wurde erfolgreich hochgeladen</p>
   </div>
 );

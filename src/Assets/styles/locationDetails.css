@@ -62,7 +62,7 @@
   }
 
 
-textarea {
+.commentTextarea {
   font-family: Nunito, sans-serif;
   width: 300px;
   height: 100px;
@@ -70,6 +70,6 @@ textarea {
 
 textarea:focus{
   outline: none;
-  border: 2px solid #faf1cf;
+  border: 2px solid #c8e0c3;
 }
   

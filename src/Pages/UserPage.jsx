@@ -20,7 +20,7 @@ const customStyles = {
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
     backgroundColor: "#C8E0C3",
-    boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+    boxShadow: "rgba(0, 0, 0, 0.25) 0px 5px 15px",
     fontSize: "14px",
     paddingLeft: "15px",
     paddingRight: "15px",
@@ -106,7 +106,7 @@ function UserPage() {
           <figure>
             <Link to="/baum-registrieren" className="link-add-tree">
               <img src={Obstbaum} alt="Obstbaum" />
-              <figcaption>Obst hinzufügen</figcaption>
+              <figcaption style={{color: "#3d6137"}}>Obst hinzufügen</figcaption>
             </Link>
           </figure>
         </div>
@@ -173,7 +173,7 @@ function UserPage() {
                   >
                     Inaktivieren / Aktivieren oder Löschen
                   </h3>
-                  <Tree closeModal={closeModal} />
+                  <Tree />
                 </Modal>
               </div>
             </div>

@@ -4,7 +4,7 @@ import LocationMarker from './LocationMarker';
 import MyLocationMarker from './MyLocationMarker';
 import LocationInfoModal from './LocationInfoModal';
 import LocateButton from './LocateButton';
-import FilterButton from '../assets/images/Filter.png';
+import FilterButton from '../assets/images/Filter2.png';
 
 const Map = ({ locationData, lat, lng, locationCoordinates, onShowFilter }) => {
   const [locationInfo, setLocationInfo] = useState(null);

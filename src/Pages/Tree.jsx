@@ -51,7 +51,6 @@ function Tree() {
     });
   };
 
-
   return (
     <>
       <div className="my-trees-container">
@@ -61,9 +60,11 @@ function Tree() {
               {userTrees &&
                 userTrees.map((myTrees) => (
                   <tr key={myTrees._id}>
-                    <td className="my-tree-type">{myTrees.type.join(", ")}</td>
+                    <td className="my-tree-type-modal">
+                      {myTrees.type.join(", ")}
+                    </td>
                     <td className="my-tree-address-modal">
-                      {myTrees.location.address.substring(0, 25)}...
+                      {myTrees.location.address}
                     </td>
                     <td className="deactivate-reactivate-btn">
                       {myTrees.active === true ? (
@@ -82,9 +83,9 @@ function Tree() {
                         </button>
                       )}
                     </td>
-                    <td>
+                    <td className="delete-tree">
                       <button
-                        className="delete-tree"
+                        className="delete-tree-btn"
                         onClick={() => deleteTree(myTrees._id)}
                       >
                         <img src={Delete} alt="Löschen" />
