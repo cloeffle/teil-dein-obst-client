@@ -24,7 +24,7 @@
 }
 
 .activate-tree {
-  background-color:green;
+  background-color:rgba(0, 128, 0, 0.632);
   font-family: "Roboto", sans-serif;
   /* border: 1px solid green; */
   padding: 0 1rem;
