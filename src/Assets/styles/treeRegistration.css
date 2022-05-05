@@ -45,6 +45,15 @@ input[type="date"] {
   font-size: 0.9rem;
 }
 
+input[type="file"] {
+  display: none;
+}
+
+.upload-icon {
+  height: 70px;
+  cursor: pointer;
+}
+
 .harvest-date {
   margin: 1.5rem 0;
 }
@@ -53,11 +62,11 @@ tree-form-image {
   margin: 1.5rem 0;
 }
 
-
 .tree-upload-success {
   margin: 1.3rem 0;
   background-color: #35756071;
   text-align: center;
 }
-.submit{  padding: 0.6rem 1.5rem;
+.submit {
+  padding: 0.6rem 1.5rem;
 }
