@@ -86,7 +86,24 @@ function LocationDetails({ locationData }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Comment', comment);
+    axios
+      .post('http://localhost:8000/comment/', comment)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     e.target.reset();
+    axios
+      .get('http://localhost:8000/comment/')
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+      console.log('COMMENT POST', comment);
   };
 
   return (
