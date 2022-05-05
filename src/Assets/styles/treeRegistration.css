@@ -30,7 +30,7 @@ label {
 .address-btn {
   font-family: "Nunito", sans-serif;
   margin: 1rem 0;
-  background-color: #357560;
+  background-color: #A7C46C;
   color: white;
   border-radius: 22px;
   padding: 0.5rem 1rem;
@@ -63,9 +63,9 @@ tree-form-image {
 }
 
 .tree-upload-success {
-  margin: 1.3rem 0;
-  background-color: #35756071;
+  /* background-color: #35756071; */
   text-align: center;
+  color: #357560;
 }
 .submit {
   padding: 0.6rem 1.5rem;
@@ -91,14 +91,13 @@ tree-form-image {
 .image-upload-btn {
   font-family: "Nunito", sans-serif;
   margin: 1rem 0;
-  background-color: #357560;
-  color: white;
+  background-color: #A7C46C;
+  color: #f7fafc;
   border-radius: 22px;
   padding: 0 1.5rem;
 }
 
 .address-fail {
-  margin: 1.3rem 0;
-  background-color: #af473c;
+  color: #af473c;
   text-align: center;
 }

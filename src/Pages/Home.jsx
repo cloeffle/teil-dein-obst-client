@@ -97,6 +97,7 @@ function Home() {
             locationData={locationData}
             filteredLocations={filteredLocations}
             /*lat={lat} lng={lng}*/ locationCoordinates={locationCoordinates}
+            isLoading={isLoading}
           />
         )
       )}

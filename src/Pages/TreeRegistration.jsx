@@ -14,6 +14,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router-dom";
 
 import { useTheme } from "@mui/material/styles";
+import {makeStyles} from "@mui/styles";
 import Box from "@mui/material/Box";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
@@ -53,6 +54,23 @@ const fruits = [
   "Sonstiges",
 ];
 
+const useStyles = makeStyles(() => ({
+  root: {
+    "& $notchedOutline": {
+      borderWidth: 0,
+      borderRadius: "32px",
+    },
+    "&:hover $notchedOutline": {
+      borderWidth: 0,
+    },
+    "&$focused $notchedOutline": {
+      borderWidth: 0,
+    },
+  },
+  focused: {},
+  notchedOutline: {},
+}));
+
 function getStyles(fruit, fruitName, theme) {
   return {
     fontWeight:
@@ -74,6 +92,8 @@ export default function TreeRegistration() {
   const [fruitName, setFruitName] = useState([]);
   const [imageUpload, setImageUpload] = useState(false);
   const [imageName, setImageName] = useState("");
+    const classes = useStyles();
+
 
   const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -279,8 +299,8 @@ export default function TreeRegistration() {
             name="userId"
             onSubmit={(e) => handleSubmit(e)}
           >
-            <FormControl sx={{ m: 0, width: 340, backgroundColor: 'white' }}>
-              <InputLabel id="Obstsorte" sx={{ fontFamily: 'Nunito' }}>
+            <FormControl sx={{ m: 0, width: 340, backgroundColor: "white", borderRadius: "32px"}}>
+              <InputLabel id="Obstsorte" sx={{ fontFamily: "Nunito" }}>
                 Obstsorte
               </InputLabel>
               <Select
@@ -291,18 +311,25 @@ export default function TreeRegistration() {
                 value={fruitName}
                 onChange={handleChange}
                 input={
-                  <OutlinedInput id="select-obstsorte" label="Obstsorte" />
+                  <OutlinedInput
+                    id="select-obstsorte"
+                    label="Obstsorte"
+                    disableunderline="true"
+                    notched={true}
+                    classes={classes}
+                    value={1}
+                  />
                 }
                 renderValue={(selected) => (
-                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                  <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
                     {selected.map((value) => (
                       <Chip
                         key={value}
                         label={value}
                         sx={{
-                          backgroundColor: '#c8e0c3',
-                          color: '#444',
-                          fontFamily: 'Nunito',
+                          backgroundColor: "#c8e0c3",
+                          color: "#444",
+                          fontFamily: "Nunito",
                         }}
                       />
                     ))}
@@ -410,7 +437,7 @@ const renderAlert = () => (
 
 const renderFailed = () => (
   <div className="address-fail">
-    <p style={{ color: "#f7fafc" }}>Adresse nicht gefunden</p>
+    <p>Adresse nicht gefunden</p>
   </div>
 );
 
