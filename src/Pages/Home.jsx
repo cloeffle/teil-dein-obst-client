@@ -58,6 +58,7 @@ function Home() {
         return location;
       }
     }
+    return null;
   });
 
   // Vorheriger Filter

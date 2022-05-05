@@ -116,69 +116,58 @@ button {
   transform: scale(0.98);
   box-shadow: 2px 1px 5px 1px rgba(0, 0, 0, 0.5);
 }
-/* Site is build mobile first, create media queries from mobile to desktop version*/
-@media (min-width: 576px) {
+/*! Media Queries */
+@media (min-width: 43rem) {
   .card-2 {
-    width: 30%;
+    width: 25%;
   }
   .card-2 p {
     font-size: 14px;
-    font-weight: bold;
-    margin: 5px 0;
-    font-family: 'Nunito', sans-serif;
+  }
+  .container {
+    width: 100vw;
+    height: 100vh;
+  }
+  .cardContainer {
+    width: 90vw;
+    height: auto;
+    margin-top: 0.25rem;
+    gap: 0.5rem;
   }
 }
-@media (min-width: 768px) {
+@media (min-width: 62rem) {
   .card-2 {
     width: 20%;
   }
   .card-2 p {
     font-size: 20px;
-    font-weight: bold;
-    margin: 5px 0;
-    font-family: 'Nunito', sans-serif;
-  }
-}
-/* @media (min-width: 992px) {
-  .card-2 {
-    width: 15%;
-  }
-  .card-2 p {
-    font-size: 20px;
-    font-weight: bold;
-    margin: 5px 0;
-    font-family: 'Nunito', sans-serif;
-  }
-} */
-@media (min-width: 1200px) {
-  .card-2 {
-    width: 15%;
-  }
-  .card-2 p {
-    font-size: 22px;
-    font-weight: bold;
-    margin: 5px 0;
-    font-family: 'Nunito', sans-serif;
   }
   .container {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: center;
-    background-color: #f7fafc;
     width: 100vw;
     height: 100vh;
   }
   .cardContainer {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
     width: 90vw;
     height: auto;
     margin-top: 0.25rem;
-    /* margin-right: 1rem; */
-    /* align-items: center; */
+    gap: 0.5rem;
+  }
+}
+@media (min-width: 82rem) {
+  .card-2 {
+    width: 15%;
+  }
+  .card-2 p {
+    font-size: 28px;
+  }
+  .container {
+    width: 100vw;
+    height: 100vh;
+  }
+  .cardContainer {
+    width: 90vw;
+    height: auto;
+    margin-top: 0.25rem;
     gap: 0.5rem;
   }
 }
