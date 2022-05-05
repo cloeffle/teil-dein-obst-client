@@ -71,8 +71,8 @@ tree-form-image {
   padding: 0.6rem 1.5rem;
 }
 
-.image-upload-wrapper{
-    margin: 1.5rem 0;
+.image-upload-wrapper {
+  margin: 1.5rem 0;
 }
 
 .image-upload {
@@ -95,4 +95,10 @@ tree-form-image {
   color: white;
   border-radius: 22px;
   padding: 0 1.5rem;
+}
+
+.address-fail {
+  margin: 1.3rem 0;
+  background-color: #af473c;
+  text-align: center;
 }
