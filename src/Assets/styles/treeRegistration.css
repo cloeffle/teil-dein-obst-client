@@ -87,3 +87,12 @@ tree-form-image {
   display: flex;
   align-items: center;
 }
+
+.image-upload-btn {
+  font-family: "Nunito", sans-serif;
+  margin: 1rem 0;
+  background-color: #357560;
+  color: white;
+  border-radius: 22px;
+  padding: 0 1.5rem;
+}

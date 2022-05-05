@@ -2,7 +2,14 @@ import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
 import { initializeApp } from 'firebase/app';
-import { ref, uploadBytes, getStorage } from 'firebase/storage';
+import {
+  ref,
+  uploadBytes,
+  getStorage,
+  getDownloadURL,
+  refFromURL,
+  deleteObject,
+} from 'firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 
@@ -67,9 +74,7 @@ export default function TreeRegistration() {
   const theme = useTheme();
   const [fruitName, setFruitName] = useState([]);
   const [imageUpload, setImageUpload] = useState(false);
-  if (imageUpload) {
-    console.log(imageUpload);
-  }
+  const [imageName, setImageName] = useState('');
 
   const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -188,16 +193,22 @@ export default function TreeRegistration() {
   }, [user.sub]);
 
   //POST REQUEST TO MONGODB
-  const handleSubmit = (e) => {
+  const imageToDB = (e) => {
     e.preventDefault();
     if (imageUpload) {
-      const name = `images/${userInput.pictureURL}}`;
+      const name = `images/${imageName}}`;
       const imageRef = ref(storage, name);
       uploadBytes(imageRef, imageUpload).then(() =>
-        console.log('Image uploaded')
+        getDownloadURL(imageRef).then((url) => {
+          setUserInput({ ...userInput, pictureURL: url });
+          console.log(url);
+        })
       );
     }
+  };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
     axios
       .post('http://localhost:8000/tree/', userInput)
       .then((res) => {
@@ -210,15 +221,14 @@ export default function TreeRegistration() {
       .catch((err) => {
         console.log(err);
       });
-    // e.target.reset();
   };
+  // e.target.reset();
 
   const handleImage = (target) => {
     const fileSize = target.size / 1024 / 1024;
     if (fileSize <= 10) {
       setImageUpload(target);
-      setUserInput({
-        ...userInput,
+      setImageName({
         pictureURL: target.name + uuidv4(),
       });
     } else {
@@ -226,6 +236,18 @@ export default function TreeRegistration() {
       setImageUpload(null);
     }
   };
+
+  const deleteImage = () => {
+    setImageUpload(null);
+    console.log(userInput.pictureURL);
+    if (userInput.pictureURL.length > 2) {
+      const desertRef = ref(storage, userInput.pictureURL);
+      deleteObject(desertRef)
+        .then(() => console.log('Bild gelöscht'))
+        .catch((error) => console.log(error));
+    }
+  };
+
   return (
     <>
       <div>
@@ -351,9 +373,12 @@ export default function TreeRegistration() {
                 {imageUpload && (
                   <>
                     <p>{imageUpload.name}</p>
+                    <button className="image-upload-btn" onClick={(e) => imageToDB(e)}>
+                      Hochladen
+                    </button>
                     <button
                       className="delete-tree-btn"
-                      onClick={() => setImageUpload(null)}
+                      onClick={() => deleteImage()}
                     >
                       <img src={Delete} alt="Löschen" />
                     </button>
