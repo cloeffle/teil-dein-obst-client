@@ -205,7 +205,7 @@ export default function TreeRegistration() {
         setUploadSuccess('uploaded');
         setTimeout(() => {
           navigate('/profil');
-        }, 3000);
+        }, 2500);
       })
       .catch((err) => {
         console.log(err);
