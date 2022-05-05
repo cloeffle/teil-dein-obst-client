@@ -52,10 +52,10 @@ function getStyles(fruit, fruitName, theme) {
         ? theme.typography.fontWeightRegular
         : theme.typography.fontWeightMedium,
 
-    color: fruitName.indexOf(fruit) === -1 ? '#444' : 'white',
+    color: '#444',
 
-    backgroundColor: fruitName.indexOf(fruit) === -1 ? 'white' : '#5a9481',
-    fontFamily: fruitName.indexOf(fruit) === -1 ? 'Nunito' : 'Nunito',
+    backgroundColor: fruitName.indexOf(fruit) === -1 ? 'white' : '#c8e0c3',
+    fontFamily: 'Nunito',
   };
 }
 
@@ -208,7 +208,7 @@ export default function TreeRegistration() {
       .catch((err) => {
         console.log(err);
       });
-    e.target.reset();
+    // e.target.reset();
   };
 
   const handleImage = (target) => {
@@ -224,13 +224,12 @@ export default function TreeRegistration() {
       setImageUpload(null);
     }
   };
-
   return (
     <>
       <div>
         <LogoComponent />
         <div className="tree-form-container">
-          <h3>Obstbaum zur Verfügung stellen</h3>
+          <h3>Obst zur Verfügung stellen</h3>
           <div className="tree-form">
             <label>Standort*</label>
             <input
@@ -243,13 +242,15 @@ export default function TreeRegistration() {
             />
             {success && renderAlert()}
             {failed && renderFailed()}
-            <button
-              className="address-btn"
-              onClick={getCoordinates}
-              disabled={!userInput.address}
-            >
-              Adresse bestätigen
-            </button>
+            <div className="address-confirm">
+              <button
+                className="address-btn"
+                onClick={getCoordinates}
+                disabled={!userInput.address}
+              >
+                Adresse bestätigen
+              </button>
+            </div>
           </div>
 
           <form
@@ -278,8 +279,8 @@ export default function TreeRegistration() {
                         key={value}
                         label={value}
                         sx={{
-                          backgroundColor: '#5a9481',
-                          color: 'white',
+                          backgroundColor: '#c8e0c3',
+                          color: '#444',
                           fontFamily: 'Nunito',
                         }}
                       />
@@ -300,24 +301,25 @@ export default function TreeRegistration() {
                 ))}
               </Select>
             </FormControl>
-
-            <label>Erntezeitraum</label>
-            <p>von</p>
-            <input
-              className="tree-input-field"
-              type="date"
-              name="start"
-              id="start"
-              onChange={handleChangeUserInput}
-            />
-            <p>bis</p>
-            <input
-              className="tree-input-field"
-              type="date"
-              id="end"
-              name="end"
-              onChange={handleChangeUserInput}
-            />
+            <div className="harvest-date">
+              <label>Erntezeitraum</label>
+              <p>von</p>
+              <input
+                className="tree-input-field"
+                type="date"
+                name="start"
+                id="start"
+                onChange={handleChangeUserInput}
+              />
+              <p>bis</p>
+              <input
+                className="tree-input-field"
+                type="date"
+                id="end"
+                name="end"
+                onChange={handleChangeUserInput}
+              />
+            </div>
 
             <label>Infos</label>
             <textarea
@@ -327,7 +329,7 @@ export default function TreeRegistration() {
               onChange={handleChangeUserInput}
               cols="30"
               rows="5"
-              placeholder="Nähere Informationen zum Standort, der Zugänglickeit z.B. Pflücken nur nach Absprache möglich etc."
+              placeholder="Nähere Informationen zum Standort, der Zugänglickeit etc."
             ></textarea>
             <label>
               <img
@@ -350,6 +352,7 @@ export default function TreeRegistration() {
               </>
             )}
             {uploadSuccess && renderUpload()}
+
             <input
               type="submit"
               className="submit btn"
@@ -376,7 +379,7 @@ const renderFailed = () => (
 );
 
 const renderUpload = () => (
-  <div className="">
-    <p style={{ color: 'green' }}>Baum wurde erfolgreich hochgeladen</p>
+  <div className="tree-upload-success">
+    <p>Baum wurde erfolgreich hochgeladen</p>
   </div>
 );

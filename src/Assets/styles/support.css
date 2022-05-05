@@ -1,5 +1,5 @@
 .support-container {
-  margin: 0.5rem 1rem
+  margin: 0.5rem 1rem;
 }
 
 .support-form {
@@ -7,14 +7,13 @@
   flex-direction: column;
 }
 
-
 .support-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 1.3rem 0;
-  line-height: 2rem
+  line-height: 2rem;
 }
 
 .support-name,
@@ -34,9 +33,10 @@ textarea {
   font-family: Nunito, sans-serif;
 }
 
-input:focus, textarea:focus{
+input:focus,
+textarea:focus {
   outline: none;
-  border: 2px solid #faf1cf;
+  border: 2px solid #c8e0c3;
 }
 
 .support-success-message {

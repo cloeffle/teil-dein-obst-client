@@ -1,10 +1,41 @@
-
-
-.delete-tree {
-    background-color: transparent;
+.my-tree-type-modal {
+  padding: 0 1rem 0 0;
 }
 
-.delete-tree img{
-    width: 50px;
-    height: 30px;
+.my-tree-address-modal {
+  padding-bottom: 1rem;
+}
+
+
+.delete-tree-btn {
+  background-color: transparent;
+}
+
+.delete-tree img {
+  width: 50px;
+  height: 30px;
+}
+
+.deactivate-reactivate-btn {
+  display: flex;
+  justify-content: center;
+  height: 35px;
+  margin: 0;
+}
+
+.activate-tree {
+  background-color:rgba(0, 128, 0, 0.632);
+  font-family: "Roboto", sans-serif;
+  /* border: 1px solid green; */
+  padding: 0 1rem;
+  border-radius: 22px;
+  color: white;
+}
+
+.deactivate-tree {
+  background-color: rgba(128, 128, 128, 0.483);
+  font-family: "Roboto", sans-serif;
+  padding: 0 0.7rem;
+  border-radius: 22px;
+  color: #444;
 }

@@ -1,5 +1,5 @@
 .map {
-  width: 97vw;
+  width: 100vw;
   height: 89vh;
   position: relative;
 }
@@ -12,14 +12,14 @@
 .btn_map_wrapper {
   position: absolute;
   top: 20%;
-  right: 3%;
+  right: 2%;
   display: flex;
   flex-direction: column;
 }
 
 .btn_map {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   background-color: white;
   border-radius: 100%;
 }
@@ -33,27 +33,36 @@
   height: auto;
 }
 
+.btn_map:hover {
+  cursor: pointer;
+  background-color: #faf1cf;
+}
+
+.btn_map:active {
+  background-color: #faf1cf;
+  transform: scale(0.9);
+}
+
 .myLocation_marker img {
   width: 35px;
 }
 
 .location_info_modal {
-    position: absolute;
-    bottom: 0px;
-    height: 45%;
-    width: 100%;
-    background-color: #faf1cf;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 10% 0;
+  position: absolute;
+  bottom: 0px;
+  height: 45%;
+  width: 100%;
+  background-color: #c8e0c3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 10% 0;
 }
 
 .location_info_modal h2 {
-    margin-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
 }
-
 
 .close_icon {
   top: 5%;
@@ -66,27 +75,22 @@
 }
 
 .btn_info_modal {
-border: none;
+  border: none;
   background-color: #357560;
   color: #f9f8f2;
-  padding: 0.7rem;
+  padding: 0.5rem 1.2rem;
   border-radius: 22px;
   font-size: 1rem;
   cursor: pointer;
   letter-spacing: 0.1rem;
-    margin-top: 2rem;
-
+  margin-top: 2rem;
 }
 
 .addresse {
-    font-size: 1.2rem;
-    margin: 1rem 0;
-    font-weight: 900;
+  font-size: 1.2rem;
+  margin: 1rem 0;
+  font-weight: 900;
 }
-
-
-
-
 
 /*LOGO AND LOGIN */
 .header-login {
@@ -96,29 +100,29 @@ border: none;
 .home-logo {
   display: flex;
   justify-content: flex-end;
-  margin: 0.5rem 2.1rem 0.5rem 0;
-
+  margin: 0.5rem 4rem 0.5rem 0;
 }
 
 .home-logo img {
-    width: 57%
+  width: 52%;
 }
 
 .login-btn {
-  padding: 0 0.7rem;
-  border-radius: 22px;
-  font-size: 0.8rem;
-  cursor: pointer;
-  letter-spacing: 0.1rem;
-  margin-top: 1rem;
-  margin-right: 0.5rem;
-  background-color: #357560;
-  color: #f9f8f2;
-  /* background-color: transparent;
-  font-weight: bold;
-  letter-spacing: 0.1rem;
-  margin-right: 0.5rem;
-  margin-top: 1rem; */
-
+  background-color: transparent;
+  margin: .3rem .5rem 0 0;
 }
+
+.login-btn img {
+width: 80%;
+}
+
+.profile-btn {
+  background-color: transparent;
+  margin: .75rem .5rem 0 0;
+}
+.profile-btn img {
+  width: 81%;
+}
+
+
 
