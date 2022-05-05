@@ -50,14 +50,14 @@
 .location_info_modal {
   position: absolute;
   bottom: 0px;
-  height: 45%;
+  height: 35%;
   width: 100%;
   background-color: #c8e0c3;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 10% 0;
+  padding: 10% 2%;
 }
 
 .location_info_modal h2 {
@@ -90,6 +90,12 @@
   font-size: 1.2rem;
   margin: 1rem 0;
   font-weight: 900;
+}
+
+.info-modal-type-status {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 /*LOGO AND LOGIN */
