@@ -72,4 +72,52 @@ textarea:focus{
   outline: none;
   border: 2px solid #c8e0c3;
 }
+
+.comment-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  margin-top: 1.5rem;
+
+}
+
+.comment-avatar {
+  justify-content: center;
+  align-items: center;
+  width: 70px;
+  margin: auto;
   
+
+}
+
+.comment-avatar img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.comment-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+}
+
+.comment-user {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 0.1rem;
+}
+
+.comment-user-name {
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+.comment-user-timestamp {
+  font-size: 0.6rem;
+  margin-right: 0.5rem;
+}
