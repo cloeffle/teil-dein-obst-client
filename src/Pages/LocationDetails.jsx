@@ -32,6 +32,7 @@ function LocationDetails({ locationData }) {
   const { user } = useAuth0();
   const [userData, setUserData] = useState([]);
   console.log('USER', userData);
+  const [liked, setLiked] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -41,6 +42,10 @@ function LocationDetails({ locationData }) {
         )
         .then((res) => {
           setUserData(res.data);
+          if (res.data.favorites.includes(locationDetail._id)) {
+            setLiked(true);
+            console.log('faved');
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -49,7 +54,6 @@ function LocationDetails({ locationData }) {
   }, [user]);
 
   //ADD TO FAVAORITES
-  const [liked, setLiked] = useState(false);
   // const [favorite, setFavorite] = useState(null);
   const handleLike = () => {
     setLiked(!liked);
@@ -142,8 +146,6 @@ function LocationDetails({ locationData }) {
 
   console.log(comment.comment);
 
-  //console.log('COMMENTLIST', commentList);
-
   return (
     <div className="locationDetails">
       <div className="header-login">
@@ -196,27 +198,20 @@ function LocationDetails({ locationData }) {
               </div>
             )}
 
-            {liked && (
+            {!liked && (
               <>
                 <div onClick={handleLike}>
                   <img src={Like_black} alt="" />
                 </div>
               </>
             )}
-            {!liked && (
+            {liked && (
               <>
                 <div onClick={handleDislike}>
                   <img src={Like_red} alt="" />
                 </div>
               </>
             )}
-
-            {/* //     <img src={Like_black} alt="" />
-            //   ) : (
-            //     <img src={Like_red} alt="" />
-            //   )}{' '}
-            // </div> */}
-
             <div className="locationDetails-details">
               <p>Info des Besitzers:</p>
               {locationDetail.info}
