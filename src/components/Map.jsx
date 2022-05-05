@@ -54,6 +54,7 @@ const Map = ({
           setLocationInfo({
             type: location.type,
             address: location.location.address,
+            active: location.active,
             id: location._id,
           })
         }

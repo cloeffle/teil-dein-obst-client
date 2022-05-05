@@ -50,14 +50,14 @@
 .location_info_modal {
   position: absolute;
   bottom: 0px;
-  height: 45%;
+  height: 35%;
   width: 100%;
   background-color: #c8e0c3;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 10% 0;
+  padding: 10% 2%;
 }
 
 .location_info_modal h2 {
@@ -92,6 +92,12 @@
   font-weight: 900;
 }
 
+.info-modal-type-status {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 /*LOGO AND LOGIN */
 .header-login {
   display: flex;
@@ -100,7 +106,7 @@
 .home-logo {
   display: flex;
   justify-content: flex-end;
-  margin: 0.5rem 4rem 0.5rem 0;
+  margin: 0.5rem 3rem 0.5rem 0;
 }
 
 .home-logo img {
@@ -118,7 +124,7 @@ width: 80%;
 
 .profile-btn {
   background-color: transparent;
-  margin: .75rem .5rem 0 0;
+  margin: 0.3rem .5rem 0 0;
 }
 .profile-btn img {
   width: 81%;
