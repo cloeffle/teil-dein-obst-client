@@ -70,3 +70,20 @@ tree-form-image {
 .submit {
   padding: 0.6rem 1.5rem;
 }
+
+.image-upload-wrapper{
+    margin: 1.5rem 0;
+}
+
+.image-upload {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  border-radius: 22px;
+  justify-content: space-evenly;
+}
+
+.image-upload p {
+  display: flex;
+  align-items: center;
+}
