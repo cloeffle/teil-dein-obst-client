@@ -44,3 +44,8 @@ textarea:focus {
   background-color: #35756071;
   text-align: center;
 }
+
+.send-btn{
+  display: flex;
+  justify-content: flex-end;
+}
