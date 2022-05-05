@@ -36,7 +36,9 @@ function LocationDetails({ locationData }) {
   useEffect(() => {
     if (user) {
       axios
-        .get(`http://localhost:8000/user/${user.sub}`)
+        .get(
+          `http://localhost:8000/user/${user.sub.slice(user.sub.length - 7)}`
+        )
         .then((res) => {
           setUserData(res.data);
         })
@@ -69,7 +71,27 @@ function LocationDetails({ locationData }) {
         console.log(err);
       });
   };
-  // console.log('LIKED ID', favorite);
+  // const [favorite, setFavorite] = useState(null);
+  const handleDislike = () => {
+    setLiked(!liked);
+    console.log(locationDetail._id);
+    // setFavorite(locationDetail._id);
+    axios
+      .put(
+        `http://localhost:8000/user/disliketree/${user.sub.slice(
+          user.sub.length - 7
+        )}`,
+        {
+          treeId: locationDetail._id,
+        }
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   //POST COMMENT
   const [comment, setComment] = useState({
@@ -174,13 +196,26 @@ function LocationDetails({ locationData }) {
               </div>
             )}
 
-            <div onClick={handleLike}>
-              {!liked ? (
-                <img src={Like_black} alt="" />
-              ) : (
-                <img src={Like_red} alt="" />
-              )}{' '}
-            </div>
+            {liked && (
+              <>
+                <div onClick={handleLike}>
+                  <img src={Like_black} alt="" />
+                </div>
+              </>
+            )}
+            {!liked && (
+              <>
+                <div onClick={handleDislike}>
+                  <img src={Like_red} alt="" />
+                </div>
+              </>
+            )}
+
+            {/* //     <img src={Like_black} alt="" />
+            //   ) : (
+            //     <img src={Like_red} alt="" />
+            //   )}{' '}
+            // </div> */}
 
             <div className="locationDetails-details">
               <p>Info des Besitzers:</p>
