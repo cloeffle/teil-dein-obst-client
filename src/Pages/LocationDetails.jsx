@@ -71,6 +71,7 @@ function LocationDetails({locationData}) {
       comment: "",
       timestamp: "",
       user: "",
+      tree:"",
       id: ""
     });
   
@@ -80,6 +81,7 @@ function LocationDetails({locationData}) {
         [e.target.name]: e.target.value,
         timestamp: new Date().toLocaleString(),
         user: user.name,
+        tree: locationDetail._id,
         id: counter
       });
     };
@@ -163,12 +165,13 @@ function LocationDetails({locationData}) {
         <div className='locationDetails-details'>
             <p>Kommentare:</p>
        </div>
-        {locationDetail.comments.map((comment, index) => 
+
+        {/*locationDetail.comments.map((comment, index) => 
             <div key={index}>
                 {comment}
             </div>
            
-        )}
+               )*/}
      
         </>
          }
