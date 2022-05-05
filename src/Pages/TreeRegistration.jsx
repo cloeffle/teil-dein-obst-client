@@ -336,13 +336,14 @@ export default function TreeRegistration() {
             </div>
 
             {uploadSuccess && renderUpload()}
-
-            <input
-              type="submit"
-              className="submit btn"
-              disabled={!userInput.address || !userInput.type}
-              defaultValue="Hinzufügen"
-            />
+            <div className="send-btn">
+              <input
+                type="submit"
+                className="submit btn"
+                disabled={!userInput.address || !userInput.type}
+                value="Hinzufügen"
+              />
+            </div>
           </form>
         </div>
       </div>
