@@ -21,6 +21,7 @@ import '../assets/styles/locationDetails.css';
 
 function LocationDetails({ locationData }) {
   //GET LOCATION DATA FOR SPECIFIC LOCATION (ID)
+  console.log("locationData", locationData);
   const params = useParams();
   let locationDetail = locationData.find(function (location) {
     return location._id === params.id;
@@ -51,7 +52,6 @@ function LocationDetails({ locationData }) {
   const handleLike = () => {
     setLiked(!liked);
     setFavorite(locationDetail._id);
-    console.log('LIKED ID', favorite);
     axios
       .put(`http://localhost:8000/user/${user.sub}`, favorite)
       .then((res) => {
@@ -61,33 +61,63 @@ function LocationDetails({ locationData }) {
         console.log(err);
       });
   };
+  console.log('LIKED ID', favorite);
 
-  //FORM COMMENT
-  let [counter, setCounter] = useState(0);
+  //POST COMMENT
   const [comment, setComment] = useState({
-    // Database anpassen? aktuell comment = array.
     comment: '',
     timestamp: '',
     user: '',
     tree: '',
-    id: '',
+    avatar: '',
   });
 
+  //GET COMMENTS
+  const [commentList, setCommentList] = useState([]);
+  
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8000/comment/${locationDetail._id}`)
+      .then((res) => setCommentList(res.data))
+      .catch((err) => console.log(err));
+  }, [locationDetail]);
+  
+
+  //POST COMMENT
   const handleChange = (e) => {
     setComment({
       [e.target.name]: e.target.value,
       timestamp: new Date().toLocaleString(),
       user: user.name,
-      tree: locationDetail._id,
-      id: counter,
+      tree: locationDetail._id,    
+      avatar: user.picture,
     });
   };
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Comment', comment);
+    axios
+      .post('http://localhost:8000/comment/', comment)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     e.target.reset();
-  };
+    axios
+      .get(`http://localhost:8000/comment/${locationDetail._id}`)
+      .then((res) => setCommentList(res.data))
+    
+  }
+
+  
+  console.log(comment.comment)
+   
+   
+
+  //console.log('COMMENTLIST', commentList);
 
   return (
     <div className="locationDetails">
@@ -147,14 +177,14 @@ function LocationDetails({ locationData }) {
               ) : (
                 <img src={Like_red} alt="" />
               )}{' '}
-              {/*noch anpassen. conditional auf favorite setzen? Mit find?*/}
             </div>
 
             <div className="locationDetails-details">
               <p>Info des Besitzers:</p>
               {locationDetail.info}
             </div>
-
+            </>
+            )}
             <div className="locationDetails-details" id="write-comment">
               <form className="commentForm" onSubmit={(e) => handleSubmit(e)}>
                 <textarea
@@ -176,18 +206,34 @@ function LocationDetails({ locationData }) {
             <div className="locationDetails-details">
               <p>Kommentare:</p>
             </div>
-
-            {/*locationDetail.comments.map((comment, index) => 
+                
+            {
+            commentList&&
+            commentList.map((comment, index) => 
             <div key={index}>
-                {comment}
+              <div className="comment-wrapper">
+                <div className="comment-avatar">
+                  <img src={comment.avatar} alt="Avatar" />
+                </div>
+                <div className='comment-content'>
+                  <div className='comment-user'>
+                    <p className='comment-user-name'>{comment.user}</p>
+                    <p className='comment-user-timestamp'>{comment.timestamp}</p>
+                  </div>
+                  <div className="comment-text">
+                    <p>{comment.comment}</p>
+                  </div>
+                </div>
+              </div>
             </div>
            
-               )*/}
-          </>
-        )}
+               )}
+          
+        
       </div>
     </div>
   );
 }
+
 
 export default LocationDetails;

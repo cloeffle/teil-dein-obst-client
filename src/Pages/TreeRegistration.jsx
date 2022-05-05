@@ -22,9 +22,9 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
 
-import LogoComponent from "../components/LogoComponent";
-import "../assets/styles/treeRegistration.css";
-import Delete from "../assets/images/icons8-entfernen.svg";
+import LogoComponent from '../components/LogoComponent';
+import '../assets/styles/treeRegistration.css';
+import Delete from '../assets/images/icons8-entfernen.svg';
 
 // Select Option Obstsorte
 const ITEM_HEIGHT = 48;
@@ -195,7 +195,7 @@ export default function TreeRegistration() {
   const imageToDB = (e) => {
     e.preventDefault();
     if (imageUpload) {
-      const name = `images/${imageName}}`;
+      const name = `images/${imageName}`;
       const imageRef = ref(storage, name);
       uploadBytes(imageRef, imageUpload).then(() =>
         getDownloadURL(imageRef).then((url) => {
@@ -227,9 +227,7 @@ export default function TreeRegistration() {
     const fileSize = target.size / 1024 / 1024;
     if (fileSize <= 10) {
       setImageUpload(target);
-      setImageName({
-        pictureURL: target.name + uuidv4(),
-      });
+      setImageName(target.name + uuidv4());
     } else {
       alert("Das Bild übersteigt die zulässige Größe von 10 MB ");
       setImageUpload(null);
@@ -281,8 +279,8 @@ export default function TreeRegistration() {
             name="userId"
             onSubmit={(e) => handleSubmit(e)}
           >
-            <FormControl sx={{ m: 0, width: 340, backgroundColor: "white" }}>
-              <InputLabel id="Obstsorte" sx={{ fontFamily: "Nunito" }}>
+            <FormControl sx={{ m: 0, width: 340, backgroundColor: 'white' }}>
+              <InputLabel id="Obstsorte" sx={{ fontFamily: 'Nunito' }}>
                 Obstsorte
               </InputLabel>
               <Select
@@ -296,15 +294,15 @@ export default function TreeRegistration() {
                   <OutlinedInput id="select-obstsorte" label="Obstsorte" />
                 }
                 renderValue={(selected) => (
-                  <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                     {selected.map((value) => (
                       <Chip
                         key={value}
                         label={value}
                         sx={{
-                          backgroundColor: "#c8e0c3",
-                          color: "#444",
-                          fontFamily: "Nunito",
+                          backgroundColor: '#c8e0c3',
+                          color: '#444',
+                          fontFamily: 'Nunito',
                         }}
                       />
                     ))}
