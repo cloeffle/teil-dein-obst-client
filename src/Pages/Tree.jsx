@@ -3,7 +3,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 
 import "../assets/styles/myTrees.css";
-import LogoComponent from "../components/LogoComponent";
 import Delete from "../assets/images/icons8-entfernen.svg";
 
 function Tree() {
@@ -11,6 +10,7 @@ function Tree() {
   const [userData, setUserData] = useState(false);
   const [userTrees, setUserTrees] = useState(false);
 
+  //GET USERS TREE DATA
   useEffect(() => {
     axios(
       `http://localhost:8000/tree/collection/${user.sub.slice(
@@ -19,6 +19,7 @@ function Tree() {
     ).then((response) => setUserTrees(response.data));
   }, [userData]);
 
+  //DELETE TREE
   const deleteTree = (id) => {
     axios.delete(`http://localhost:8000/tree/${id}`).then(() => {
       axios(
@@ -29,35 +30,56 @@ function Tree() {
     });
   };
 
+  //DEACTIVATE/REACTIVATE TREE
+  const deactivateTree = (id) => {
+    axios.put(`http://localhost:8000/tree/${id}`).then(() => {
+      axios(
+        `http://localhost:8000/tree/collection/${user.sub.slice(
+          user.sub.length - 7
+        )}`
+      ).then((response) => setUserTrees(response.data));
+    });
+  };
+
+  const reactivateTree = (id) => {
+    axios.put(`http://localhost:8000/tree/${id}/reactivate`).then(() => {
+      axios(
+        `http://localhost:8000/tree/collection/${user.sub.slice(
+          user.sub.length - 7
+        )}`
+      ).then((response) => setUserTrees(response.data));
+    });
+  };
+
+
   return (
     <>
-      <div>
-        <LogoComponent />
-      </div>
       <div className="my-trees-container">
-        <h3>Deaktivieren/Löschen</h3>
         <div className="my-trees">
           <table>
-            <thead>
-              <tr>
-                <th>Sorte</th>
-                <th>Adresse</th>
-                <th>Status</th>
-              </tr>
-            </thead>
             <tbody>
               {userTrees &&
                 userTrees.map((myTrees) => (
                   <tr key={myTrees._id}>
-                    <td className="my-tree-type">{myTrees.type}</td>
-                    <td className="my-tree-address">
-                      {myTrees.location.address}
+                    <td className="my-tree-type">{myTrees.type.join(", ")}</td>
+                    <td className="my-tree-address-modal">
+                      {myTrees.location.address.substring(0, 25)}...
                     </td>
-                    <td className="my-tree-status">
+                    <td className="deactivate-reactivate-btn">
                       {myTrees.active === true ? (
-                        <p style={{ color: "green" }}>aktiv</p>
+                        <button
+                          className="activate-tree"
+                          onClick={() => deactivateTree(myTrees._id)}
+                        >
+                          aktiv
+                        </button>
                       ) : (
-                        <p style={{ color: "red" }}>inaktiv</p>
+                        <button
+                          className="deactivate-tree"
+                          onClick={() => reactivateTree(myTrees._id)}
+                        >
+                          inaktiv
+                        </button>
                       )}
                     </td>
                     <td>

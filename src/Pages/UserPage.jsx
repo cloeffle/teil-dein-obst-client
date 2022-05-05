@@ -1,20 +1,45 @@
-import React, { useEffect, useState } from 'react';
-import LogoutButton from '../components/Login/LogoutButton';
-import '../assets/styles/userpage.css';
-import LogoComponent from '../components/LogoComponent';
-import Obstbaum from '../assets/images/fruit-tree.png';
+import React, { useEffect, useState } from "react";
+import LogoutButton from "../components/Login/LogoutButton";
+import "../assets/styles/userpage.css";
+import LogoComponent from "../components/LogoComponent";
+import Obstbaum from "../assets/images/fruit-tree.png";
+import Tree from "./Tree";
 
-import { useAuth0 } from '@auth0/auth0-react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { useAuth0 } from "@auth0/auth0-react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import Modal from "react-modal";
+
+//MODAL STYLE
+const customStyles = {
+  content: {
+    top: "55%",
+    left: "50%",
+    right: "4%",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    backgroundColor: "#C8E0C3",
+    boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+    fontSize: "14px",
+    paddingLeft: "15px",
+    paddingRight: "15px",
+    paddingTop: "5px",
+  },
+};
+
+Modal.setAppElement("#root");
 
 function UserPage() {
   const { user } = useAuth0();
   const [userData, setUserData] = useState(false);
-  const [userTrees, setUserTrees] = useState(false);
+  const [userTrees, setUserTrees] = useState([]);
   const [userFavorites, setUserFavorites] = useState([]);
+  let subtitle;
+  const [isOpen, setIsOpen] = useState(false);
+
   if (userFavorites) {
-    console.log(userFavorites, 'userFavorites');
+    // console.log(userFavorites, 'userFavorites');
   }
 
   useEffect(() => {
@@ -51,9 +76,26 @@ function UserPage() {
           email: user.email,
         }
       )
-      .then((response) => console.log(response))
+      // .then((response) => console.log(response))
       .catch((error) => console.log(error));
   }, []);
+
+  //MODAL FUNCTIONS
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const afterOpenModal = () => {
+    subtitle.style.color = "#444";
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
+  const refreshPage = () => {
+    window.location.reload();
+  };
 
   return (
     <div>
@@ -64,43 +106,75 @@ function UserPage() {
           <figure>
             <Link to="/baum-registrieren" className="link-add-tree">
               <img src={Obstbaum} alt="Obstbaum" />
-              <figcaption>Baum hinzufügen</figcaption>
+              <figcaption>Obst hinzufügen</figcaption>
             </Link>
           </figure>
         </div>
         <div className="trees-wrapper">
-          <h4>Meine Bäume</h4>
+          <h4>Mein Obst</h4>
           <div className="trees-container userpage">
             <div className="my-trees">
               <table>
-                <thead>
-                  <tr>
-                    <th>Sorte</th>
-                    <th>Adresse</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
                 <tbody>
-                  {userTrees &&
+                  {!userTrees.length > 0 && (
+                    <tr style={{ fontSize: "14px", fontStyle: "italic" }}>
+                      <td>
+                        Hier werden dir deine hochgeladenen Obstbäume/-sträucher
+                        angezeigt
+                      </td>
+                    </tr>
+                  )}
+                  {userTrees.length > 0 &&
                     userTrees.map((myTrees) => (
                       <tr key={myTrees._id}>
-                        <td className="my-tree-type">{myTrees.type}</td>
+                        <td className="my-tree-type">
+                          {myTrees.type.join(", ")}
+                        </td>
                         <td className="my-tree-address">
                           {myTrees.location.address.substring(0, 25)}...
                         </td>
                         <td className="my-tree-status">
                           {myTrees.active === true ? (
-                            <p style={{ color: 'green' }}>aktiv</p>
+                            <p style={{ color: "green" }}>aktiv</p>
                           ) : (
-                            <p style={{ color: 'red' }}>inaktiv</p>
+                            <p style={{ color: "grey", fontWeight: "bold" }}>
+                              inaktiv
+                            </p>
                           )}
                         </td>
                       </tr>
                     ))}
                 </tbody>
               </table>
-              <div className="my-tree-edit">
-                <Link to="/profil/baum">Bearbeiten</Link>
+              <div className="my-tree-edit" id="root">
+                {userTrees.length > 0 && (
+                  <button className="tree-edit-btn" onClick={openModal}>
+                    Bearbeiten
+                  </button>
+                )}
+                <Modal
+                  isOpen={isOpen}
+                  onAfterOpen={afterOpenModal}
+                  onRequestClose={closeModal}
+                  style={customStyles}
+                  contentLabel="Tree Modal"
+                >
+                  <div className="modal-close">
+                    <button
+                      className="modal-close-btn"
+                      onClick={closeModal && refreshPage}
+                    >
+                      &times;
+                    </button>
+                  </div>
+                  <h3
+                    ref={(_subtitle) => (subtitle = _subtitle)}
+                    style={{ marginBottom: "1rem" }}
+                  >
+                    Inaktivieren / Aktivieren oder Löschen
+                  </h3>
+                  <Tree closeModal={closeModal} />
+                </Modal>
               </div>
             </div>
           </div>
@@ -109,14 +183,19 @@ function UserPage() {
           <h4>Meine Favoriten</h4>
           <div className="favorite-trees userpage">
             <table>
-              <thead>
+              {/* <thead>
                 <tr>
                   <th>Status</th>
                   <th>Sorte</th>
                   <th>Adresse</th>
                 </tr>
-              </thead>
+              </thead> */}
               <tbody>
+                {!userFavorites.length > 0 && (
+                  <tr style={{ fontSize: "14px", fontStyle: "italic" }}>
+                    <td>Hier findest du deine Favoriten</td>
+                  </tr>
+                )}
                 {/* {userFavorites &&
                   userFavorites.map((favorite) => (
                     <tr>
