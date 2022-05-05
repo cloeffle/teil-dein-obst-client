@@ -46,16 +46,15 @@ figure img {
 
 .my-tree-edit {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 
-.tree-edit-btn {
-  margin-top: 1rem;
-  border: 2px solid #A7C46C;
+.tree-edit-btn, .userpage-title button {
   background-color: transparent;
-  color: #444;
-  border-radius: 22px;
-  padding: 0.4rem 0.8rem;
+}
+
+.tree-edit-btn img {
+  width: 40%;
 }
 
 .modal-close {
@@ -87,4 +86,15 @@ figure img {
   border: none;
   background-color: #A7C46C;
   color: #f9f8f2;
+}
+
+.userpage-title {
+  display: flex;
+    justify-content: space-between;
+}
+
+
+
+.userpage-title img {
+  width: 45%;
 }

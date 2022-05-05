@@ -60,7 +60,7 @@ function Tree() {
               {!userTrees.length > 0 && (
                 <tr>
                   <td style={{ fontSize: "14px", fontStyle: "italic" }}>
-                    Keine zu bearbeiteten Obstbäume-/sträucher gefunden
+                    Keine zu bearbeiteten Obstbäume /-sträucher gefunden
                   </td>
                 </tr>
               )}
