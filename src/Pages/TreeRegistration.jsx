@@ -2,7 +2,14 @@ import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
 import { initializeApp } from 'firebase/app';
-import { ref, uploadBytes, getStorage, getDownloadURL } from 'firebase/storage';
+import {
+  ref,
+  uploadBytes,
+  getStorage,
+  getDownloadURL,
+  refFromURL,
+  deleteObject,
+} from 'firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 
@@ -227,6 +234,18 @@ export default function TreeRegistration() {
       setImageUpload(null);
     }
   };
+
+  const deleteImage = () => {
+    setImageUpload(null);
+    console.log(userInput.pictureURL);
+    if (userInput.pictureURL.length > 2) {
+      const desertRef = ref(storage, userInput.pictureURL);
+      deleteObject(desertRef)
+        .then(() => console.log('Bild gelöscht'))
+        .catch((error) => console.log(error));
+    }
+  };
+
   return (
     <>
       <div>
@@ -346,11 +365,14 @@ export default function TreeRegistration() {
                 accept=".jpg,.jpeg,.png"
               ></input>
             </label>
-            <button onClick={(e) => imageToDB(e)}>Bild hochladen</button>
             {imageUpload && (
               <>
                 <p>{imageUpload.name}</p>
-                <button className="btn" onClick={() => setImageUpload(null)}>
+                <button className="btn" onClick={(e) => imageToDB(e)}>
+                  Bild hochladen
+                </button>
+
+                <button className="btn" onClick={() => deleteImage()}>
                   Bild löschen
                 </button>
               </>
