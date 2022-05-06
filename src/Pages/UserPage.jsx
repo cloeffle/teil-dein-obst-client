@@ -38,9 +38,12 @@ function UserPage() {
   let subtitle;
   const [isOpen, setIsOpen] = useState(false);
 
-  if (userFavorites) {
-    console.log(userFavorites, 'userFavorites');
-  }
+  useEffect(() => {
+    // slice id to avoid special characters
+    axios(
+      `http://localhost:8000/user/${user.sub.slice(user.sub.length - 7)}`
+    ).then((response) => setUserData(response.data));
+  }, []);
 
   useEffect(() => {
     if (userData) {
@@ -51,13 +54,6 @@ function UserPage() {
       );
     }
   }, [userData]);
-
-  useEffect(() => {
-    // slice id to avoid special characters
-    axios(
-      `http://localhost:8000/user/${user.sub.slice(user.sub.length - 7)}`
-    ).then((response) => setUserData(response.data));
-  }, []);
 
   useEffect(() => {
     axios(
@@ -96,6 +92,18 @@ function UserPage() {
   const refreshPage = () => {
     window.location.reload();
   };
+
+  if (userFavorites) {
+    console.log(userFavorites, 'userFavorites');
+    userFavorites.map((favorite) =>
+      console.log(favorite[0].location.adress, 'fav')
+    );
+  }
+
+  if (userTrees.length > 0) {
+    console.log(userTrees, 'usertrees');
+    userTrees.map((myTrees) => console.log(myTrees.location.address));
+  }
 
   return (
     <div>
@@ -198,12 +206,21 @@ function UserPage() {
                     <td>Hier findest du deine Favoriten</td>
                   </tr>
                 )}
-                {userFavorites &&
+                {userFavorites.length > 0 &&
                   userFavorites.map((favorite) => (
                     <tr>
-                      <td>{favorite[0].active}</td>
                       <td>{favorite[0].type[0]}</td>
-                      <td>{favorite[0].location.address}</td>
+                      <td>
+                        {favorite[0].location.address.substring(0, 25)}...
+                      </td>
+                      {favorite[0].active && (
+                        <p style={{ color: 'green' }}>aktiv</p>
+                      )}
+                      {!favorite[0].active && (
+                        <p style={{ color: 'grey', fontWeight: 'bold' }}>
+                          inaktiv
+                        </p>
+                      )}
                     </tr>
                   ))}
               </tbody>
