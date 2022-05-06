@@ -82,12 +82,13 @@ function LocationDetails({ locationData }) {
       .catch((err) => console.log(err));
   }, [locationDetail]);
   
+  let timestamp = new Date().toGMTString();
 
   //POST COMMENT
   const handleChange = (e) => {
     setComment({
       [e.target.name]: e.target.value,
-      timestamp: new Date().toLocaleString(),
+      timestamp: timestamp,
       user: user.name,
       tree: locationDetail._id,    
       avatar: user.picture,
