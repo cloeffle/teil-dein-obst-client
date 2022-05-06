@@ -208,13 +208,6 @@ function UserPage() {
           <h4>Meine Favoriten</h4>
           <div className="favorite-trees userpage">
             <table>
-              {/* <thead>
-                <tr>
-                  <th>Status</th>
-                  <th>Sorte</th>
-                  <th>Adresse</th>
-                </tr>
-              </thead> */}
               <tbody>
                 {!userFavorites.length > 0 && (
                   <tr style={{ fontSize: '14px', fontStyle: 'italic' }}>

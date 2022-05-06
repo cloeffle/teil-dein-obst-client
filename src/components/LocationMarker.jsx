@@ -46,7 +46,7 @@ const LocationMarker = ({ onClick, type }) => {
       {type === 'Pflaume' && (
         <img src={Pflaume} alt="Pflaume-Icon" height={120} />
       )}
-      {type === 'Korb' && <img src={Korb} alt="Sonstiges-Icon" height={120} />}
+      {type === 'Sonstiges' && <img src={Korb} alt="Sonstiges-Icon" height={120} />}
     </div>
   );
 };

@@ -79,6 +79,9 @@ function LocationDetails({ locationData }) {
       .then((res) => {
         console.log(res);
       })
+      .then(() => {
+        window.location.reload();
+      })
       .catch((err) => {
         console.log(err);
       });
@@ -99,6 +102,9 @@ function LocationDetails({ locationData }) {
       )
       .then((res) => {
         console.log(res);
+      })
+      .then(() => {
+        window.location.reload();
       })
       .catch((err) => {
         console.log(err);
@@ -156,8 +162,6 @@ function LocationDetails({ locationData }) {
       });
     e.target.reset();
   };
-
-  console.log(comment);
 
   return (
     <>
@@ -252,6 +256,16 @@ function LocationDetails({ locationData }) {
                     <p>{locationDetail.location.address}</p>
                   </div>
 
+                  {locationDetail.harvestPeriod.start.length > 0 && (
+                    <div className="harvest-start-details">
+                      <h4>Erntezeitraum</h4>
+                      <p>
+                        von {locationDetail.harvestPeriod.start} bis{" "}
+                        {locationDetail.harvestPeriod.end}
+                      </p>
+                    </div>
+                  )}
+
                   {locationDetail.info.length > 0 && (
                     <div className="details-owner">
                       <h4>Info des Besitzers:</h4>
@@ -267,25 +281,38 @@ function LocationDetails({ locationData }) {
                 </>
               )}
             </div>
-            <div className="locationDetails-details" id="write-comment">
-              <form className="commentForm" onSubmit={(e) => handleSubmit(e)}>
-                <textarea
-                  className="commentTextarea"
-                  type="text"
-                  name="comment"
-                  value={comment.text}
-                  onBlur={handleChange}
-                  placeholder="Hinterlasse einen Kommentar"
-                  required
-                ></textarea>
-                <div className="comment-btn">
-                  <input
-                    type="submit"
-                    className="submit btn"
-                    value="Kommentieren"
-                  />
-                </div>
-              </form>
+            {user ? (
+              <div className="locationDetails-details" id="write-comment">
+                <form className="commentForm" onSubmit={(e) => handleSubmit(e)}>
+                  <textarea
+                    className="commentTextarea"
+                    type="text"
+                    name="comment"
+                    value={comment.text}
+                    onBlur={handleChange}
+                    placeholder="Hinterlasse einen Kommentar"
+                    required
+                  ></textarea>
+                  <div className="comment-btn">
+                    <input
+                      type="submit"
+                      className="submit btn"
+                      value="Kommentieren"
+                    />
+                  </div>
+                </form>
+              </div>
+            ) : (
+              <div className="locationDetails-content">
+                <h4>Kommentare</h4>
+              </div>
+            )}
+            <div className="locationDetails-content">
+              {!commentList.length > 0 && (
+                <p style={{ fontSize: "14px", fontStyle: "italic" }}>
+                  Keine Kommentare
+                </p>
+              )}
             </div>
             <div className="comment-container">
               {commentList &&
