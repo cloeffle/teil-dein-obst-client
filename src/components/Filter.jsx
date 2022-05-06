@@ -129,8 +129,8 @@ function Filter(props) {
             id={sort.id}
             className={
               sort.status === true
-                ? "card-2 chooseBtn selected"
-                : "card-2 chooseBtn"
+                ? 'card-2 chooseBtn selected'
+                : 'card-2 chooseBtn'
             }
             key={crypto.randomUUID()}
             selected={sort.selected}
