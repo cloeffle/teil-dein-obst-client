@@ -1,27 +1,30 @@
-import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useAuth0 } from '@auth0/auth0-react';
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { useAuth0 } from "@auth0/auth0-react";
 
-import Logo from '../assets/logo/Logo.svg';
-import Login from '../components/Login/LoginButton';
-import Apfel from '../assets/images/icons8-apple-500.png';
-import Aprikose from '../assets/images/icons8-apricot-500.png';
-import Blaubeere from '../assets/images/icons8-blueberry-500.png';
-import Kirsche from '../assets/images/icons8-cherry-500.png';
-import Weintraube from '../assets/images/icons8-grapes-500.png';
-import Pflaume from '../assets/images/icons8-plum-500.png';
-import Erdbeere from '../assets/images/icons8-strawberry-500.png';
-import Sonstiges from '../assets/images/fruit basket 500.png';
-import Birne from '../assets/images/icons8-pear-500.png';
-import Like_black from '../assets/images/Like_black.png';
-import Like_red from '../assets/images/Like_red.png';
+import Logo from "../assets/logo/Logo.svg";
+import Login from "../components/Login/LoginButton";
+import Apfel from "../assets/images/icons8-apple-500.png";
+import Aprikose from "../assets/images/icons8-apricot-500.png";
+import Blaubeere from "../assets/images/icons8-blueberry-500.png";
+import Himbeere from "../assets/images/icons8-raspberry-500.png";
+import Johannisbeere from "../assets/images/icons8-redcurrant-512.png";
+import Kirsche from "../assets/images/icons8-cherry-500.png";
+import Weintraube from "../assets/images/icons8-grapes-500.png";
+import Pflaume from "../assets/images/icons8-plum-500.png";
+import Erdbeere from "../assets/images/icons8-strawberry-500.png";
+import Stachelbeere from "../assets/images/icons8-gooseberry-500-2.png";
+import Sonstiges from "../assets/images/fruit basket 500.png";
+import Birne from "../assets/images/icons8-pear-500.png";
+import Like_black from "../assets/images/Like_black.png";
+import Like_red from "../assets/images/Like_red.png";
 
-import '../assets/styles/locationDetails.css';
+import "../assets/styles/locationDetails.css";
 
 function LocationDetails({ locationData }) {
   //GET LOCATION DATA FOR SPECIFIC LOCATION (ID)
-  console.log('locationData', locationData);
+  console.log("locationData", locationData);
   const params = useParams();
   const [locationDetail, setLocationDetail] = useState(false);
 
@@ -34,12 +37,12 @@ function LocationDetails({ locationData }) {
     }
   }, [locationData]);
 
-  console.log('LOCATIONDETAIL', locationDetail);
+  console.log("LOCATIONDETAIL", locationDetail);
 
   //GET USER DATA FROM AUTH0
   const { user } = useAuth0();
   const [userData, setUserData] = useState([]);
-  console.log('USER', userData);
+  console.log("USER", userData);
   const [liked, setLiked] = useState(false);
 
   useEffect(() => {
@@ -49,7 +52,7 @@ function LocationDetails({ locationData }) {
           setUserData(res.data);
           if (res.data.favorites.includes(locationDetail._id)) {
             setLiked(true);
-            console.log('faved');
+            console.log("faved");
           }
         })
         .catch((err) => {
@@ -115,11 +118,11 @@ function LocationDetails({ locationData }) {
 
   //POST COMMENT
   const [comment, setComment] = useState({
-    comment: '',
-    timestamp: '',
-    user: '',
-    tree: '',
-    avatar: '',
+    comment: "",
+    timestamp: "",
+    user: "",
+    tree: "",
+    avatar: "",
   });
 
   let timestamp = new Date().toGMTString();
@@ -137,9 +140,9 @@ function LocationDetails({ locationData }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Comment', comment);
+    console.log("Comment", comment);
     axios
-      .post('http://localhost:8000/comment/', comment)
+      .post("http://localhost:8000/comment/", comment)
       .then((res) => {
         console.log(res);
       })
@@ -168,68 +171,100 @@ function LocationDetails({ locationData }) {
             </div>
             <Login />
           </div>
-          <div className="locationDetails-content">
-            {locationDetail && (
-              <>
-                {locationDetail.type[0] === 'Apfel' && (
-                  <img src={Apfel} alt="Apfel-Icon" height={120} />
-                )}
-                {locationDetail.type[0] === 'Aprikose' && (
-                  <img src={Aprikose} alt="Aprikose-Icon" height={120} />
-                )}
-                {locationDetail.type[0] === 'Birne' && (
-                  <img src={Birne} alt="Birne-Icon" height={120} />
-                )}
-                {locationDetail.type[0] === 'Blaubeere' && (
-                  <img src={Blaubeere} alt="Blaubeere-Icon" height={120} />
-                )}
-                {locationDetail.type[0] === 'Kirsche' && (
-                  <img src={Kirsche} alt="Kirsche-Icon" height={120} />
-                )}
-                {locationDetail.type[0] === 'Weintraube' && (
-                  <img src={Weintraube} alt="Weintraube-Icon" height={120} />
-                )}
-                {locationDetail.type[0] === 'Pflaume' && (
-                  <img src={Pflaume} alt="Pflaume-Icon" height={120} />
-                )}
-                {locationDetail.type[0] === 'Erdbeere' && (
-                  <img src={Erdbeere} alt="Erdbeere-Icon" height={120} />
-                )}
-                {locationDetail.type[0] === 'Sonstiges' && (
-                  <img src={Sonstiges} alt="Obstkorb" height={120} />
-                )}
-                <div>{locationDetail.type[0]}</div>
+          <div className="locationDetails-wrapper">
+            <div className="locationDetails-content">
+              {locationDetail && (
+                <>
+                  <div className="details-fruit">
+                    {locationDetail.type[0] === "Apfel" && (
+                      <img src={Apfel} alt="Apfel-Icon" height={120} />
+                    )}
+                    {locationDetail.type[0] === "Aprikose" && (
+                      <img src={Aprikose} alt="Aprikose-Icon" height={120} />
+                    )}
+                    {locationDetail.type[0] === "Birne" && (
+                      <img src={Birne} alt="Birne-Icon" height={120} />
+                    )}
+                    {locationDetail.type[0] === "Heidelbeere" && (
+                      <img src={Blaubeere} alt="Blaubeere-Icon" height={120} />
+                    )}
+                    {locationDetail.type[0] === "Himbeere" && (
+                      <img src={Himbeere} alt="Himbeere-Icon" height={120} />
+                    )}
+                    {locationDetail.type[0] === "Johannisbeere" && (
+                      <img
+                        src={Johannisbeere}
+                        alt="Johannisbeere-Icon"
+                        height={120}
+                      />
+                    )}
+                    {locationDetail.type[0] === "Kirsche" && (
+                      <img src={Kirsche} alt="Kirsche-Icon" height={120} />
+                    )}
+                    {locationDetail.type[0] === "Weintraube" && (
+                      <img
+                        src={Weintraube}
+                        alt="Weintraube-Icon"
+                        height={120}
+                      />
+                    )}
+                    {locationDetail.type[0] === "Pflaume" && (
+                      <img src={Pflaume} alt="Pflaume-Icon" height={120} />
+                    )}
+                    {locationDetail.type[0] === "Erdbeere" && (
+                      <img src={Erdbeere} alt="Erdbeere-Icon" height={120} />
+                    )}
+                    {locationDetail.type[0] === "Stachelbeere" && (
+                      <img
+                        src={Stachelbeere}
+                        alt="Stachelbeere-Icon"
+                        height={120}
+                      />
+                    )}
+                    {locationDetail.type[0] === "Sonstiges" && (
+                      <img src={Sonstiges} alt="Obstkorb" height={120} />
+                    )}
+                    <div>
+                      <h4>{locationDetail.type[0]}</h4>
 
-                <div className="locationDetails-details">
-                  <p>Wo befindet sich der Baum?</p>
-                  {locationDetail.location.address}
-                </div>
-                {locationDetail.pictureURL.length > 2 && (
-                  <div className="tree-picture">
-                    <img src={locationDetail.pictureURL} alt="" />
+                      <div className="like-btn">
+                        <p>Favorit</p>
+                        {!liked && (
+                          <>
+                            <div onClick={handleLike}>
+                              <img src={Like_black} alt="" />
+                            </div>
+                          </>
+                        )}
+                        {liked && (
+                          <>
+                            <div onClick={handleDislike}>
+                              <img src={Like_red} alt="" />
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    </div>
                   </div>
-                )}
 
-                {!liked && (
-                  <>
-                    <div onClick={handleLike}>
-                      <img src={Like_black} alt="" />
+                  <div className="locationDetails-details">
+                    <h4>Wo?</h4>
+                    <p>{locationDetail.location.address}</p>
+                  </div>
+
+                  <div className="details-owner">
+                    <h4>Info des Besitzers:</h4>
+                    <p>{locationDetail.info}</p>
+                  </div>
+
+                  {locationDetail.pictureURL.length > 2 && (
+                    <div className="tree-picture">
+                      <img src={locationDetail.pictureURL} alt="" />
                     </div>
-                  </>
-                )}
-                {liked && (
-                  <>
-                    <div onClick={handleDislike}>
-                      <img src={Like_red} alt="" />
-                    </div>
-                  </>
-                )}
-                <div className="locationDetails-details">
-                  <p>Info des Besitzers:</p>
-                  {locationDetail.info}
-                </div>
-              </>
-            )}
+                  )}
+                </>
+              )}
+            </div>
             <div className="locationDetails-details" id="write-comment">
               <form className="commentForm" onSubmit={(e) => handleSubmit(e)}>
                 <textarea
@@ -241,38 +276,38 @@ function LocationDetails({ locationData }) {
                   placeholder="Hinterlasse einen Kommentar"
                   required
                 ></textarea>
-                <input
-                  type="submit"
-                  className="submit btn"
-                  value="Hinzufügen"
-                />
+                <div className="comment-btn">
+                  <input
+                    type="submit"
+                    className="submit btn"
+                    value="Kommentieren"
+                  />
+                </div>
               </form>
             </div>
-            <div className="locationDetails-details">
-              <p>Kommentare:</p>
-            </div>
-
-            {commentList &&
-              commentList.map((comment, index) => (
-                <div key={index}>
-                  <div className="comment-wrapper">
-                    <div className="comment-avatar">
-                      <img src={comment.avatar} alt="Avatar" />
-                    </div>
-                    <div className="comment-content">
-                      <div className="comment-user">
-                        <p className="comment-user-name">{comment.user}</p>
-                        <p className="comment-user-timestamp">
-                          {comment.timestamp}
-                        </p>
+            <div className="comment-container">
+              {commentList &&
+                commentList.map((comment, index) => (
+                  <div key={index}>
+                    <div className="comment-wrapper">
+                      <div className="comment-avatar">
+                        <img src={comment.avatar} alt="Avatar" />
                       </div>
-                      <div className="comment-text">
-                        <p>{comment.comment}</p>
+                      <div className="comment-content">
+                        <div className="comment-user">
+                          <p className="comment-user-name">{comment.user}</p>
+                          <p className="comment-user-timestamp">
+                            {comment.timestamp}
+                          </p>
+                        </div>
+                        <div className="comment-text">
+                          <p>{comment.comment}</p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+            </div>
           </div>
         </div>
       )}
