@@ -212,14 +212,14 @@ function UserPage() {
                     <td>Hier findest du deine Favoriten</td>
                   </tr>
                 )}
-                {/* {userFavorites &&
+                {userFavorites &&
                   userFavorites.map((favorite) => (
                     <tr>
                       <td>{favorite[0].status.status}</td>
                       <td>{favorite[0].type[0]}</td>
                       <td>{favorite[0].location.address}</td>
                     </tr>
-                  ))} */}
+                  ))}
               </tbody>
             </table>
           </div>
