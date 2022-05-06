@@ -67,11 +67,9 @@ function Tree() {
               {userTrees &&
                 userTrees.map((myTrees) => (
                   <tr key={myTrees._id}>
-                    <td className="my-tree-type-modal">
-                      {myTrees.type.join(", ")}
-                    </td>
+                    <td className="my-tree-type">{myTrees.type.join(", ")}</td>
                     <td className="my-tree-address-modal">
-                      {myTrees.location.address}
+                      {myTrees.location.address.substring(0, 25)}...
                     </td>
                     <td className="deactivate-reactivate-btn">
                       {myTrees.active === true ? (
