@@ -252,10 +252,12 @@ function LocationDetails({ locationData }) {
                     <p>{locationDetail.location.address}</p>
                   </div>
 
-                  <div className="details-owner">
-                    <h4>Info des Besitzers:</h4>
-                    <p>{locationDetail.info}</p>
-                  </div>
+                  {locationDetail.info.length > 0 && (
+                    <div className="details-owner">
+                      <h4>Info des Besitzers:</h4>
+                      <p>{locationDetail.info}</p>
+                    </div>
+                  )}
 
                   {locationDetail.pictureURL.length > 2 && (
                     <div className="tree-picture">

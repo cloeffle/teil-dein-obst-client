@@ -126,11 +126,12 @@ textarea:focus {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin: 0.5rem 1.5rem;
 }
 
 .locationDetails-content {
   line-height: 2rem;
+  margin: 0.5rem 1.5rem;
+
 }
 
 .details-fruit {
@@ -142,6 +143,8 @@ textarea:focus {
   display: flex;
   flex-direction: column;
   justify-content: center;
+    margin: 0.5rem 1.5rem;
+
 }
 
 .commentForm textarea {
