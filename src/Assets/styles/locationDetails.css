@@ -184,7 +184,8 @@ textarea:focus {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  margin-top: 1rem;
+  margin: 1rem 1.5rem;
+
 }
 
 .comment-avatar {
@@ -202,6 +203,7 @@ textarea:focus {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  
 }
 
 .comment-user {
