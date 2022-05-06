@@ -22,34 +22,34 @@ const LocationMarker = ({ onClick, type }) => {
         <img src={Kirsche} alt="Kirsche-Icon" height={120} />
       )}
       {type === 'Aprikose' && (
-        <img src={Aprikose} alt="Apfel-Icon" height={120} />
+        <img src={Aprikose} alt="Aprikose-Icon" height={120} />
       )}
-      {type === 'Birne' && <img src={Birne} alt="Apfel-Icon" height={120} />}
+      {type === 'Birne' && <img src={Birne} alt="Birne-Icon" height={120} />}
       {type === 'Erdbeere' && (
-        <img src={Erdbeere} alt="Apfel-Icon" height={120} />
+        <img src={Erdbeere} alt="Erdbeere-Icon" height={120} />
       )}
       {type === 'Heidelbeere' && (
-        <img src={Heidelbeere} alt="Apfel-Icon" height={120} />
+        <img src={Heidelbeere} alt="Heidelbeere-Icon" height={120} />
       )}
       {type === 'Himbeere' && (
-        <img src={Himbeere} alt="Apfel-Icon" height={120} />
+        <img src={Himbeere} alt="Himbeere-Icon" height={120} />
       )}
       {type === 'Johannisbeere' && (
-        <img src={Johannisbeere} alt="Apfel-Icon" height={120} />
+        <img src={Johannisbeere} alt="Johannisbeere-Icon" height={120} />
       )}
       {type === 'Kirsche' && (
-        <img src={Kirsche} alt="Apfel-Icon" height={120} />
+        <img src={Kirsche} alt="Kirsche-Icon" height={120} />
       )}
       {type === 'Stachelbeere' && (
-        <img src={Stachelbeere} alt="Apfel-Icon" height={120} />
+        <img src={Stachelbeere} alt="Stachelbeere-Icon" height={120} />
       )}
       {type === 'Weintraube' && (
-        <img src={Weintraube} alt="Apfel-Icon" height={120} />
+        <img src={Weintraube} alt="Weintraube-Icon" height={120} />
       )}
       {type === 'Pflaume' && (
-        <img src={Pflaume} alt="Apfel-Icon" height={120} />
+        <img src={Pflaume} alt="Pflaume-Icon" height={120} />
       )}
-      {type === 'Korb' && <img src={Korb} alt="Apfel-Icon" height={120} />}
+      {type === 'Korb' && <img src={Korb} alt="Sonstiges-Icon" height={120} />}
     </div>
   );
 };
