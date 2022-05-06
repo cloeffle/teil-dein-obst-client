@@ -18,6 +18,9 @@ const LocationMarker = ({ onClick, type }) => {
   return (
     <div className="location_marker" onClick={onClick}>
       {type === 'Apfel' && <img src={Apfel} alt="Apfel-Icon" height={120} />}
+      {type === 'Kirsche' && (
+        <img src={Kirsche} alt="Kirsche-Icon" height={120} />
+      )}
       {type === 'Aprikose' && (
         <img src={Aprikose} alt="Aprikose-Icon" height={120} />
       )}

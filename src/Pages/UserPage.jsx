@@ -38,9 +38,12 @@ function UserPage() {
   let subtitle;
   const [isOpen, setIsOpen] = useState(false);
 
-  if (userFavorites) {
-    console.log(userFavorites, 'userFavorites');
-  }
+  useEffect(() => {
+    // slice id to avoid special characters
+    axios(
+      `http://localhost:8000/user/${user.sub.slice(user.sub.length - 7)}`
+    ).then((response) => setUserData(response.data));
+  }, []);
 
   useEffect(() => {
     if (userData) {
@@ -51,13 +54,6 @@ function UserPage() {
       );
     }
   }, [userData]);
-
-  useEffect(() => {
-    // slice id to avoid special characters
-    axios(
-      `http://localhost:8000/user/${user.sub.slice(user.sub.length - 7)}`
-    ).then((response) => setUserData(response.data));
-  }, []);
 
   useEffect(() => {
     axios(
@@ -93,10 +89,21 @@ function UserPage() {
     setIsOpen(false);
   };
 
-
   const refreshPage = () => {
     window.location.reload();
   };
+
+  if (userFavorites) {
+    console.log(userFavorites, 'userFavorites');
+    userFavorites.map((favorite) =>
+      console.log(favorite[0].location.adress, 'fav')
+    );
+  }
+
+  if (userTrees.length > 0) {
+    console.log(userTrees, 'usertrees');
+    userTrees.map((myTrees) => console.log(myTrees.location.address));
+  }
 
   return (
     <div>
@@ -147,23 +154,25 @@ function UserPage() {
                   )}
                   {userTrees.length > 0 &&
                     userTrees.map((myTrees) => (
-                      <tr key={myTrees._id}>
-                        <td className="my-tree-type">
-                          {myTrees.type.join(', ')}
-                        </td>
-                        <td className="my-tree-address">
-                          {myTrees.location.address.substring(0, 25)}...
-                        </td>
-                        <td className="my-tree-status">
-                          {myTrees.active === true ? (
-                            <p style={{ color: 'green' }}>aktiv</p>
-                          ) : (
-                            <p style={{ color: 'grey', fontWeight: 'bold' }}>
-                              inaktiv
-                            </p>
-                          )}
-                        </td>
-                      </tr>
+                      <Link to={`../${myTrees._id}`} className="tree-list">
+                        <tr key={myTrees._id}>
+                          <td className="my-tree-type">
+                            {myTrees.type.join(', ')}
+                          </td>
+                          <td className="my-tree-address">
+                            {myTrees.location.address.substring(0, 25)}...
+                          </td>
+                          <td className="my-tree-status">
+                            {myTrees.active === true ? (
+                              <p style={{ color: 'green' }}>aktiv</p>
+                            ) : (
+                              <p style={{ color: 'grey', fontWeight: 'bold' }}>
+                                inaktiv
+                              </p>
+                            )}
+                          </td>
+                        </tr>
+                      </Link>
                     ))}
                 </tbody>
               </table>
@@ -185,7 +194,7 @@ function UserPage() {
                 </div>
                 <h3
                   ref={(_subtitle) => (subtitle = _subtitle)}
-                  style={{ marginBottom: "1rem" }}
+                  style={{ marginBottom: '1rem' }}
                 >
                   Inaktivieren / Aktivieren oder Löschen
                 </h3>
@@ -211,13 +220,26 @@ function UserPage() {
                     <td>Hier findest du deine Favoriten</td>
                   </tr>
                 )}
-                {userFavorites &&
+                {userFavorites.length > 0 &&
                   userFavorites.map((favorite) => (
-                    <tr>
-                      <td>{favorite[0].active}</td>
-                      <td>{favorite[0].type[0]}</td>
-                      <td>{favorite[0].location.address}</td>
-                    </tr>
+                    <Link to={`../${favorite[0]._id}`} className="tree-list">
+                      <tr>
+                        <td className="my-tree-type">{favorite[0].type[0]}</td>
+                        <td className="my-tree-address">
+                          {favorite[0].location.address.substring(0, 25)}...
+                        </td>
+                        <td className="my-tree-status">
+                          {favorite[0].active && (
+                            <p style={{ color: 'green' }}>aktiv</p>
+                          )}
+                          {!favorite[0].active && (
+                            <p style={{ color: 'grey', fontWeight: 'bold' }}>
+                              inaktiv
+                            </p>
+                          )}
+                        </td>
+                      </tr>
+                    </Link>
                   ))}
               </tbody>
             </table>

@@ -91,3 +91,8 @@ figure img {
 .userpage-title img {
   width: 45%;
 }
+
+.tree-list {
+  display: flex;
+  flex-direction: column;
+}
