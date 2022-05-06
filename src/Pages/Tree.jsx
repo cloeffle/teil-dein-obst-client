@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
+import axios from 'axios';
 
-import "../assets/styles/myTrees.css";
-import Delete from "../assets/images/icons8-entfernen.svg";
+import '../assets/styles/myTrees.css';
+import Delete from '../assets/images/icons8-entfernen.svg';
 
 function Tree() {
   const { user } = useAuth0();
@@ -21,6 +21,21 @@ function Tree() {
 
   //DELETE TREE
   const deleteTree = (id) => {
+    axios
+      .put(
+        `http://localhost:8000/user/disliketree/${user.sub.slice(
+          user.sub.length - 7
+        )}`,
+        {
+          treeId: id,
+        }
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     axios.delete(`http://localhost:8000/tree/${id}`).then(() => {
       axios(
         `http://localhost:8000/tree/collection/${user.sub.slice(
@@ -67,7 +82,9 @@ function Tree() {
               {userTrees &&
                 userTrees.map((myTrees) => (
                   <tr key={myTrees._id}>
-                    <td className="my-tree-type">{myTrees.type.join(", ")}</td>
+                    <td className="my-tree-type-modal">
+                      {myTrees.type.join(', ')}
+                    </td>
                     <td className="my-tree-address-modal">
                       {myTrees.location.address.substring(0, 25)}...
                     </td>
