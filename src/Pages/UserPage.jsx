@@ -154,25 +154,25 @@ function UserPage() {
                   )}
                   {userTrees.length > 0 &&
                     userTrees.map((myTrees) => (
-                      <Link to={`../${myTrees._id}`} className="tree-list">
-                        <tr key={myTrees._id}>
-                          <td className="my-tree-type">
+                      <tr key={myTrees._id}>
+                        <td className="my-tree-type">
+                          <Link to={`../${myTrees._id}`}>
                             {myTrees.type.join(', ')}
-                          </td>
-                          <td className="my-tree-address">
-                            {myTrees.location.address.substring(0, 25)}...
-                          </td>
-                          <td className="my-tree-status">
-                            {myTrees.active === true ? (
-                              <p style={{ color: 'green' }}>aktiv</p>
-                            ) : (
-                              <p style={{ color: 'grey', fontWeight: 'bold' }}>
-                                inaktiv
-                              </p>
-                            )}
-                          </td>
-                        </tr>
-                      </Link>
+                          </Link>
+                        </td>
+                        <td className="my-tree-address">
+                          {myTrees.location.address.substring(0, 25)}...
+                        </td>
+                        <td className="my-tree-status">
+                          {myTrees.active === true ? (
+                            <p style={{ color: 'green' }}>aktiv</p>
+                          ) : (
+                            <p style={{ color: 'grey', fontWeight: 'bold' }}>
+                              inaktiv
+                            </p>
+                          )}
+                        </td>
+                      </tr>
                     ))}
                 </tbody>
               </table>
@@ -222,24 +222,26 @@ function UserPage() {
                 )}
                 {userFavorites.length > 0 &&
                   userFavorites.map((favorite) => (
-                    <Link to={`../${favorite[0]._id}`} className="tree-list">
-                      <tr>
-                        <td className="my-tree-type">{favorite[0].type[0]}</td>
-                        <td className="my-tree-address">
-                          {favorite[0].location.address.substring(0, 25)}...
-                        </td>
-                        <td className="my-tree-status">
-                          {favorite[0].active && (
-                            <p style={{ color: 'green' }}>aktiv</p>
-                          )}
-                          {!favorite[0].active && (
-                            <p style={{ color: 'grey', fontWeight: 'bold' }}>
-                              inaktiv
-                            </p>
-                          )}
-                        </td>
-                      </tr>
-                    </Link>
+                    <tr key={favorite[0]._id}>
+                      <td className="my-tree-type">
+                        <Link to={`../${favorite[0]._id}`}>
+                          {favorite[0].type[0]}{' '}
+                        </Link>
+                      </td>
+                      <td className="my-tree-address">
+                        {favorite[0].location.address.substring(0, 25)}...
+                      </td>
+                      <td className="my-tree-status">
+                        {favorite[0].active && (
+                          <p style={{ color: 'green' }}>aktiv</p>
+                        )}
+                        {!favorite[0].active && (
+                          <p style={{ color: 'grey', fontWeight: 'bold' }}>
+                            inaktiv
+                          </p>
+                        )}
+                      </td>
+                    </tr>
                   ))}
               </tbody>
             </table>
