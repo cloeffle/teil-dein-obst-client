@@ -1,4 +1,5 @@
-.userpage-container {
+@media screen and (min-width: 0px) {
+  .userpage-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -98,3 +99,15 @@ figure img {
   display: flex;
   flex-direction: column;
 }
+
+}
+/**********************/
+/*****MEDIA QUERIES*****/
+/**********************/
+
+@media screen and (min-width: 390px) {
+ .userpage-container{
+     margin: 0.5rem 3rem;
+ }
+}
+
