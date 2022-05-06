@@ -1,9 +1,18 @@
+import '../assets/styles/locationMarker.css';
 import Marker from '../assets/images/Marker.png';
+import Apfel from '../assets/images/icons8-apple-500.png';
+import Kirsche from '../assets/images/icons8-cherry-500.png';
 
-const LocationMarker = ({ lat, lng, onClick }) => {
+const LocationMarker = ({ onClick, type }) => {
+  console.log('TYPE', type);
   return (
     <div className="location_marker" onClick={onClick}>
-      <img src={Marker} className="location_icon" alt="marker" />
+      {type === 'Apfel' && (
+              <img src={Apfel} alt="Apfel-Icon" height={120} />
+            )}
+      {type === 'Kirsche' && (
+              <img src={Kirsche} alt="Kirsche-Icon" height={120} />
+            )}
     </div>
   );
 };

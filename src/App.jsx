@@ -25,7 +25,6 @@ function App() {
 
   console.log("Fetch Trees", locationData);
 
-
   return (
     <div className="App">
       <Navbar />

@@ -72,6 +72,13 @@ function Tree() {
         <div className="my-trees">
           <table>
             <tbody>
+              {!userTrees.length > 0 && (
+                <tr>
+                  <td style={{ fontSize: "14px", fontStyle: "italic" }}>
+                    Keine zu bearbeiteten Obstbäume /-sträucher gefunden
+                  </td>
+                </tr>
+              )}
               {userTrees &&
                 userTrees.map((myTrees) => (
                   <tr key={myTrees._id}>

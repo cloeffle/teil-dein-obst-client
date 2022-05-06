@@ -89,6 +89,7 @@ function UserPage() {
     setIsOpen(false);
   };
 
+
   const refreshPage = () => {
     window.location.reload();
   };
@@ -109,7 +110,15 @@ function UserPage() {
     <div>
       <LogoComponent />
       <div className="userpage-container">
-        <h3>Hallo {user.name}</h3>
+        <div className="userpage-title">
+          <h3>Hallo {user.name}</h3>
+          <button>
+            <img
+              src="https://img.icons8.com/dusk/64/000000/gear.png"
+              alt="Einstellungen"
+            />
+          </button>
+        </div>
         <div className="add-trees">
           <figure>
             <Link to="/baum-registrieren" className="link-add-tree">
@@ -121,7 +130,17 @@ function UserPage() {
           </figure>
         </div>
         <div className="trees-wrapper">
-          <h4>Mein Obst</h4>
+          <div className="my-tree-edit">
+            <h4>Mein Obst</h4>
+            {userTrees.length > 0 && (
+              <button className="tree-edit-btn" onClick={openModal}>
+                <img
+                  src="https://img.icons8.com/dusk/64/000000/pencil--v1.png"
+                  alt="Bearbeiten"
+                />
+              </button>
+            )}
+          </div>
           <div className="trees-container userpage">
             <div className="my-trees">
               <table>
@@ -156,36 +175,30 @@ function UserPage() {
                     ))}
                 </tbody>
               </table>
-              <div className="my-tree-edit" id="root">
-                {userTrees.length > 0 && (
-                  <button className="tree-edit-btn" onClick={openModal}>
-                    Bearbeiten
-                  </button>
-                )}
-                <Modal
-                  isOpen={isOpen}
-                  onAfterOpen={afterOpenModal}
-                  onRequestClose={closeModal}
-                  style={customStyles}
-                  contentLabel="Tree Modal"
-                >
-                  <div className="modal-close">
-                    <button
-                      className="modal-close-btn"
-                      onClick={closeModal && refreshPage}
-                    >
-                      &times;
-                    </button>
-                  </div>
-                  <h3
-                    ref={(_subtitle) => (subtitle = _subtitle)}
-                    style={{ marginBottom: '1rem' }}
+              <Modal
+                isOpen={isOpen}
+                onAfterOpen={afterOpenModal}
+                onRequestClose={closeModal}
+                shouldCloseOnOverlayClick={false}
+                style={customStyles}
+                contentLabel="Tree Modal"
+              >
+                <div className="modal-close">
+                  <button
+                    className="modal-close-btn"
+                    onClick={closeModal && refreshPage}
                   >
-                    Inaktivieren / Aktivieren oder Löschen
-                  </h3>
-                  <Tree />
-                </Modal>
-              </div>
+                    &times;
+                  </button>
+                </div>
+                <h3
+                  ref={(_subtitle) => (subtitle = _subtitle)}
+                  style={{ marginBottom: "1rem" }}
+                >
+                  Inaktivieren / Aktivieren oder Löschen
+                </h3>
+                <Tree />
+              </Modal>
             </div>
           </div>
         </div>
@@ -227,17 +240,8 @@ function UserPage() {
             </table>
           </div>
         </div>
-        {/* <div className="leaderboard-container">
-          <h4>Rangliste</h4>
-          <div className="leaderboard userpage">
-            <p>1. User #12423</p>
-            <p>2. User #45345</p>
-            <p>3. User #23456</p>
-          </div>
-        </div> */}
         <div className="userpage-btn">
           <LogoutButton />
-          <button className="settings-btn btn">Einstellungen</button>
         </div>
       </div>
     </div>
