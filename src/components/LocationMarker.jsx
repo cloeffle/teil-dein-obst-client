@@ -14,39 +14,39 @@ import Pflaume from '../assets/images/icons8-plum-500.png';
 import Korb from '../assets/images/fruit basket 500.png';
 
 const LocationMarker = ({ onClick, type }) => {
-  console.log('TYPE', type);
+  // console.log('TYPE', type);
   return (
     <div className="location_marker" onClick={onClick}>
       {type === 'Apfel' && <img src={Apfel} alt="Apfel-Icon" height={120} />}
       {type === 'Aprikose' && (
-        <img src={Aprikose} alt="Apfel-Icon" height={120} />
+        <img src={Aprikose} alt="Aprikose-Icon" height={120} />
       )}
-      {type === 'Birne' && <img src={Birne} alt="Apfel-Icon" height={120} />}
+      {type === 'Birne' && <img src={Birne} alt="Birne-Icon" height={120} />}
       {type === 'Erdbeere' && (
-        <img src={Erdbeere} alt="Apfel-Icon" height={120} />
+        <img src={Erdbeere} alt="Erdbeere-Icon" height={120} />
       )}
       {type === 'Heidelbeere' && (
-        <img src={Heidelbeere} alt="Apfel-Icon" height={120} />
+        <img src={Heidelbeere} alt="Heidelbeere-Icon" height={120} />
       )}
       {type === 'Himbeere' && (
-        <img src={Himbeere} alt="Apfel-Icon" height={120} />
+        <img src={Himbeere} alt="Himbeere-Icon" height={120} />
       )}
       {type === 'Johannisbeere' && (
-        <img src={Johannisbeere} alt="Apfel-Icon" height={120} />
+        <img src={Johannisbeere} alt="Johannisbeere-Icon" height={120} />
       )}
       {type === 'Kirsche' && (
-        <img src={Kirsche} alt="Apfel-Icon" height={120} />
+        <img src={Kirsche} alt="Kirsche-Icon" height={120} />
       )}
       {type === 'Stachelbeere' && (
-        <img src={Stachelbeere} alt="Apfel-Icon" height={120} />
+        <img src={Stachelbeere} alt="Stachelbeere-Icon" height={120} />
       )}
       {type === 'Weintraube' && (
-        <img src={Weintraube} alt="Apfel-Icon" height={120} />
+        <img src={Weintraube} alt="Weintraube-Icon" height={120} />
       )}
       {type === 'Pflaume' && (
-        <img src={Pflaume} alt="Apfel-Icon" height={120} />
+        <img src={Pflaume} alt="Pflaume-Icon" height={120} />
       )}
-      {type === 'Korb' && <img src={Korb} alt="Apfel-Icon" height={120} />}
+      {type === 'Korb' && <img src={Korb} alt="Sonstiges-Icon" height={120} />}
     </div>
   );
 };
