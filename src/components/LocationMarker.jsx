@@ -14,10 +14,13 @@ import Pflaume from '../assets/images/icons8-plum-500.png';
 import Korb from '../assets/images/fruit basket 500.png';
 
 const LocationMarker = ({ onClick, type }) => {
-  console.log('TYPE', type);
+  // console.log('TYPE', type);
   return (
     <div className="location_marker" onClick={onClick}>
       {type === 'Apfel' && <img src={Apfel} alt="Apfel-Icon" height={120} />}
+      {type === 'Kirsche' && (
+        <img src={Kirsche} alt="Kirsche-Icon" height={120} />
+      )}
       {type === 'Aprikose' && (
         <img src={Aprikose} alt="Apfel-Icon" height={120} />
       )}
