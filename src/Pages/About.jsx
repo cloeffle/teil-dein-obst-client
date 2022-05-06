@@ -8,18 +8,40 @@ export default function About() {
     <>
       <LogoComponent />
       <div className="about-container">
-        <div className="about-text">
+        <div className="about-text-wrapper">
           <h3>Über Teil dein Obst</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
-            mollitia, molestiae quas vel sint commodi repudiandae consequuntur
-            voluptatum laborum numquam blanditiis harum quisquam eius sed odit
-            fugiat iusto fuga praesentium optio, eaque rerum! Provident
-            similique accusantium nemo autem. Veritatis obcaecati tenetur iure
-            eius earum ut molestias architecto voluptate aliquam nihil, eveniet
-            aliquid culpa officia aut! Impedit sit sunt quaerat, odit, tenetur
-            error, harum nesciunt ipsum debitis quas aliquid.
-          </p>
+          <div className="about-text">
+            <i>Teil dein Obst</i> ist eine Plattform auf der Besitzer von
+            Obstbäumen/-sträuchen das Obst der Gemeinschaft zur Verfügung
+            stellen können bevor es verfault. Besitzer müssen sich vorher
+            registrieren um das Obst auf die Plattform hochzuladen.
+            <br />
+            Obstliebhaber können die Map ohne Registrierung nutzen. Wer jedoch eine
+            Favoritenliste erstellen möchte um z.B. zu sehen, ob es dort noch Früchte
+            gibt, oder die Kommentarfunktion nutzen möchte, muss sich zuerst
+            registrieren.
+            <br />
+            Folgende Regeln sollten bei der Nutzung dieser Webapp berücksichtigt
+            werden:
+            <br />
+            <ol>
+              <li>
+                <b>Nimm nur so viel Obst wie Du selbst essen kannst</b>
+              </li>
+              <li>
+                <b>
+                  Veröffentliche keine Obstbäume/-sträucher die Dir nicht
+                  gehören
+                </b>
+              </li>
+              <li>
+                <b>Gehe behutsam mit dem Eigentum anderer um. Breche keine Äste oder entwurzel Pflanzen etc.</b>
+              </li>
+              <li>
+                <b>Achte auf die Infos vom Besitzer und halte Dich an sie</b>
+              </li>
+            </ol>
+          </div>
         </div>
       </div>
     </>
