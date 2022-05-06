@@ -115,7 +115,7 @@ function LocationDetails({ locationData }) {
       .then((res) => setCommentList(res.data))
       .catch((err) => console.log(err));
   }, [locationDetail]);
-  
+
   let timestamp = new Date().toGMTString();
 
   //POST COMMENT

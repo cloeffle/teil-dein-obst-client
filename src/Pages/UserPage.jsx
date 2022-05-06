@@ -89,7 +89,6 @@ function UserPage() {
     setIsOpen(false);
   };
 
-
   const refreshPage = () => {
     window.location.reload();
   };
@@ -155,23 +154,25 @@ function UserPage() {
                   )}
                   {userTrees.length > 0 &&
                     userTrees.map((myTrees) => (
-                      <tr key={myTrees._id}>
-                        <td className="my-tree-type">
-                          {myTrees.type.join(', ')}
-                        </td>
-                        <td className="my-tree-address">
-                          {myTrees.location.address.substring(0, 25)}...
-                        </td>
-                        <td className="my-tree-status">
-                          {myTrees.active === true ? (
-                            <p style={{ color: 'green' }}>aktiv</p>
-                          ) : (
-                            <p style={{ color: 'grey', fontWeight: 'bold' }}>
-                              inaktiv
-                            </p>
-                          )}
-                        </td>
-                      </tr>
+                      <Link to={`../${myTrees._id}`}>
+                        <tr key={myTrees._id}>
+                          <td className="my-tree-type">
+                            {myTrees.type.join(', ')}
+                          </td>
+                          <td className="my-tree-address">
+                            {myTrees.location.address.substring(0, 25)}...
+                          </td>
+                          <td className="my-tree-status">
+                            {myTrees.active === true ? (
+                              <p style={{ color: 'green' }}>aktiv</p>
+                            ) : (
+                              <p style={{ color: 'grey', fontWeight: 'bold' }}>
+                                inaktiv
+                              </p>
+                            )}
+                          </td>
+                        </tr>
+                      </Link>
                     ))}
                 </tbody>
               </table>
@@ -193,7 +194,7 @@ function UserPage() {
                 </div>
                 <h3
                   ref={(_subtitle) => (subtitle = _subtitle)}
-                  style={{ marginBottom: "1rem" }}
+                  style={{ marginBottom: '1rem' }}
                 >
                   Inaktivieren / Aktivieren oder Löschen
                 </h3>
@@ -221,20 +222,22 @@ function UserPage() {
                 )}
                 {userFavorites.length > 0 &&
                   userFavorites.map((favorite) => (
-                    <tr>
-                      <td>{favorite[0].type[0]}</td>
-                      <td>
-                        {favorite[0].location.address.substring(0, 25)}...
-                      </td>
-                      {favorite[0].active && (
-                        <p style={{ color: 'green' }}>aktiv</p>
-                      )}
-                      {!favorite[0].active && (
-                        <p style={{ color: 'grey', fontWeight: 'bold' }}>
-                          inaktiv
-                        </p>
-                      )}
-                    </tr>
+                    <Link to={`../${favorite[0]._id}`}>
+                      <tr>
+                        <td>{favorite[0].type[0]}</td>
+                        <td>
+                          {favorite[0].location.address.substring(0, 25)}...
+                        </td>
+                        {favorite[0].active && (
+                          <p style={{ color: 'green' }}>aktiv</p>
+                        )}
+                        {!favorite[0].active && (
+                          <p style={{ color: 'grey', fontWeight: 'bold' }}>
+                            inaktiv
+                          </p>
+                        )}
+                      </tr>
+                    </Link>
                   ))}
               </tbody>
             </table>
