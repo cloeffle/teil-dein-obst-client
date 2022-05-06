@@ -93,6 +93,7 @@ function UserPage() {
     setIsOpen(false);
   };
 
+
   const refreshPage = () => {
     window.location.reload();
   };
@@ -170,6 +171,7 @@ function UserPage() {
                 isOpen={isOpen}
                 onAfterOpen={afterOpenModal}
                 onRequestClose={closeModal}
+                shouldCloseOnOverlayClick={false}
                 style={customStyles}
                 contentLabel="Tree Modal"
               >
@@ -224,7 +226,6 @@ function UserPage() {
         </div>
         <div className="userpage-btn">
           <LogoutButton />
-          {/* <button className="settings-btn btn">Einstellungen</button> */}
         </div>
       </div>
     </div>

@@ -49,7 +49,8 @@ figure img {
   justify-content: space-between;
 }
 
-.tree-edit-btn, .userpage-title button {
+.tree-edit-btn,
+.userpage-title button {
   background-color: transparent;
 }
 
@@ -82,18 +83,10 @@ figure img {
   color: #af473c;
 }
 
-.settings-btn {
-  border: none;
-  background-color: #A7C46C;
-  color: #f9f8f2;
-}
-
 .userpage-title {
   display: flex;
-    justify-content: space-between;
+  justify-content: space-between;
 }
-
-
 
 .userpage-title img {
   width: 45%;
