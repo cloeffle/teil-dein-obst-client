@@ -17,7 +17,9 @@ button {
   flex-wrap: wrap;
   justify-content: center;
   background-color: #f7fafc;
-  width: 100vw;
+  max-width: 98vw;
+  height: 100vh;
+  margin: 0 auto;
 }
 
 .chooseBtn {
@@ -80,7 +82,7 @@ button {
 
 .applyFilter {
   display: flex;
-  margin-bottom: 1rem;
+  /* margin-bottom: 2rem; */
   justify-content: space-evenly;
   width: 100vw;
 }
@@ -88,8 +90,9 @@ button {
 .select {
   margin-top: 1rem;
   margin-left: 0.5rem;
+  margin-bottom: 1rem;
   padding: 10px 25px;
-  background-color: #A7C46C;
+  background-color: #a7c46c;
   color: #f9f8f2;
   font-family: 'Nunito', sans-serif;
   font-size: 0.9rem;
@@ -104,6 +107,7 @@ button {
 
 .delete {
   margin-top: 1rem;
+  margin-bottom: 1rem;
   padding: 10px 30.79px;
   border: 2px solid #af473c;
   background-color: transparent;
@@ -125,11 +129,12 @@ button {
     font-size: 14px;
   }
   .container {
-    width: 100vw;
-    height: 100vh;
+    max-width: 98vw;
+    height: 90vh;
+    margin: 0 auto;
   }
   .cardContainer {
-    width: 90vw;
+    max-width: 80vw;
     height: auto;
     margin-top: 0.25rem;
     gap: 0.5rem;
@@ -143,8 +148,9 @@ button {
     font-size: 20px;
   }
   .container {
-    width: 100vw;
-    height: 100vh;
+    max-width: 98vw;
+    height: 90vh;
+    margin: 0 auto;
   }
   .cardContainer {
     width: 90vw;
@@ -161,8 +167,9 @@ button {
     font-size: 28px;
   }
   .container {
-    width: 100vw;
-    height: 100vh;
+    max-width: 98vw;
+    height: 90vh;
+    margin: 0 auto;
   }
   .cardContainer {
     width: 90vw;
