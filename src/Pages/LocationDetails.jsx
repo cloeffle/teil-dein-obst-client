@@ -21,7 +21,7 @@ import '../assets/styles/locationDetails.css';
 
 function LocationDetails({ locationData }) {
   //GET LOCATION DATA FOR SPECIFIC LOCATION (ID)
-  console.log("locationData", locationData);
+  console.log('locationData', locationData);
   const params = useParams();
   let locationDetail = locationData.find(function (location) {
     return location._id === params.id;
@@ -32,13 +32,20 @@ function LocationDetails({ locationData }) {
   const { user } = useAuth0();
   const [userData, setUserData] = useState([]);
   console.log('USER', userData);
+  const [liked, setLiked] = useState(false);
 
   useEffect(() => {
     if (user) {
       axios
-        .get(`http://localhost:8000/user/${user.sub}`)
+        .get(
+          `http://localhost:8000/user/${user.sub.slice(user.sub.length - 7)}`
+        )
         .then((res) => {
           setUserData(res.data);
+          if (res.data.favorites.includes(locationDetail._id)) {
+            setLiked(true);
+            console.log('faved');
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -47,13 +54,20 @@ function LocationDetails({ locationData }) {
   }, [user]);
 
   //ADD TO FAVAORITES
-  const [liked, setLiked] = useState(false);
-  const [favorite, setFavorite] = useState(null);
+  // const [favorite, setFavorite] = useState(null);
   const handleLike = () => {
     setLiked(!liked);
-    setFavorite(locationDetail._id);
+    console.log(locationDetail._id);
+    // setFavorite(locationDetail._id);
     axios
-      .put(`http://localhost:8000/user/${user.sub}`, favorite)
+      .put(
+        `http://localhost:8000/user/liketree/${user.sub.slice(
+          user.sub.length - 7
+        )}`,
+        {
+          treeId: locationDetail._id,
+        }
+      )
       .then((res) => {
         console.log(res);
       })
@@ -61,7 +75,27 @@ function LocationDetails({ locationData }) {
         console.log(err);
       });
   };
-  console.log('LIKED ID', favorite);
+  // const [favorite, setFavorite] = useState(null);
+  const handleDislike = () => {
+    setLiked(!liked);
+    console.log(locationDetail._id);
+    // setFavorite(locationDetail._id);
+    axios
+      .put(
+        `http://localhost:8000/user/disliketree/${user.sub.slice(
+          user.sub.length - 7
+        )}`,
+        {
+          treeId: locationDetail._id,
+        }
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   //POST COMMENT
   const [comment, setComment] = useState({
@@ -74,14 +108,13 @@ function LocationDetails({ locationData }) {
 
   //GET COMMENTS
   const [commentList, setCommentList] = useState([]);
-  
+
   useEffect(() => {
     axios
       .get(`http://localhost:8000/comment/${locationDetail._id}`)
       .then((res) => setCommentList(res.data))
       .catch((err) => console.log(err));
   }, [locationDetail]);
-  
 
   //POST COMMENT
   const handleChange = (e) => {
@@ -89,11 +122,11 @@ function LocationDetails({ locationData }) {
       [e.target.name]: e.target.value,
       timestamp: new Date().toLocaleString(),
       user: user.name,
-      tree: locationDetail._id,    
+      tree: locationDetail._id,
       avatar: user.picture,
     });
   };
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Comment', comment);
@@ -108,16 +141,10 @@ function LocationDetails({ locationData }) {
     e.target.reset();
     axios
       .get(`http://localhost:8000/comment/${locationDetail._id}`)
-      .then((res) => setCommentList(res.data))
-    
-  }
+      .then((res) => setCommentList(res.data));
+  };
 
-  
-  console.log(comment.comment)
-   
-   
-
-  //console.log('COMMENTLIST', commentList);
+  console.log(comment.comment);
 
   return (
     <div className="locationDetails">
@@ -171,54 +198,57 @@ function LocationDetails({ locationData }) {
               </div>
             )}
 
-            <div onClick={handleLike}>
-              {!liked ? (
-                <img src={Like_black} alt="" />
-              ) : (
-                <img src={Like_red} alt="" />
-              )}{' '}
-            </div>
-
+            {!liked && (
+              <>
+                <div onClick={handleLike}>
+                  <img src={Like_black} alt="" />
+                </div>
+              </>
+            )}
+            {liked && (
+              <>
+                <div onClick={handleDislike}>
+                  <img src={Like_red} alt="" />
+                </div>
+              </>
+            )}
             <div className="locationDetails-details">
               <p>Info des Besitzers:</p>
               {locationDetail.info}
             </div>
-            </>
-            )}
-            <div className="locationDetails-details" id="write-comment">
-              <form className="commentForm" onSubmit={(e) => handleSubmit(e)}>
-                <textarea
-                  className="commentTextarea"
-                  type="text"
-                  name="comment"
-                  value={comment.text}
-                  onBlur={handleChange}
-                  placeholder="Hinterlasse einen Kommentar"
-                  required
-                ></textarea>
-                <input
-                  type="submit"
-                  className="submit btn"
-                  value="Hinzufügen"
-                />
-              </form>
-            </div>
-            <div className="locationDetails-details">
-              <p>Kommentare:</p>
-            </div>
-                
-            {
-            commentList&&
-            commentList.map((comment, index) => 
+          </>
+        )}
+        <div className="locationDetails-details" id="write-comment">
+          <form className="commentForm" onSubmit={(e) => handleSubmit(e)}>
+            <textarea
+              className="commentTextarea"
+              type="text"
+              name="comment"
+              value={comment.text}
+              onBlur={handleChange}
+              placeholder="Hinterlasse einen Kommentar"
+              required
+            ></textarea>
+            <input type="submit" className="submit btn" value="Hinzufügen" />
+          </form>
+        </div>
+        <div className="locationDetails-details">
+          <p>Kommentare:</p>
+        </div>
+
+        {commentList &&
+          commentList.map((comment, index) => (
             <div key={index}>
               <div className="comment-wrapper">
                 <div className="comment-avatar">
                   <img src={comment.avatar} alt="Avatar" />
                 </div>
-                <div className='comment-content'>
-                  <div className='comment-user'>
-                    <p className='comment-user-name'>{comment.user}</p>
-                    <p className='comment-user-timestamp'>{comment.timestamp}</p>
+                <div className="comment-content">
+                  <div className="comment-user">
+                    <p className="comment-user-name">{comment.user}</p>
+                    <p className="comment-user-timestamp">
+                      {comment.timestamp}
+                    </p>
                   </div>
                   <div className="comment-text">
                     <p>{comment.comment}</p>
@@ -226,14 +256,10 @@ function LocationDetails({ locationData }) {
                 </div>
               </div>
             </div>
-           
-               )}
-          
-        
+          ))}
       </div>
     </div>
   );
 }
-
 
 export default LocationDetails;
