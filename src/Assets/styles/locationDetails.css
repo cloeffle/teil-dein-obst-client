@@ -176,7 +176,6 @@ textarea:focus {
 
 .comment-container {
   margin: 1rem 0;
-  border-top: 0.5px solid rgba(68, 68, 68, 0.517);
 }
 
 .comment-wrapper {
@@ -237,5 +236,11 @@ textarea:focus {
 }
 
 .details-owner {
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
+}
+
+.harvest-start-details {
+  display: flex;
+  flex-direction: column;
+  margin: 2.5rem 0,
 }

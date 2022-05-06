@@ -14,7 +14,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router-dom";
 
 import { useTheme } from "@mui/material/styles";
-import {makeStyles} from "@mui/styles";
+import { makeStyles } from "@mui/styles";
 import Box from "@mui/material/Box";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
@@ -23,9 +23,9 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
 
-import LogoComponent from '../components/LogoComponent';
-import '../assets/styles/treeRegistration.css';
-import Delete from '../assets/images/icons8-entfernen.svg';
+import LogoComponent from "../components/LogoComponent";
+import "../assets/styles/treeRegistration.css";
+import Delete from "../assets/images/icons8-entfernen.svg";
 
 // Select Option Obstsorte
 const ITEM_HEIGHT = 48;
@@ -92,8 +92,7 @@ export default function TreeRegistration() {
   const [fruitName, setFruitName] = useState([]);
   const [imageUpload, setImageUpload] = useState(false);
   const [imageName, setImageName] = useState("");
-    const classes = useStyles();
-
+  const classes = useStyles();
 
   const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -143,24 +142,6 @@ export default function TreeRegistration() {
     });
   };
 
-  //POSITIONSTACK API TO GET COORDINATES OF ADDRESS
-  // const getCoordinates = useCallback(async () => {
-  //   try {
-  //     const resp = await axios.get(
-  //       `http://api.positionstack.com/v1/forward?access_key=${process.env.REACT_APP_COORDINATE_KEY}&query=${userInput.address}&limit=1`
-  //     );
-  //     setUserInput({
-  //       ...userInput,
-  //       lat: resp.data.data[0].latitude,
-  //       lng: resp.data.data[0].longitude,
-  //     });
-  //     setSuccess("succeeded");
-  //   } catch (err) {
-  //     console.log("Error: ", err);
-  //     setFailed("error");
-  //   }
-  // }, [userInput]);
-
   // GOOGLE GEOCODING API TO GET ADDRESS FROM COORDINATES
   const getCoordinates = useCallback(
     async (e) => {
@@ -186,6 +167,7 @@ export default function TreeRegistration() {
   const [success, setSuccess] = useState("");
   const [failed, setFailed] = useState("");
   const [uploadSuccess, setUploadSuccess] = useState("");
+  const [imgUploadSuccess, setImgUploadSuccess] = useState("");
 
   //SUCCESS AND FAILED SEND MESSAGES TIMEOUT
   useEffect(() => {
@@ -224,6 +206,7 @@ export default function TreeRegistration() {
         })
       );
     }
+    setImgUploadSuccess("uploaded");
   };
 
   const handleSubmit = (e) => {
@@ -263,6 +246,7 @@ export default function TreeRegistration() {
         .then(() => console.log("Bild gelöscht"))
         .catch((error) => console.log(error));
     }
+    setImgUploadSuccess("");
   };
 
   return (
@@ -299,7 +283,14 @@ export default function TreeRegistration() {
             name="userId"
             onSubmit={(e) => handleSubmit(e)}
           >
-            <FormControl sx={{ m: 0, width: 340, backgroundColor: "white", borderRadius: "32px"}}>
+            <FormControl
+              sx={{
+                m: 0,
+                width: 340,
+                backgroundColor: "white",
+                borderRadius: "32px",
+              }}
+            >
               <InputLabel id="Obstsorte" sx={{ fontFamily: "Nunito" }}>
                 Obstsorte
               </InputLabel>
@@ -381,36 +372,41 @@ export default function TreeRegistration() {
             ></textarea>
             <div className="image-upload-wrapper">
               <label>Foto hochladen</label>
-              <div className="image-upload">
-                <label>
-                  <img
-                    className="upload-icon"
-                    src="https://img.icons8.com/bubbles/344/image.png"
-                    alt="upload icon"
-                  ></img>
-                  <input
-                    onChange={(event) => handleImage(event.target.files[0])}
-                    type="file"
-                    accept=".jpg,.jpeg,.png"
-                  ></input>
-                </label>
-                {imageUpload && (
-                  <>
-                    <p>{imageUpload.name}</p>
-                    <button
-                      className="image-upload-btn"
-                      onClick={(e) => imageToDB(e)}
-                    >
-                      Hochladen
-                    </button>
-                    <button
-                      className="delete-tree-btn"
-                      onClick={() => deleteImage()}
-                    >
-                      <img src={Delete} alt="Löschen" />
-                    </button>
-                  </>
-                )}
+              {imgUploadSuccess && renderImgUpload()}
+              <div className="image-upload-container">
+                <div className="image-icon-btn">
+                  <label>
+                    <img
+                      className="upload-icon"
+                      src="https://img.icons8.com/bubbles/344/image.png"
+                      alt="upload icon"
+                    ></img>
+                    <input
+                      onChange={(event) => handleImage(event.target.files[0])}
+                      type="file"
+                      accept=".jpg,.jpeg,.png"
+                    ></input>
+                  </label>
+                </div>
+                <div className="image-btn">
+                  {imageUpload && (
+                    <>
+                      <p>{imageUpload.name}</p>
+                      <button
+                        className="image-upload-btn"
+                        onClick={(e) => imageToDB(e)}
+                      >
+                        Hochladen
+                      </button>
+                      <button
+                        className="delete-tree-btn"
+                        onClick={() => deleteImage()}
+                      >
+                        <img src={Delete} alt="Löschen" />
+                      </button>
+                    </>
+                  )}
+                </div>
               </div>
             </div>
             {uploadSuccess && renderUpload()}
@@ -443,6 +439,12 @@ const renderFailed = () => (
 
 const renderUpload = () => (
   <div className="tree-upload-success">
-    <p>Baum wurde erfolgreich hochgeladen</p>
+    <p>Dein Obstbaum/-strauch wurde erfolgreich hochgeladen</p>
+  </div>
+);
+
+const renderImgUpload = () => (
+  <div className="tree-upload-success">
+    <p>Dein Foto wurde erfolgreich hochgeladen</p>
   </div>
 );
