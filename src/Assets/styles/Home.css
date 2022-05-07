@@ -110,6 +110,11 @@
   margin: 0.5rem 2rem 0.5rem 0;
 }
 
+.home-logo a{
+  display: flex;
+  justify-content: flex-end;
+}
+
 .home-logo img {
   width: 55%;
 }
