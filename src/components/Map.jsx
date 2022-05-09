@@ -27,22 +27,16 @@ const Map = ({
     }
   }, [locationCoordinates]);
 
-  console.log('center', center);
-
   const mapRef = useRef();
   const onMapLoad = useCallback((map) => {
     mapRef.current = map;
   }, []);
-
-  console.log('FILTEREDLOCATIONS ON MAP:', filteredLocations);
-  console.log('LOCATION DATA ON MAP:', locationData);
 
   // //! handover filtered Data from filter to Map-Markers
   if (filteredLocations.length > 0) {
     locationData = filteredLocations;
   }
 
-  console.log('LOC DATA ON MAP AFTER filled FILTEREDLOCATIONS :', locationData);
   //SHOW ALL LOCATIONS ON MAP
   const locations = locationData.map((location) => {
     return (

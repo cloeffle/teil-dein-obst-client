@@ -18,9 +18,6 @@ function Filter(props) {
   const { onSelectFilter, selectedFilter } = props;
   const [filter, setFilter] = useState([]);
 
-  // console.log('filter state in filter', filter);
-  // console.log('selectedFilter in filter', selectedFilter);
-
   const [fruitsort, setFruitsort] = useState([
     { name: 'Apfel', alt: 'Äpfel', bild: Apfel, id: 1, status: false },
     {
@@ -86,8 +83,6 @@ function Filter(props) {
     setFruitsort(fruit);
   };
 
-  // console.log('Fruitsort:', fruitsort);
-
   const handleDelete = () => {
     const fruit = [...fruitsort];
     fruit.forEach((fruit) => {
@@ -103,7 +98,6 @@ function Filter(props) {
     setFilter(filter);
     onSelectFilter(filter);
   };
-  // console.log('Filter anwenden:', filter);
 
   useEffect(() => {
     if (selectedFilter.length > 0) {

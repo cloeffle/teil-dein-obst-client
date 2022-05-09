@@ -1,30 +1,30 @@
-import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { useAuth0 } from "@auth0/auth0-react";
+import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useAuth0 } from '@auth0/auth0-react';
 
-import Logo from "../assets/logo/Logo.svg";
-import Login from "../components/Login/LoginButton";
-import Apfel from "../assets/images/icons8-apple-500.png";
-import Aprikose from "../assets/images/icons8-apricot-500.png";
-import Blaubeere from "../assets/images/icons8-blueberry-500.png";
-import Himbeere from "../assets/images/icons8-raspberry-500.png";
-import Johannisbeere from "../assets/images/icons8-redcurrant-512.png";
-import Kirsche from "../assets/images/icons8-cherry-500.png";
-import Weintraube from "../assets/images/icons8-grapes-500.png";
-import Pflaume from "../assets/images/icons8-plum-500.png";
-import Erdbeere from "../assets/images/icons8-strawberry-500.png";
-import Stachelbeere from "../assets/images/icons8-gooseberry-500-2.png";
-import Sonstiges from "../assets/images/fruit basket 500.png";
-import Birne from "../assets/images/icons8-pear-500.png";
-import Like_black from "../assets/images/Like_black.png";
-import Like_red from "../assets/images/Like_red.png";
+import Logo from '../assets/logo/Logo.svg';
+import Login from '../components/Login/LoginButton';
+import Apfel from '../assets/images/icons8-apple-500.png';
+import Aprikose from '../assets/images/icons8-apricot-500.png';
+import Blaubeere from '../assets/images/icons8-blueberry-500.png';
+import Himbeere from '../assets/images/icons8-raspberry-500.png';
+import Johannisbeere from '../assets/images/icons8-redcurrant-512.png';
+import Kirsche from '../assets/images/icons8-cherry-500.png';
+import Weintraube from '../assets/images/icons8-grapes-500.png';
+import Pflaume from '../assets/images/icons8-plum-500.png';
+import Erdbeere from '../assets/images/icons8-strawberry-500.png';
+import Stachelbeere from '../assets/images/icons8-gooseberry-500-2.png';
+import Sonstiges from '../assets/images/fruit basket 500.png';
+import Birne from '../assets/images/icons8-pear-500.png';
+import Like_black from '../assets/images/Like_black.png';
+import Like_red from '../assets/images/Like_red.png';
 
-import "../assets/styles/locationDetails.css";
+import '../assets/styles/locationDetails.css';
 
 function LocationDetails({ locationData }) {
   //GET LOCATION DATA FOR SPECIFIC LOCATION (ID)
-  console.log("locationData", locationData);
+
   const params = useParams();
   const [locationDetail, setLocationDetail] = useState(false);
 
@@ -37,12 +37,10 @@ function LocationDetails({ locationData }) {
     }
   }, [locationData]);
 
-  console.log("LOCATIONDETAIL", locationDetail);
-
   //GET USER DATA FROM AUTH0
   const { user } = useAuth0();
   const [userData, setUserData] = useState([]);
-  console.log("USER", userData);
+
   const [liked, setLiked] = useState(false);
 
   useEffect(() => {
@@ -52,7 +50,7 @@ function LocationDetails({ locationData }) {
           setUserData(res.data);
           if (res.data.favorites.includes(locationDetail._id)) {
             setLiked(true);
-            console.log("faved");
+            console.log('faved');
           }
         })
         .catch((err) => {
@@ -65,7 +63,7 @@ function LocationDetails({ locationData }) {
   // const [favorite, setFavorite] = useState(null);
   const handleLike = () => {
     setLiked(!liked);
-    console.log(locationDetail._id);
+
     // setFavorite(locationDetail._id);
     axios
       .put(
@@ -124,11 +122,11 @@ function LocationDetails({ locationData }) {
 
   //POST COMMENT
   const [comment, setComment] = useState({
-    comment: "",
-    timestamp: "",
-    user: "",
-    tree: "",
-    avatar: "",
+    comment: '',
+    timestamp: '',
+    user: '',
+    tree: '',
+    avatar: '',
   });
 
   let timestamp = new Date().toGMTString();
@@ -146,9 +144,9 @@ function LocationDetails({ locationData }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Comment", comment);
+
     axios
-      .post("http://localhost:8000/comment/", comment)
+      .post('http://localhost:8000/comment/', comment)
       .then((res) => {
         console.log(res);
       })
@@ -182,52 +180,48 @@ function LocationDetails({ locationData }) {
               {locationDetail && (
                 <>
                   <div className="details-fruit">
-                    {locationDetail.type[0] === "Apfel" && (
+                    {locationDetail.type[0] === 'Apfel' && (
                       <img src={Apfel} alt="Apfel-Icon" height={50} />
                     )}
-                    {locationDetail.type[0] === "Aprikose" && (
+                    {locationDetail.type[0] === 'Aprikose' && (
                       <img src={Aprikose} alt="Aprikose-Icon" height={50} />
                     )}
-                    {locationDetail.type[0] === "Birne" && (
+                    {locationDetail.type[0] === 'Birne' && (
                       <img src={Birne} alt="Birne-Icon" height={50} />
                     )}
-                    {locationDetail.type[0] === "Heidelbeere" && (
+                    {locationDetail.type[0] === 'Heidelbeere' && (
                       <img src={Blaubeere} alt="Blaubeere-Icon" height={50} />
                     )}
-                    {locationDetail.type[0] === "Himbeere" && (
+                    {locationDetail.type[0] === 'Himbeere' && (
                       <img src={Himbeere} alt="Himbeere-Icon" height={50} />
                     )}
-                    {locationDetail.type[0] === "Johannisbeere" && (
+                    {locationDetail.type[0] === 'Johannisbeere' && (
                       <img
                         src={Johannisbeere}
                         alt="Johannisbeere-Icon"
                         height={50}
                       />
                     )}
-                    {locationDetail.type[0] === "Kirsche" && (
+                    {locationDetail.type[0] === 'Kirsche' && (
                       <img src={Kirsche} alt="Kirsche-Icon" height={50} />
                     )}
-                    {locationDetail.type[0] === "Weintraube" && (
-                      <img
-                        src={Weintraube}
-                        alt="Weintraube-Icon"
-                        height={50}
-                      />
+                    {locationDetail.type[0] === 'Weintraube' && (
+                      <img src={Weintraube} alt="Weintraube-Icon" height={50} />
                     )}
-                    {locationDetail.type[0] === "Pflaume" && (
+                    {locationDetail.type[0] === 'Pflaume' && (
                       <img src={Pflaume} alt="Pflaume-Icon" height={50} />
                     )}
-                    {locationDetail.type[0] === "Erdbeere" && (
+                    {locationDetail.type[0] === 'Erdbeere' && (
                       <img src={Erdbeere} alt="Erdbeere-Icon" height={50} />
                     )}
-                    {locationDetail.type[0] === "Stachelbeere" && (
+                    {locationDetail.type[0] === 'Stachelbeere' && (
                       <img
                         src={Stachelbeere}
                         alt="Stachelbeere-Icon"
                         height={50}
                       />
                     )}
-                    {locationDetail.type[0] === "Sonstiges" && (
+                    {locationDetail.type[0] === 'Sonstiges' && (
                       <img src={Sonstiges} alt="Obstkorb" height={50} />
                     )}
                     <div>
@@ -262,7 +256,7 @@ function LocationDetails({ locationData }) {
                     <div className="harvest-start-details">
                       <h4>Erntezeitraum</h4>
                       <p>
-                        von {locationDetail.harvestPeriod.start} bis{" "}
+                        von {locationDetail.harvestPeriod.start} bis{' '}
                         {locationDetail.harvestPeriod.end}
                       </p>
                     </div>
@@ -311,7 +305,7 @@ function LocationDetails({ locationData }) {
             )}
             <div className="locationDetails-content">
               {!commentList.length > 0 && (
-                <p style={{ fontSize: "14px", fontStyle: "italic" }}>
+                <p style={{ fontSize: '14px', fontStyle: 'italic' }}>
                   Keine Kommentare
                 </p>
               )}
