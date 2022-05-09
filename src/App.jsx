@@ -14,7 +14,7 @@ import LocationDetails from './pages/LocationDetails';
 function App() {
   const [locationData, setLocationData] = useState([]);
   useEffect(() => {
-    fetch('http://localhost:8000/tree')
+    fetch("https://teile-deine-obst.herokuapp.com/tree")
       .then((response) => response.json())
       .then((data) => setLocationData(data))
       .catch((error) => console.log(error));

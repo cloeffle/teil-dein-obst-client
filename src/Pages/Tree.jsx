@@ -13,7 +13,7 @@ function Tree() {
   //GET USERS TREE DATA
   useEffect(() => {
     axios(
-      `http://localhost:8000/tree/collection/${user.sub.slice(
+      `https://teile-deine-obst.herokuapp.com/tree/collection/${user.sub.slice(
         user.sub.length - 7
       )}`
     ).then((response) => setUserTrees(response.data));
@@ -23,7 +23,7 @@ function Tree() {
   const deleteTree = (id) => {
     axios
       .put(
-        `http://localhost:8000/user/disliketree/${user.sub.slice(
+        `https://teile-deine-obst.herokuapp.com/user/disliketree/${user.sub.slice(
           user.sub.length - 7
         )}`,
         {
@@ -36,20 +36,22 @@ function Tree() {
       .catch((err) => {
         console.log(err);
       });
-    axios.delete(`http://localhost:8000/tree/${id}`).then(() => {
-      axios(
-        `http://localhost:8000/tree/collection/${user.sub.slice(
-          user.sub.length - 7
-        )}`
-      ).then((response) => setUserTrees(response.data));
-    });
+    axios
+      .delete(`https://teile-deine-obst.herokuapp.com/tree/${id}`)
+      .then(() => {
+        axios(
+          `https://teile-deine-obst.herokuapp.com/tree/collection/${user.sub.slice(
+            user.sub.length - 7
+          )}`
+        ).then((response) => setUserTrees(response.data));
+      });
   };
 
   //DEACTIVATE/REACTIVATE TREE
   const deactivateTree = (id) => {
-    axios.put(`http://localhost:8000/tree/${id}`).then(() => {
+    axios.put(`https://teile-deine-obst.herokuapp.com/tree/${id}`).then(() => {
       axios(
-        `http://localhost:8000/tree/collection/${user.sub.slice(
+        `https://teile-deine-obst.herokuapp.com/tree/collection/${user.sub.slice(
           user.sub.length - 7
         )}`
       ).then((response) => setUserTrees(response.data));
@@ -57,9 +59,9 @@ function Tree() {
   };
 
   const reactivateTree = (id) => {
-    axios.put(`http://localhost:8000/tree/${id}/reactivate`).then(() => {
+    axios.put(`https://teile-deine-obst.herokuapp.com/tree/${id}/reactivate`).then(() => {
       axios(
-        `http://localhost:8000/tree/collection/${user.sub.slice(
+        `https://teile-deine-obst.herokuapp.com/tree/collection/${user.sub.slice(
           user.sub.length - 7
         )}`
       ).then((response) => setUserTrees(response.data));
