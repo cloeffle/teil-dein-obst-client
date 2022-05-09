@@ -213,7 +213,7 @@ function LocationDetails({ locationData }) {
                     <div>
                       <h4>{locationDetail.type[0]}</h4>
 
-                      <div className="like-btn">
+                     {user ? <div className="like-btn">
                         <p>Favorit</p>
                         {!liked && locationDetail && (
                           <>
@@ -229,7 +229,7 @@ function LocationDetails({ locationData }) {
                             </div>
                           </>
                         )}
-                      </div>
+                      </div> : null}
                     </div>
                   </div>
 
