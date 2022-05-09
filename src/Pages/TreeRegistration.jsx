@@ -1,31 +1,30 @@
-import React, { useState, useEffect, useCallback } from "react";
-import axios from "axios";
-import { useAuth0 } from "@auth0/auth0-react";
-import { initializeApp } from "firebase/app";
+import React, { useState, useEffect, useCallback } from 'react';
+import axios from 'axios';
+import { useAuth0 } from '@auth0/auth0-react';
+import { initializeApp } from 'firebase/app';
 import {
   ref,
   uploadBytes,
   getStorage,
   getDownloadURL,
-  refFromURL,
   deleteObject,
-} from "firebase/storage";
-import { v4 as uuidv4 } from "uuid";
-import { useNavigate } from "react-router-dom";
+} from 'firebase/storage';
+import { v4 as uuidv4 } from 'uuid';
+import { useNavigate } from 'react-router-dom';
 
-import { useTheme } from "@mui/material/styles";
-import { makeStyles } from "@mui/styles";
-import Box from "@mui/material/Box";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import Chip from "@mui/material/Chip";
+import { useTheme } from '@mui/material/styles';
+import { makeStyles } from '@mui/styles';
+import Box from '@mui/material/Box';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import Chip from '@mui/material/Chip';
 
-import LogoComponent from "../components/LogoComponent";
-import "../assets/styles/treeRegistration.css";
-import Delete from "../assets/images/icons8-entfernen.svg";
+import LogoComponent from '../components/LogoComponent';
+import '../assets/styles/treeRegistration.css';
+import Delete from '../assets/images/icons8-entfernen.svg';
 
 // Select Option Obstsorte
 const ITEM_HEIGHT = 48;
@@ -40,30 +39,30 @@ const MenuProps = {
 };
 
 const fruits = [
-  "Apfel",
-  "Aprikose",
-  "Birne",
-  "Erdbeere",
-  "Heidelbeere",
-  "Himbeere",
-  "Johannisbeere",
-  "Kirsche",
-  "Stachelbeere",
-  "Weintraube",
-  "Pflaume",
-  "Sonstiges",
+  'Apfel',
+  'Aprikose',
+  'Birne',
+  'Erdbeere',
+  'Heidelbeere',
+  'Himbeere',
+  'Johannisbeere',
+  'Kirsche',
+  'Stachelbeere',
+  'Weintraube',
+  'Pflaume',
+  'Sonstiges',
 ];
 
 const useStyles = makeStyles(() => ({
   root: {
-    "& $notchedOutline": {
+    '& $notchedOutline': {
       borderWidth: 0,
-      borderRadius: "32px",
+      borderRadius: '32px',
     },
-    "&:hover $notchedOutline": {
+    '&:hover $notchedOutline': {
       borderWidth: 0,
     },
-    "&$focused $notchedOutline": {
+    '&$focused $notchedOutline': {
       borderWidth: 0,
     },
   },
@@ -78,10 +77,10 @@ function getStyles(fruit, fruitName, theme) {
         ? theme.typography.fontWeightRegular
         : theme.typography.fontWeightMedium,
 
-    color: "#444",
+    color: '#444',
 
-    backgroundColor: fruitName.indexOf(fruit) === -1 ? "white" : "#c8e0c3",
-    fontFamily: "Nunito",
+    backgroundColor: fruitName.indexOf(fruit) === -1 ? 'white' : '#c8e0c3',
+    fontFamily: 'Nunito',
   };
 }
 
@@ -91,7 +90,7 @@ export default function TreeRegistration() {
   const theme = useTheme();
   const [fruitName, setFruitName] = useState([]);
   const [imageUpload, setImageUpload] = useState(false);
-  const [imageName, setImageName] = useState("");
+  const [imageName, setImageName] = useState('');
   const classes = useStyles();
 
   const firebaseConfig = {
@@ -115,8 +114,8 @@ export default function TreeRegistration() {
     const {
       target: { value },
     } = e;
-    setFruitName(typeof value === "string" ? value.split(",") : value);
-    const myFruit = typeof value === "string" ? value.split(",") : value;
+    setFruitName(typeof value === 'string' ? value.split(',') : value);
+    const myFruit = typeof value === 'string' ? value.split(',') : value;
     setUserInput({
       ...userInput,
       type: myFruit,
@@ -125,14 +124,14 @@ export default function TreeRegistration() {
 
   // Form Input
   const [userInput, setUserInput] = useState({
-    type: "",
-    lat: "",
-    lng: "",
-    start: "",
-    end: "",
-    info: "",
-    userId: "",
-    pictureURL: "",
+    type: '',
+    lat: '',
+    lng: '',
+    start: '',
+    end: '',
+    info: '',
+    userId: '',
+    pictureURL: '',
   });
 
   const handleChangeUserInput = (e) => {
@@ -154,31 +153,31 @@ export default function TreeRegistration() {
           lat: resp.data.results[0].geometry.location.lat,
           lng: resp.data.results[0].geometry.location.lng,
         });
-        setSuccess("succeeded");
+        setSuccess('succeeded');
       } catch (err) {
         console.log(err);
-        setFailed("error");
+        setFailed('error');
       }
     },
     [userInput]
   );
 
   //SUCCESS AND FAILED SEND MESSAGES
-  const [success, setSuccess] = useState("");
-  const [failed, setFailed] = useState("");
-  const [uploadSuccess, setUploadSuccess] = useState("");
-  const [imgUploadSuccess, setImgUploadSuccess] = useState("");
+  const [success, setSuccess] = useState('');
+  const [failed, setFailed] = useState('');
+  const [uploadSuccess, setUploadSuccess] = useState('');
+  const [imgUploadSuccess, setImgUploadSuccess] = useState('');
 
   //SUCCESS AND FAILED SEND MESSAGES TIMEOUT
   useEffect(() => {
-    if (success === "succeeded") {
+    if (success === 'succeeded') {
       setTimeout(() => {
-        setSuccess("");
+        setSuccess('');
       }, 3000);
     } else {
-      if (failed === "error") {
+      if (failed === 'error') {
         setTimeout(() => {
-          setFailed("");
+          setFailed('');
         }, 3000);
       }
     }
@@ -206,18 +205,20 @@ export default function TreeRegistration() {
         })
       );
     }
-    setImgUploadSuccess("uploaded");
+    setTimeout(() => {
+      setImgUploadSuccess('uploaded');
+    }, 2000);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:8000/tree/", userInput)
+      .post('http://localhost:8000/tree/', userInput)
       .then((res) => {
         console.log(res);
-        setUploadSuccess("uploaded");
+        setUploadSuccess('uploaded');
         setTimeout(() => {
-          navigate("/profil");
+          navigate('/profil');
         }, 2500);
       })
       .catch((err) => {
@@ -232,21 +233,21 @@ export default function TreeRegistration() {
       setImageUpload(target);
       setImageName(target.name + uuidv4());
     } else {
-      alert("Das Bild übersteigt die zulässige Größe von 10 MB ");
+      alert('Das Bild übersteigt die zulässige Größe von 10 MB');
       setImageUpload(null);
     }
   };
 
   const deleteImage = () => {
     setImageUpload(null);
-    console.log(userInput.pictureURL);
+
     if (userInput.pictureURL.length > 2) {
       const desertRef = ref(storage, userInput.pictureURL);
       deleteObject(desertRef)
-        .then(() => console.log("Bild gelöscht"))
+        .then(() => console.log('Bild gelöscht'))
         .catch((error) => console.log(error));
     }
-    setImgUploadSuccess("");
+    setImgUploadSuccess('');
   };
 
   return (
@@ -287,11 +288,11 @@ export default function TreeRegistration() {
               sx={{
                 m: 0,
                 width: 340,
-                backgroundColor: "white",
-                borderRadius: "32px",
+                backgroundColor: 'white',
+                borderRadius: '32px',
               }}
             >
-              <InputLabel id="Obstsorte" sx={{ fontFamily: "Nunito" }}>
+              <InputLabel id="Obstsorte" sx={{ fontFamily: 'Nunito' }}>
                 Obstsorte
               </InputLabel>
               <Select
@@ -312,15 +313,15 @@ export default function TreeRegistration() {
                   />
                 }
                 renderValue={(selected) => (
-                  <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                     {selected.map((value) => (
                       <Chip
                         key={value}
                         label={value}
                         sx={{
-                          backgroundColor: "#c8e0c3",
-                          color: "#444",
-                          fontFamily: "Nunito",
+                          backgroundColor: '#c8e0c3',
+                          color: '#444',
+                          fontFamily: 'Nunito',
                         }}
                       />
                     ))}

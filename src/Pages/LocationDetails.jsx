@@ -45,7 +45,6 @@ function LocationDetails({ locationData }) {
   //ADD TO FAVAORITES
   const handleLike = () => {
     setLiked(true);
-    console.log('like');
     axios
       .put(
         `http://localhost:8000/user/liketree/${user.sub.slice(
@@ -65,7 +64,6 @@ function LocationDetails({ locationData }) {
 
   const handleDislike = () => {
     setLiked(false);
-    console.log('dislike');
     axios
       .put(
         `http://localhost:8000/user/disliketree/${user.sub.slice(
@@ -77,7 +75,6 @@ function LocationDetails({ locationData }) {
       )
       .then((res) => {
         console.log(res);
-        console.log('disliked');
       })
       .catch((err) => {
         console.log(err);

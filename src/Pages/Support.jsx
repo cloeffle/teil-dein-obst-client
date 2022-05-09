@@ -1,18 +1,17 @@
-import React, { useState, useRef, useEffect } from "react";
-import emailjs from "@emailjs/browser";
+import React, { useState, useRef, useEffect } from 'react';
+import emailjs from '@emailjs/browser';
 
-import "../assets/styles/support.css";
-import LogoComponent from "../components/LogoComponent";
+import '../assets/styles/support.css';
+import LogoComponent from '../components/LogoComponent';
 
 export default function Support() {
   const [userInput, setUserInput] = useState({
-    name: "",
-    email: "",
-    message: "",
+    name: '',
+    email: '',
+    message: '',
   });
 
-  const [status, setStatus] = useState("");
-  console.log("status:", status);
+  const [status, setStatus] = useState('');
 
   const handleChange = (e) => {
     setUserInput({
@@ -37,11 +36,11 @@ export default function Support() {
         (result) => {
           console.log(result.text);
           setUserInput({
-            name: "",
-            email: "",
-            message: "",
+            name: '',
+            email: '',
+            message: '',
           });
-          setStatus("success");
+          setStatus('success');
         },
         (error) => {
           console.log(error.text);
@@ -51,9 +50,9 @@ export default function Support() {
   };
 
   useEffect(() => {
-    if (status === "success") {
+    if (status === 'success') {
       setTimeout(() => {
-        setStatus("");
+        setStatus('');
       }, 5000);
     }
   }, [status]);

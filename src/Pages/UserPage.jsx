@@ -94,18 +94,6 @@ function UserPage() {
     window.location.reload();
   };
 
-  if (userFavorites) {
-    console.log(userFavorites, 'userFavorites');
-    userFavorites.map((favorite) =>
-      console.log(favorite[0].location.adress, 'fav')
-    );
-  }
-
-  if (userTrees.length > 0) {
-    console.log(userTrees, 'usertrees');
-    userTrees.map((myTrees) => console.log(myTrees.location.address));
-  }
-
   return (
     <div>
       <LogoComponent />
