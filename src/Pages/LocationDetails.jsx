@@ -245,8 +245,15 @@ function LocationDetails({ locationData }) {
                     <div className="harvest-start-details">
                       <h4>Erntezeitraum</h4>
                       <p>
-                        von {locationDetail.harvestPeriod.start} bis{' '}
-                        {locationDetail.harvestPeriod.end}
+                        vom{' '}
+                        {DateTime.fromISO(locationDetail.harvestPeriod.start)
+                          .setLocale('de')
+                          .toFormat('dd. LLL')}{' '}
+                        bis{' '}
+                        {DateTime.fromISO(locationDetail.harvestPeriod.end)
+                          .setLocale('de')
+                          .toFormat('dd. LLL')}
+                        {/* DateTime.fromISO(comment.timestamp).toFormat('ff') */}
                       </p>
                     </div>
                   )}
