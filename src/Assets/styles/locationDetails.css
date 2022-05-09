@@ -1,55 +1,41 @@
+.locationDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .locationDetails-content {
+  line-height: 2rem;
+  margin: 0.5rem 1.5rem;
+
+}
+
+.details-fruit {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  width: 100%;
-  text-align: center;
-  margin-top: 4rem;
 }
 
-.locationDetails-details {
-  margin: 1.5rem 0;
-  line-height: 1.5rem;
+.details-fruit img {
+  margin-right: 1rem;
 }
 
-.locationDetails-details p {
-  font-size: large;
-  font-weight: bolder;
-  margin-bottom: 0.5rem;
-}
-
-#write-comment {
+.heart {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  margin-left: .25rem;
 }
 
 .commentForm {
-  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  margin-top: 0.7rem;
-}
+    margin: 0.5rem 1.5rem;
 
-.btn_comment {
-  padding: 0.5rem 1rem;
-  border-radius: 22px;
-  font-size: 0.8rem;
-  cursor: pointer;
-  letter-spacing: 0.1rem;
-  margin-top: 1rem;
-  margin-right: 0.5rem;
-  background-color: #357560;
-  color: #f9f8f2;
-  font-weight: bold;
-  letter-spacing: 0.1rem;
-  margin-right: 0.5rem;
-  margin-top: 1rem;
 }
 
 .commentForm textarea {
+  display: flex;
+  justify-content: center;
   padding: 0.5rem;
   margin: 0.7rem 0;
   border: none;
@@ -60,31 +46,35 @@
 
 .commentTextarea {
   font-family: Nunito, sans-serif;
-  width: 300px;
+  width: 320px;
   height: 100px;
 }
 
 textarea:focus {
   outline: none;
-  border: 2px solid #A7C46C;
+  border: 2px solid #a7c46c;
+}
+
+.comment-btn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.comment-container {
+  margin: 1rem 0;
 }
 
 .comment-wrapper {
   display: flex;
   flex-direction: row;
-  justify-content: left;
+  justify-content: flex-start;
   align-items: center;
-  margin-top: 1.5rem;
+  margin: 1rem 1.5rem;
 
 }
 
 .comment-avatar {
-  justify-content: center;
-  align-items: center;
   width: 70px;
-  margin: auto;
-  
-
 }
 
 .comment-avatar img {
@@ -98,7 +88,7 @@ textarea:focus {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-
+  
 }
 
 .comment-user {
@@ -116,8 +106,24 @@ textarea:focus {
 .comment-user-timestamp {
   font-size: 0.6rem;
   margin-right: 0.5rem;
-
 }
+
+.tree-picture {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
 .tree-picture img {
   height: 150px;
+}
+
+.like-btn {
+  display: flex;
+}
+
+.harvest-start-details {
+  display: flex;
+  flex-direction: column;
+  margin: 2.5rem 0,
 }

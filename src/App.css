@@ -37,8 +37,9 @@ a {
 }
 
 .logo-wrapper {
-  display: flex;
-  justify-content: center;
+ display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
 .logo,
@@ -50,7 +51,7 @@ a {
 }
 
 .logo img {
-  width: 45%;
+  width: 48.4%;
 }
 
 input:focus,

@@ -1,5 +1,5 @@
 import './App.css';
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ProtectedRoute } from './auth/ProtectedRoute';
 import Navbar from './components/Navbar';
@@ -9,21 +9,18 @@ import Home from './pages/Home';
 import Tree from './pages/Tree';
 import UserPage from './pages/UserPage';
 import TreeRegistration from './pages/TreeRegistration';
-import LocationDetails from "./pages/LocationDetails";
-
+import LocationDetails from './pages/LocationDetails';
 
 function App() {
-
   const [locationData, setLocationData] = useState([]);
   useEffect(() => {
     fetch('http://localhost:8000/tree')
       .then((response) => response.json())
       .then((data) => setLocationData(data))
       .catch((error) => console.log(error));
-    
   }, []);
 
-  console.log("Fetch Trees", locationData);
+  console.log('Fetch Trees', locationData);
 
   return (
     <div className="App">

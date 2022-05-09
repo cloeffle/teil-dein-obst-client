@@ -30,7 +30,7 @@ label {
 .address-btn {
   font-family: "Nunito", sans-serif;
   margin: 1rem 0;
-  background-color: #A7C46C;
+  background-color: #a7c46c;
   color: white;
   border-radius: 22px;
   padding: 0.5rem 1rem;
@@ -63,7 +63,6 @@ tree-form-image {
 }
 
 .tree-upload-success {
-  /* background-color: #35756071; */
   text-align: center;
   color: #357560;
 }
@@ -91,13 +90,32 @@ tree-form-image {
 .image-upload-btn {
   font-family: "Nunito", sans-serif;
   margin: 1rem 0;
-  background-color: #A7C46C;
+  background-color: #a7c46c;
   color: #f7fafc;
   border-radius: 22px;
-  padding: 0 1.5rem;
+  padding: 0.3rem 1rem;
 }
 
 .address-fail {
   color: #af473c;
   text-align: center;
+}
+
+.image-btn {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 0.5rem 1rem;
+}
+
+.image-icon-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.image-upload-container {
+  background-color: white;
+  border-radius: 22px;
+  margin: 0.7rem 0;
 }

@@ -8,10 +8,13 @@ import Login from "../components/Login/LoginButton";
 import Apfel from "../assets/images/icons8-apple-500.png";
 import Aprikose from "../assets/images/icons8-apricot-500.png";
 import Blaubeere from "../assets/images/icons8-blueberry-500.png";
+import Himbeere from "../assets/images/icons8-raspberry-500.png";
+import Johannisbeere from "../assets/images/icons8-redcurrant-512.png";
 import Kirsche from "../assets/images/icons8-cherry-500.png";
 import Weintraube from "../assets/images/icons8-grapes-500.png";
 import Pflaume from "../assets/images/icons8-plum-500.png";
 import Erdbeere from "../assets/images/icons8-strawberry-500.png";
+import Stachelbeere from "../assets/images/icons8-gooseberry-500-2.png";
 import Sonstiges from "../assets/images/fruit basket 500.png";
 import Birne from "../assets/images/icons8-pear-500.png";
 import Like_black from "../assets/images/Like_black.png";
@@ -23,9 +26,17 @@ function LocationDetails({ locationData }) {
   //GET LOCATION DATA FOR SPECIFIC LOCATION (ID)
   console.log("locationData", locationData);
   const params = useParams();
-  let locationDetail = locationData.find(function (location) {
-    return location._id === params.id;
-  });
+  const [locationDetail, setLocationDetail] = useState(false);
+
+  useEffect(() => {
+    if (locationData) {
+      const detail = locationData.find(function (location) {
+        return location._id === params.id;
+      });
+      setLocationDetail(detail);
+    }
+  }, [locationData]);
+
   console.log("LOCATIONDETAIL", locationDetail);
 
   //GET USER DATA FROM AUTH0
@@ -68,6 +79,9 @@ function LocationDetails({ locationData }) {
       .then((res) => {
         console.log(res);
       })
+      .then(() => {
+        window.location.reload();
+      })
       .catch((err) => {
         console.log(err);
       });
@@ -89,6 +103,9 @@ function LocationDetails({ locationData }) {
       .then((res) => {
         console.log(res);
       })
+      .then(() => {
+        window.location.reload();
+      })
       .catch((err) => {
         console.log(err);
       });
@@ -98,9 +115,11 @@ function LocationDetails({ locationData }) {
   const [commentList, setCommentList] = useState([]);
 
   useEffect(() => {
-    axios(`http://localhost:8000/comment/${locationDetail._id}`)
-      .then((res) => setCommentList(res.data))
-      .catch((err) => console.log(err));
+    if (locationDetail) {
+      axios(`http://localhost:8000/comment/${locationDetail._id}`)
+        .then((res) => setCommentList(res.data))
+        .catch((err) => console.log(err));
+    }
   }, [locationDetail]);
 
   //POST COMMENT
@@ -144,121 +163,186 @@ function LocationDetails({ locationData }) {
     e.target.reset();
   };
 
-  console.log(comment);
-
   return (
-    <div className="locationDetails">
-      <div className="header-login">
-        <div className="logo-wrapper">
-          <div className="home-logo">
-            <img src={Logo} alt="logo" />
+    <>
+      {locationData.length > 0 && (
+        <div className="locationDetails">
+          <div className="header-login">
+            <div className="logo-wrapper">
+              <div className="home-logo">
+                <a href="/">
+                  <img src={Logo} alt="logo" />
+                </a>
+              </div>
+            </div>
+            <Login />
+          </div>
+          <div className="locationDetails-wrapper">
+            <div className="locationDetails-content">
+              {locationDetail && (
+                <>
+                  <div className="details-fruit">
+                    {locationDetail.type[0] === "Apfel" && (
+                      <img src={Apfel} alt="Apfel-Icon" height={50} />
+                    )}
+                    {locationDetail.type[0] === "Aprikose" && (
+                      <img src={Aprikose} alt="Aprikose-Icon" height={50} />
+                    )}
+                    {locationDetail.type[0] === "Birne" && (
+                      <img src={Birne} alt="Birne-Icon" height={50} />
+                    )}
+                    {locationDetail.type[0] === "Heidelbeere" && (
+                      <img src={Blaubeere} alt="Blaubeere-Icon" height={50} />
+                    )}
+                    {locationDetail.type[0] === "Himbeere" && (
+                      <img src={Himbeere} alt="Himbeere-Icon" height={50} />
+                    )}
+                    {locationDetail.type[0] === "Johannisbeere" && (
+                      <img
+                        src={Johannisbeere}
+                        alt="Johannisbeere-Icon"
+                        height={50}
+                      />
+                    )}
+                    {locationDetail.type[0] === "Kirsche" && (
+                      <img src={Kirsche} alt="Kirsche-Icon" height={50} />
+                    )}
+                    {locationDetail.type[0] === "Weintraube" && (
+                      <img
+                        src={Weintraube}
+                        alt="Weintraube-Icon"
+                        height={50}
+                      />
+                    )}
+                    {locationDetail.type[0] === "Pflaume" && (
+                      <img src={Pflaume} alt="Pflaume-Icon" height={50} />
+                    )}
+                    {locationDetail.type[0] === "Erdbeere" && (
+                      <img src={Erdbeere} alt="Erdbeere-Icon" height={50} />
+                    )}
+                    {locationDetail.type[0] === "Stachelbeere" && (
+                      <img
+                        src={Stachelbeere}
+                        alt="Stachelbeere-Icon"
+                        height={50}
+                      />
+                    )}
+                    {locationDetail.type[0] === "Sonstiges" && (
+                      <img src={Sonstiges} alt="Obstkorb" height={50} />
+                    )}
+                    <div>
+                      <h4>{locationDetail.type[0]}</h4>
+
+                      <div className="like-btn">
+                        <p>Favorit</p>
+                        {!liked && (
+                          <>
+                            <div className="heart" onClick={handleLike}>
+                              <img src={Like_black} alt="" height={20} />
+                            </div>
+                          </>
+                        )}
+                        {liked && (
+                          <>
+                            <div className="heart" onClick={handleDislike}>
+                              <img src={Like_red} alt="" height={20} />
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* <div className="locationDetails-details">
+                    <h4>Wo?</h4>
+                    <p>{locationDetail.location.address}</p>
+                  </div> */}
+
+                  {locationDetail.harvestPeriod.start.length > 0 && (
+                    <div className="harvest-start-details">
+                      <h4>Erntezeitraum</h4>
+                      <p>
+                        von {locationDetail.harvestPeriod.start} bis{" "}
+                        {locationDetail.harvestPeriod.end}
+                      </p>
+                    </div>
+                  )}
+
+                  {locationDetail.info.length > 0 && (
+                    <div className="details-owner">
+                      <h4>Info des Besitzers:</h4>
+                      <p>{locationDetail.info}</p>
+                    </div>
+                  )}
+
+                  {locationDetail.pictureURL.length > 2 && (
+                    <div className="tree-picture">
+                      <img src={locationDetail.pictureURL} alt="" />
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
+            {user ? (
+              <div className="locationDetails-details" id="write-comment">
+                <form className="commentForm" onSubmit={(e) => handleSubmit(e)}>
+                  <textarea
+                    className="commentTextarea"
+                    type="text"
+                    name="comment"
+                    value={comment.text}
+                    onBlur={handleChange}
+                    placeholder="Hinterlasse einen Kommentar"
+                    required
+                  ></textarea>
+                  <div className="comment-btn">
+                    <input
+                      type="submit"
+                      className="submit btn"
+                      value="Kommentieren"
+                    />
+                  </div>
+                </form>
+              </div>
+            ) : (
+              <div className="locationDetails-content">
+                <h4>Kommentare</h4>
+              </div>
+            )}
+            <div className="locationDetails-content">
+              {!commentList.length > 0 && (
+                <p style={{ fontSize: "14px", fontStyle: "italic" }}>
+                  Keine Kommentare
+                </p>
+              )}
+            </div>
+            <div className="comment-container">
+              {commentList &&
+                commentList.map((comment, index) => (
+                  <div key={index}>
+                    <div className="comment-wrapper">
+                      <div className="comment-avatar">
+                        <img src={comment.avatar} alt="Avatar" />
+                      </div>
+                      <div className="comment-content">
+                        <div className="comment-user">
+                          <p className="comment-user-name">{comment.user}</p>
+                          <p className="comment-user-timestamp">
+                            {comment.timestamp}
+                          </p>
+                        </div>
+                        <div className="comment-text">
+                          <p>{comment.comment}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+            </div>
           </div>
         </div>
-        <Login />
-      </div>
-      <div className="locationDetails-content">
-        {locationDetail && (
-          <>
-            {locationDetail.type[0] === "Apfel" && (
-              <img src={Apfel} alt="Apfel-Icon" height={120} />
-            )}
-            {locationDetail.type[0] === "Aprikose" && (
-              <img src={Aprikose} alt="Aprikose-Icon" height={120} />
-            )}
-            {locationDetail.type[0] === "Birne" && (
-              <img src={Birne} alt="Birne-Icon" height={120} />
-            )}
-            {locationDetail.type[0] === "Blaubeere" && (
-              <img src={Blaubeere} alt="Blaubeere-Icon" height={120} />
-            )}
-            {locationDetail.type[0] === "Kirsche" && (
-              <img src={Kirsche} alt="Kirsche-Icon" height={120} />
-            )}
-            {locationDetail.type[0] === "Weintraube" && (
-              <img src={Weintraube} alt="Weintraube-Icon" height={120} />
-            )}
-            {locationDetail.type[0] === "Pflaume" && (
-              <img src={Pflaume} alt="Pflaume-Icon" height={120} />
-            )}
-            {locationDetail.type[0] === "Erdbeere" && (
-              <img src={Erdbeere} alt="Erdbeere-Icon" height={120} />
-            )}
-            {locationDetail.type[0] === "Sonstiges" && (
-              <img src={Sonstiges} alt="Obstkorb" height={120} />
-            )}
-            <div>{locationDetail.type[0]}</div>
-
-            <div className="locationDetails-details">
-              <p>Wo befindet sich der Baum?</p>
-              {locationDetail.location.address}
-            </div>
-            {locationDetail.pictureURL.length > 2 && (
-              <div className="tree-picture">
-                <img src={locationDetail.pictureURL} alt="" />
-              </div>
-            )}
-
-            {!liked && (
-              <>
-                <div onClick={handleLike}>
-                  <img src={Like_black} alt="" />
-                </div>
-              </>
-            )}
-            {liked && (
-              <>
-                <div onClick={handleDislike}>
-                  <img src={Like_red} alt="" />
-                </div>
-              </>
-            )}
-            <div className="locationDetails-details">
-              <p>Info des Besitzers:</p>
-              {locationDetail.info}
-            </div>
-          </>
-        )}
-        <div className="locationDetails-details" id="write-comment">
-          <form className="commentForm" onSubmit={(e) => handleSubmit(e)}>
-            <textarea
-              className="commentTextarea"
-              type="text"
-              name="comment"
-              value={comment.text}
-              onBlur={handleChange}
-              placeholder="Hinterlasse einen Kommentar"
-              required
-            ></textarea>
-            <input type="submit" className="submit btn" value="Hinzufügen" />
-          </form>
-        </div>
-        <div className="locationDetails-details">
-          <p>Kommentare:</p>
-        </div>
-
-        {commentList &&
-          commentList.map((comment, index) => (
-            <div key={index}>
-              <div className="comment-wrapper">
-                <div className="comment-avatar">
-                  <img src={comment.avatar} alt="Avatar" />
-                </div>
-                <div className="comment-content">
-                  <div className="comment-user">
-                    <p className="comment-user-name">{comment.user}</p>
-                    <p className="comment-user-timestamp">
-                      {comment.timestamp}
-                    </p>
-                  </div>
-                  <div className="comment-text">
-                    <p>{comment.comment}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-      </div>
-    </div>
+      )}
+    </>
   );
 }
 

@@ -4,6 +4,7 @@ import '../assets/styles/userpage.css';
 import LogoComponent from '../components/LogoComponent';
 import Obstbaum from '../assets/images/fruit-tree.png';
 import Tree from './Tree';
+import { v4 as uuidv4 } from 'uuid';
 
 import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
@@ -154,7 +155,7 @@ function UserPage() {
                   )}
                   {userTrees.length > 0 &&
                     userTrees.map((myTrees) => (
-                      <tr key={myTrees._id}>
+                      <tr key={uuidv4()}>
                         <td className="my-tree-type">
                           <Link to={`../${myTrees._id}`}>
                             {myTrees.type.join(', ')}
@@ -207,13 +208,6 @@ function UserPage() {
           <h4>Meine Favoriten</h4>
           <div className="favorite-trees userpage">
             <table>
-              {/* <thead>
-                <tr>
-                  <th>Status</th>
-                  <th>Sorte</th>
-                  <th>Adresse</th>
-                </tr>
-              </thead> */}
               <tbody>
                 {!userFavorites.length > 0 && (
                   <tr style={{ fontSize: '14px', fontStyle: 'italic' }}>
@@ -222,7 +216,7 @@ function UserPage() {
                 )}
                 {userFavorites.length > 0 &&
                   userFavorites.map((favorite) => (
-                    <tr key={favorite[0]._id}>
+                    <tr key={uuidv4()}>
                       <td className="my-tree-type">
                         <Link to={`../${favorite[0]._id}`}>
                           {favorite[0].type[0]}{' '}

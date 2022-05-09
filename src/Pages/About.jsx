@@ -12,16 +12,16 @@ export default function About() {
           <h3>Über Teil dein Obst</h3>
           <div className="about-text">
             <i>Teil dein Obst</i> ist eine Plattform auf der Besitzer von
-            Obstbäumen/-sträuchen das Obst der Gemeinschaft zur Verfügung
+            Obstbäumen/-sträucher das Obst der Gemeinschaft zur Verfügung
             stellen können bevor es verfault. Besitzer müssen sich vorher
-            registrieren um das Obst auf die Plattform hochzuladen.
+            registrieren um das Obst hochzuladen.
             <br />
             Obstliebhaber können die Map ohne Registrierung nutzen. Wer jedoch eine
             Favoritenliste erstellen möchte um z.B. zu sehen, ob es dort noch Früchte
             gibt, oder die Kommentarfunktion nutzen möchte, muss sich zuerst
             registrieren.
             <br />
-            Folgende Regeln sollten bei der Nutzung dieser Webapp berücksichtigt
+            Folgende Regeln sollten bei der Nutzung von <i>Teil dein Obst</i> berücksichtigt
             werden:
             <br />
             <ol>

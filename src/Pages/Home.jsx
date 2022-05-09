@@ -80,7 +80,9 @@ function Home() {
       <div className="header-login">
         <div className="logo-wrapper">
           <div className="home-logo">
-            <img src={Logo} alt="logo" />
+            <a href="/">
+              <img src={Logo} alt="logo" />
+            </a>
           </div>
         </div>
         <AuthenticationButton />
