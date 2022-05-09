@@ -42,23 +42,27 @@ function UserPage() {
   useEffect(() => {
     // slice id to avoid special characters
     axios(
-      `http://localhost:8000/user/${user.sub.slice(user.sub.length - 7)}`
+      `https://teile-deine-obst.herokuapp.com/user/${user.sub.slice(
+        user.sub.length - 7
+      )}`
     ).then((response) => setUserData(response.data));
   }, []);
 
   useEffect(() => {
     if (userData) {
       userData.favorites.every((favorite) =>
-        axios(`http://localhost:8000/tree/${favorite}`).then((response) => {
-          setUserFavorites((prev) => [...prev, response.data]);
-        })
+        axios(`https://teile-deine-obst.herokuapp.com/tree/${favorite}`).then(
+          (response) => {
+            setUserFavorites((prev) => [...prev, response.data]);
+          }
+        )
       );
     }
   }, [userData]);
 
   useEffect(() => {
     axios(
-      `http://localhost:8000/tree/collection/${user.sub.slice(
+      `https://teile-deine-obst.herokuapp.com/tree/collection/${user.sub.slice(
         user.sub.length - 7
       )}`
     ).then((response) => setUserTrees(response.data));
@@ -67,7 +71,9 @@ function UserPage() {
   useEffect(() => {
     axios
       .post(
-        `http://localhost:8000/user/${user.sub.slice(user.sub.length - 7)}`,
+        `https://teile-deine-obst.herokuapp.com/user/${user.sub.slice(
+          user.sub.length - 7
+        )}`,
         {
           name: user.name,
           email: user.email,

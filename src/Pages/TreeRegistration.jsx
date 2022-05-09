@@ -186,7 +186,9 @@ export default function TreeRegistration() {
   //GET USER ID FROM USER
   useEffect(() => {
     axios(
-      `http://localhost:8000/user/${user.sub.slice(user.sub.length - 7)}`
+      `https://teile-deine-obst.herokuapp.com/user/${user.sub.slice(
+        user.sub.length - 7
+      )}`
     ).then((response) =>
       setUserInput({ ...userInput, userId: response.data.id })
     );
@@ -213,12 +215,12 @@ export default function TreeRegistration() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post('http://localhost:8000/tree/', userInput)
+      .post("https://teile-deine-obst.herokuapp.com/tree/", userInput)
       .then((res) => {
         console.log(res);
-        setUploadSuccess('uploaded');
+        setUploadSuccess("uploaded");
         setTimeout(() => {
-          navigate('/profil');
+          navigate("/profil");
         }, 2500);
       })
       .catch((err) => {

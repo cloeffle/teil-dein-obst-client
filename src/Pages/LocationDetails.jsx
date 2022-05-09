@@ -47,7 +47,7 @@ function LocationDetails({ locationData }) {
     setLiked(true);
     axios
       .put(
-        `http://localhost:8000/user/liketree/${user.sub.slice(
+        `https://teile-deine-obst.herokuapp.com/user/liketree/${user.sub.slice(
           user.sub.length - 7
         )}`,
         {
@@ -66,7 +66,7 @@ function LocationDetails({ locationData }) {
     setLiked(false);
     axios
       .put(
-        `http://localhost:8000/user/disliketree/${user.sub.slice(
+        `https://teile-deine-obst.herokuapp.com/user/disliketree/${user.sub.slice(
           user.sub.length - 7
         )}`,
         {
@@ -86,7 +86,7 @@ function LocationDetails({ locationData }) {
 
   useEffect(() => {
     if (locationDetail) {
-      axios(`http://localhost:8000/comment/${locationDetail._id}`)
+      axios(`https://teile-deine-obst.herokuapp.com/comment/${locationDetail._id}`)
         .then((res) => setCommentList(res.data))
         .catch((err) => console.log(err));
     }
@@ -117,12 +117,12 @@ function LocationDetails({ locationData }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post('http://localhost:8000/comment/', comment)
+      .post('https://teile-deine-obst.herokuapp.com/comment/', comment)
       .then((res) => {
         console.log(res);
       })
       .then(() => {
-        axios(`http://localhost:8000/comment/${locationDetail._id}`).then(
+        axios(`https://teile-deine-obst.herokuapp.com/comment/${locationDetail._id}`).then(
           (res) => setCommentList(res.data)
         );
       })
@@ -134,7 +134,7 @@ function LocationDetails({ locationData }) {
 
   useEffect(() => {
     if (user && locationDetail) {
-      axios(`http://localhost:8000/user/${user.sub.slice(user.sub.length - 7)}`)
+      axios(`https://teile-deine-obst.herokuapp.com/user/${user.sub.slice(user.sub.length - 7)}`)
         .then((res) => {
           setUserData(res.data);
           if (res.data.favorites.includes(locationDetail._id)) {
