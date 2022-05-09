@@ -1,127 +1,3 @@
-/* .locationDetails-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  text-align: center;
-  margin-top: 4rem;
-}
-
-.locationDetails-details {
-  margin: 1.5rem 0;
-  line-height: 1.5rem;
-}
-
-.locationDetails-details p {
-  font-size: large;
-  font-weight: bolder;
-  margin-bottom: 0.5rem;
-}
-
-#write-comment {
-  display: flex;
-  flex-direction: column;
-}
-
-.commentForm {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 0.7rem;
-}
-
-.btn_comment {
-  padding: 0.5rem 1rem;
-  border-radius: 22px;
-  font-size: 0.8rem;
-  cursor: pointer;
-  letter-spacing: 0.1rem;
-  margin-top: 1rem;
-  margin-right: 0.5rem;
-  background-color: #357560;
-  color: #f9f8f2;
-  font-weight: bold;
-  letter-spacing: 0.1rem;
-  margin-right: 0.5rem;
-  margin-top: 1rem;
-}
-
-.commentForm textarea {
-  padding: 0.5rem;
-  margin: 0.7rem 0;
-  border: none;
-  border-radius: 22px;
-  background-color: white;
-  font-size: 1rem;
-}
-
-.commentTextarea {
-  font-family: Nunito, sans-serif;
-  width: 300px;
-  height: 100px;
-}
-
-textarea:focus {
-  outline: none;
-  border: 2px solid #A7C46C;
-}
-
-.comment-wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: left;
-  align-items: center;
-  margin-top: 1.5rem;
-
-}
-
-.comment-avatar {
-  justify-content: center;
-  align-items: center;
-  width: 70px;
-  margin: auto;
-  
-
-}
-
-.comment-avatar img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-}
-
-.comment-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-
-}
-
-.comment-user {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 0.1rem;
-}
-
-.comment-user-name {
-  font-size: 0.8rem;
-  font-weight: bold;
-  margin-right: 0.5rem;
-}
-
-.comment-user-timestamp {
-  font-size: 0.6rem;
-  margin-right: 0.5rem;
-
-}
-.tree-picture img {
-  height: 150px;
-} */
-
 .locationDetails {
   display: flex;
   flex-direction: column;
@@ -137,6 +13,16 @@ textarea:focus {
 .details-fruit {
   display: flex;
   align-items: center;
+}
+
+.details-fruit img {
+  margin-right: 1rem;
+}
+
+.heart {
+  display: flex;
+  align-items: center;
+  margin-left: .25rem;
 }
 
 .commentForm {
@@ -225,6 +111,7 @@ textarea:focus {
 .tree-picture {
   display: flex;
   justify-content: center;
+  margin-top: 1rem;
 }
 
 .tree-picture img {
@@ -233,10 +120,6 @@ textarea:focus {
 
 .like-btn {
   display: flex;
-}
-
-.details-owner {
-  /* margin-bottom: 1rem; */
 }
 
 .harvest-start-details {

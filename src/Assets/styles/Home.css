@@ -22,6 +22,7 @@
   height: 50px;
   background-color: white;
   border-radius: 100%;
+  box-shadow: rgb(0 0 0 / 30%) 0px 1px 4px -1px;
 }
 
 .btn_map:first-child {
@@ -75,20 +76,19 @@
 }
 
 .btn_info_modal {
-  border: none;
-  background-color: #357560;
-  color: #f9f8f2;
+  background-color: transparent;
+  /* border: 2px solid #f39c1b; */
+  color: #f39c1b;
   padding: 0.5rem 1.2rem;
   border-radius: 22px;
   font-size: 1rem;
   cursor: pointer;
   letter-spacing: 0.1rem;
-  margin-top: 2rem;
 }
 
 .addresse {
   font-size: 1.2rem;
-  margin: 1rem 0;
+  margin: 2rem 0;
   font-weight: 900;
 }
 
@@ -96,6 +96,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  font-size: 1.1rem;
 }
 
 /*LOGO AND LOGIN */
@@ -107,10 +108,10 @@
 .home-logo {
   display: flex;
   justify-content: flex-end;
-  margin: 0.5rem 2rem 0.5rem 0;
+  margin: 0.5rem 2.1rem 0.5rem 0;
 }
 
-.home-logo a{
+.home-logo a {
   display: flex;
   justify-content: flex-end;
 }

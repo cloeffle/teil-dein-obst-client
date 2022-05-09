@@ -63,7 +63,6 @@ tree-form-image {
 }
 
 .tree-upload-success {
-  /* background-color: #35756071; */
   text-align: center;
   color: #357560;
 }
@@ -107,20 +106,16 @@ tree-form-image {
   justify-content: space-evenly;
   align-items: center;
   margin: 0.5rem 1rem;
-
 }
 
 .image-icon-btn {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  /* background-color: white; */
-  /* border-radius: 22px; */
-  /* margin: 0.7rem 0; */
 }
 
-.image-upload-container{
-   background-color: white; 
+.image-upload-container {
+  background-color: white;
   border-radius: 22px;
-   margin: 0.7rem 0;
+  margin: 0.7rem 0;
 }
