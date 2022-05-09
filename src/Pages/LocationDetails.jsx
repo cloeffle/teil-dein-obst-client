@@ -25,7 +25,6 @@ import '../assets/styles/locationDetails.css';
 
 function LocationDetails({ locationData }) {
   //GET LOCATION DATA FOR SPECIFIC LOCATION (ID)
-  console.log('locationData', locationData);
   const params = useParams();
   const [locationDetail, setLocationDetail] = useState(false);
 
@@ -38,36 +37,15 @@ function LocationDetails({ locationData }) {
     }
   }, [locationData]);
 
-  console.log('LOCATIONDETAIL', locationDetail);
-
   //GET USER DATA FROM AUTH0
   const { user } = useAuth0();
   const [userData, setUserData] = useState([]);
-  console.log('USER', userData);
   const [liked, setLiked] = useState(false);
 
-  useEffect(() => {
-    if (user) {
-      axios(`http://localhost:8000/user/${user.sub.slice(user.sub.length - 7)}`)
-        .then((res) => {
-          setUserData(res.data);
-          if (res.data.favorites.includes(locationDetail._id)) {
-            setLiked(true);
-            console.log('faved');
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }, [user]);
-
   //ADD TO FAVAORITES
-  // const [favorite, setFavorite] = useState(null);
   const handleLike = () => {
-    setLiked(!liked);
-    console.log(locationDetail._id);
-    // setFavorite(locationDetail._id);
+    setLiked(true);
+    console.log('like');
     axios
       .put(
         `http://localhost:8000/user/liketree/${user.sub.slice(
@@ -80,18 +58,14 @@ function LocationDetails({ locationData }) {
       .then((res) => {
         console.log(res);
       })
-      .then(() => {
-        window.location.reload();
-      })
       .catch((err) => {
         console.log(err);
       });
   };
-  // const [favorite, setFavorite] = useState(null);
+
   const handleDislike = () => {
-    setLiked(!liked);
-    console.log(locationDetail._id);
-    // setFavorite(locationDetail._id);
+    setLiked(false);
+    console.log('dislike');
     axios
       .put(
         `http://localhost:8000/user/disliketree/${user.sub.slice(
@@ -103,9 +77,7 @@ function LocationDetails({ locationData }) {
       )
       .then((res) => {
         console.log(res);
-      })
-      .then(() => {
-        window.location.reload();
+        console.log('disliked');
       })
       .catch((err) => {
         console.log(err);
@@ -147,7 +119,6 @@ function LocationDetails({ locationData }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Comment', comment);
     axios
       .post('http://localhost:8000/comment/', comment)
       .then((res) => {
@@ -163,6 +134,21 @@ function LocationDetails({ locationData }) {
       });
     e.target.reset();
   };
+
+  useEffect(() => {
+    if (user && locationDetail) {
+      axios(`http://localhost:8000/user/${user.sub.slice(user.sub.length - 7)}`)
+        .then((res) => {
+          setUserData(res.data);
+          if (res.data.favorites.includes(locationDetail._id)) {
+            setLiked(true);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [locationDetail, user]);
 
   return (
     <>
@@ -232,14 +218,14 @@ function LocationDetails({ locationData }) {
 
                       <div className="like-btn">
                         <p>Favorit</p>
-                        {!liked && (
+                        {!liked && locationDetail && (
                           <>
                             <div className="heart" onClick={handleLike}>
                               <img src={Like_black} alt="" height={20} />
                             </div>
                           </>
                         )}
-                        {liked && (
+                        {liked && locationDetail && (
                           <>
                             <div className="heart" onClick={handleDislike}>
                               <img src={Like_red} alt="" height={20} />
