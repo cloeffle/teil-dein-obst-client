@@ -1,26 +1,25 @@
-import { Link } from "react-router-dom";
-import { AiOutlineClose } from "react-icons/ai";
-import "../assets/styles/Home.css";
-import "../../src/App.css";
-import "animate.css";
-
+import { Link } from 'react-router-dom';
+import { AiOutlineClose } from 'react-icons/ai';
+import '../assets/styles/Home.css';
+import '../../src/App.css';
+import 'animate.css';
 
 function LocationInfoModal({ locationInfo, setLocationInfo, locationData }) {
-  console.log("locationinfo", locationInfo);
+  console.log('locationinfo', locationInfo);
 
   return (
     <div className="location_info_modal animate__animated animate__slideInUp">
       <div className="info_wrapper">
         <div className="info-modal-type-status">
-          <p className="info-modal-type">{locationInfo.type.join(", ")}</p>
+          <p className="info-modal-type">{locationInfo.type.join(', ')}</p>
           &nbsp;
           {locationInfo.active === true ? (
             <p>
-              |<i style={{ color: "green" }}> aktiv</i>
+              |<i style={{ color: 'green' }}> aktiv</i>
             </p>
           ) : (
             <p>
-              |<i style={{ color: "red" }}> inaktiv</i>
+              |<i style={{ color: 'red' }}> inaktiv</i>
             </p>
           )}
         </div>

@@ -20,8 +20,6 @@ function App() {
       .catch((error) => console.log(error));
   }, []);
 
-  console.log('Fetch Trees', locationData);
-
   return (
     <div className="App">
       <Navbar />
