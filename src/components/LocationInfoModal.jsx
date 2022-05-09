@@ -59,15 +59,19 @@ function LocationInfoModal({ locationInfo, setLocationInfo, locationData }) {
           <img src={Korb} alt="Obstkorb" height={65} />
         )} */}
         <div className="info-modal-type-status">
-          <p>{locationInfo.type.join(", ")}</p>&nbsp;[
+          <p className="info-modal-type">{locationInfo.type.join(", ")}</p>
+          &nbsp;
           {locationInfo.active === true ? (
-            <p style={{ color: "green" }}>aktiv</p>
+            <p>
+              |<i style={{ color: "green" }}> aktiv</i>
+            </p>
           ) : (
-            <p style={{ color: "red", fontWeight: "bold" }}>inaktiv</p>
+            <p>
+              |<i style={{ color: "red" }}> inaktiv</i>
+            </p>
           )}
-          ]
         </div>
-        <h3 className="addresse">{locationInfo.address}</h3>
+        <h4 className="addresse">{locationInfo.address}</h4>
         <Link to={locationInfo.id}>
           <button className="btn_info_modal">Details</button>
         </Link>

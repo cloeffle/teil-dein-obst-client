@@ -170,7 +170,9 @@ function LocationDetails({ locationData }) {
           <div className="header-login">
             <div className="logo-wrapper">
               <div className="home-logo">
-                <img src={Logo} alt="logo" />
+                <a href="/">
+                  <img src={Logo} alt="logo" />
+                </a>
               </div>
             </div>
             <Login />
@@ -181,52 +183,52 @@ function LocationDetails({ locationData }) {
                 <>
                   <div className="details-fruit">
                     {locationDetail.type[0] === "Apfel" && (
-                      <img src={Apfel} alt="Apfel-Icon" height={120} />
+                      <img src={Apfel} alt="Apfel-Icon" height={50} />
                     )}
                     {locationDetail.type[0] === "Aprikose" && (
-                      <img src={Aprikose} alt="Aprikose-Icon" height={120} />
+                      <img src={Aprikose} alt="Aprikose-Icon" height={50} />
                     )}
                     {locationDetail.type[0] === "Birne" && (
-                      <img src={Birne} alt="Birne-Icon" height={120} />
+                      <img src={Birne} alt="Birne-Icon" height={50} />
                     )}
                     {locationDetail.type[0] === "Heidelbeere" && (
-                      <img src={Blaubeere} alt="Blaubeere-Icon" height={120} />
+                      <img src={Blaubeere} alt="Blaubeere-Icon" height={50} />
                     )}
                     {locationDetail.type[0] === "Himbeere" && (
-                      <img src={Himbeere} alt="Himbeere-Icon" height={120} />
+                      <img src={Himbeere} alt="Himbeere-Icon" height={50} />
                     )}
                     {locationDetail.type[0] === "Johannisbeere" && (
                       <img
                         src={Johannisbeere}
                         alt="Johannisbeere-Icon"
-                        height={120}
+                        height={50}
                       />
                     )}
                     {locationDetail.type[0] === "Kirsche" && (
-                      <img src={Kirsche} alt="Kirsche-Icon" height={120} />
+                      <img src={Kirsche} alt="Kirsche-Icon" height={50} />
                     )}
                     {locationDetail.type[0] === "Weintraube" && (
                       <img
                         src={Weintraube}
                         alt="Weintraube-Icon"
-                        height={120}
+                        height={50}
                       />
                     )}
                     {locationDetail.type[0] === "Pflaume" && (
-                      <img src={Pflaume} alt="Pflaume-Icon" height={120} />
+                      <img src={Pflaume} alt="Pflaume-Icon" height={50} />
                     )}
                     {locationDetail.type[0] === "Erdbeere" && (
-                      <img src={Erdbeere} alt="Erdbeere-Icon" height={120} />
+                      <img src={Erdbeere} alt="Erdbeere-Icon" height={50} />
                     )}
                     {locationDetail.type[0] === "Stachelbeere" && (
                       <img
                         src={Stachelbeere}
                         alt="Stachelbeere-Icon"
-                        height={120}
+                        height={50}
                       />
                     )}
                     {locationDetail.type[0] === "Sonstiges" && (
-                      <img src={Sonstiges} alt="Obstkorb" height={120} />
+                      <img src={Sonstiges} alt="Obstkorb" height={50} />
                     )}
                     <div>
                       <h4>{locationDetail.type[0]}</h4>
@@ -235,15 +237,15 @@ function LocationDetails({ locationData }) {
                         <p>Favorit</p>
                         {!liked && (
                           <>
-                            <div onClick={handleLike}>
-                              <img src={Like_black} alt="" />
+                            <div className="heart" onClick={handleLike}>
+                              <img src={Like_black} alt="" height={20} />
                             </div>
                           </>
                         )}
                         {liked && (
                           <>
-                            <div onClick={handleDislike}>
-                              <img src={Like_red} alt="" />
+                            <div className="heart" onClick={handleDislike}>
+                              <img src={Like_red} alt="" height={20} />
                             </div>
                           </>
                         )}
@@ -251,10 +253,10 @@ function LocationDetails({ locationData }) {
                     </div>
                   </div>
 
-                  <div className="locationDetails-details">
+                  {/* <div className="locationDetails-details">
                     <h4>Wo?</h4>
                     <p>{locationDetail.location.address}</p>
-                  </div>
+                  </div> */}
 
                   {locationDetail.harvestPeriod.start.length > 0 && (
                     <div className="harvest-start-details">
