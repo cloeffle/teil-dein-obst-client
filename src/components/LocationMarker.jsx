@@ -1,5 +1,4 @@
 import '../assets/styles/locationMarker.css';
-import Marker from '../assets/images/Marker.png';
 import Apfel from '../assets/images/icons8-apple-500.png';
 import Aprikose from '../assets/images/icons8-apricot-500.png';
 import Birne from '../assets/images/icons8-pear-500.png';

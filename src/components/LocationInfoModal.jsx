@@ -5,8 +5,6 @@ import '../../src/App.css';
 import 'animate.css';
 
 function LocationInfoModal({ locationInfo, setLocationInfo, locationData }) {
-  console.log('locationinfo', locationInfo);
-
   return (
     <div className="location_info_modal animate__animated animate__slideInUp">
       <div className="info_wrapper">
