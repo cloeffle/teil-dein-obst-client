@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
+import { DateTime } from 'luxon';
 
 import Logo from '../assets/logo/Logo.svg';
 import Login from '../components/Login/LoginButton';
@@ -24,7 +25,6 @@ import '../assets/styles/locationDetails.css';
 
 function LocationDetails({ locationData }) {
   //GET LOCATION DATA FOR SPECIFIC LOCATION (ID)
-
   const params = useParams();
   const [locationDetail, setLocationDetail] = useState(false);
 
@@ -40,31 +40,11 @@ function LocationDetails({ locationData }) {
   //GET USER DATA FROM AUTH0
   const { user } = useAuth0();
   const [userData, setUserData] = useState([]);
-
   const [liked, setLiked] = useState(false);
 
-  useEffect(() => {
-    if (user) {
-      axios(`http://localhost:8000/user/${user.sub.slice(user.sub.length - 7)}`)
-        .then((res) => {
-          setUserData(res.data);
-          if (res.data.favorites.includes(locationDetail._id)) {
-            setLiked(true);
-            console.log('faved');
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }, [user]);
-
   //ADD TO FAVAORITES
-  // const [favorite, setFavorite] = useState(null);
   const handleLike = () => {
-    setLiked(!liked);
-
-    // setFavorite(locationDetail._id);
+    setLiked(true);
     axios
       .put(
         `http://localhost:8000/user/liketree/${user.sub.slice(
@@ -77,18 +57,13 @@ function LocationDetails({ locationData }) {
       .then((res) => {
         console.log(res);
       })
-      .then(() => {
-        window.location.reload();
-      })
       .catch((err) => {
         console.log(err);
       });
   };
-  // const [favorite, setFavorite] = useState(null);
+
   const handleDislike = () => {
-    setLiked(!liked);
-    console.log(locationDetail._id);
-    // setFavorite(locationDetail._id);
+    setLiked(false);
     axios
       .put(
         `http://localhost:8000/user/disliketree/${user.sub.slice(
@@ -100,9 +75,6 @@ function LocationDetails({ locationData }) {
       )
       .then((res) => {
         console.log(res);
-      })
-      .then(() => {
-        window.location.reload();
       })
       .catch((err) => {
         console.log(err);
@@ -144,7 +116,6 @@ function LocationDetails({ locationData }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     axios
       .post('http://localhost:8000/comment/', comment)
       .then((res) => {
@@ -160,6 +131,21 @@ function LocationDetails({ locationData }) {
       });
     e.target.reset();
   };
+
+  useEffect(() => {
+    if (user && locationDetail) {
+      axios(`http://localhost:8000/user/${user.sub.slice(user.sub.length - 7)}`)
+        .then((res) => {
+          setUserData(res.data);
+          if (res.data.favorites.includes(locationDetail._id)) {
+            setLiked(true);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [locationDetail, user]);
 
   return (
     <>
@@ -229,14 +215,14 @@ function LocationDetails({ locationData }) {
 
                       <div className="like-btn">
                         <p>Favorit</p>
-                        {!liked && (
+                        {!liked && locationDetail && (
                           <>
                             <div className="heart" onClick={handleLike}>
                               <img src={Like_black} alt="" height={20} />
                             </div>
                           </>
                         )}
-                        {liked && (
+                        {liked && locationDetail && (
                           <>
                             <div className="heart" onClick={handleDislike}>
                               <img src={Like_red} alt="" height={20} />
@@ -256,8 +242,15 @@ function LocationDetails({ locationData }) {
                     <div className="harvest-start-details">
                       <h4>Erntezeitraum</h4>
                       <p>
-                        von {locationDetail.harvestPeriod.start} bis{' '}
-                        {locationDetail.harvestPeriod.end}
+                        vom{' '}
+                        {DateTime.fromISO(locationDetail.harvestPeriod.start)
+                          .setLocale('de')
+                          .toFormat('dd. LLL')}{' '}
+                        bis{' '}
+                        {DateTime.fromISO(locationDetail.harvestPeriod.end)
+                          .setLocale('de')
+                          .toFormat('dd. LLL')}
+                        {/* DateTime.fromISO(comment.timestamp).toFormat('ff') */}
                       </p>
                     </div>
                   )}
@@ -322,7 +315,7 @@ function LocationDetails({ locationData }) {
                         <div className="comment-user">
                           <p className="comment-user-name">{comment.user}</p>
                           <p className="comment-user-timestamp">
-                            {comment.timestamp}
+                            {DateTime.fromISO(comment.timestamp).toFormat('ff')}
                           </p>
                         </div>
                         <div className="comment-text">
