@@ -4,7 +4,6 @@ import Filter from "../components/Filter";
 import "../assets/styles/Home.css";
 import Logo from "../assets/logo/Logo.svg";
 import AuthenticationButton from "../components/Login/AuthenticationButton";
-import { LocationSearching } from "@mui/icons-material";
 
 function Home() {
   const [showFilter, setShowFilter] = useState(false);

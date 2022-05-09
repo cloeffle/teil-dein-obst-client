@@ -7,7 +7,6 @@ import {
   uploadBytes,
   getStorage,
   getDownloadURL,
-  refFromURL,
   deleteObject,
 } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
@@ -206,7 +205,7 @@ export default function TreeRegistration() {
         })
       );
     }
-    setImgUploadSuccess("uploaded");
+    setTimeout(() => {setImgUploadSuccess("uploaded")}, 2000);
   };
 
   const handleSubmit = (e) => {
@@ -232,7 +231,7 @@ export default function TreeRegistration() {
       setImageUpload(target);
       setImageName(target.name + uuidv4());
     } else {
-      alert("Das Bild übersteigt die zulässige Größe von 10 MB ");
+      alert("Das Bild übersteigt die zulässige Größe von 10 MB");
       setImageUpload(null);
     }
   };
