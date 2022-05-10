@@ -49,3 +49,38 @@ textarea:focus {
   display: flex;
   justify-content: flex-end;
 }
+
+
+@media only screen and (min-width: 540px) {
+  .support-container {
+  margin: 0.5rem 3rem;
+  padding: 5%;
+  background-color: #c8e0c3bd;
+  border-radius: 12px;
+}
+}
+
+@media only screen and (min-width: 600px) {
+  .support-container {
+  margin: 0.5rem 5rem;
+}
+}
+
+@media only screen and (min-width: 768px) {
+.support-container {
+  margin: 0.5rem 10rem;
+}
+}
+
+@media only screen and (min-width: 992px) {
+.support-container {
+  margin: 0.5rem 15rem;
+}
+}
+
+@media only screen and (min-width: 1200px) {
+.support-container {
+  margin: 0.5rem 25rem;
+}
+}
+

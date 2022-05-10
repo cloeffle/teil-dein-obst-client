@@ -71,9 +71,9 @@ function Home() {
       <div className="header-login">
         <div className="logo-wrapper">
           <div className="home-logo">
-            <a href="/">
+            {/* <a href="/"> */}
               <img src={Logo} alt="logo" />
-            </a>
+            {/* </a> */}
           </div>
         </div>
         <AuthenticationButton />

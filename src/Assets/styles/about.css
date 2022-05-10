@@ -1,9 +1,28 @@
 .about-container {
-    display: flex;
-    margin: 0.5rem 1rem;
-    line-height: 2rem;
+  display: flex;
+  margin: 0.5rem 1rem;
+  line-height: 2rem;
 }
 
 .about-text ol {
-    margin: 0.5rem 1rem;
+  margin: 0.5rem 1rem;
 }
+
+@media only screen and (min-width: 600px) {
+  .about-container {
+    margin: 0.5rem 4rem;
+    background-color: white;
+    padding: 5%;
+    border: 2px solid #c8e0c3;
+    border-radius: 12px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .about-container {
+    margin: 0.5rem 4rem;
+    justify-content: center;
+    width: 90vw;
+  }
+}
+

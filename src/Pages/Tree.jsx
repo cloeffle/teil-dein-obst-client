@@ -71,7 +71,7 @@ function Tree() {
   return (
     <>
       <div className="my-trees-container">
-        <div className="my-trees">
+        <div className="my-trees-modal">
           <table>
             <tbody>
               {!userTrees.length > 0 && (
@@ -88,7 +88,7 @@ function Tree() {
                       {myTrees.type.join(', ')}
                     </td>
                     <td className="my-tree-address-modal">
-                      {myTrees.location.address.substring(0, 25)}...
+                      {myTrees.location.address}
                     </td>
                     <td className="deactivate-reactivate-btn">
                       {myTrees.active === true ? (

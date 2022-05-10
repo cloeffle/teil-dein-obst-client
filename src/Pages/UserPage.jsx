@@ -12,22 +12,22 @@ import { Link } from 'react-router-dom';
 import Modal from 'react-modal';
 
 //MODAL STYLE
-const customStyles = {
-  content: {
-    top: '55%',
-    left: '50%',
-    right: '4%',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    backgroundColor: '#C8E0C3',
-    boxShadow: 'rgba(0, 0, 0, 0.25) 0px 5px 15px',
-    fontSize: '14px',
-    paddingLeft: '15px',
-    paddingRight: '15px',
-    paddingTop: '5px',
-  },
-};
+// const customStyles = {
+//   content: {
+//     top: '55%',
+//     left: '50%',
+//     right: '4%',
+//     bottom: 'auto',
+//     marginRight: '-50%',
+//     transform: 'translate(-50%, -50%)',
+//     backgroundColor: '#C8E0C3',
+//     boxShadow: 'rgba(0, 0, 0, 0.25) 0px 5px 15px',
+//     fontSize: '14px',
+//     paddingLeft: '15px',
+//     paddingRight: '15px',
+//     paddingTop: '5px',
+//   },
+// };
 
 Modal.setAppElement('#root');
 
@@ -156,7 +156,7 @@ function UserPage() {
                           </Link>
                         </td>
                         <td className="my-tree-address">
-                          {myTrees.location.address.substring(0, 25)}...
+                          {myTrees.location.address}
                         </td>
                         <td className="my-tree-status">
                           {myTrees.active === true ? (
@@ -176,8 +176,9 @@ function UserPage() {
                 onAfterOpen={afterOpenModal}
                 onRequestClose={closeModal}
                 shouldCloseOnOverlayClick={false}
-                style={customStyles}
+                // style={customStyles}
                 contentLabel="Tree Modal"
+                className="modal"
               >
                 <div className="modal-close">
                   <button
@@ -217,7 +218,7 @@ function UserPage() {
                         </Link>
                       </td>
                       <td className="my-tree-address">
-                        {favorite[0].location.address.substring(0, 25)}...
+                        {favorite[0].location.address}
                       </td>
                       <td className="my-tree-status">
                         {favorite[0].active && (
