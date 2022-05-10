@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useRecoilState } from 'recoil';
 import '../assets/styles/filter.css';
 import Apfel from '../assets/images/icons8-apple-500.png';
 import Aprikose from '../assets/images/icons8-apricot-500.png';
@@ -13,10 +14,13 @@ import Weintraube from '../assets/images/icons8-grapes-500.png';
 import Pflaume from '../assets/images/icons8-plum-500.png';
 import Korb from '../assets/images/fruit basket 500.png';
 
+import { selectedFilterState } from '../atoms/filterAtom';
+
 // use Javascript ES6 Syntax
 function Filter(props) {
-  const { onSelectFilter, selectedFilter } = props;
-  const [filter, setFilter] = useState([]);
+  const { onSelectFilter } = props;
+  const [selectedFilter, setSelectedFilter] =
+    useRecoilState(selectedFilterState);
 
   const [fruitsort, setFruitsort] = useState([
     { name: 'Apfel', alt: 'Äpfel', bild: Apfel, id: 1, status: false },
@@ -95,8 +99,8 @@ function Filter(props) {
     e.preventDefault();
     const fruit = [...fruitsort];
     const filter = fruit.filter((fruit) => fruit.status === true);
-    setFilter(filter);
     onSelectFilter(filter);
+    setSelectedFilter(filter);
   };
 
   useEffect(() => {
