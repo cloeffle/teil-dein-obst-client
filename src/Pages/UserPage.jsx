@@ -117,7 +117,7 @@ function UserPage() {
           <figure>
             <Link to="/baum-registrieren" className="link-add-tree">
               <img src={Obstbaum} alt="Obstbaum" />
-              <figcaption style={{ color: '#3d6137' }}>
+              <figcaption style={{ color: "#3d6137" }}>
                 Obst hinzufügen
               </figcaption>
             </Link>
@@ -140,7 +140,7 @@ function UserPage() {
               <table>
                 <tbody>
                   {!userTrees.length > 0 && (
-                    <tr style={{ fontSize: '14px', fontStyle: 'italic' }}>
+                    <tr style={{ fontSize: "14px", fontStyle: "italic" }}>
                       <td>
                         Hier werden dir deine hochgeladenen Obstbäume/-sträucher
                         angezeigt
@@ -152,7 +152,7 @@ function UserPage() {
                       <tr key={uuidv4()}>
                         <td className="my-tree-type">
                           <Link to={`../${myTrees._id}`}>
-                            {myTrees.type.join(', ')}
+                            <p style={{fontFamily: "Roboto"}}>{myTrees.type.join(", ")}</p>
                           </Link>
                         </td>
                         <td className="my-tree-address">
@@ -160,9 +160,9 @@ function UserPage() {
                         </td>
                         <td className="my-tree-status">
                           {myTrees.active === true ? (
-                            <p style={{ color: 'green' }}>aktiv</p>
+                            <p style={{ color: "green" }}>aktiv</p>
                           ) : (
-                            <p style={{ color: 'grey', fontWeight: 'bold' }}>
+                            <p style={{ color: "grey", fontWeight: "bold" }}>
                               inaktiv
                             </p>
                           )}
@@ -190,7 +190,7 @@ function UserPage() {
                 </div>
                 <h3
                   ref={(_subtitle) => (subtitle = _subtitle)}
-                  style={{ marginBottom: '1rem' }}
+                  style={{ marginBottom: "1rem" }}
                 >
                   Inaktivieren / Aktivieren oder Löschen
                 </h3>
@@ -205,7 +205,7 @@ function UserPage() {
             <table>
               <tbody>
                 {!userFavorites.length > 0 && (
-                  <tr style={{ fontSize: '14px', fontStyle: 'italic' }}>
+                  <tr style={{ fontSize: "14px", fontStyle: "italic" }}>
                     <td>Hier findest du deine Favoriten</td>
                   </tr>
                 )}
@@ -214,7 +214,7 @@ function UserPage() {
                     <tr key={uuidv4()}>
                       <td className="my-tree-type">
                         <Link to={`../${favorite[0]._id}`}>
-                          {favorite[0].type[0]}{' '}
+                          <p style={{fontFamily: "Roboto"}}>{favorite[0].type[0]}</p>
                         </Link>
                       </td>
                       <td className="my-tree-address">
@@ -222,10 +222,10 @@ function UserPage() {
                       </td>
                       <td className="my-tree-status">
                         {favorite[0].active && (
-                          <p style={{ color: 'green' }}>aktiv</p>
+                          <p style={{ color: "green" }}>aktiv</p>
                         )}
                         {!favorite[0].active && (
-                          <p style={{ color: 'grey', fontWeight: 'bold' }}>
+                          <p style={{ color: "grey", fontWeight: "bold" }}>
                             inaktiv
                           </p>
                         )}
