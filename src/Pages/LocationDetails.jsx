@@ -155,7 +155,7 @@ function LocationDetails({ locationData }) {
   }, [locationDetail, user]);
 
   const deleteComment = (id) => {
-    axios.put(`http://localhost:8000/comment/${id}`);
+    axios.put(`https://teile-deine-obst.herokuapp.com/comment/${id}`);
     axios(
       `https://teile-deine-obst.herokuapp.com/comment/${locationDetail._id}`
     )

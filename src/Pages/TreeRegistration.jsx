@@ -259,7 +259,7 @@ export default function TreeRegistration() {
         <div className="tree-form-container">
           <h3>Obst zur Verfügung stellen</h3>
           <div className="tree-form">
-            <label>Standort*</label>
+            <label>Standort</label>
             <input
               className="tree-input-field"
               type="text"
