@@ -2,7 +2,7 @@
   font-family: "Nunito", sans-serif;
   font-size: 16px;
   color: #444;
-  background-color: #f7fafc;
+  background-color: rgba(240, 241, 243);
 }
 
 * {
@@ -32,14 +32,14 @@ a {
 
 .submit {
   border: none;
-  background-color: #A7C46C;
+  background-color: #a7c46c;
   color: #f7fafc;
 }
 
 .logo-wrapper {
- display: flex;
-    justify-content: center;
-    width: 100%;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .logo,
@@ -57,7 +57,7 @@ a {
 input:focus,
 textarea:focus {
   outline: none;
-  border: 2px solid #A7C46C;
+  border: 2px solid #a7c46c;
 }
 
 .loading {

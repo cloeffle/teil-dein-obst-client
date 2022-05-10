@@ -16,7 +16,7 @@ button {
   align-items: center;
   flex-wrap: wrap;
   justify-content: center;
-  background-color: #f7fafc;
+  background-color: rgb(240, 241, 243);
   max-width: 98vw;
   height: 100vh;
   margin: 0 auto;
@@ -93,7 +93,7 @@ button {
   margin-bottom: 1rem;
   padding: 10px 25px;
   background-color: #a7c46c;
-  color: #f9f8f2;
+  color: white;
   font-family: 'Nunito', sans-serif;
   font-size: 0.9rem;
 }
