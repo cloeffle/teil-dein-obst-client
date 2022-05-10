@@ -19,13 +19,17 @@ td {
   vertical-align: top;
 }
 
+
 .my-tree-type {
   padding-right: 0.5rem;
 }
 
 .my-tree-address {
-  margin-top: 1rem;
   padding-right: 0.5rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
 figure {
@@ -97,4 +101,65 @@ figure img {
 .tree-list {
   display: flex;
   flex-direction: column;
+}
+
+
+@media only screen and (min-width: 580px) {
+  .userpage-container {
+    margin: 0.5rem 3rem;
+    padding: 5%;
+    border: 2px solid #c8e0c3;
+    background-color: white;
+    border-radius: 12px;
+  }
+}
+
+@media screen and (min-width: 620px) {
+  .userpage-container {
+  margin: 0.5rem 5rem;
+}
+}
+
+@media only screen and (min-width: 690px)
+{
+  .userpage-container {
+    margin: 0.5rem 7rem;
+  }
+}
+
+@media only screen and (min-width: 754px)
+{
+  .userpage-container {
+    margin: 0.5rem 9rem;
+  }
+}
+
+@media only screen and (min-width: 940px)
+{
+  .userpage-container {
+    margin: 0.5rem 13rem;
+  
+  }
+}
+
+
+@media only screen and (min-width: 1040px)
+{
+  .userpage-container {
+    margin: 0.5rem 15rem;
+  }
+}
+
+@media only screen and (min-width: 1100px)
+{
+  .userpage-container {
+    margin: 0.5rem 18rem;
+  }
+}
+
+@media only screen and (min-width: 1200px)
+{
+  .userpage-container {
+    margin: 0.5rem 25rem;
+  }
 }

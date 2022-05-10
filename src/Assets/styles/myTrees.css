@@ -1,3 +1,15 @@
+.modal {
+  position: absolute;
+  top: 30%;
+  left: 2%;
+  right: 2%;
+  padding: 5px 15px 30px 15px;
+  bottom: auto;
+  background-color: #c8e0c3;
+  font-size: 14px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px;
+}
+
 .my-tree-type-modal {
   padding: 0 1rem 0 0;
 }
@@ -5,7 +17,6 @@
 .my-tree-address-modal {
   padding-bottom: 1rem;
 }
-
 
 .delete-tree-btn {
   background-color: transparent;
@@ -24,7 +35,7 @@
 }
 
 .activate-tree {
-  background-color:#358537;
+  background-color: #358537;
   font-family: "Roboto", sans-serif;
   /* border: 1px solid green; */
   padding: 0 1rem;
@@ -38,4 +49,49 @@
   padding: 0 0.7rem;
   border-radius: 22px;
   color: #444;
+}
+
+@media screen and (min-width: 600px) {
+  .my-trees-modal {
+    display: flex;
+    justify-content: space-between;
+  }
+  .my-tree-address-modal {
+    padding-right: 2rem;
+  }
+.modal {
+  margin: 0 3rem;
+}
+}
+
+@media only screen and (min-width: 768px) {
+  .modal {
+    margin: 0 7rem;
+  }
+  .my-tree-address-modal {
+    padding-right: 1rem;
+  }
+}
+
+
+@media screen and (min-width: 830px) {
+  .modal {
+  margin: 0 12rem;
+}
+}
+
+@media only screen and (min-width: 992px) {
+  .modal {
+    margin: 0 17rem;
+  }
+
+   .my-tree-address-modal {
+    padding-right: 1.5rem;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .modal {
+    margin: 0 25rem;
+  }
 }
