@@ -20,6 +20,7 @@ import Sonstiges from '../assets/images/fruit basket 500.png';
 import Birne from '../assets/images/icons8-pear-500.png';
 import Like_black from '../assets/images/Like_black.png';
 import Like_red from '../assets/images/Like_red.png';
+import Delete from '../assets/images/icons8-entfernen.svg';
 
 import '../assets/styles/locationDetails.css';
 
@@ -86,7 +87,9 @@ function LocationDetails({ locationData }) {
 
   useEffect(() => {
     if (locationDetail) {
-      axios(`https://teile-deine-obst.herokuapp.com/comment/${locationDetail._id}`)
+      axios(
+        `https://teile-deine-obst.herokuapp.com/comment/${locationDetail._id}`
+      )
         .then((res) => setCommentList(res.data))
         .catch((err) => console.log(err));
     }
@@ -122,9 +125,9 @@ function LocationDetails({ locationData }) {
         console.log(res);
       })
       .then(() => {
-        axios(`https://teile-deine-obst.herokuapp.com/comment/${locationDetail._id}`).then(
-          (res) => setCommentList(res.data)
-        );
+        axios(
+          `https://teile-deine-obst.herokuapp.com/comment/${locationDetail._id}`
+        ).then((res) => setCommentList(res.data));
       })
       .catch((err) => {
         console.log(err);
@@ -134,7 +137,11 @@ function LocationDetails({ locationData }) {
 
   useEffect(() => {
     if (user && locationDetail) {
-      axios(`https://teile-deine-obst.herokuapp.com/user/${user.sub.slice(user.sub.length - 7)}`)
+      axios(
+        `https://teile-deine-obst.herokuapp.com/user/${user.sub.slice(
+          user.sub.length - 7
+        )}`
+      )
         .then((res) => {
           setUserData(res.data);
           if (res.data.favorites.includes(locationDetail._id)) {
@@ -146,6 +153,17 @@ function LocationDetails({ locationData }) {
         });
     }
   }, [locationDetail, user]);
+
+  const deleteComment = (id) => {
+    axios.put(`http://localhost:8000/comment/${id}`);
+    axios(
+      `https://teile-deine-obst.herokuapp.com/comment/${locationDetail._id}`
+    )
+      .then((res) => setCommentList(res.data))
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <>
@@ -213,23 +231,25 @@ function LocationDetails({ locationData }) {
                     <div>
                       <h4>{locationDetail.type[0]}</h4>
 
-                     {user ? <div className="like-btn">
-                        <p>Favorit</p>
-                        {!liked && locationDetail && (
-                          <>
-                            <div className="heart" onClick={handleLike}>
-                              <img src={Like_black} alt="" height={20} />
-                            </div>
-                          </>
-                        )}
-                        {liked && locationDetail && (
-                          <>
-                            <div className="heart" onClick={handleDislike}>
-                              <img src={Like_red} alt="" height={20} />
-                            </div>
-                          </>
-                        )}
-                      </div> : null}
+                      {user ? (
+                        <div className="like-btn">
+                          <p>Favorit</p>
+                          {!liked && locationDetail && (
+                            <>
+                              <div className="heart" onClick={handleLike}>
+                                <img src={Like_black} alt="" height={20} />
+                              </div>
+                            </>
+                          )}
+                          {liked && locationDetail && (
+                            <>
+                              <div className="heart" onClick={handleDislike}>
+                                <img src={Like_red} alt="" height={20} />
+                              </div>
+                            </>
+                          )}
+                        </div>
+                      ) : null}
                     </div>
                   </div>
 
@@ -317,6 +337,15 @@ function LocationDetails({ locationData }) {
                           <p className="comment-user-timestamp">
                             {DateTime.fromISO(comment.timestamp).toFormat('ff')}
                           </p>
+                          {user.name === comment.user && (
+                            <button onClick={() => deleteComment(comment._id)}>
+                              <img
+                                style={{ height: 20 }}
+                                src={Delete}
+                                alt="Löschen"
+                              />
+                            </button>
+                          )}
                         </div>
                         <div className="comment-text">
                           <p>{comment.comment}</p>
