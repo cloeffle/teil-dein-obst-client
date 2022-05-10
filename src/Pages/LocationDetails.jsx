@@ -156,14 +156,18 @@ function LocationDetails({ locationData }) {
 
   const deleteComment = (id) => {
     axios.put(`https://teile-deine-obst.herokuapp.com/comment/${id}`);
-    axios(
-      `https://teile-deine-obst.herokuapp.com/comment/${locationDetail._id}`
-    )
-      .then((res) => setCommentList(res.data))
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+    setTimeout(
+      () =>
+        axios(
+          `https://teile-deine-obst.herokuapp.com/comment/${locationDetail._id}`
+        )
+          .then((res) => setCommentList(res.data))
+          .catch((err) => {
+            console.log(err);
+          }),
+      1000
+    );
+  }; 
 
   return (
     <>
@@ -184,48 +188,48 @@ function LocationDetails({ locationData }) {
               {locationDetail && (
                 <>
                   <div className="details-fruit">
-                    {locationDetail.type[0] === 'Apfel' && (
+                    {locationDetail.type[0] === "Apfel" && (
                       <img src={Apfel} alt="Apfel-Icon" height={50} />
                     )}
-                    {locationDetail.type[0] === 'Aprikose' && (
+                    {locationDetail.type[0] === "Aprikose" && (
                       <img src={Aprikose} alt="Aprikose-Icon" height={50} />
                     )}
-                    {locationDetail.type[0] === 'Birne' && (
+                    {locationDetail.type[0] === "Birne" && (
                       <img src={Birne} alt="Birne-Icon" height={50} />
                     )}
-                    {locationDetail.type[0] === 'Heidelbeere' && (
+                    {locationDetail.type[0] === "Heidelbeere" && (
                       <img src={Blaubeere} alt="Blaubeere-Icon" height={50} />
                     )}
-                    {locationDetail.type[0] === 'Himbeere' && (
+                    {locationDetail.type[0] === "Himbeere" && (
                       <img src={Himbeere} alt="Himbeere-Icon" height={50} />
                     )}
-                    {locationDetail.type[0] === 'Johannisbeere' && (
+                    {locationDetail.type[0] === "Johannisbeere" && (
                       <img
                         src={Johannisbeere}
                         alt="Johannisbeere-Icon"
                         height={50}
                       />
                     )}
-                    {locationDetail.type[0] === 'Kirsche' && (
+                    {locationDetail.type[0] === "Kirsche" && (
                       <img src={Kirsche} alt="Kirsche-Icon" height={50} />
                     )}
-                    {locationDetail.type[0] === 'Weintraube' && (
+                    {locationDetail.type[0] === "Weintraube" && (
                       <img src={Weintraube} alt="Weintraube-Icon" height={50} />
                     )}
-                    {locationDetail.type[0] === 'Pflaume' && (
+                    {locationDetail.type[0] === "Pflaume" && (
                       <img src={Pflaume} alt="Pflaume-Icon" height={50} />
                     )}
-                    {locationDetail.type[0] === 'Erdbeere' && (
+                    {locationDetail.type[0] === "Erdbeere" && (
                       <img src={Erdbeere} alt="Erdbeere-Icon" height={50} />
                     )}
-                    {locationDetail.type[0] === 'Stachelbeere' && (
+                    {locationDetail.type[0] === "Stachelbeere" && (
                       <img
                         src={Stachelbeere}
                         alt="Stachelbeere-Icon"
                         height={50}
                       />
                     )}
-                    {locationDetail.type[0] === 'Sonstiges' && (
+                    {locationDetail.type[0] === "Sonstiges" && (
                       <img src={Sonstiges} alt="Obstkorb" height={50} />
                     )}
                     <div>
@@ -262,14 +266,14 @@ function LocationDetails({ locationData }) {
                     <div className="harvest-start-details">
                       <h4>Erntezeitraum</h4>
                       <p>
-                        vom{' '}
+                        vom{" "}
                         {DateTime.fromISO(locationDetail.harvestPeriod.start)
-                          .setLocale('de')
-                          .toFormat('dd. LLL')}{' '}
-                        bis{' '}
+                          .setLocale("de")
+                          .toFormat("dd. LLL")}{" "}
+                        bis{" "}
                         {DateTime.fromISO(locationDetail.harvestPeriod.end)
-                          .setLocale('de')
-                          .toFormat('dd. LLL')}
+                          .setLocale("de")
+                          .toFormat("dd. LLL")}
                         {/* DateTime.fromISO(comment.timestamp).toFormat('ff') */}
                       </p>
                     </div>
@@ -318,7 +322,7 @@ function LocationDetails({ locationData }) {
             )}
             <div className="locationDetails-content">
               {!commentList.length > 0 && (
-                <p style={{ fontSize: '14px', fontStyle: 'italic' }}>
+                <p style={{ fontSize: "14px", fontStyle: "italic" }}>
                   Keine Kommentare
                 </p>
               )}
@@ -335,21 +339,23 @@ function LocationDetails({ locationData }) {
                         <div className="comment-user">
                           <p className="comment-user-name">{comment.user}</p>
                           <p className="comment-user-timestamp">
-                            {DateTime.fromISO(comment.timestamp).toFormat('ff')}
+                            {DateTime.fromISO(comment.timestamp).toFormat("ff")}
                           </p>
-                          {user.name === comment.user && (
-                            <button onClick={() => deleteComment(comment._id)}>
-                              <img
-                                style={{ height: 20 }}
-                                src={Delete}
-                                alt="Löschen"
-                              />
-                            </button>
-                          )}
                         </div>
                         <div className="comment-text">
                           <p>{comment.comment}</p>
                         </div>
+                      </div>
+                      <div className="comment-delete">
+                      {user && user.name === comment.user && (
+                        <button onClick={() => deleteComment(comment._id)}>
+                          <img
+                            style={{ height: 20 }}
+                            src={Delete}
+                            alt="Löschen"
+                          />
+                        </button>
+                      )}
                       </div>
                     </div>
                   </div>

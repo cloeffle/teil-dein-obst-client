@@ -18,7 +18,8 @@ const Auth0ProviderWithHistory = ({ children }) => {
       domain={domain}
       clientId={clientId}
       audience={audience}
-      redirectUri="https://teil-dein-obst.netlify.app/profil"
+      // redirectUri="https://teil-dein-obst.netlify.app/profil"
+      redirecUri="http:localhost:3000/profil"
       onRedirectCallback={onRedirectCallback}
     >
       {children}
