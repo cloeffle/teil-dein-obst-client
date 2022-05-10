@@ -152,7 +152,9 @@ function UserPage() {
                       <tr key={uuidv4()}>
                         <td className="my-tree-type">
                           <Link to={`../${myTrees._id}`}>
-                            <p style={{fontFamily: "Roboto"}}>{myTrees.type.join(", ")}</p>
+                            <p style={{ fontFamily: "Roboto", color: "#444" }}>
+                              {myTrees.type.join(", ")}
+                            </p>
                           </Link>
                         </td>
                         <td className="my-tree-address">
@@ -214,7 +216,9 @@ function UserPage() {
                     <tr key={uuidv4()}>
                       <td className="my-tree-type">
                         <Link to={`../${favorite[0]._id}`}>
-                          <p style={{fontFamily: "Roboto"}}>{favorite[0].type[0]}</p>
+                          <p style={{ fontFamily: "Roboto", color: "#444"}}>
+                            {favorite[0].type[0]}
+                          </p>
                         </Link>
                       </td>
                       <td className="my-tree-address">
