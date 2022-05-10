@@ -1,19 +1,22 @@
 import { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
 import Map from '../components/Map';
 import Filter from '../components/Filter';
 import '../assets/styles/Home.css';
 import Logo from '../assets/logo/Logo.svg';
 import AuthenticationButton from '../components/Login/AuthenticationButton';
+import { selectedFilterState } from '../atoms/filterAtom';
 
 function Home() {
   const [showFilter, setShowFilter] = useState(false);
-  const [selectedFilter, setSelectedFilter] = useState([]);
+  const [selectedFilter, setSelectedFilter] =
+    useRecoilState(selectedFilterState);
   const [isLoading, setIsLoading] = useState(false);
   /*GET ALL LOCATIONS FROM BACKEND*/
 
   const [locationData, setLocationData] = useState([]);
   useEffect(() => {
-    fetch("https://teile-deine-obst.herokuapp.com/tree")
+    fetch('https://teile-deine-obst.herokuapp.com/tree')
       .then((response) => response.json())
       .then((data) => setLocationData(data))
       .catch((error) => console.log(error));
@@ -37,8 +40,7 @@ function Home() {
     setIsLoading(true);
   }, []);
 
-  const handleSelectFilter = (filter) => {
-    setSelectedFilter(filter);
+  const handleSelectFilter = () => {
     setShowFilter(false);
   };
 
