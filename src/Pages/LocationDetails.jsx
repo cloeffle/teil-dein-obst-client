@@ -328,38 +328,38 @@ function LocationDetails({ locationData }) {
               )}
             </div>
             <div className="comment-container">
-              {commentList &&
-                commentList.map((comment, index) => (
-                  <div key={index}>
-                    <div className="comment-wrapper">
-                      <div className="comment-avatar">
-                        <img src={comment.avatar} alt="Avatar" />
-                      </div>
-                      <div className="comment-content">
-                        <div className="comment-user">
+              <table>
+                <tbody>
+                  {commentList &&
+                    commentList.map((comment, index) => (
+                      <tr key={index}>
+                        <td className="comment-avatar">
+                          <img src={comment.avatar} alt="Avatar" />
+                        </td>
+                        <td className="comment-user">
+                        </td>
+                        <td className="comment-text">
                           <p className="comment-user-name">{comment.user}</p>
                           <p className="comment-user-timestamp">
                             {DateTime.fromISO(comment.timestamp).toFormat("ff")}
                           </p>
-                        </div>
-                        <div className="comment-text">
-                          <p>{comment.comment}</p>
-                        </div>
-                      </div>
-                      <div className="comment-delete">
-                      {user && user.name === comment.user && (
-                        <button onClick={() => deleteComment(comment._id)}>
-                          <img
-                            style={{ height: 20 }}
-                            src={Delete}
-                            alt="Löschen"
-                          />
-                        </button>
-                      )}
-                      </div>
-                    </div>
-                  </div>
-                ))}
+                          <p className="comment">{comment.comment}</p>
+                        </td>
+                        <td className="comment-delete">
+                          {user && user.name === comment.user && (
+                            <button onClick={() => deleteComment(comment._id)}>
+                              <img
+                                style={{ height: 20 }}
+                                src={Delete}
+                                alt="Löschen"
+                              />
+                            </button>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>

@@ -108,7 +108,7 @@
 .home-logo {
   display: flex;
   justify-content: flex-end;
-  margin: 0.5rem 2.1rem 0.5rem 0;
+  margin: .6rem 2.4rem 0.5rem 0;
 }
 
 .home-logo a {
@@ -117,7 +117,7 @@
 }
 
 .home-logo img {
-  width: 55%;
+  width: 57%;
 }
 
 .login-btn {
