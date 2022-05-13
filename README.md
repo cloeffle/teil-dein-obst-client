@@ -14,7 +14,7 @@ This won't be an issue if you can pick fruits yourself e.g. in your neighbourhoo
 This web app is designed to be a mobile first app.
 Get your smartphone and go on **teil-dein-obst.netlify.app** to take a look around.
 
-***NOTE: ALL FRUIT TREES ON THE MAP ARE ONLY MOCK DATA AND NOT REAL! PLEASE REFRAIN TO GO TO THE ADDRESS. THANKS.***
+***NOTE: ALL FRUIT TREES ON THE MAP ARE ONLY MOCK DATA AND NOT REAL! PLEASE REFRAIN FROM GOING TO THE ADDRESS. THANKS.***
 
 
 #### Tools used in this project:
