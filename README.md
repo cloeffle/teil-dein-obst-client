@@ -1,3 +1,5 @@
+Final-Project of WBS-Coding: Fullstack Web & App Developer Bootcamp, Project-Members: Yen-Thi-Ho, Meike Huettel, Patrick Plüquett, Christian Löffler (cloeffle)
+
 # Teil dein Obst
 
 Ever wanted to pick some fruits from trees because you feel like it's a waste to see them rot, or only because they look so yummy?
