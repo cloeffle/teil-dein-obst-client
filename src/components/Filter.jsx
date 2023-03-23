@@ -16,7 +16,7 @@ import Korb from '../assets/images/fruit basket 500.png';
 
 import { selectedFilterState } from '../atoms/filterAtom';
 
-// use Javascript ES6 Syntax
+
 function Filter(props) {
   const { onSelectFilter } = props;
   const [selectedFilter, setSelectedFilter] =
